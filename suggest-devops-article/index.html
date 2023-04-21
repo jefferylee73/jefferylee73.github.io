@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="DevOps 文化 DevOps 介紹 》建立 DevOps 文化，消除開發、營運、品保斷層  iThome 鐵人賽 AWS新手的30天之旅 用 GitLab CI 玩轉自動化測試與佈署  AWS [AWS IAM] 學習重點節錄(3) - Assuming IAM Role AWS的雲端架構框架-效能篇 The Definitive Guide to AWS EC2 Instance Types">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推薦DevOps文章">
+<meta property="og:url" content="https://jefferylee73.github.io/suggest-devops-article/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="DevOps 文化 DevOps 介紹 》建立 DevOps 文化，消除開發、營運、品保斷層  iThome 鐵人賽 AWS新手的30天之旅 用 GitLab CI 玩轉自動化測試與佈署  AWS [AWS IAM] 學習重點節錄(3) - Assuming IAM Role AWS的雲端架構框架-效能篇 The Definitive Guide to AWS EC2 Instance Types">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-11-23T09:49:02.000Z">
+<meta property="article:modified_time" content="2023-04-21T01:45:34.280Z">
+<meta property="article:author" content="Jeffery Lee">
+<meta property="article:tag" content="DevOps">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://jefferylee73.github.io/suggest-devops-article/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>推薦DevOps文章 | 傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/suggest-devops-article/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          推薦DevOps文章
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-23 17:49:02" itemprop="dateCreated datePublished" datetime="2022-11-23T17:49:02+08:00">2022-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning/" itemprop="url" rel="index"><span itemprop="name">Learning</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>882</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="DevOps-文化"><a href="#DevOps-文化" class="headerlink" title="DevOps 文化"></a>DevOps 文化</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://www.cakeresume.com/resources/what-is-devops?locale=zh-TW">DevOps 介紹 》建立 DevOps 文化，消除開發、營運、品保斷層</a></strong></li>
+</ul>
+<h2 id="iThome-鐵人賽"><a href="#iThome-鐵人賽" class="headerlink" title="iThome 鐵人賽"></a>iThome 鐵人賽</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20130511/ironman/3644">AWS新手的30天之旅</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20072606/ironman/3827">用 GitLab CI 玩轉自動化測試與佈署</a></strong></li>
+</ul>
+<h2 id="AWS"><a href="#AWS" class="headerlink" title="AWS"></a>AWS</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://godleon.github.io/blog/AWS/learn-AWS-IAM-3-assuming-role/">[AWS IAM] 學習重點節錄(3) - Assuming IAM Role</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://jason-kao-blog.medium.com/aws%E7%9A%84%E9%9B%B2%E7%AB%AF%E6%9E%B6%E6%A7%8B%E6%A1%86%E6%9E%B6-%E6%95%88%E8%83%BD%E7%AF%87-8139e744a4b7">AWS的雲端架構框架-效能篇</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.nakivo.com/blog/the-definitive-guide-to-aws-ec2-instance-types/">The Definitive Guide to AWS EC2 Instance Types</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/starbugs/coding-your-cdn-%E5%85%85%E6%BB%BF%E9%A9%9A%E5%A5%87%E7%9A%84-aws-lambda-edge-763d9dd1f00d">Coding your CDN ! 充滿驚奇的 AWS Lambda@Edge</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://ikala.cloud/google-cloud-pub-sub-aws-sqs-comparison/">拆解雲端 Message Service：Google Cloud Pub&#x2F;Sub vs. AWS SQS 優劣分析</a></strong></li>
+</ul>
+<h2 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/starbugs/multi-tenancy-kubernetes-cluster-part-1-%E8%AA%8D%E5%91%BD%E5%90%A7-%E6%9C%89%E4%B8%80%E5%A5%BD-%E5%B0%B1%E6%B2%92%E5%85%A9%E5%A5%BD-3eddb75eeb4c">Multi-Tenancy Kubernetes Cluster Part 1: 認命吧！有一好，就沒兩好！</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/@pavanbelagatti/kubernetes-service-types-explained-2709cde3bc0c">Kubernetes Service Types Explained</a></strong></li>
+</ul>
+<h2 id="Grafana"><a href="#Grafana" class="headerlink" title="Grafana"></a>Grafana</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://pavolkutaj.medium.com/using-cloudwatch-dimension-values-as-grafana-variables-45c2c09f9fdd">Using Cloudwatch Dimension Values As Grafana Variables</a></strong></li>
+</ul>
+<h2 id="Domain"><a href="#Domain" class="headerlink" title="Domain"></a>Domain</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://its-okay.medium.com/%E6%90%9E%E6%87%82-ip-fqdn-dns-name-server-%E9%BC%A0%E5%B9%B4%E5%85%A8%E9%A6%AC%E9%90%B5%E4%BA%BA%E6%8C%91%E6%88%B0-05-aa60f45496fb">搞懂 IP、FQDN、DNS、Name Server</a></strong></li>
+</ul>
+<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://totoroliu.medium.com/http-2-%E6%98%AF%E4%BB%80%E9%BA%BC-d7de699bdbae">Http&#x2F;2 是什麼?</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://its-okay.medium.com/%E9%97%9C%E6%96%BC-http-request-%E7%9A%84%E6%BC%8F%E6%B4%9E-%E9%BC%A0%E5%B9%B4%E5%85%A8%E9%A6%AC%E9%90%B5%E4%BA%BA%E6%8C%91%E6%88%B0-23-d215b1e819a7">關於 HTTP Request 的漏洞</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://yu-jack.github.io/2017/10/20/secure-header/">增加安全性的 HTTP Headers</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://notfalse.net/48/http-status-codes#302-Found-8212">HTTP 狀態碼 (Status Codes)</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://kknews.cc/news/yegpn6g.html">看圖學 HTTPS</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://codecharms.me/posts/security-ssl-https">[Security] SSL—HTTPS 背後功臣</a></strong></li>
+</ul>
+<h2 id="Session-amp-Cookie"><a href="#Session-amp-Cookie" class="headerlink" title="Session &amp; Cookie"></a>Session &amp; Cookie</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://yu-jack.github.io/2019/06/02/ajax-with-session/">前後端分離下之使用 session</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://its-okay.medium.com/same-origin-policy-%E5%90%8C%E6%BA%90%E6%94%BF%E7%AD%96%E7%AD%86%E8%A8%98-%E9%BC%A0%E5%B9%B4%E5%85%A8%E9%A6%AC%E9%90%B5%E4%BA%BA%E6%8C%91%E6%88%B0-22-eb9f38bf902b">Same Origin Policy 同源政策筆記</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://its-okay.medium.com/%E8%AA%8D%E8%AD%98%E7%B6%B2%E7%AB%99%E4%B8%89%E5%B1%A4%E5%BC%8F%E6%9E%B6%E6%A7%8B-cookie-%E9%BC%A0%E5%B9%B4%E5%85%A8%E9%A6%AC%E9%90%B5%E4%BA%BA%E6%8C%91%E6%88%B0-21-c3dddde1e5c4">認識網站三層式架構 、Cookie</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://blog.kenwsc.com/posts/2023/jwt-vs-session/">更好的選擇？用 JWT 取代 Session 的風險</a></strong></li>
+</ul>
+<h2 id="密碼學"><a href="#密碼學" class="headerlink" title="密碼學"></a>密碼學</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/starbugs/what-are-encoding-encrypt-and-hashing-4b03d40e7b0c">一次搞懂密碼學中的三兄弟 — Encode、Encrypt 跟 Hash</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/starbugs/how-to-store-password-in-database-sefely-6b20f48def92">聽說不能用明文存密碼，那到底該怎麼存？</a></strong></li>
+</ul>
+<h2 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://giboss.pixnet.net/blog/post/26798748-osi%E4%B8%83%E5%B1%A4%E7%B0%A1%E4%BB%8B">OSI七層簡介</a></strong></li>
+</ul>
+<h2 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://kknews.cc/zh-tw/code/34mlvqg.html">圖解 SSH 原理</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://codecharms.me/posts/security-ssh">[Security] 你該知道所有關於 SSH 的那些事</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://hackmd.io/@CynthiaChuang/Generating-a-Ssh-Key-and-Adding-It-to-the-Github">使用 SSH 金鑰與 GitHub 連線</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://huataihuang.gitbooks.io/cloud-atlas/content/service/ssh/ssh_key.html">SSH 密鑰</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://wangdoc.com/ssh/key">SSH 密钥登录</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://terryl.in/zh/ssh-key-login-without-password/">SSH Login 使用 Key 驗證，免密碼登入的設定方法</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E6%B5%A6%E5%B3%B6%E5%A4%AA%E9%83%8E%E7%9A%84%E6%B0%B4%E6%97%8F%E7%BC%B8/how-to-setup-ssh-config-%E4%BD%BF%E7%94%A8-ssh-%E8%A8%AD%E5%AE%9A%E6%AA%94-74ad46f99818">How to setup SSH config ：使用 SSH 設定檔簡化指令與連線網址</a></strong></li>
+</ul>
+<h2 id="Load-Testing"><a href="#Load-Testing" class="headerlink" title="Load Testing"></a>Load Testing</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://clouding.city/tool/k6/">k6 - 現代負載測試工具</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10305862">[Day24][負載測試] K6 使用上常見的參數設定(options)有哪些？</a></strong></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DevOps/" rel="tag"># DevOps</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/deploy-spa-project-by-cf-cdn/" rel="prev" title="如何部署前端專案(SPA)到 CloudFront">
+      <i class="fa fa-chevron-left"></i> 如何部署前端專案(SPA)到 CloudFront
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/access-s3-object-url-methods/" rel="next" title="盤點存取 S3 圖片連結方式">
+      盤點存取 S3 圖片連結方式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DevOps-%E6%96%87%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">DevOps 文化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iThome-%E9%90%B5%E4%BA%BA%E8%B3%BD"><span class="nav-number">2.</span> <span class="nav-text">iThome 鐵人賽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AWS"><span class="nav-number">3.</span> <span class="nav-text">AWS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kubernetes"><span class="nav-number">4.</span> <span class="nav-text">Kubernetes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grafana"><span class="nav-number">5.</span> <span class="nav-text">Grafana</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Domain"><span class="nav-number">6.</span> <span class="nav-text">Domain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP"><span class="nav-number">7.</span> <span class="nav-text">HTTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session-amp-Cookie"><span class="nav-number">8.</span> <span class="nav-text">Session &amp; Cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E7%A2%BC%E5%AD%B8"><span class="nav-number">9.</span> <span class="nav-text">密碼學</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network"><span class="nav-number">10.</span> <span class="nav-text">Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH"><span class="nav-number">11.</span> <span class="nav-text">SSH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Load-Testing"><span class="nav-number">12.</span> <span class="nav-text">Load Testing</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

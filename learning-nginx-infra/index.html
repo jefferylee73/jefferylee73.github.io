@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Nginx 簡介 開源的 reverse proxy 和 web 伺服器 功能有 cache、api gateway、load balancer 等等 在多個 Worker Process 架構下，Nginx 允許跨多個 CPU 去分配連線及請求，讓資料更有效被利用  Worker Processes 啟動 Nginx 會有一個 master process 去管理其他 worker proces">
+<meta property="og:type" content="article">
+<meta property="og:title" content="探討 Nginx 架構">
+<meta property="og:url" content="https://jefferylee73.github.io/learning-nginx-infra/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="Nginx 簡介 開源的 reverse proxy 和 web 伺服器 功能有 cache、api gateway、load balancer 等等 在多個 Worker Process 架構下，Nginx 允許跨多個 CPU 去分配連線及請求，讓資料更有效被利用  Worker Processes 啟動 Nginx 會有一個 master process 去管理其他 worker proces">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://jefferylee73.github.io/images/web/learning-nginx-infra1.webp">
+<meta property="og:image" content="https://jefferylee73.github.io/images/web/learning-nginx-infra2.webp">
+<meta property="og:image" content="https://jefferylee73.github.io/images/web/learning-nginx-infra3.webp">
+<meta property="og:image" content="https://jefferylee73.github.io/images/web/learning-nginx-infra4.webp">
+<meta property="article:published_time" content="2022-12-05T03:23:57.000Z">
+<meta property="article:modified_time" content="2023-04-21T01:45:34.278Z">
+<meta property="article:author" content="Jeffery Lee">
+<meta property="article:tag" content="Nginx">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jefferylee73.github.io/images/web/learning-nginx-infra1.webp">
+
+<link rel="canonical" href="https://jefferylee73.github.io/learning-nginx-infra/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>探討 Nginx 架構 | 傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/learning-nginx-infra/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          探討 Nginx 架構
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-05 11:23:57" itemprop="dateCreated datePublished" datetime="2022-12-05T11:23:57+08:00">2022-12-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Nginx-簡介"><a href="#Nginx-簡介" class="headerlink" title="Nginx 簡介"></a>Nginx 簡介</h2><ul>
+<li>開源的 reverse proxy 和 web 伺服器</li>
+<li>功能有 cache、api gateway、load balancer 等等</li>
+<li>在多個 Worker Process 架構下，Nginx 允許跨多個 CPU 去分配連線及請求，讓資料更有效被利用</li>
+</ul>
+<h2 id="Worker-Processes"><a href="#Worker-Processes" class="headerlink" title="Worker Processes"></a><strong><strong>Worker Processes</strong></strong></h2><ul>
+<li><p>啟動 Nginx 會有一個 master process 去管理其他 worker process</p>
+</li>
+<li><p>Nginx 預設會根據機器的 CPU 核心數量，來建立對應的 worker process</p>
+</li>
+<li><p>啟動 Hyper-Threading 功能，可以允許一個物理(physical)核心 CPU 當作兩個邏輯(logical)核心 CPU 來使用，來提供作業系統的使用效能</p>
+<p>  <img src="/../images/web/learning-nginx-infra1.webp" alt="learning-nginx-infra1"></p>
+</li>
+</ul>
+<h2 id="Connection-Management"><a href="#Connection-Management" class="headerlink" title="Connection Management"></a>Connection Management</h2><ul>
+<li><p>Work process 會監聽設定的 port，預設是 80 port (HTTP)</p>
+</li>
+<li><p>監聽行為會使用 1 個 Socket 及 2 個 Queue (Kernel 管理)</p>
+</li>
+<li><p>Client 會使用 80 port 與 Nginx 建立 TCP 連線，背後連線原理是 Client 發送 SYN 企圖與 TCP 進行連線，Kernel 收到 SYN 會去比對 Nginx 監聽的 socket 並放入 SYN Queue，然後回應 SYN-ACK 完成 TCP 連線交握</p>
+</li>
+<li><p>一旦連線完成，Kernel 會將連線移動到 Accept Queue 給任一個 worker process 使用</p>
+<p>  <img src="/../images/web/learning-nginx-infra2.webp" alt="learning-nginx-infra2"></p>
+</li>
+<li><p>一個 worker process 可以同時處理多個連線</p>
+<p>  <img src="/../images/web/learning-nginx-infra3.webp" alt="learning-nginx-infra3"></p>
+</li>
+</ul>
+<h2 id="Request-Processing"><a href="#Request-Processing" class="headerlink" title="Request Processing"></a>Request Processing</h2><ul>
+<li>Client 連線到 Worker 3 從 disk 取的 HTML Page</li>
+<li>Client 連線到 Worker 4 發請求呼叫 Backend API</li>
+</ul>
+<p><img src="/../images/web/learning-nginx-infra4.webp" alt="learning-nginx-infra4"></p>
+<ul>
+<li>Worker 3 請求流程<ol>
+<li>Request 透過 TCP 連線當作 bytes 串流形式(stream) 來傳送</li>
+<li>這個 bytes stream 會在 kernel 的 receive buffer 等待被 Worker 連線</li>
+<li>Worker 3 讀取這個連線</li>
+<li>資料被複製到 Worker 3 的記憶體中</li>
+<li>Worker 3 將資料解析成 HTTP request</li>
+<li>Worker 3 處理該請求，並從 disk 抓取 HTML 檔案</li>
+<li>Worker 3 回應 HTTP response 到該連線</li>
+<li>該 response byte 串流到 kernel 的 send buffer</li>
+<li>Kernel 在回應給客戶端</li>
+</ol>
+</li>
+<li>Worker 4 請求流程與 Worker 3 類似，需要多建立與 Backend 連線來轉送(forward) request</li>
+</ul>
+<h2 id="Kernel"><a href="#Kernel" class="headerlink" title="Kernel"></a>Kernel</h2><ul>
+<li>不會主動 push 資料給 worker process，只會將資料保留在 recevie buffer，並告訴 worker process 有資料需要被處理</li>
+</ul>
+<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><ul>
+<li>使用的 HTTP 版本取決於 TLS 是否被啟用</li>
+<li>Worker process 需要解碼(decrypt)資料及解析(parse) protocol，來完成工作任務</li>
+<li>有很多 process 會有 context switch (processes swapped in and out of the CPU) 問題，造成效能變差，所以這就是為何 NGINX 會根據 CPU 核心數量來固定 Worker Processes</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://medium.com/@hnasr/the-architecture-of-nginx-2b32fc0b7877">The Architecture of NGINX</a></strong></strong></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Nginx/" rel="tag"># Nginx</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/redis-infra-cluster-mode/" rel="prev" title="Redis 架構 - Cluster">
+      <i class="fa fa-chevron-left"></i> Redis 架構 - Cluster
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/what-is-redis/" rel="next" title="Redis 簡介">
+      Redis 簡介 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx-%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Nginx 簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Worker-Processes"><span class="nav-number">2.</span> <span class="nav-text">Worker Processes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Connection-Management"><span class="nav-number">3.</span> <span class="nav-text">Connection Management</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Request-Processing"><span class="nav-number">4.</span> <span class="nav-text">Request Processing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kernel"><span class="nav-number">5.</span> <span class="nav-text">Kernel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP"><span class="nav-number">6.</span> <span class="nav-text">HTTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">7.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

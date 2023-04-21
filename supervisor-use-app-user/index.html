@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="步驟一、建立 Supervisord.conf 資料夾路徑改成自定義，來放執行檔 ⇒ supervisor.sock  將原本定義 &#x2F;var&#x2F;run 改成 &#x2F;var&#x2F;supervisor   更改原因：&#x2F;var&#x2F;run 資料夾必須是用 root 使用者才可以讀取  修改 supervisord.conf 檔案的 unix_http_server、supervisord 區塊   123456789">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何設定 Supervisor 用 app 執行">
+<meta property="og:url" content="https://jefferylee73.github.io/supervisor-use-app-user/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="步驟一、建立 Supervisord.conf 資料夾路徑改成自定義，來放執行檔 ⇒ supervisor.sock  將原本定義 &#x2F;var&#x2F;run 改成 &#x2F;var&#x2F;supervisor   更改原因：&#x2F;var&#x2F;run 資料夾必須是用 root 使用者才可以讀取  修改 supervisord.conf 檔案的 unix_http_server、supervisord 區塊   123456789">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-11-16T09:07:57.000Z">
+<meta property="article:modified_time" content="2023-04-21T01:45:34.280Z">
+<meta property="article:author" content="Jeffery Lee">
+<meta property="article:tag" content="Supervisor">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://jefferylee73.github.io/supervisor-use-app-user/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>如何設定 Supervisor 用 app 執行 | 傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/supervisor-use-app-user/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何設定 Supervisor 用 app 執行
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 17:07:57" itemprop="dateCreated datePublished" datetime="2022-11-16T17:07:57+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>2 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="步驟一、建立-Supervisord-conf"><a href="#步驟一、建立-Supervisord-conf" class="headerlink" title="步驟一、建立 Supervisord.conf"></a>步驟一、建立 Supervisord.conf</h2><ul>
+<li><p>資料夾路徑改成自定義，來放執行檔 ⇒ supervisor.sock</p>
+<ul>
+<li>將原本定義 <code>/var/run</code> 改成 <code>/var/supervisor</code></li>
+</ul>
+</li>
+<li><p>更改原因：<code>/var/run</code> 資料夾必須是用 root 使用者才可以讀取</p>
+</li>
+<li><p>修改 supervisord.conf 檔案的 unix_http_server、supervisord 區塊</p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">;</span> <span class="string">supervisor</span> <span class="string">config</span> <span class="string">file</span></span><br><span class="line"></span><br><span class="line">[<span class="string">unix_http_server</span>]</span><br><span class="line"><span class="string">file=/var/supervisor/supervisor.sock</span>   <span class="string">;</span> <span class="string">(the</span> <span class="string">path</span> <span class="string">to</span> <span class="string">the</span> <span class="string">socket</span> <span class="string">file)</span></span><br><span class="line"><span class="string">chmod=0700</span>                       <span class="string">;</span> <span class="string">sockef</span> <span class="string">file</span> <span class="string">mode</span> <span class="string">(default</span> <span class="number">0700</span><span class="string">)</span></span><br><span class="line"></span><br><span class="line">[<span class="string">supervisord</span>]</span><br><span class="line"><span class="string">;logfile=/var/log/supervisor/supervisord.log</span> <span class="string">;</span> <span class="string">(main</span> <span class="string">log</span> <span class="string">file;default</span> <span class="string">$CWD/supervisord.log)</span></span><br><span class="line"><span class="string">pidfile=/var/supervisor/supervisord.pid</span> <span class="string">;</span> <span class="string">(supervisord</span> <span class="string">pidfile;default</span> <span class="string">supervisord.pid)</span></span><br><span class="line"><span class="string">;childlogdir=/var/log/supervisor</span>            <span class="string">;</span> <span class="string">(&#x27;AUTO&#x27;</span> <span class="string">child</span> <span class="string">log</span> <span class="string">dir,</span> <span class="string">default</span> <span class="string">$TEMP)</span></span><br><span class="line"></span><br><span class="line"><span class="string">;</span> <span class="string">the</span> <span class="string">below</span> <span class="string">section</span> <span class="string">must</span> <span class="string">remain</span> <span class="string">in</span> <span class="string">the</span> <span class="string">config</span> <span class="string">file</span> <span class="string">for</span> <span class="string">RPC</span></span><br><span class="line"><span class="string">;</span> <span class="string">(supervisorctl/web</span> <span class="string">interface)</span> <span class="string">to</span> <span class="string">work,</span> <span class="string">additional</span> <span class="string">interfaces</span> <span class="string">may</span> <span class="string">be</span></span><br><span class="line"><span class="string">;</span> <span class="attr">added by defining them in separate rpcinterface:</span> <span class="string">sections</span></span><br><span class="line">[<span class="string">rpcinterface:supervisor</span>]</span><br><span class="line"><span class="string">supervisor.rpcinterface_factory</span> <span class="string">=</span> <span class="string">supervisor.rpcinterface:make_main_rpcinterface</span></span><br><span class="line"></span><br><span class="line">[<span class="string">supervisorctl</span>]</span><br><span class="line"><span class="string">serverurl=unix:///var/supervisor/supervisor.sock</span> <span class="string">;</span> <span class="string">use</span> <span class="string">a</span> <span class="string">unix://</span> <span class="string">URL</span>  <span class="string">for</span> <span class="string">a</span> <span class="string">unix</span> <span class="string">socket</span></span><br><span class="line"></span><br><span class="line"><span class="string">;</span> <span class="string">The</span> [<span class="string">include</span>] <span class="string">section</span> <span class="string">can</span> <span class="string">just</span> <span class="string">contain</span> <span class="string">the</span> <span class="string">&quot;files&quot;</span> <span class="string">setting.</span>  <span class="string">This</span></span><br><span class="line"><span class="string">;</span> <span class="string">setting</span> <span class="string">can</span> <span class="string">list</span> <span class="string">multiple</span> <span class="string">files</span> <span class="string">(separated</span> <span class="string">by</span> <span class="string">whitespace</span> <span class="string">or</span></span><br><span class="line"><span class="string">;</span> <span class="string">newlines).</span>  <span class="string">It</span> <span class="string">can</span> <span class="string">also</span> <span class="string">contain</span> <span class="string">wildcards.</span>  <span class="string">The</span> <span class="string">filenames</span> <span class="string">are</span></span><br><span class="line"><span class="string">;</span> <span class="string">interpreted</span> <span class="string">as</span> <span class="string">relative</span> <span class="string">to</span> <span class="string">this</span> <span class="string">file.</span>  <span class="string">Included</span> <span class="string">files</span> <span class="string">*cannot*</span></span><br><span class="line"><span class="string">;</span> <span class="string">include</span> <span class="string">files</span> <span class="string">themselves.</span></span><br><span class="line"></span><br><span class="line">[<span class="string">include</span>]</span><br><span class="line"><span class="string">files</span> <span class="string">=</span> <span class="string">/etc/supervisor/conf.d/*.conf</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="步驟二、更改-Dockerfile-的指令"><a href="#步驟二、更改-Dockerfile-的指令" class="headerlink" title="步驟二、更改 Dockerfile 的指令"></a>步驟二、更改 Dockerfile 的指令</h2><ul>
+<li>複製 supervisord.conf 到 <code>/etc/supervisor</code> 資料夾</li>
+<li>使用 root 角色建立資料夾並更改資料夾的 owner 使用者為 app</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">USER</span> <span class="string">root</span></span><br><span class="line"></span><br><span class="line"><span class="string">COPY</span> <span class="string">deploy/supervisord.conf</span> <span class="string">/etc/supervisor/supervisord.conf</span></span><br><span class="line"><span class="string">RUN</span> <span class="string">mkdir</span> <span class="string">/var/supervisor</span> <span class="string">&amp;&amp;</span> <span class="string">chown</span> <span class="string">-R</span> <span class="string">app:app</span> <span class="string">/var/supervisor</span></span><br><span class="line"></span><br><span class="line"><span class="string">...</span></span><br><span class="line"></span><br><span class="line"><span class="string">USER</span> <span class="string">app</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="最後步驟、設定容器啟動指令"><a href="#最後步驟、設定容器啟動指令" class="headerlink" title="最後步驟、設定容器啟動指令"></a>最後步驟、設定容器啟動指令</h2><ul>
+<li>用 <code>supervisord</code> 指令去執行第一步建立的設定檔， <code>-n</code> 代表用 dameon 背景執行</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">heavy-worker:</span></span><br><span class="line">    <span class="attr">extends:</span></span><br><span class="line">      <span class="attr">file:</span> <span class="string">common-services.yml</span></span><br><span class="line">      <span class="attr">service:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">rhitics-heavy-worker</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">$&#123;SERVER_PATH&#125;/deploy/heavy_workers/laravel-worker.conf:/etc/supervisor/conf.d/laravel-worker.conf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">$&#123;SERVER_PATH&#125;/deploy/heavy_workers/horizon.php:/var/www/api.rhitics.com/config/horizon.php</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">&quot;supervisord&quot;</span>, <span class="string">&quot;-n&quot;</span>, <span class="string">&quot;-c&quot;</span>, <span class="string">&quot;/etc/supervisor/supervisord.conf&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Supervisor/" rel="tag"># Supervisor</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/sqs-lambda-for-nodejs/" rel="prev" title="使用 SQS + Lambda - NodeJS 篇">
+      <i class="fa fa-chevron-left"></i> 使用 SQS + Lambda - NodeJS 篇
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/horizon-inactive/" rel="next" title="如何處理 horizon 出現 inactive 問題">
+      如何處理 horizon 出現 inactive 問題 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%A9%9F%E4%B8%80%E3%80%81%E5%BB%BA%E7%AB%8B-Supervisord-conf"><span class="nav-number">1.</span> <span class="nav-text">步驟一、建立 Supervisord.conf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%A9%9F%E4%BA%8C%E3%80%81%E6%9B%B4%E6%94%B9-Dockerfile-%E7%9A%84%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">步驟二、更改 Dockerfile 的指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%BE%8C%E6%AD%A5%E9%A9%9F%E3%80%81%E8%A8%AD%E5%AE%9A%E5%AE%B9%E5%99%A8%E5%95%9F%E5%8B%95%E6%8C%87%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">最後步驟、設定容器啟動指令</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

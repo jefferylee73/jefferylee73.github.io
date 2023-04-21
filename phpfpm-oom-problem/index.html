@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="問題釐清發生問題的原因是因為 php8.0-fpm 的 process 開太多造成 OOM (Out Of Memory)問題發生，php8.0-fpm 程式自動關閉，所以 nginx 的 error.log 才會跳出 &#x2F;var&#x2F;run&#x2F;php&#x2F;php8.0-fpm.sock找不到檔案，瀏覽器才跳出 502 Bad Gateway 查找問題 查看 php8.0-fpm 狀態  ⇒ service">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何解決 php-fpm 造成 OOM 問題">
+<meta property="og:url" content="https://jefferylee73.github.io/phpfpm-oom-problem/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="問題釐清發生問題的原因是因為 php8.0-fpm 的 process 開太多造成 OOM (Out Of Memory)問題發生，php8.0-fpm 程式自動關閉，所以 nginx 的 error.log 才會跳出 &#x2F;var&#x2F;run&#x2F;php&#x2F;php8.0-fpm.sock找不到檔案，瀏覽器才跳出 502 Bad Gateway 查找問題 查看 php8.0-fpm 狀態  ⇒ service">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://jefferylee73.github.io/images/PHP/phpfpm-oom-problem1.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/PHP/phpfpm-oom-problem2.png">
+<meta property="article:published_time" content="2022-11-16T09:14:09.000Z">
+<meta property="article:modified_time" content="2023-04-21T01:45:34.279Z">
+<meta property="article:author" content="Jeffery Lee">
+<meta property="article:tag" content="PHP-FPM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jefferylee73.github.io/images/PHP/phpfpm-oom-problem1.png">
+
+<link rel="canonical" href="https://jefferylee73.github.io/phpfpm-oom-problem/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>如何解決 php-fpm 造成 OOM 問題 | 傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/phpfpm-oom-problem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何解決 php-fpm 造成 OOM 問題
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 17:14:09" itemprop="dateCreated datePublished" datetime="2022-11-16T17:14:09+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>679</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="問題釐清"><a href="#問題釐清" class="headerlink" title="問題釐清"></a>問題釐清</h2><p>發生問題的原因是因為 php8.0-fpm 的 process 開太多造成 OOM (Out Of Memory)問題發生，php8.0-fpm 程式自動關閉，所以 nginx 的 error.log 才會跳出 <code>/var/run/php/php8.0-fpm.sock</code><br>找不到檔案，瀏覽器才跳出 502 Bad Gateway</p>
+<h2 id="查找問題"><a href="#查找問題" class="headerlink" title="查找問題"></a>查找問題</h2><ol>
+<li>查看 php8.0-fpm 狀態  ⇒ <code>service php8.0-fpm status</code></li>
+</ol>
+<p><img src="/../images/PHP/phpfpm-oom-problem1.png" alt="phpfpm-oom-problem1"></p>
+<ol>
+<li>查看 php-fpm 進程 ⇒  <code>ps ax | grep php</code></li>
+<li>查看系統 log ⇒ <code>cat /var/log/syslog</code></li>
+</ol>
+<p><img src="/../images/PHP/phpfpm-oom-problem2.png" alt="phpfpm-oom-problem2"></p>
+<ol>
+<li>查看 nginx error log ⇒ <code>cat /var/log/nginx/error.log</code></li>
+</ol>
+<h2 id="問題排解時間軸"><a href="#問題排解時間軸" class="headerlink" title="問題排解時間軸"></a>問題排解時間軸</h2><ol>
+<li>緊急重啟 php-fpm 服務 ⇒ <code>sudo service php8.0-fpm restart</code></li>
+<li>調整 instance 數量為 6 台</li>
+<li>調整 php-fpm 的 <a target="_blank" rel="noopener" href="http://www.conf/">www.conf</a> 參數</li>
+</ol>
+<p>線上公式換算參數 ⇒ <a target="_blank" rel="noopener" href="https://cmorrell.com/php-fpm/">Tuning dynamic php-fpm settings</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pm = dynamic  &lt;= 動態增減</span><br><span class="line">pm.max_children = 85  &lt;= process 上限</span><br><span class="line">pm.start_servers = 40 &lt;= 預設啟動的 process 數量</span><br><span class="line">pm.min_spare_servers = 40 &lt;= 最少會閒置的 process 數量</span><br><span class="line">pm.max_spare_servers = 65 &lt;= 最多會閒置的 process 數量</span><br><span class="line">pm.max_requests = 200 &lt;= 每個 process 最多可以處理的 request</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://mini.nidbox.com/diary/read/9924593">php-fpm：解決 memory leak 問題、 pm.max_children 相關設定</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PHP-FPM/" rel="tag"># PHP-FPM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/install-phpfpm-by-ubuntu/" rel="prev" title="如何在 docker 的 ubuntu 環境中使用 php-fpm">
+      <i class="fa fa-chevron-left"></i> 如何在 docker 的 ubuntu 環境中使用 php-fpm
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/learning-phpfpm/" rel="next" title="深入認識 PHP-FPM">
+      深入認識 PHP-FPM <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%95%8F%E9%A1%8C%E9%87%90%E6%B8%85"><span class="nav-number">1.</span> <span class="nav-text">問題釐清</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E5%95%8F%E9%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">查找問題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%95%8F%E9%A1%8C%E6%8E%92%E8%A7%A3%E6%99%82%E9%96%93%E8%BB%B8"><span class="nav-number">3.</span> <span class="nav-text">問題排解時間軸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E9%80%A3%E7%B5%90"><span class="nav-number">4.</span> <span class="nav-text">參考連結</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

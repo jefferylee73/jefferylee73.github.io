@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+<meta property="og:type" content="website">
+<meta property="og:title" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:url" content="https://jefferylee73.github.io/page/2/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:author" content="Jeffery Lee">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://jefferylee73.github.io/page/2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/codedeploy-error-log/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/codedeploy-error-log/" class="post-title-link" itemprop="url">CodeDeploy 錯誤盤查紀錄</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-15 11:53:23" itemprop="dateCreated datePublished" datetime="2022-12-15T11:53:23+08:00">2022-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>228</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="問題一、CodeDeploy-agent-was-not-able-to-receive-the-lifecycle-event-的錯誤訊息"><a href="#問題一、CodeDeploy-agent-was-not-able-to-receive-the-lifecycle-event-的錯誤訊息" class="headerlink" title="問題一、CodeDeploy agent was not able to receive the lifecycle event 的錯誤訊息"></a>問題一、CodeDeploy agent was not able to receive the lifecycle event 的錯誤訊息</h2><p><strong>盤查問題</strong></p>
+<ul>
+<li><p>Code Deploy 錯誤訊息</p>
+<p>  <img src="/../images/aws/codedeploy-error-log1.png" alt="codedeploy-error-log1"></p>
+</li>
+<li><p>連線到 EC2 查看 code deploy agent log</p>
+  <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat /<span class="keyword">var</span>/log/aws/codedeploy-agent/codedeploy-agent.<span class="property">log</span></span><br></pre></td></tr></table></figure>
+
+<p>  發現 code deploy 監聽 version 的 process，因為資源不夠而被關掉</p>
+<p>  <img src="/../images/aws/codedeploy-error-log2.png" alt="codedeploy-error-log2"></p>
+</li>
+<li><p>查看 12&#x2F;12 那天的 CPU metric 高達 99%</p>
+<p>  <img src="/../images/aws/codedeploy-error-log3.png" alt="codedeploy-error-log3"></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/choose-redis-node-type/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/choose-redis-node-type/" class="post-title-link" itemprop="url">Redis 機器選型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-15 11:48:10" itemprop="dateCreated datePublished" datetime="2022-12-15T11:48:10+08:00">2022-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>816</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="AWS-建議"><a href="#AWS-建議" class="headerlink" title="AWS 建議"></a>AWS 建議</h2><ul>
+<li>Cache node<ul>
+<li>M5 cache nodes if you need more throughput with some increased memory</li>
+<li>R5 cache nodes if you need more throughput and up to 35%–51% higher memory per cache node</li>
+</ul>
+</li>
+<li>Memory<ul>
+<li>You should keep at least 25% of the node size apart from containing your database size. Replication uses some memory from the primary node.</li>
+</ul>
+</li>
+</ul>
+<h2 id="ARM-vs-x86"><a href="#ARM-vs-x86" class="headerlink" title="ARM vs x86"></a>ARM vs x86</h2><ul>
+<li>x86-based Redis provides higher single-CPU performance than Arm-based Redis in scenarios that involve complex commands, such as big keys or keys whose time complexity is larger than O(N)</li>
+</ul>
+<h2 id="綜合評估"><a href="#綜合評估" class="headerlink" title="綜合評估"></a>綜合評估</h2><ul>
+<li>啟用 Redis Cluster 模式，建立的 node type 規格只要可以應付平均使用量即可，當遇到 peak demand 只要確保 Auto Scaling 機制可以正常伸縮機器即可</li>
+<li>查看記憶體及 CPU 的 metrics 使用量，記得要預留 25% 的記憶體給 replication 使用</li>
+<li>x86 效能比 arm 還要好</li>
+</ul>
+<h2 id="EC2-類型介紹"><a href="#EC2-類型介紹" class="headerlink" title="EC2 類型介紹"></a>EC2 類型介紹</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://www.nakivo.com/blog/the-definitive-guide-to-aws-ec2-instance-types/">The Definitive Guide to AWS EC2 Instance Types</a></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://medium.com/summers-life/aws-ec2-instance-e1d08316e712">AWS — EC2 instance</a></strong></strong></li>
+</ul>
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/premiumsupport/knowledge-center/elasticache-redis-cluster-instance-type/"><strong>如何為我的 Redis 叢集選擇正確的執行個體類型和大小？</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://support.huaweicloud.com/intl/en-us/dcs_faq/dcs-faq-0515001.html"><strong>What Are the Differences Between Arm-based and x86-based DCS for Redis?</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/blogs/database/five-workload-characteristics-to-consider-when-right-sizing-amazon-elasticache-redis-clusters/"><strong>Five workload characteristics to consider when right sizing Amazon ElastiCache Redis clusters</strong></a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/what-is-redis-replication/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/what-is-redis-replication/" class="post-title-link" itemprop="url">Redis - Replication 運作機制</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-15 11:46:47" itemprop="dateCreated datePublished" datetime="2022-12-15T11:46:47+08:00">2022-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Replica-類型"><a href="#Replica-類型" class="headerlink" title="Replica 類型"></a>Replica 類型</h2><ul>
+<li>整台機器：單一實例</li>
+<li>Shard：Cluster 模式</li>
+</ul>
+<h2 id="運作流程"><a href="#運作流程" class="headerlink" title="運作流程"></a>運作流程</h2><p><strong>名詞解釋</strong></p>
+<ul>
+<li>主節點(primary node )<ul>
+<li>主要用來 read&#x2F;write</li>
+</ul>
+</li>
+<li>從節點(replica node)<ul>
+<li>只能 read 不能 write，負責與主節點同步資料</li>
+</ul>
+</li>
+<li>Replication ID(runId)<ul>
+<li>每一個主節點都會有自己的 Replication ID，由 40 個隨機的十六進制字符組成</li>
+<li>當從節點初次複製主節點時，主節點會把 Replication ID 發給從節點保存，這樣從節點重新連線，主節點會拿 Replication ID 與自己的 ID 做比對來判斷是否為同一個</li>
+</ul>
+</li>
+<li>Replication id 和 offset (偏移量)<ul>
+<li>Replication ID 用來標記 data set 的歷史紀錄</li>
+<li>主從節點會各自維護 record (offset) 記錄</li>
+<li>offset 記錄的偏移量，用於判斷主從之間的數據差</li>
+</ul>
+</li>
+<li>Replication backlog<ul>
+<li>backlog buffer 是緩衝區，主節點只會有一個 backlog 與所有的從節點共用</li>
+<li>backlog 會累積主節點最近沒有同步給從節點的資料</li>
+<li>大小透過 repl-backlog-size 設置，預設大小為 1 MB</li>
+<li>TTL 透過 repl-backlog-ttl 設置，預設為 3600 秒</li>
+</ul>
+</li>
+</ul>
+<p><strong>流程</strong></p>
+<ul>
+<li>從節點使用**非同步(asynchronous)**的方式，從主節點複制資料到從節點上，當從節點加入到 redis cluster 後，從節點會拿 replication-id 及 offset 向主節點發起 psync (增量&#x2F;部分同步)，此時主節點會比對 replication-id 是否一致，若不一致 ，則會 reject psync，而執行 full-sync (全同步)，若 replication-id 一致，則會比對 offset 資料是否在 backlog buffer 中，若 offset 資料在 backlog buffer 中則執行 psync，反之 reject psync 而執行 full-sync。</li>
+<li>當主節點與從節點連線成功，主節點會持續送指令給從節點，當某些原因造成連線異常會延遲複製，之後從節點 reconnect 主節點會要求 partial sync (又稱為 psync)，如果 partial sync 失敗則會用 full sync 方式來同步</li>
+</ul>
+<h2 id="Replica-特性"><a href="#Replica-特性" class="headerlink" title="Replica 特性"></a><strong>Replica 特性</strong></h2><ul>
+<li>Replica 節點使用異步方式與 Primary 節點保持同步</li>
+<li>應用程式可以從任一節點(Primary&#x2F;Replica)進行讀取，但只能從主節點寫入資料</li>
+<li>Read Replicas 透過多個不同的 endpoints 來增加擴展性</li>
+<li>Read Replicas 透過複製主節點資料來改善容錯機制</li>
+</ul>
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://medium.com/jerrynotes/redis-replication-%E5%90%8C%E6%AD%A5%E5%A6%82%E4%BD%95%E5%9F%B7%E8%A1%8C-ef48675f6918">Redis Replication 同步如何執行？</a></strong></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/use-redis-benchmark-stress-test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/use-redis-benchmark-stress-test/" class="post-title-link" itemprop="url">使用 Redis Benchmark 進行壓力測試</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-15 11:43:56" itemprop="dateCreated datePublished" datetime="2022-12-15T11:43:56+08:00">2022-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>2 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Redis-Benchmark"><a href="#Redis-Benchmark" class="headerlink" title="Redis Benchmark"></a>Redis Benchmark</h2><ul>
+<li>Redis 版本 6 才會有 <code>--cluster</code> 參數使用</li>
+<li>Cluster 的 master node 必須要 2 台以上，才可以進行壓測</li>
+<li>只會針對 master node 進行壓測，slave node 則不會</li>
+<li>用來模擬 N 個客戶端同時發出 M 個請求</li>
+<li>參數認識<ul>
+<li><code>-n &lt;requests&gt;</code>：要發送的 request 數量 (預設 100,000)</li>
+<li><code>-d &lt;data size&gt;</code>：執行 SET&#x2F;GET 指令操作的資料大小 (預設 2 bytes )</li>
+<li><code>-c &lt;clients&gt;</code>：平行的連線數 (預設 50)</li>
+<li><code>-t &lt;tests&gt;</code>：指定要執行的指令(預設是全跑)</li>
+<li><code>-r &lt;random keyspacelen&gt;</code>：使用隨機的 key (指定範圍)</li>
+<li><code>-P &lt;pipeline&gt;</code>：發送 Request 的 Pipeline 數量 (預設 1 條)</li>
+<li><code>-q &lt;quite&gt;</code>：只顯示 query&#x2F;sec 值 (預設會顯示詳細報告)</li>
+<li><code>-h &lt;host&gt;</code>：Redis Endpoint</li>
+<li><code>-p &lt;port&gt;</code>：開放 Port</li>
+<li><code>--cluster</code>：指定 Redis Cluster 模式</li>
+</ul>
+</li>
+</ul>
+<h2 id="Elasticache-AutoScaling-Limit"><a href="#Elasticache-AutoScaling-Limit" class="headerlink" title="Elasticache AutoScaling Limit"></a>Elasticache AutoScaling Limit</h2><p>參考連結 ⇒ <strong><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoScaling.html">Auto Scaling ElastiCache for Redis clusters</a></strong></p>
+<ul>
+<li>Redis 版本必須 6 以上</li>
+<li>Instance Family：R5, R6g, M5, M6g</li>
+<li>Instance size：large, xlarge, 2xlarge</li>
+</ul>
+<h2 id="Elasticache-AutoScaling-Policy"><a href="#Elasticache-AutoScaling-Policy" class="headerlink" title="Elasticache AutoScaling Policy"></a>Elasticache AutoScaling Policy</h2><ul>
+<li>每一個 target metrics 只會有一個 auto scaling policy</li>
+<li>Target metrics 支援 memory 及 primary cpu utilization</li>
+<li>Scale 類型可以選擇 shards 或 replicas</li>
+<li>Minimum and maximum capacity 設定區間，如果要調整上限可以到 aws service limit 填寫<ul>
+<li>shards 設定區間為 1~250</li>
+<li>replicas 設定區間為 1~5</li>
+</ul>
+</li>
+<li>Cold Down 預設 scale-out 為 600 秒，scale-in 為 900 秒</li>
+<li>Target Value 設定區間為 35~70</li>
+</ul>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><ul>
+<li><p><strong>步驟一、設定 auto scaling policy</strong></p>
+<ul>
+<li>當 memory 使用量達到 50% 可以增加到 3 個 shards，沒在使用可以縮減為 1 個 shard</li>
+</ul>
+</li>
+<li><p><strong>步驟二、確認 Cluster 的 Node 數量</strong></p>
+<ul>
+<li>使用 redis-benchmark 工具需要至少兩台 Node</li>
+</ul>
+</li>
+<li><p><strong>步驟三、建立 EC2 環境</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安裝 redis 6</span></span><br><span class="line">$ sudo amazon-linux-extras install redis6</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看工具版本</span></span><br><span class="line">$ redis-benchmark -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>步驟四、連線到 EC2 執行壓測指令</strong></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 連線 redis 測試</span></span><br><span class="line">$ redis-cli -h &lt;endpoint&gt; -p 6379 -c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 連線進去 redis 查看 cluster 節點</span></span><br><span class="line">$ cluster nodes</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用set,get指令，來操作10240Bytes(10MB)資料大小，預設一次並行50個client總共會發十萬個請求</span></span><br><span class="line">$ redis-benchmark -t <span class="built_in">set</span>,get -d 10240 -h &lt;redis endpoint&gt; -p 6379 --cluster</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>步驟五、查看執行結果</strong></p>
+<ul>
+<li><p>執行完出現 <code>ERROR: ERR unknown command ‘Config’</code> 錯誤訊息，是因為 Elasticache 不支援該語法(<a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/RestrictedCommands.html">Restricted Redis Commands</a>)，但不影響壓測功能</p>
+</li>
+<li><p>顯示呼叫 SET 指令的資料(request數量、並行數量、資料大小等等)</p>
+<p>  <img src="/../images/redis/use-redis-benchmark-stress-test1.png" alt="use-redis-benchmark-stress-test1"></p>
+</li>
+<li><p>回報全部請求的平均速度(msec)</p>
+<p>  <img src="/../images/redis/use-redis-benchmark-stress-test2.png" alt="use-redis-benchmark-stress-test2"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>步驟六、觸發 Scale Out 機制</strong></p>
+<ul>
+<li><p>將壓測的資料大小改成 200 KB、並發 100 個且總共發 1百萬個請求</p>
+<p>  <img src="/../images/redis/use-redis-benchmark-stress-test3.png" alt="use-redis-benchmark-stress-test3"></p>
+</li>
+<li><p>伸縮機器都會觸發 resharding 機制，設定完大約會花費 17 分鐘左右，還是可以正常使用</p>
+</li>
+</ul>
+</li>
+<li><p><strong>步驟七、觸發 Scale In 機制</strong></p>
+<ul>
+<li><p>使用 flushall 將 Redis 資料清掉</p>
+<p>  <img src="/../images/redis/use-redis-benchmark-stress-test4.png" alt="use-redis-benchmark-stress-test4"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="影響-Redis-效能"><a href="#影響-Redis-效能" class="headerlink" title="影響 Redis 效能"></a>影響 Redis 效能</h2><ul>
+<li><strong>Network bandwidth and latency</strong><ul>
+<li>建議提高機器的網卡速度(1 GBits&#x2F;s → 10 GBits&#x2F;s)，來提高吞吐量</li>
+</ul>
+</li>
+<li><strong>CPU</strong><ul>
+<li>Redis 是單線程模型，適合大緩存快速 CPU 而不是多核，官方推薦 Intel CPU (AMD CPU 只有 Intel CPU 效能的一半)</li>
+</ul>
+</li>
+<li><strong>VM</strong><ul>
+<li>Redis 在 VM 上會變慢，因為虛擬化對普通操作會有額外的消耗</li>
+<li>建議把 Redis 運行在物理機器上，特別是很在意延遲</li>
+</ul>
+</li>
+<li><strong>Server 和 Client 都運行在同一個機器上</strong><ul>
+<li>同一台機器上，TCP&#x2F;IP loopback 和 unix domain sockets 都可以使用，對 Linux 來說，使用unix socket 可以比 TCP&#x2F;IP loopback 快 50%，Redis 預設會使用 TCP&#x2F;IP loopback</li>
+<li>使用大量的 pipeline，unix domain sockets 優勢就沒這麼明顯</li>
+<li>建議把 Server 和 Clinet 運行在不同機器上</li>
+</ul>
+</li>
+<li><strong>Memory</strong><ul>
+<li>盡可能大內存，千萬不要使用SWAP。注意32 位和64 位Redis 有不同的內存限制</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/jerrynotes/redis-benchmark-316dca7d91a8">Jerry - Redis Benchmark</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="http://www.redis.cn/topics/benchmarks.html">Redis有多快?</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoScaling-Scaling-Adding-Policy-Shards.html">Adding a scaling policy</a></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/redis-connection-timeout/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/redis-connection-timeout/" class="post-title-link" itemprop="url">Redis 連線逾時</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-15 11:40:54" itemprop="dateCreated datePublished" datetime="2022-12-15T11:40:54+08:00">2022-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><ul>
+<li><p>Laravel Job 讀取 redis 快取資料等待時間，超過 job 上限時間造成 timeout 程式無法執行完</p>
+</li>
+<li><p>查看 AWS metrics 發現 Network Bandwidth 超過限制，造成封包遺失或斷線問題</p>
+<ul>
+<li>redis 背後運行是一台 <a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/ec2/instance-types/">instance</a>，大部分網路頻寬上限都是 10 Gbps，所以當取得的值太大又同時被很多 client 存取，很容易就會達到上限</li>
+</ul>
+<p>  <img src="/../images/redis/redis-connection-timeout1.png" alt="redis-connection-timeout1"></p>
+</li>
+<li><p>現有 redis 架構是 standalone，隨著使用需求提高，如果沒有擴展機器數量或提升機器規格，容易機器回應較慢</p>
+</li>
+</ul>
+<h2 id="AWS-提供解決方法"><a href="#AWS-提供解決方法" class="headerlink" title="AWS 提供解決方法"></a>AWS 提供解決方法</h2><ol>
+<li>最簡單方式：就是提高機器等級</li>
+<li>最佳方式：使用 redis cluster 架構，透過 data partition and sharding 將資料分成小部分並分散在不同機器，再透過 autoscaling 方式水平擴展 shards，降低單一機器的負載</li>
+</ol>
+<h2 id="Redis-架構：從-Standalone-改成-Cluster"><a href="#Redis-架構：從-Standalone-改成-Cluster" class="headerlink" title="Redis 架構：從 Standalone 改成 Cluster"></a>Redis 架構：從 Standalone 改成 Cluster</h2><ul>
+<li>需要更了解 redis，可以參考 redis 系列筆記</li>
+<li>standalone 支援多個 db，但 cluster 只支援 db0</li>
+</ul>
+<p><strong>操作步驟</strong></p>
+<ol>
+<li><p>建立 EC2</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 安裝 redis-cli</span><br><span class="line">$ sudo amazon-linux-extras install redis6</span><br><span class="line"></span><br><span class="line"># 安裝 docker</span><br><span class="line">$ sudo yum install -y docker</span><br><span class="line">$ sudo service docker restart</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>將原本的 Redis 搬移資料到 db0</p>
+<ul>
+<li>如果只有一台 Redis 要搬遷資料，可以直接使用第 4 步加上 –db 參數</li>
+<li>使用 redis-cli 指令連線或 <strong><a target="_blank" rel="noopener" href="https://github.com/qishibo/AnotherRedisDesktopManager">AnotherRedisDesktopManager</a></strong> 應用程式</li>
+</ul>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># numkeys: 0</span><br><span class="line"># ARGV[1]: the cursor for SCAN, initially 0</span><br><span class="line"># ARGV[2]: the destination database. E.g. 0</span><br><span class="line"></span><br><span class="line">127.0.0.1 6379 &gt; EVAL &quot;local result = redis.call(&#x27;SCAN&#x27;, ARGV[1]) \n local conflict = &#123;&#125; \n local moved = &#123;&#125; \n for _,key in ipairs(result[2]) do \n     if redis.call(&#x27;MOVE&#x27;, key, ARGV[2]) == 0 then \n         table.insert(conflict, key) \n else \n     table.insert(moved, key) \n     end \n end \n result[2] = conflict \n result[3] = moved \n return result&quot; 0 0 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立 redis cluster</p>
+<p> <img src="/../images/redis/redis-connection-timeout2.png" alt="redis-connection-timeout2"></p>
+</li>
+<li><p>連線到 EC2 執行同步指令(<strong><a target="_blank" rel="noopener" href="https://developer.redis.com/riot/riot-redis/index.html#_install">RIOT-Redis</a></strong>)</p>
+<ul>
+<li>預設 db 0 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run fieldengineering/riot-redis -h &lt;source endpoint&gt; -p 6379 \</span><br><span class="line">replicate -h &lt;target endpoint&gt; -p 6379 --cluster --mode live</span><br></pre></td></tr></table></figure></li>
+<li>指定其他 db <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run fieldengineering/riot-redis -h &lt;source endpoint&gt; -p 6379 --db &lt;db number&gt; \</span><br><span class="line">replicate -h &lt;target endpoint&gt; -p 6379 --cluster --mode live</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="參考文件"><a href="#參考文件" class="headerlink" title="參考文件"></a>參考文件</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_tw/AmazonElastiCache/latest/red-ug/TroubleshootingConnections.html#Network-limits"><strong>Elasticache 故障排除</strong></a></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://repost.aws/questions/QUv105xDmfQMGUiBbfeYW-iQ/elasticache-shows-network-in-and-out-as-exceeded-but-how">Elasticache shows network in and out as exceeded, but how?</a></strong></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/59936252/it-is-possible-to-merge-two-separate-dbs-e-g-db0-db1-running-in-one-single-r">It is possible to merge two separate DBs (e.g. db0, db1) running in one single Redis instance (6379) into one single DB (db0)?</a></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/redis-infra-sentinel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/redis-infra-sentinel/" class="post-title-link" itemprop="url">Redis 架構 - 哨兵(Sentinel)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-15 11:35:09" itemprop="dateCreated datePublished" datetime="2022-12-15T11:35:09+08:00">2022-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>170</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><ul>
+<li><p>是一種系統設計，透過監控、通知、故障轉移、配置，幫助管理 redis instance，確保 master 與 slave 運行狀態</p>
+</li>
+<li><p>提供 instance failover 來提高可用性</p>
+</li>
+<li><p>所有行為都是透過 API 實作，所以需要注意 client 授權問題</p>
+<p>  <img src="/../images/redis/redis-infra-sentinel.png" alt="redis-infra-sentinel"></p>
+</li>
+</ul>
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://cloudinfrastructureservices.co.uk/redis-sentinel-vs-cluster/">Redis Sentinel vs Cluster – Which is Better? (Pros and Cons)</a></strong></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/redis-infra-master-slave/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/redis-infra-master-slave/" class="post-title-link" itemprop="url">Redis 架構 - Master/Slave(高可用性)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-15 11:33:26" itemprop="dateCreated datePublished" datetime="2022-12-15T11:33:26+08:00">2022-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>222</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><ul>
+<li>主從部署方式，當資料寫入到 master 後，會建立副本到 slave，提供故障轉移機制</li>
+<li>1 個 Master 會有 0~1 個 Slave (replicas)</li>
+<li>全部的寫入請求，都會經過 Master 節點</li>
+<li>如果 Master 節點壞掉，就會出現 SPOF (Single point of failure)</li>
+<li>此架構並不會隨著使用量而自動 scaling</li>
+<li>是一種 active-passive 機制，由多個 master-slave 組成</li>
+</ul>
+<h2 id="使用情境"><a href="#使用情境" class="headerlink" title="使用情境"></a>使用情境</h2><ul>
+<li><p>單一實例 (Standalone)</p>
+<p>  <img src="/../images/redis/redis-infra-master-slave1.png" alt="redis-infra-master-slave1"></p>
+</li>
+<li><p>Cluster 模式</p>
+<p>  <img src="/../images/redis/redis-infra-master-slave2.png" alt="redis-infra-master-slave2"></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/redis-infra-standalone/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/redis-infra-standalone/" class="post-title-link" itemprop="url">Redis 架構 - 單一實例(Standalone)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-15 11:31:37" itemprop="dateCreated datePublished" datetime="2022-12-15T11:31:37+08:00">2022-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>493</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><ul>
+<li>一個機器除了部署後端專案，還會安裝 redis 服務</li>
+<li>有提供 Select 指令，可以自由選擇 db index</li>
+<li>沒有提供 Data partitioning 及 Online resharding</li>
+<li>只會有 1 個 shard，最多 5 個 read replica nodes<ul>
+<li>當遇到 overhead 只能透過提高 node type</li>
+</ul>
+</li>
+<li>當遇到高峰需求 (peak demand)<ul>
+<li>scaling read replica nodes</li>
+<li>scaling up node type</li>
+</ul>
+</li>
+<li>只能透過 primary 來 read&#x2F;write，當遇到高峰要使用 read replica 來分散 read 壓力<ul>
+<li>primary&#x2F;replica endpoint 是不同</li>
+</ul>
+</li>
+</ul>
+<h2 id="與-Cluster-比較"><a href="#與-Cluster-比較" class="headerlink" title="與 Cluster 比較"></a>與 Cluster 比較</h2><ul>
+<li>只有單一個 shards (node group)，但 Cluster 可以有多個 shards (node group)</li>
+</ul>
+<p><img src="/../images/redis/redis-infra-standalone.png" alt="redis-infra-standalone"></p>
+<h2 id="延伸學習"><a href="#延伸學習" class="headerlink" title="延伸學習"></a>延伸學習</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html">Comparing Memcached and Redis</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://docs.amazonaws.cn/en_us/AmazonElastiCache/latest/red-ug/Replication.Redis-RedisCluster.html">Replication: Redis (Cluster Mode Disabled) vs. Redis (Cluster Mode Enabled)</a></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://medium.com/hepsiburadatech/redis-solutions-standalone-vs-sentinel-vs-cluster-f46e703307a9">Redis Solutions: Standalone vs Sentinel vs Cluster</a></strong></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/what-is-redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/what-is-redis/" class="post-title-link" itemprop="url">Redis 簡介</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-15 11:27:51" itemprop="dateCreated datePublished" datetime="2022-12-15T11:27:51+08:00">2022-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>2 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="什麼是-Redis"><a href="#什麼是-Redis" class="headerlink" title="什麼是 Redis"></a>什麼是 Redis</h2><ul>
+<li>用 C 語言開發的一個開源高性能 key-value 的 NoSQL(非關聯式資料庫)</li>
+<li>Redis 是一個內存數據庫，用作另一個<strong>真實</strong>數據庫（如 MySQL 或 PostgreSQL）前面的緩存，以幫助提高應用程序性能</li>
+<li>支持數據持久化到磁盤</li>
+<li>Redis 是單進程單線程的模型，完全基於內存的操作</li>
+</ul>
+<h2 id="使用情境"><a href="#使用情境" class="headerlink" title="使用情境"></a>使用情境</h2><ul>
+<li>Cache 緩存<ul>
+<li>不經常更改且經常被請求的數據</li>
+<li>任務關鍵性較低且經常變動的數據</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://www.readfog.com/a/1635361097659813888">分佈式鎖(Lock)</a>、Message Stream、Pub&#x2F;Sub、Geospatial(地理位置)</li>
+</ul>
+<h2 id="為何-Redis-速度如此快"><a href="#為何-Redis-速度如此快" class="headerlink" title="為何 Redis 速度如此快"></a>為何 Redis 速度如此快</h2><ul>
+<li>Redis 官方介紹，速度可以達到 10W + 的 QPS，這個數據不比 MemCache 差</li>
+<li>Redis 的瓶頸是內存及網絡頻寬，而不是 CPU</li>
+</ul>
+<p><strong>特點</strong></p>
+<ul>
+<li>使用類似於 HashMap 的原理，HashMap 的查詢及操作的時間複雜度是 O(1)</li>
+<li>基於 key-value，數據結構簡單，對數據操作也簡單</li>
+<li>採用單線程操作不會有死鎖現象，避免了不必要的上下文切換及競爭條件，不存在 CPU 切換現象，也就不存在考慮各種鎖的問題</li>
+<li>使用非阻塞 IO，多路複用 IO 模型</li>
+</ul>
+<h2 id="緩存問題"><a href="#緩存問題" class="headerlink" title="緩存問題"></a>緩存問題</h2><ul>
+<li><strong>數據一致性</strong><ul>
+<li>在分散式架構會常遇到一致性問題，如果要強一致性就要避免使用緩存</li>
+</ul>
+</li>
+<li><strong>緩存雪崩</strong><ul>
+<li>當請求高峰時，緩存機器掛掉，造成全部請求打到資料庫也跟著掛掉，整個服務無法使用</li>
+<li>解決方法<ul>
+<li>使用主從式架構或 Sentinel 或 Cluster 等，避免全面崩潰</li>
+<li>做資料持久化，讓 Redis 重啟可以快速恢復資料</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>緩存穿透</strong><ul>
+<li>黑客發起大量資料查詢請求，且該請求在緩存及資料庫中都沒有資料，導致請求直接攻擊資料庫，造成資料庫掛掉，整個服務無法使用</li>
+<li>解決方法<ul>
+<li>在請求接口層可以做一些驗證(ID、身分、參數等)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>緩存擊穿</strong><ul>
+<li>黑客發起針對一個 key 的大量請求，當這個 key 時效過期，大量請求就會擊穿緩存，直接攻擊資料庫，就像在屏障中鑿開了一個洞</li>
+<li>解決方法<ul>
+<li>緩存的值不會更新，就設定永不過期</li>
+<li>緩存的值會更新，就要在到期之前主動更新值或延長時效</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="資料持久化"><a href="#資料持久化" class="headerlink" title="資料持久化"></a>資料持久化</h2><p><img src="/../images/redis/what-is-redis.jpeg" alt="what-is-redis"></p>
+<p><strong>無持久化</strong></p>
+<ul>
+<li>Redis 在重新啓動或故障轉移時數據會丟失資料</li>
+</ul>
+<p><strong>RDB 文件</strong></p>
+<ul>
+<li>指定的時間間隔執行數據集的時間點快照(snapshot)，<strong>異步拷貝</strong>內存中的數據來做持久化</li>
+<li>依賴主進程的 fork，可能會導致服務請求的瞬間延遲</li>
+<li>優點<ul>
+<li>RDB 文件在內存中的加載速度要比 AOF 快得多</li>
+<li>災難恢復較快</li>
+</ul>
+</li>
+<li>缺點<ul>
+<li>建立快照資料可能會有丟失</li>
+</ul>
+</li>
+</ul>
+<p><strong>AOF(Append Only File)</strong></p>
+<ul>
+<li>將 Redis 執行的每一條命令追加到磁盤中，處理巨大的寫入會降低 Redis 的性能</li>
+<li>優點<ul>
+<li>持久性能夠比 RDB 快照更持久，因爲它是一個僅附加文件</li>
+<li>資料較少機率會丟失</li>
+</ul>
+</li>
+<li>缺點<ul>
+<li>格式不緊湊，並且比 RDB 文件使用更多的磁盤</li>
+<li>會降低 Redis 的性能</li>
+</ul>
+</li>
+</ul>
+<h2 id="資料淘汰策略"><a href="#資料淘汰策略" class="headerlink" title="資料淘汰策略"></a>資料淘汰策略</h2><ul>
+<li>volatile 爲前綴的策略都是從已過期的數據集中進行淘汰</li>
+<li>allkeys 爲前綴的策略都是面向所有 key 進行淘汰</li>
+<li>LRU（least recently used）最近最少用到的</li>
+<li>LFU（least frequently used）最不常用的</li>
+<li>以下為現有策略，觸發條件為使用的內存達到閾值時<ul>
+<li>allkeys-random：隨機刪除</li>
+<li>allkeys-lru：使用 LRU 算法進行篩選刪除</li>
+<li>allkeys-lfu：使用 LFU 算法進行篩選刪除</li>
+<li>volatile-random：隨機刪除</li>
+<li>volatile-ttl：根據過期時間先後進行刪除，越早過期的越先被刪除</li>
+<li>volatile-lru：使用 LRU 算法進行篩選刪除</li>
+<li>volatile-lfu：使用 LFU 算法進行篩選刪除</li>
+<li>noevition：不進行淘汰 (Redis 預設策略)</li>
+</ul>
+</li>
+</ul>
+<h2 id="數據庫"><a href="#數據庫" class="headerlink" title="數據庫"></a>數據庫</h2><ul>
+<li>預設創建 16 個 (db0 ~ db15)，但 Cluster 模式只會有一個 (db0)</li>
+<li>Redis 是字典結構(Dictionary Structure)的儲存服務，Client 端可以指定要將數據儲存在哪一個字典(db)裡面，每一個 db 都是獨立的，類似關聯式資料庫實例中可以創建多個 db</li>
+<li>Client 端與 Redis 建立連線，預設會選擇 db 0 數據庫，可以使用 <code>select &lt;db index&gt;</code> 做切換</li>
+<li>預設值都可以利用 <code>/redis/redis.conf</code> 檔案來做修改</li>
+<li>redis 不支援自定義 db，所以使用者只能透過 db編號來操作，且權限上只能要馬全部看到要馬全部看不到</li>
+<li>每一個數據庫可以用命名空間(namespace) 來給一個應用程式做切分使用，例如 prod&#x2F;stag 環境</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://www.readfog.com/a/1681013780987875328">圖解 Redis</a></strong></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://www.readfog.com/a/1666648997847207936">一文讀懂 Redis</a></strong></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://www.readfog.com/a/1636087731802181632">Redis 爲什麼要分 16 個庫</a></strong></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://www.readfog.com/a/1678019908615639040">Redis 內存淘汰機制詳解</a></strong></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://www.readfog.com/a/1657226667469410304">Redis 多線程演進</a></strong></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/learning-nginx-infra/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/learning-nginx-infra/" class="post-title-link" itemprop="url">探討 Nginx 架構</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-05 11:23:57" itemprop="dateCreated datePublished" datetime="2022-12-05T11:23:57+08:00">2022-12-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Nginx-簡介"><a href="#Nginx-簡介" class="headerlink" title="Nginx 簡介"></a>Nginx 簡介</h2><ul>
+<li>開源的 reverse proxy 和 web 伺服器</li>
+<li>功能有 cache、api gateway、load balancer 等等</li>
+<li>在多個 Worker Process 架構下，Nginx 允許跨多個 CPU 去分配連線及請求，讓資料更有效被利用</li>
+</ul>
+<h2 id="Worker-Processes"><a href="#Worker-Processes" class="headerlink" title="Worker Processes"></a><strong><strong>Worker Processes</strong></strong></h2><ul>
+<li><p>啟動 Nginx 會有一個 master process 去管理其他 worker process</p>
+</li>
+<li><p>Nginx 預設會根據機器的 CPU 核心數量，來建立對應的 worker process</p>
+</li>
+<li><p>啟動 Hyper-Threading 功能，可以允許一個物理(physical)核心 CPU 當作兩個邏輯(logical)核心 CPU 來使用，來提供作業系統的使用效能</p>
+<p>  <img src="/../images/web/learning-nginx-infra1.webp" alt="learning-nginx-infra1"></p>
+</li>
+</ul>
+<h2 id="Connection-Management"><a href="#Connection-Management" class="headerlink" title="Connection Management"></a>Connection Management</h2><ul>
+<li><p>Work process 會監聽設定的 port，預設是 80 port (HTTP)</p>
+</li>
+<li><p>監聽行為會使用 1 個 Socket 及 2 個 Queue (Kernel 管理)</p>
+</li>
+<li><p>Client 會使用 80 port 與 Nginx 建立 TCP 連線，背後連線原理是 Client 發送 SYN 企圖與 TCP 進行連線，Kernel 收到 SYN 會去比對 Nginx 監聽的 socket 並放入 SYN Queue，然後回應 SYN-ACK 完成 TCP 連線交握</p>
+</li>
+<li><p>一旦連線完成，Kernel 會將連線移動到 Accept Queue 給任一個 worker process 使用</p>
+<p>  <img src="/../images/web/learning-nginx-infra2.webp" alt="learning-nginx-infra2"></p>
+</li>
+<li><p>一個 worker process 可以同時處理多個連線</p>
+<p>  <img src="/../images/web/learning-nginx-infra3.webp" alt="learning-nginx-infra3"></p>
+</li>
+</ul>
+<h2 id="Request-Processing"><a href="#Request-Processing" class="headerlink" title="Request Processing"></a>Request Processing</h2><ul>
+<li>Client 連線到 Worker 3 從 disk 取的 HTML Page</li>
+<li>Client 連線到 Worker 4 發請求呼叫 Backend API</li>
+</ul>
+<p><img src="/../images/web/learning-nginx-infra4.webp" alt="learning-nginx-infra4"></p>
+<ul>
+<li>Worker 3 請求流程<ol>
+<li>Request 透過 TCP 連線當作 bytes 串流形式(stream) 來傳送</li>
+<li>這個 bytes stream 會在 kernel 的 receive buffer 等待被 Worker 連線</li>
+<li>Worker 3 讀取這個連線</li>
+<li>資料被複製到 Worker 3 的記憶體中</li>
+<li>Worker 3 將資料解析成 HTTP request</li>
+<li>Worker 3 處理該請求，並從 disk 抓取 HTML 檔案</li>
+<li>Worker 3 回應 HTTP response 到該連線</li>
+<li>該 response byte 串流到 kernel 的 send buffer</li>
+<li>Kernel 在回應給客戶端</li>
+</ol>
+</li>
+<li>Worker 4 請求流程與 Worker 3 類似，需要多建立與 Backend 連線來轉送(forward) request</li>
+</ul>
+<h2 id="Kernel"><a href="#Kernel" class="headerlink" title="Kernel"></a>Kernel</h2><ul>
+<li>不會主動 push 資料給 worker process，只會將資料保留在 recevie buffer，並告訴 worker process 有資料需要被處理</li>
+</ul>
+<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><ul>
+<li>使用的 HTTP 版本取決於 TLS 是否被啟用</li>
+<li>Worker process 需要解碼(decrypt)資料及解析(parse) protocol，來完成工作任務</li>
+<li>有很多 process 會有 context switch (processes swapped in and out of the CPU) 問題，造成效能變差，所以這就是為何 NGINX 會根據 CPU 核心數量來固定 Worker Processes</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://medium.com/@hnasr/the-architecture-of-nginx-2b32fc0b7877">The Architecture of NGINX</a></strong></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

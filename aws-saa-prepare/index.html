@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="為何會想考證照 放在履歷上，增加職場競爭力 驗收自己的雲端知識  考前準備 模擬試題 免費：Amazon AWS Certified Solutions Architect - Associate SAA-C02 付費：Practice Exams | AWS Certified Solutions Architect Associate   做模擬試題至少都要 80 以上 紀錄錯誤的題型，把該">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SAA 證照筆記 - 準備到報考過程">
+<meta property="og:url" content="https://jefferylee73.github.io/aws-saa-prepare/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="為何會想考證照 放在履歷上，增加職場競爭力 驗收自己的雲端知識  考前準備 模擬試題 免費：Amazon AWS Certified Solutions Architect - Associate SAA-C02 付費：Practice Exams | AWS Certified Solutions Architect Associate   做模擬試題至少都要 80 以上 紀錄錯誤的題型，把該">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://jefferylee73.github.io/images/saa/aws-saa-prepare1.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/saa/aws-saa-prepare2.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/saa/aws-saa-prepare3.png">
+<meta property="article:published_time" content="2023-02-04T09:19:18.000Z">
+<meta property="article:modified_time" content="2023-04-21T01:45:34.276Z">
+<meta property="article:author" content="Jeffery Lee">
+<meta property="article:tag" content="SAA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jefferylee73.github.io/images/saa/aws-saa-prepare1.png">
+
+<link rel="canonical" href="https://jefferylee73.github.io/aws-saa-prepare/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>SAA 證照筆記 - 準備到報考過程 | 傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/aws-saa-prepare/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SAA 證照筆記 - 準備到報考過程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2023-02-04 17:19:18" itemprop="dateCreated datePublished" datetime="2023-02-04T17:19:18+08:00">2023-02-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>616</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="為何會想考證照"><a href="#為何會想考證照" class="headerlink" title="為何會想考證照"></a>為何會想考證照</h2><ul>
+<li>放在履歷上，增加職場競爭力</li>
+<li>驗收自己的雲端知識</li>
+</ul>
+<h2 id="考前準備"><a href="#考前準備" class="headerlink" title="考前準備"></a>考前準備</h2><ul>
+<li>模擬試題<ul>
+<li>免費：<a target="_blank" rel="noopener" href="https://www.examtopics.com/exams/amazon/aws-certified-solutions-architect-associate-saa-c02/view/2/">Amazon AWS Certified Solutions Architect - Associate SAA-C02</a></li>
+<li>付費：<a target="_blank" rel="noopener" href="https://www.udemy.com/course/practice-exams-aws-certified-solutions-architect-associate/">Practice Exams | AWS Certified Solutions Architect Associate</a></li>
+</ul>
+</li>
+<li>做模擬試題至少都要 80 以上<ul>
+<li>紀錄錯誤的題型，把該 AWS 服務的知識補足起來(建議直接看 FAQ 比較快)</li>
+<li>把常見的<a target="_blank" rel="noopener" href="https://www.notion.so/d1b41a2f0cec426e863476f7124f1f0f">英文單字</a>背起來，這樣才看得懂題目</li>
+</ul>
+</li>
+<li>看 IT 邦幫忙文章<ul>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20100951/ironman/4671">無限手套 AWS 版：掌控一切的 5 + 1 雲端必學主題</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20129560/ironman/3159">AWS Certified Solution Architect</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20130683/ironman/3758?page=1">30天初探 Amazon Web Services</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20124610/ironman/3984?page=1">你用雲端，還敢談資安?AWS資安服務佈署之路</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="線上報考"><a href="#線上報考" class="headerlink" title="線上報考"></a>線上報考</h2><ul>
+<li><p>到 <a target="_blank" rel="noopener" href="https://www.aws.training/Certification">AWS certification</a> 網站線上選考試日期及地點</p>
+</li>
+<li><p>我考試地點選考試中心，這樣就算中途去上廁所也不會被取消資格</p>
+<ul>
+<li>需要帶身分證跟護照</li>
+<li>提前15分鐘到那邊填寫基本資料</li>
+</ul>
+</li>
+<li><p>從 2023&#x2F;1&#x2F;1 開始不能選考試中心(PSI)，只能選擇自己的考試空間 QQ</p>
+<p>  <img src="/../images/saa/aws-saa-prepare1.png" alt="aws-saa-prepare1"></p>
+</li>
+</ul>
+<h2 id="考試期間"><a href="#考試期間" class="headerlink" title="考試期間"></a>考試期間</h2><ul>
+<li>考試時間 120 分鐘，每題作答時間不要超過 2 分鐘，不然有可能做不完</li>
+<li>注意題目是要多選或是單選<ul>
+<li>多選也要注意要選幾個答案，不然少選一個也是錯</li>
+</ul>
+</li>
+</ul>
+<h2 id="成績公告"><a href="#成績公告" class="headerlink" title="成績公告"></a>成績公告</h2><ul>
+<li><p>考完隔天就收到信件，或是可以到 <a target="_blank" rel="noopener" href="https://www.aws.training/Certification">AWS certification</a>  網站線上查看分數</p>
+</li>
+<li><p>可以下載 PDF</p>
+<p>  <img src="/../images/saa/aws-saa-prepare2.png" alt="aws-saa-prepare2"></p>
+</li>
+<li><p>也可以登入 <strong><a target="_blank" rel="noopener" href="https://www.credly.com/users/sign_in">Credly Digital badges</a></strong> 拿到 badge 放在自己的個人 blog</p>
+<p>  <img src="/../images/saa/aws-saa-prepare3.png" alt="aws-saa-prepare3"></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SAA/" rel="tag"># SAA</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/suggest-frontend-article/" rel="prev" title="推薦Frontend文章">
+      <i class="fa fa-chevron-left"></i> 推薦Frontend文章
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%BA%E4%BD%95%E6%9C%83%E6%83%B3%E8%80%83%E8%AD%89%E7%85%A7"><span class="nav-number">1.</span> <span class="nav-text">為何會想考證照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%80%83%E5%89%8D%E6%BA%96%E5%82%99"><span class="nav-number">2.</span> <span class="nav-text">考前準備</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%9A%E4%B8%8A%E5%A0%B1%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">線上報考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%80%83%E8%A9%A6%E6%9C%9F%E9%96%93"><span class="nav-number">4.</span> <span class="nav-text">考試期間</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%90%E7%B8%BE%E5%85%AC%E5%91%8A"><span class="nav-number">5.</span> <span class="nav-text">成績公告</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

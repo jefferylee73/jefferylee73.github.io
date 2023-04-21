@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+<meta property="og:type" content="website">
+<meta property="og:title" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:url" content="https://jefferylee73.github.io/page/3/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:author" content="Jeffery Lee">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://jefferylee73.github.io/page/3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/redis-infra-cluster-mode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/redis-infra-cluster-mode/" class="post-title-link" itemprop="url">Redis 架構 - Cluster</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-04 15:35:51" itemprop="dateCreated datePublished" datetime="2022-12-04T15:35:51+08:00">2022-12-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><ul>
+<li>透過 hash slot 處理 key，當使用者在搜尋 key 會自動從對應的分片上取得資料</li>
+<li>透過 hash partitioning 將 keyspace 拆分為 16,384 key slots(鍵值)</li>
+<li>每一個 master 只負責 a subset of those slots (鍵值的子集合)</li>
+<li>每一個 slave 只複製特定的 master，也可以重新分配複製給其他 master，或是被選為 master</li>
+<li>沒有提供 Select 指令，所以只支援 db 0</li>
+<li>有提供 data partitioning 及 Online resharding</li>
+<li>最多會有 500 個 shards 在 1 ~ 5 個 read replica nodes<ul>
+<li>由於 shard 會分散在不同的 node，當遇到 overhead 可以平均分散且 node type 可以用較小規格</li>
+</ul>
+</li>
+<li>當遇到高峰需求 (peak demand)<ul>
+<li>data partitioning and sharding</li>
+<li>autoscaling shards&#x2F;replicas</li>
+</ul>
+</li>
+<li>透過 multiple shard 可以分散 read&#x2F;write 壓力<ul>
+<li>只會有一個 endpoint，需要使用 -c 切換到 cluster mode</li>
+</ul>
+</li>
+<li>實作可以參考文章 ⇒ <strong><a target="_blank" rel="noopener" href="https://isdaniel.github.io/redis-cluster-introduce-01/">Redis Cluster 介紹</a></strong></li>
+</ul>
+<h2 id="Ports-Communication"><a href="#Ports-Communication" class="headerlink" title="Ports Communication"></a><strong><strong>Ports Communication</strong></strong></h2><ul>
+<li>每一個 node 都要有兩個 TCP ports</li>
+<li>第一個 port 給 client 端連線溝通，通常用在 Application 或 CLI</li>
+<li>第二個 port 給 node 之間的連線溝通</li>
+</ul>
+<h2 id="Failover"><a href="#Failover" class="headerlink" title="Failover"></a>Failover</h2><ul>
+<li>當 master 換掉，會從剩下 slave 投票選擇一個當作 master 來使用</li>
+<li>當失敗的 master 重新加入 cluster，會被當作 slave 並複製其他 master</li>
+<li>使用 gossiping 來確定整個 Cluster 的健康狀況，一般設計主節點與副本必須為奇數個，以實現最穩健的設置</li>
+</ul>
+<h2 id="Sharding"><a href="#Sharding" class="headerlink" title="Sharding"></a><strong><strong>Sharding</strong></strong></h2><ul>
+<li>Redis 會自動將分片的資料，分配到個別 Server</li>
+<li>Redis 透過 hash slots 拆分成小部分的資料，存放在個別的 slots</li>
+<li>每個 slot 會存放在不同的 Server</li>
+<li>多加一個 shard 就會重新做分片</li>
+</ul>
+<h2 id="Cluster-中的-Master-Slave-架構"><a href="#Cluster-中的-Master-Slave-架構" class="headerlink" title="Cluster 中的 Master-Slave 架構"></a>Cluster 中的 Master-Slave 架構</h2><p><strong>情況一、不同 Node</strong></p>
+<ul>
+<li><p>每一個 Node 都開放 6379 做溝通</p>
+</li>
+<li><p>當 Master Node 掛掉就會從 Slave Node 之中 Promote 出新的 Master Node</p>
+</li>
+<li><p>提高可用性，但也提高了成本</p>
+<p>  <img src="/../images/redis/redis-infra-cluster-mode1.png" alt="redis-infra-cluster-mode1"></p>
+</li>
+</ul>
+<p><strong>情況二、同一個 Node</strong></p>
+<ul>
+<li><p>同時會有 Master 及 Slave 的 Redis Service</p>
+</li>
+<li><p>同一個 Node 會開放兩個不同的 port 做溝通</p>
+</li>
+<li><p>每一個 Master 的 Slave 會在不同的 Node，避免同時故障</p>
+</li>
+<li><p>節省成本，但可用性不高，因為當一個 Node 掛掉會同時沒有 Master 及 Slave</p>
+<p>  <img src="/../images/redis/redis-infra-cluster-mode2.png" alt="redis-infra-cluster-mode2"></p>
+</li>
+</ul>
+<h2 id="Cluster-Scaling"><a href="#Cluster-Scaling" class="headerlink" title="Cluster Scaling"></a><strong>Cluster Scaling</strong></h2><p>參考文章 ⇒ <strong><a target="_blank" rel="noopener" href="https://vearne.cc/archives/39908">REDIS-CLUSTER集群SLOT迁移过程分析</a></strong></p>
+<ul>
+<li>Online resharding<ul>
+<li>增減 shards 或 replicas 數量，都會觸發 resharding (重新調整 slots)</li>
+</ul>
+</li>
+<li>Shard rebalancing<ul>
+<li>相同的 shards 或 replicas 數量，重新調整 slots</li>
+<li>必須要有 1 個以上的 shards 才可以做 rebalancing</li>
+<li>當 item 序列化 size 大於 256 MB 會無法有效 balancing</li>
+</ul>
+</li>
+<li>Scaling 策略<ul>
+<li>Scale out：增加 shards 提高讀寫</li>
+<li>Scale in：減少 shards 降低讀寫</li>
+<li>Rebalancing：重新調整 shards 之間的 keyspaces</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://medium.com/opstree-technology/redis-cluster-architecture-replication-sharding-and-failover-86871e783ac0">Redis Cluster: Architecture, Replication, Sharding and Failover</a></strong></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://medium.com/opstree-technology/redis-cluster-setup-sharding-and-failover-testing-cbf12d063d2c">Redis Cluster: Setup, Sharding and Failover Testing</a></strong></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/premiumsupport/knowledge-center/elasticache-redis-minimize-time-scaling/">在 ElastiCache for Redis 擴展過程中，如何將停機時間降至最低？</a></strong></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/learning-redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/learning-redis/" class="post-title-link" itemprop="url">Redis 學習文章</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-04 15:35:25" itemprop="dateCreated datePublished" datetime="2022-12-04T15:35:25+08:00">2022-12-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>230</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="資料類型及語法使用"><a href="#資料類型及語法使用" class="headerlink" title="資料類型及語法使用"></a>資料類型及語法使用</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://clhjoe.github.io/post/redis-performance-optimization/">Redis Performance Optimization</a></strong></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://medium.com/happy-friday/%E5%88%9D%E8%AD%98-redis-%E4%BA%94%E5%A4%A7%E8%B3%87%E6%96%99%E5%9E%8B%E5%88%A5-3c67c05238d0">初識 Redis : 五大資料型別</a></strong></strong></li>
+</ul>
+<h2 id="應用程式導入-Cache"><a href="#應用程式導入-Cache" class="headerlink" title="應用程式導入 Cache"></a>應用程式導入 Cache</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://acloud.devoteam.com/expert-view/how-to-optimise-application-performance-with-aws-elasticache/">How To Optimise Application Performance With Aws Elasticache</a></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://www.learnaws.org/2021/06/12/aws-elasticache-deep-dive/">AWS Elasticache Deep Dive: What is it and when to use it</a></strong></strong></li>
+</ul>
+<h2 id="Elasticache-系列文"><a href="#Elasticache-系列文" class="headerlink" title="Elasticache 系列文"></a>Elasticache 系列文</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://medium.com/jerrynotes/elasticache-redis-and-memcached-822a72709c74"><strong>Jerry 大大 - ElastiCache, Redis and Memcached</strong></a></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20111658/ironman/4426">zeroandy 大大 - Redis還在學</a></strong></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/learning-laravel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/learning-laravel/" class="post-title-link" itemprop="url">Laravel 學習筆記</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-01 17:45:01" itemprop="dateCreated datePublished" datetime="2022-12-01T17:45:01+08:00">2022-12-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laravel/" itemprop="url" rel="index"><span itemprop="name">Laravel</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>57</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/@reccatsai/laravel-model-reads-old-data-when-using-transaction-and-queue-9fa26a751f8e">Laravel Model reads old data when using Transaction and Queue</a></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/cache-image-by-cloudfront/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/cache-image-by-cloudfront/" class="post-title-link" itemprop="url">使用 CloudFront 快取 S3 Image</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-29 15:42:18" itemprop="dateCreated datePublished" datetime="2022-11-29T15:42:18+08:00">2022-11-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="CloudFront-計費方式"><a href="#CloudFront-計費方式" class="headerlink" title="CloudFront 計費方式"></a>CloudFront 計費方式</h2><ul>
+<li><p>圖片來源 ⇒ <a target="_blank" rel="noopener" href="https://www.leyun.cloud/cc-91">圖解AWS CloudFront 收費模式 !</a></p>
+<p>  <img src="/../images/aws/cache-image-by-cloudfront1.png" alt="cache-image-by-cloudfront1"></p>
+</li>
+<li><p>使用 Amazon S3 儲存貯體的儲存費用</p>
+</li>
+<li><p>收取從節點提供物件的費用 ⇒ 上方圖說明的”<strong>用戶端從節點下載</strong>“</p>
+</li>
+<li><p>收取提交資料費用 ⇒ 上方圖說明的”<strong>節點上傳到Origin Server</strong>”</p>
+</li>
+<li><p>可以參考 AWS 官方 <strong><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_tw/AmazonCloudFront/latest/DeveloperGuide/CloudFrontPricing.html">CloudFront 定價</a></strong> 說明</p>
+</li>
+</ul>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><p><strong>步驟一、建立 S3 Bucket 並上傳 Image</strong></p>
+<p><img src="/../images/aws/cache-image-by-cloudfront2.png" alt="cache-image-by-cloudfront2"></p>
+<p><strong>步驟二、建立 Cloudfront</strong></p>
+<ul>
+<li>設定 origin path 為 S3 資料夾路徑當作入口</li>
+<li>origin access 選擇 Origin access control settings (recommended)</li>
+</ul>
+<p><img src="/../images/aws/cache-image-by-cloudfront3.png" alt="cache-image-by-cloudfront3"></p>
+<p><strong>步驟三、建立 Response headers policy</strong></p>
+<ul>
+<li><p>CDN 回傳給 Client 端的 Response Header 加上 Cache-Control，max-age&#x3D;31536000(一年)</p>
+</li>
+<li><p>建立完後更新 CDN 的 Behaviors</p>
+<p>  <img src="/../images/aws/cache-image-by-cloudfront4.png" alt="cache-image-by-cloudfront4"></p>
+</li>
+</ul>
+<p><strong>步驟四、開啟瀏覽器進行測試</strong></p>
+<ul>
+<li><p>可以看到 response header 自動回傳 cache-control</p>
+<p>  <img src="/../images/aws/cache-image-by-cloudfront5.png" alt="cache-image-by-cloudfront5"></p>
+</li>
+</ul>
+<h2 id="Cache-Control-簡介"><a href="#Cache-Control-簡介" class="headerlink" title="Cache-Control 簡介"></a>Cache-Control 簡介</h2><ul>
+<li>當我們瀏覽一個網頁時，瀏覽器會透過網路，找我們的伺服器抓取許多檔案，例如 html，js，image 等等，然後渲染出畫面給使用者看。</li>
+<li>伺服器可以在回傳這些檔案時，多跟瀏覽器交代一下，請他短時間內如果使用者又要拿一樣的資料，那你就先用同一份，這個行為叫做 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control">Cache-Control</a></li>
+<li>具體來說，如果伺服器回傳一張圖，並且在 header 加上 <code>Cache-Control: max-age=60</code>，那麼就算使用者瘋狂重新整理頁面，瀏覽器在 60 秒之內也不會一直找伺服器拿同一張圖</li>
+<li><strong>優點：善用這個行為，使用者瀏覽網站時會感到比較流暢，我們也可以減少流量費用</strong></li>
+<li>使用上要考慮檔案變更的時間，使用者要多快看到新的內容，這是成本與效能的權衡。</li>
+<li>可以利用 cache buster 的機制，讓網頁和資源搭配出又省又能快速反應變動的方案，例如，網頁的 html, css, js 設定快取五分鐘，這樣子我們上 code 之後，可以預期使用者只少五分鐘後會來拿新的網頁，但是 image 我們可以設定快取一年，並且加上 cache buster，例如 <code>[https://xx.com/image?cb=123](https://xx.com/image?cb=123)</code> 其中 <code>cb</code> 並非特殊參數，隨便的 key 都行。當 image 因為某些原因必須要更換時，我們只要上 code，讓網頁改抓 <code>[https://xx.com/image?cb=456](https://xx.com/image?cb=456)</code>，瀏覽器一看到網址不一樣，他就會去抓新的了</li>
+</ul>
+<h2 id="額外補充：S3-設定-metadata"><a href="#額外補充：S3-設定-metadata" class="headerlink" title="額外補充：S3 設定 metadata"></a>額外補充：S3 設定 metadata</h2><ul>
+<li>取得檔案會自動在 header 加上 cache-control</li>
+<li><strong>操作步驟</strong><ul>
+<li><p>編輯 metadata</p>
+<p>  <img src="/../images/aws/cache-image-by-cloudfront6.png" alt="cache-image-by-cloudfront6"></p>
+</li>
+<li><p>加上 cache-control</p>
+<p>  <img src="/../images/aws/cache-image-by-cloudfront7.png" alt="cache-image-by-cloudfront7"></p>
+</li>
+<li><p>查看 object metadata</p>
+<p>  <img src="/../images/aws/cache-image-by-cloudfront8.png" alt="cache-image-by-cloudfront8"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="延伸學習"><a href="#延伸學習" class="headerlink" title="延伸學習"></a>延伸學習</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://godleon.github.io/blog/AWS/AWS-CloudFront-Introduction/">[AWS] CloudFront 簡介</a></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/search-elb-log-by-cloudwatch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/search-elb-log-by-cloudwatch/" class="post-title-link" itemprop="url">如何搜尋 ELB 的 Access Log</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-28 16:58:30" itemprop="dateCreated datePublished" datetime="2022-11-28T16:58:30+08:00">2022-11-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>2 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li><p>ELB 存放 access log 預設只能存放在 S3</p>
+<p>  <img src="/../images/aws/search-elb-log-by-cloudwatch1.png" alt="search-elb-log-by-cloudwatch1"></p>
+</li>
+<li><p>如果要做搜尋，官方提供解決方式是使用 <a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_tw/athena/latest/ug/application-load-balancer-logs.html">AWS Athena 服務</a>，使用 SQL 語法去搜尋 S3 檔案，計費方式是按照搜尋次數及範圍資料量來計費，直接使用 <strong><a target="_blank" rel="noopener" href="https://calculator.aws/">AWS Pricing Calculator</a></strong> 算一下</p>
+</li>
+<li><p>一天搜尋 10 次，範圍資料量為 10 GB，就要花費 14.84 USD，真的是坑錢</p>
+<p>  <img src="/../images/aws/search-elb-log-by-cloudwatch2.png" alt="search-elb-log-by-cloudwatch2"></p>
+</li>
+<li><p>如果相同的條件使用 Cloudwatch log insight，只要 0.08 USD，比前一個方案價格省超多</p>
+<p>  <img src="/../images/aws/search-elb-log-by-cloudwatch3.png" alt="search-elb-log-by-cloudwatch3"></p>
+</li>
+</ul>
+<h2 id="使用-Cloudwatch-Log-Insight-限制"><a href="#使用-Cloudwatch-Log-Insight-限制" class="headerlink" title="使用 Cloudwatch Log Insight 限制"></a>使用 Cloudwatch Log Insight 限制</h2><ul>
+<li>只能搜尋在 Cloudwatch 本身存放 log 的位置(log group, log stream)</li>
+<li>log 只限於 JSON 格式</li>
+<li>基於該限制，思考兩個方向<ul>
+<li>方向一、監聽 S3 file event 觸發 Lambda 將 log 轉成 JSON 格式，並寫入到 CloudWatch Log Group 做查詢 ⇒ 參考<a target="_blank" rel="noopener" href="https://github.com/rupertbg/aws-load-balancer-logs-to-cloudwatch">連結</a></li>
+<li>方向二、EC2 安裝 cloudwatch agent 將 nginx 的 access log 收集到 cloudwatch log group 中 做查詢 ⇒ 由於之前就設定好 nginx log，就使用該方法</li>
+</ul>
+</li>
+</ul>
+<h2 id="設定-nginx-access-log-操作步驟"><a href="#設定-nginx-access-log-操作步驟" class="headerlink" title="設定 nginx access log 操作步驟"></a>設定 nginx access log 操作步驟</h2><p><strong>步驟一、安裝 cloudwatch agent</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Install CloudWatch Agent</span></span><br><span class="line">wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install -y collectd</span><br><span class="line">sudo dpkg -i -E ./amazon-cloudwatch-agent.deb</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟二、撰寫 JSON</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># amazon-cloudwatch-agent.json</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;agent&quot;:</span> &#123;</span><br><span class="line">    <span class="attr">&quot;metrics_collection_interval&quot;:</span> <span class="number">60</span>,</span><br><span class="line">    <span class="attr">&quot;run_as_user&quot;:</span> <span class="string">&quot;root&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;logs&quot;:</span> &#123;</span><br><span class="line">    <span class="attr">&quot;logs_collected&quot;:</span> &#123;</span><br><span class="line">      <span class="attr">&quot;files&quot;:</span> &#123;</span><br><span class="line">        <span class="attr">&quot;collect_list&quot;:</span> [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">&quot;file_path&quot;:</span> <span class="string">&quot;/var/log/nginx/access.log&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;log_group_name&quot;:</span> <span class="string">&quot;/$APPLICATION_NAME/nginx/access.log&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;log_stream_name&quot;:</span> <span class="string">&quot;$DEPLOYMENT_GROUP_NAME-[&#123;instance_id&#125;]-[&#123;ip_address&#125;]&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;retention_in_days&quot;:</span> <span class="number">90</span></span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">&quot;file_path&quot;:</span> <span class="string">&quot;/var/log/nginx/access.log.*&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;log_group_name&quot;:</span> <span class="string">&quot;/$APPLICATION_NAME/nginx/access.log&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;log_stream_name&quot;:</span> <span class="string">&quot;$DEPLOYMENT_GROUP_NAME-[&#123;instance_id&#125;]-[&#123;ip_address&#125;]&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;retention_in_days&quot;:</span> <span class="number">90</span></span><br><span class="line">          &#125;</span><br><span class="line">			 ]</span><br><span class="line">		 &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟三、啟動 cloudwatch agent</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># start cloudwatch agent</span></span><br><span class="line">envsubst <span class="string">&#x27;$APPLICATION_NAME $DEPLOYMENT_GROUP_NAME&#x27;</span> &lt; deploy/amazon-cloudwatch-agent.json &gt; /tmp/amazon-cloudwatch-agent.json</span><br><span class="line">/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/tmp/amazon-cloudwatch-agent.json</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟四、查看 cloudwatch group</strong></p>
+<p><img src="/../images/aws/search-elb-log-by-cloudwatch4.png" alt="search-elb-log-by-cloudwatch4"></p>
+<h2 id="使用-Cloudwatch-Log-Insight-做查詢"><a href="#使用-Cloudwatch-Log-Insight-做查詢" class="headerlink" title="使用 Cloudwatch Log Insight 做查詢"></a>使用 Cloudwatch Log Insight 做查詢</h2><p>可以參考此文章 ⇒ <strong><strong><a target="_blank" rel="noopener" href="https://yu-jack.github.io/2019/11/28/aws-cloudwatch-logs-insights/">AWS CloudWatch Logs Insights 介紹及教學</a></strong></strong></p>
+<ul>
+<li><p>按照時間來統計 status code 大於 400 的數量</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fields @timestamp, @message</span><br><span class="line">| <span class="built_in">sort</span> @timestamp desc</span><br><span class="line">| parse @message <span class="string">&quot;* * * * * * * * * *&quot;</span> as @ip, @c1, @c2, @<span class="built_in">date</span>, @c4, @method, @path, @c7, @status, @c9</span><br><span class="line">| filter @<span class="built_in">date</span> like <span class="string">&quot;28/Nov/2022&quot;</span></span><br><span class="line">| filter @status &gt;= 400</span><br><span class="line">| stats count(*) as <span class="built_in">sum</span> by @<span class="built_in">date</span>, @status</span><br></pre></td></tr></table></figure>
+
+<p>  <img src="/../images/aws/search-elb-log-by-cloudwatch5.png" alt="search-elb-log-by-cloudwatch5"></p>
+</li>
+<li><p>可以去 ALB 的 4xx&#x2F;5xx metrics 比對數量</p>
+<p>  <img src="/../images/aws/search-elb-log-by-cloudwatch6.png" alt="search-elb-log-by-cloudwatch6"></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/suggest-architecture-article/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/suggest-architecture-article/" class="post-title-link" itemprop="url">推薦Architecture文章</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-25 12:10:20" itemprop="dateCreated datePublished" datetime="2022-11-25T12:10:20+08:00">2022-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning/" itemprop="url" rel="index"><span itemprop="name">Learning</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>645</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Project-Cases"><a href="#Project-Cases" class="headerlink" title="Project Cases"></a>Project Cases</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E5%BE%8C%E7%AB%AF%E6%96%B0%E6%89%8B%E6%9D%91/%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AD%B8%E7%BF%92%E5%9C%B0%E5%9C%96-de216ab211fb">系統設計學習地圖</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/jkopay-frontend/%E5%AF%A6%E8%B8%90%E4%B8%80%E5%80%8B%E5%94%AE%E7%A5%A8%E5%BE%8C%E5%8F%B0%E7%9A%84%E6%80%9D%E8%B7%AF-f6015cd897aa">實踐一個售票後台的思路</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.slideshare.net/kylinfish/ss-80020439">與設計架構當朋友</a></strong></li>
+</ul>
+<h2 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://blog.wu-boy.com/2022/09/three-tools-design-system-architecture-and-flow/?fbclid=IwAR1WotPK4u_Vfr1fK_A7wmU1TYo7pE3FiYDsHZ41kWhNQO4fqo5ztJYpCIU&fs=e&s=cl">三款好用的繪圖工具來解決系統架構或流程圖</a></strong></li>
+</ul>
+<h2 id="Code-Style"><a href="#Code-Style" class="headerlink" title="Code Style"></a>Code Style</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/@steph.c/%E4%B8%89%E5%B1%A4%E6%9E%B6%E6%A7%8B%E6%98%AF%E4%BB%80%E9%BA%BC-%E6%88%91%E5%8F%AA%E7%9F%A5%E9%81%93%E4%B8%89%E5%B1%A4%E8%82%89-efe542c38aaf">MVC 三層架構 是什麼? 我只知道三層肉</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://igouist.github.io/post/2021/10/newbie-5-3-layer-architecture/">菜雞新訓記 (5): 使用 三層式架構 來切分服務的關注點和職責吧</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E8%BB%9F%E9%AB%94%E6%9E%B6%E6%A7%8B-%E5%88%86%E5%B1%A4%E6%9E%B6%E6%A7%8B%E6%A8%A1%E5%BC%8F-layered-architecture-a959da09d1c6">軟體架構：分層架構模式 ( Layered Architecture )</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E4%BB%80%E9%BA%BC%E6%98%AFoo-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E8%88%87%E5%B0%81%E8%A3%9D-80379c24e62">什麼是OO？物件導向與封裝</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E4%BB%80%E9%BA%BC%E6%98%AFoo-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E8%88%87%E7%B9%BC%E6%89%BF-6955239576af">什麼是OO？物件導向與繼承</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E4%BB%80%E9%BA%BC%E6%98%AFoo-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E8%88%87%E5%A4%9A%E5%9E%8B-30690aa3934c">什麼是OO？物件導向與多型</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E4%B8%AD%E7%9A%84%E4%BB%8B%E9%9D%A2%E8%88%87%E6%8A%BD%E8%B1%A1%E9%A1%9E%E5%88%A5%E6%98%AF%E4%BB%80%E9%BA%BC-1199804ccc5f">物件導向中的介面與抽象類別是什麼 ?</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E4%BD%BF%E4%BA%BA%E7%98%8B%E7%8B%82%E7%9A%84-solid-%E5%8E%9F%E5%89%87-%E7%9B%AE%E9%8C%84-b33fdfc983ca">使人瘋狂的 SOLID 原則：目錄</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E8%AE%8A%E6%95%B8%E5%91%BD%E5%90%8D-f53cd1115076">基礎但不簡單: 變數命名規則</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E5%9F%BA%E7%A4%8E%E4%BD%86%E4%B8%8D%E7%B0%A1%E5%96%AE-%E4%BD%BF%E7%94%A8function-a3f6561cc9bd">基礎但不簡單：函數設計方法</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://github.com/Kantai235/php-design-pattern">設計模式 Design Pattern</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20111119/ironman/3269">PHP 大師之路 - 開源的技術淬練</a></strong></li>
+</ul>
+<h2 id="Microservices"><a href="#Microservices" class="headerlink" title="Microservices"></a>Microservices</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E8%BB%9F%E9%AB%94%E6%9E%B6%E6%A7%8B-%E5%BE%AE%E6%9C%8D%E5%8B%99%E6%A8%A1%E5%BC%8F-microservice-9fbb15bdeeed">軟體架構 : 微服務模式 (Microservice)</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E5%BE%AE%E6%9C%8D%E5%8B%99-%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87-bounded-context-75cee43278af">微服務：限界上下文(Bounded Context)</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E5%BE%AE%E6%9C%8D%E5%8B%99-%E5%A6%82%E4%BD%95%E7%A2%BA%E5%AE%9A%E8%B3%87%E6%96%99%E4%B8%80%E8%87%B4%E6%80%A7-2adab03fdc7f">微服務：如何確定資料一致性？</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://cloud.google.com/learn/what-is-microservices-architecture?hl=zh-tw">什麼是微服務架構？</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://columns.chicken-house.net/2017/04/15/microservice8-case-study/#%E5%89%8D%E8%A8%80-%E5%BE%AE%E6%9C%8D%E5%8B%99%E6%9E%B6%E6%A7%8B-%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0%E5%B0%8E%E8%AE%80">微服務架構 系列文章導讀</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/microservices/">AWS 提供產品的 Solution</a></strong></li>
+</ul>
+<h2 id="API-Gateway-Pattern"><a href="#API-Gateway-Pattern" class="headerlink" title="API Gateway Pattern"></a>API Gateway Pattern</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/starbugs/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC%E8%80%85%E8%A9%B2%E8%B2%A0%E8%B2%AC%E5%AF%AB-api-endpoints-%E5%97%8E-the-backend-for-frontend-pattern-bff-in-microservices-world-1368362c141c">前端開發者該負責寫 API Endpoints 嗎？The Backend For Frontend Pattern (BFF) In Microservices World</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/tech-tajawal/backend-for-frontend-using-graphql-under-microservices-5b63bbfcd7d9">Backend-For-Frontend using GraphQL under Microservices</a></strong></li>
+</ul>
+<h2 id="Event-Driven-Pattern"><a href="#Event-Driven-Pattern" class="headerlink" title="Event-Driven Pattern"></a>Event-Driven Pattern</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/tech-tajawal/rabbitmq-at-your-servers-775d3dbd36e8">RabbitMQ At your Service</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/peerone-technology-%E7%9A%AE%E5%81%B6%E7%8E%A9%E4%BA%92%E5%8B%95%E7%A7%91%E6%8A%80/%E5%9F%BA%E6%96%BC-event-driven-architecture-%E7%82%BA%E5%BE%AE%E6%9C%8D%E5%8B%99%E6%9E%B6%E6%A7%8B%E6%89%93%E9%80%A0-auth-service-a81aac364b21">基於 Event-Driven Architecture 為微服務架構打造 Auth Service</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.readfog.com/a/1649430324632981504">EDA 事件驅動架構與 EventBridge 二三事</a></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/access-cross-db-by-vpc-peering/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/access-cross-db-by-vpc-peering/" class="post-title-link" itemprop="url">使用 VPC Peering 連接不同 VPC 的 RDS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-24 18:26:33" itemprop="dateCreated datePublished" datetime="2022-11-24T18:26:33+08:00">2022-11-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="為何需要"><a href="#為何需要" class="headerlink" title="為何需要"></a>為何需要</h2><ul>
+<li>不同 VPC 需要互相存取走 Internet 會比較貴且危險</li>
+<li>設定 VPC Peering 功能，可以將兩個不同 VPC 的 CIDR 位址串連在一起，透過 Private IP Address 互相連結，走內網相較安全且便宜</li>
+<li>支援同一個 Region 兩個 VPC 或不同 Region 各別 VPC，也支援多個 Account</li>
+<li><strong>需要注意 VPC 的 CIDR 不同重複</strong></li>
+</ul>
+<h2 id="達成目標"><a href="#達成目標" class="headerlink" title="達成目標"></a>達成目標</h2><ul>
+<li>從 A 帳戶 EC2 存取 B 帳戶的 RDS，每個帳戶會有各自 VPC</li>
+</ul>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><p><strong>步驟一、在 A 帳戶建立 VPC</strong></p>
+<ul>
+<li>選擇 public&#x2F;private 各一個 subnet</li>
+</ul>
+<p><strong>步驟二、在 B 帳戶建立 VPC</strong></p>
+<ul>
+<li>選擇 public&#x2F;private 各一個 subnet</li>
+</ul>
+<p><strong>步驟三、在 A 帳戶建立 VPC Peering Connection</strong></p>
+<ul>
+<li><p>輸入 Peering 名稱</p>
+</li>
+<li><p>選擇 local vpc id 及 another vpc id (記得要填 region, account)</p>
+</li>
+<li><p>建立完後要啟動 DNS，才可以將 RDS Domain Name 解析為內網 IP</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering1.png" alt="access_cross_db_by_vpc_peering1"></p>
+</li>
+</ul>
+<p><strong>步驟四、在 B 帳戶的 VPC Peering Connection</strong></p>
+<ul>
+<li><p>點擊 Accept Request，狀態就會變成 Active</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering2.png" alt="access_cross_db_by_vpc_peering2"></p>
+</li>
+<li><p>Accept 之後，再啟動 DNS</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering3.png" alt="access_cross_db_by_vpc_peering3"></p>
+</li>
+</ul>
+<p><strong>步驟五、在 A 帳戶修改 public subnet 的 route table</strong></p>
+<ul>
+<li><p>設定 private subnet 的 route table 會無效哦</p>
+</li>
+<li><p>設定 B 帳戶 VPC 的 CIDR</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering4.png" alt="access_cross_db_by_vpc_peering4"></p>
+</li>
+</ul>
+<p><strong>步驟六、在 B 帳戶修改 public subnet 的 route table</strong></p>
+<ul>
+<li><p>設定 A 帳戶 VPC 的 CIDR</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering5.png" alt="access_cross_db_by_vpc_peering5"></p>
+</li>
+</ul>
+<p><strong>步驟七、在 A, B 帳戶都建立 EC2</strong></p>
+<ul>
+<li>選擇 public subnet 並 auto assign ip</li>
+<li>security group 開放 22, ICMP port (有 ICMP 才可以 ping 對方 IP)</li>
+</ul>
+<p><strong>步驟八、互相 Ping 對方內網 IP 進行測試</strong></p>
+<ul>
+<li><p>A 帳戶的 EC2</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering6.png" alt="access_cross_db_by_vpc_peering6"></p>
+</li>
+<li><p>B 帳戶的 EC2</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering7.png" alt="access_cross_db_by_vpc_peering7"></p>
+</li>
+</ul>
+<p><strong>步驟九、在 B 帳戶修改 RDS 的 Security Group</strong></p>
+<ul>
+<li><p>新增 A 帳戶的 VPC CIDR 的 Inbound rule</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering8.png" alt="access_cross_db_by_vpc_peering8"></p>
+</li>
+</ul>
+<p><strong>步驟十、測試從 A 帳戶 EC2 連 B 帳戶的 RDS</strong></p>
+<ul>
+<li><p>使用 nslookup 解析 RDS endpoint 是否有轉換成內網 IP (如果沒有到步驟三啟動 DNS 設定)</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering9.png" alt="access_cross_db_by_vpc_peering9"></p>
+</li>
+<li><p>安裝 mysql 進行連線</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安裝 mysql</span></span><br><span class="line">$ sudo yum install mysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 mysql client 連線</span></span><br><span class="line">$ mysql -h &lt;endpoint&gt; -P 3306 -u &lt;mysql user&gt; --password &lt;mysql password&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://rdpapa.tw/2022/09/10/aws-vpc-peering/">《AWS 教學–如何在不同的VPC建立一條可互通的通道》VPC PEERING操作分享 | 學習筆記</a></strong></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/premiumsupport/knowledge-center/vpc-peering-troubleshoot-dns-resolution/">為什麼我無法透過 VPC 對等互連解析網域名稱？</a></strong></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/access-sqs-by-vpc-internet-endpoint/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/access-sqs-by-vpc-internet-endpoint/" class="post-title-link" itemprop="url">如何使用 VPC Interface Endpoint 存取 SQS 資源</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-23 18:35:10" itemprop="dateCreated datePublished" datetime="2022-11-23T18:35:10+08:00">2022-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="完成示意圖"><a href="#完成示意圖" class="headerlink" title="完成示意圖"></a>完成示意圖</h2><p><img src="/../images/aws/access_sqs_by_vpc_internet_endpoint1.png" alt="access_sqs_by_vpc_internet_endpoint1"></p>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><p><strong>步驟一、建立 VPC</strong></p>
+<ul>
+<li>選擇一個 public subnet (對外開放 SSH port 的 EC2，當作跳板做測試)</li>
+<li>選擇一個 private subnet (透過 private link 方式存取 AWS 服務)</li>
+<li>取消勾選 S3 Gateway</li>
+<li><strong>勾選 DNS hostnames 及 resolution</strong> (才可以使用私有域名的方式存取 AWS 服務)</li>
+</ul>
+<p><strong>步驟二、確認 default security</strong></p>
+<ul>
+<li>建立完 VPC，會預設建立內部溝通使用的 default security group</li>
+<li>會在後面建立 vpc interface endpoint 使用到</li>
+</ul>
+<p><img src="/../images/aws/access_sqs_by_vpc_internet_endpoint2.png" alt="access_sqs_by_vpc_internet_endpoint2"></p>
+<p><strong>步驟三、建立 Role，分配給 EC2 來限制存取 AWS 資源權限</strong></p>
+<p><img src="/../images/aws/access_sqs_by_vpc_internet_endpoint3.png" alt="access_sqs_by_vpc_internet_endpoint3"></p>
+<p><strong>步驟四、建立對外開放 SSH Port 的 EC2</strong></p>
+<ul>
+<li>選擇 aws 官方 image (預設有 aws cli 指令)</li>
+<li>選擇 public subnet，並自動分配對外 IP</li>
+<li>建立 security group 的 inbound rule 只允許 ssh port</li>
+</ul>
+<p><strong>步驟五、建立對內 EC2</strong></p>
+<ul>
+<li>選擇 aws 官方 image (預設有 aws cli 指令)</li>
+<li>選擇 private subnet</li>
+<li>選擇前面建立好的 Role、security group</li>
+</ul>
+<p><strong>步驟六、建立 Interface Endpoint</strong></p>
+<ul>
+<li>選擇 com.amazonaws.us-west-2.sqs 的 AWS 服務</li>
+<li>選擇前面建立的 VPC</li>
+<li><strong>勾選 DNS name (可以用 private link 與預設的 public endpoint 進行存取)</strong></li>
+<li>選擇 private subnet 與 IPv4</li>
+<li>選擇步驟二的 default security group 走 vpc 內網溝通</li>
+<li>建立完後會看到 ENI 網卡</li>
+</ul>
+<p><img src="/../images/aws/access_sqs_by_vpc_internet_endpoint4.png" alt="access_sqs_by_vpc_internet_endpoint4"></p>
+<p><strong>步驟七、修改 default security group</strong></p>
+<ul>
+<li>將前面建立好的 security group 加入到 inbound rule 中</li>
+</ul>
+<p><img src="/../images/aws/access_sqs_by_vpc_internet_endpoint5.png" alt="access_sqs_by_vpc_internet_endpoint5"></p>
+<p><strong>步驟八、建立 SQS</strong></p>
+<ul>
+<li>輸入名稱為 vpc-endpoint-sqs</li>
+<li>複製 SQS Details 的 URL</li>
+</ul>
+<p><strong>步驟九、發送 Message 到 Queue 中</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># default public DNS</span></span><br><span class="line"><span class="string">$</span> <span class="string">aws</span> <span class="string">sqs</span> <span class="string">send-message</span> <span class="string">--region</span> <span class="string">us-west-2</span> <span class="string">--endpoint-url</span> <span class="string">https://sqs.us-west-2.amazonaws.com/</span> <span class="string">--queue-url</span> <span class="string">https://sqs.us-west-2.amazonaws.com/&lt;account</span> <span class="string">id&gt;/vpc-endpoint-sqs</span> <span class="string">--message-body</span> <span class="string">&quot;Hello from Amazon SQS.&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># interface private DNS</span></span><br><span class="line"><span class="string">$</span> <span class="string">aws</span> <span class="string">sqs</span> <span class="string">send-message</span> <span class="string">--region</span> <span class="string">us-west-2</span> <span class="string">--endpoint-url</span> <span class="string">https://vpce-028c733be6bb2e23a-ylx2ithw.sqs.us-west-2.vpce.amazonaws.com/</span> <span class="string">--queue-url</span> <span class="string">https://sqs.us-west-2.amazonaws.com/&lt;account</span> <span class="string">id&gt;/vpc-endpoint-sqs</span> <span class="string">--message-body</span> <span class="string">&quot;Hello from Amazon SQS.&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 看到下方結果，即為成功</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;MD5OfMessageBody&quot;:</span> <span class="string">&quot;c5dba0dd8f89fe763f66cbddb9c37cb7&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;MessageId&quot;:</span> <span class="string">&quot;70b7327e-e414-4cd2-adbb-b708bfc8a1d4&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=zlFmrT2Do74&ab_channel=CloudDeepDive">VPC Interface Endpoints - Demo</a></strong></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=fByROZKY0x0&ab_channel=NamrataHShah">AWS Tutorial - AWS SQS - Sending a Message using A VPC Endpoint (AWS Privatelink)</a></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/access-s3-by-vpc-gateway-endpoint/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/access-s3-by-vpc-gateway-endpoint/" class="post-title-link" itemprop="url">如何使用 VPC Gateway Endpoint 存取 S3 資源</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-23 18:30:13" itemprop="dateCreated datePublished" datetime="2022-11-23T18:30:13+08:00">2022-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="VPC-Endpoint"><a href="#VPC-Endpoint" class="headerlink" title="VPC Endpoint"></a>VPC Endpoint</h2><ul>
+<li>主要的功能是透過 private link 方式連接到 AWS Service</li>
+<li>優點是節費又安全</li>
+<li>其中的 Gateway Endpoint 存取 S3, DynamoDB 服務是完全免費</li>
+</ul>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><p><strong>步驟一、建立 VPC</strong></p>
+<ul>
+<li>選擇一個 public subnet (對外開放 SSH port 的 EC2，當作跳板做測試)</li>
+<li>選擇一個 private subnet (透過 private link 方式存取 S3)</li>
+<li>勾選 S3 Gateway</li>
+<li><strong>勾選 DNS hostnames 及 resolution</strong> (才可以使用私有域名的方式存取 AWS 服務，像是 <code>s3.us-west-2.amazonaws.com</code>)</li>
+</ul>
+<p><img src="/../images/aws/access_s3_by_vpc_gateway_endpoint1.png" alt="access_s3_by_vpc_gateway_endpoint1"></p>
+<p><strong>步驟二、查看 Private Subnet 的 Route Table，可以路由到 VPC endpoint</strong></p>
+<p><img src="/../images/aws/access_s3_by_vpc_gateway_endpoint2.png" alt="access_s3_by_vpc_gateway_endpoint2"></p>
+<p><strong>步驟三、查看 VPC Endpoint 設定，可以看到存取的服務 (注意只能設定同一個 Region)</strong></p>
+<ul>
+<li>預設 Policy 為 Full access (會覆蓋掉 IAM Role 的權限)</li>
+</ul>
+<p><img src="/../images/aws/access_s3_by_vpc_gateway_endpoint3.png" alt="access_s3_by_vpc_gateway_endpoint3"></p>
+<p><strong>步驟四、建立 Role，分配給 EC2 來限制存取 AWS 資源權限</strong></p>
+<ul>
+<li>除了設定 Permission 之外，更重要的是設定 Trust relationships (允許誰可以 assume 這個 role)</li>
+</ul>
+<p><img src="/../images/aws/access_s3_by_vpc_gateway_endpoint4.png" alt="access_s3_by_vpc_gateway_endpoint4"></p>
+<p><strong>步驟五、建立對外開放 SSH Port 的 EC2</strong></p>
+<ul>
+<li>選擇 aws 官方 image (預設有 aws cli 指令)</li>
+<li>選擇 public subnet，並自動分配對外 IP</li>
+<li>建立 security group 的 inbound rule 只允許 ssh port</li>
+</ul>
+<p><strong>步驟六、建立對內 EC2</strong></p>
+<ul>
+<li>選擇 aws 官方 image (預設有 aws cli 指令)</li>
+<li>選擇 private subnet</li>
+<li>選擇前面建立好的 Role</li>
+</ul>
+<p><strong>步驟七、透過跳板機連線到對內 EC2</strong></p>
+<ul>
+<li>使用 <code>nslookup s3.us-west-2.amazonaws.com</code>  查看 S3 的 IP 位址</li>
+<li>可以隨機 ping 一個 IP，有回應則連線成功</li>
+</ul>
+<p><img src="/../images/aws/access_s3_by_vpc_gateway_endpoint5.png" alt="access_s3_by_vpc_gateway_endpoint5"></p>
+<ul>
+<li>使用 aws s3 指令查看 bucket<ul>
+<li><code>export AWS_DEFAULT_REGION=us-west-2</code></li>
+<li><code>aws s3 ls s3://&#123;bucket-name&#125;</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>步驟八、使用 VPC Reachability Analyzer 測試網路連線</strong></p>
+<ul>
+<li>狀態為 Reachable 代表連線成功</li>
+<li>查看連線路徑</li>
+</ul>
+<p><img src="/../images/aws/access_s3_by_vpc_gateway_endpoint6.png" alt="access_s3_by_vpc_gateway_endpoint6"></p>
+<h2 id="使用限制"><a href="#使用限制" class="headerlink" title="使用限制"></a>使用限制</h2><ul>
+<li>VPC Endpoint policy 會覆蓋 IAM policy，使用情境會根據不同的 Policy 建立不同的 endpoint<ul>
+<li>預設 quota 是每個 region 上限 20 個 VPC Gateway Endpoint，超過上限可在調整 &#x3D;&gt; <a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-endpoints">link</a></li>
+</ul>
+</li>
+<li>只能存取同一個 Region 的資源</li>
+<li><strong>當指定服務走 VPC Endpoint，所有該服務的請求都會走 VPC Endpoint，不會走 NAT gateway</strong><ul>
+<li>可以使用 VPC Endpoint Policy 做實驗</li>
+</ul>
+</li>
+</ul>
+<h2 id="EC2-狀況排除"><a href="#EC2-狀況排除" class="headerlink" title="EC2 狀況排除"></a>EC2 狀況排除</h2><p><strong>狀況一、打 <code>aws s3 ls</code> 指令會沒有回應</strong></p>
+<p>解決方法</p>
+<ul>
+<li>設定預設 Region ⇒ <code>export AWS_DEFAULT_REGION=us-west-2</code></li>
+</ul>
+<p><strong>狀況二、下 aws cli 指令出現 Unable to locate credentials. 的錯誤</strong></p>
+<p>解決方法</p>
+<ul>
+<li>開 EC2 要記得設定 IAM Role</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-s3.html#create-gateway-endpoint-s3">Gateway endpoints for Amazon S3</a></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://tomgregory.com/when-to-use-an-aws-s3-vpc-endpoint/">When to use an AWS S3 VPC endpoint</a></strong></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://itnext.io/what-exactly-are-vpc-endpoints-and-why-they-need-real-inter-region-support-283a9987fe51">What Exactly are VPC Endpoints and Why They Need Real Inter-Region Support</a></strong></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/use-mariadb-with-rds-proxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/use-mariadb-with-rds-proxy/" class="post-title-link" itemprop="url">如何使用 AWS RDS Proxy</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-23 18:23:58" itemprop="dateCreated datePublished" datetime="2022-11-23T18:23:58+08:00">2022-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>3.7k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>3 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="發生問題"><a href="#發生問題" class="headerlink" title="發生問題"></a>發生問題</h2><ul>
+<li>資料庫有 max_connection 參數來限制最大連線數</li>
+<li>當 Worker 數量變多與資料庫的連線達到上限值，新 worker 機器就會出現 connection fail</li>
+</ul>
+<h2 id="RDS-Proxy"><a href="#RDS-Proxy" class="headerlink" title="RDS Proxy"></a>RDS Proxy</h2><ul>
+<li><p>用來處理資料庫流量無法預測的突增情況，避免 Connection Fail 情況發生</p>
+</li>
+<li><p>應用程式更具可擴展性、提高對數據庫遇故障時的恢復能力</p>
+</li>
+<li><p>實作原理</p>
+<p>  <img src="/../images/aws/use-mariadb-with-rds-proxy1.png" alt="use-mariadb-with-rds-proxy1"></p>
+</li>
+</ul>
+<h2 id="Connection-Pool"><a href="#Connection-Pool" class="headerlink" title="Connection Pool"></a>Connection Pool</h2><p>主要功能是<strong>降低對資料庫連線&#x2F;關閉的次數</strong>，讓每次的 connection 都可以從 pool 中取得，為了達到該主要功能需要了解以下三個元素：</p>
+<ul>
+<li><strong>multiplexing:</strong> 為 transaction-level reuse，就是 session 中的每個 transaction 做完後可以在被重複使用，連線不會因此而中斷</li>
+<li><strong>borrowing connection:</strong> 移除現有的 connection，重新將連線在加入到 pool 中，根據 Connection borrow timeout 參數來做動</li>
+<li><strong>pinning:</strong> 當 Proxy 判斷該目前的 session 不安全無法共用連線就會進行鎖定，直到該 session 結束就會恢復可共用</li>
+</ul>
+<blockquote>
+<p>注意：RDS Proxy 不會主動去關閉 connection，所以才會一直處於一樣的連線數，透過 Connection Pool 去達到 connection reuse ，讓每次請求進來不用重新建立連線加快執行效率</p>
+</blockquote>
+<p><strong>參考連結</strong></p>
+<ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://vocus.cc/article/5f800406fd89780001365d17">Connection Pool (連線池)</a></strong></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.howitworks.html">RDS Proxy concepts and terminology</a></strong></li>
+</ul>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><p>詳細步驟可參考此 <a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/getting-started/hands-on/set-up-shared-database-connection-amazon-rds-proxy/">link</a></p>
+<p><strong>步驟一、建立 VPC</strong></p>
+<ul>
+<li>兩個 public 及 private subnet</li>
+</ul>
+<p><strong>步驟二、建立 DB</strong></p>
+<ul>
+<li>建立 subnet group 只包含 private subnet</li>
+<li>建立允許 RDS port 的 security group<ul>
+<li>inbound rule 允許 vpc 的 CIDR block</li>
+</ul>
+</li>
+<li>DB engine 選擇 Mariadb<ul>
+<li><a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/about-aws/whats-new/2022/07/amazon-rds-proxy-mariadb-version-10-support/">Proxy 只支援 Mariadb 版本 10.3, 10.4, 10.5</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>步驟三、建立 EC2</strong></p>
+<ul>
+<li>建立 key-pair</li>
+<li>允許 SSH port 的 security group</li>
+</ul>
+<p><strong>步驟四、測試無 Proxy RDS</strong></p>
+<ul>
+<li>連線到 EC2</li>
+<li>安裝 mysql-client<ul>
+<li><code>sudo yum install mysql</code></li>
+</ul>
+</li>
+<li>連線 mysql<ul>
+<li><code>mysql -h rds-test-2.xxx.us-west-2.rds.amazonaws.com -u admin -p</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>步驟五、建立 Secret Manager</strong></p>
+<ul>
+<li>secret type 選擇 Credentials for Amazon RDS database</li>
+<li>輸入 DB 的 username, password</li>
+<li>選擇前面建立的 Database</li>
+</ul>
+<p><strong>步驟六、建立 RDS Proxy (Read&#x2F;Write)</strong></p>
+<ul>
+<li>Engine Family 選擇 MySQL</li>
+<li>Idle client connection timeout 改成 30 分鐘<ul>
+<li>用戶端如果在時間內沒有丟新任務，DB 會判定為閒置將連線斷掉，給其它 client 使用</li>
+</ul>
+</li>
+<li>Target group 選擇前面建立的 Database</li>
+<li>Connection 選擇前面建立的 secret manager、自動建立 IAM Role</li>
+<li>選擇 private subnet</li>
+<li>選擇前面建立允許 RDS port 的 security group<ul>
+<li><strong>rds proxy 的 port 必須為 3306</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="/../images/aws/use-mariadb-with-rds-proxy2.png" alt="use-mariadb-with-rds-proxy2"></p>
+<p><strong>步驟七、建立 RDS Proxy Endpoint For Read-only</strong></p>
+<ul>
+<li>同一個 Proxy 建立 Read-only 的 endpoint</li>
+<li>target role 選擇 read-only</li>
+</ul>
+<p><img src="/../images/aws/use-mariadb-with-rds-proxy3.png" alt="use-mariadb-with-rds-proxy3"></p>
+<p><strong>步驟八、測試有 Proxy RDS</strong></p>
+<ul>
+<li>連線 Proxy<ul>
+<li><code>mysql -h &lt;proxy endpoint&gt; -u admin -p</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="Sysbench-簡介"><a href="#Sysbench-簡介" class="headerlink" title="Sysbench 簡介"></a>Sysbench 簡介</h2><ul>
+<li><p>用來做 MySQL &#x2F; Mariadb &#x2F; PostgreSQL 資料庫的壓力測試</p>
+</li>
+<li><p>安裝方式 ⇒ <a target="_blank" rel="noopener" href="https://github.com/akopytov/sysbench">link</a></p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">curl</span> <span class="string">-s</span> <span class="string">https://packagecloud.io/install/repositories/akopytov/sysbench/script.rpm.sh</span> <span class="string">|</span> <span class="string">sudo</span> <span class="string">bash</span></span><br><span class="line"><span class="string">sudo</span> <span class="string">yum</span> <span class="string">-y</span> <span class="string">install</span> <span class="string">sysbench</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>預設提供的壓力測試腳本</p>
+<ul>
+<li>bulk_insert</li>
+<li>oltp_delete</li>
+<li>oltp_insert  ⇒ 下方壓測例子用此腳本</li>
+<li>oltp_point_select</li>
+<li>oltp_read_only</li>
+<li>oltp_read_write</li>
+<li>oltp_update_index</li>
+<li>oltp_update_non_index</li>
+<li>oltp_write_only</li>
+<li>select_random_points</li>
+<li>select_random_ranges</li>
+</ul>
+</li>
+<li><p>測試前可以先建立資料庫 <code>create database test</code></p>
+</li>
+<li><p>指令介紹</p>
+<ul>
+<li>第一次執行跑 <code>prepare</code> 建立測試 Table 及 RowData</li>
+<li>做壓力測試跑 <code>run</code></li>
+<li>測試完跑 <code>cleanup</code> 清除測試 Table 及 RowData</li>
+</ul>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">sysbench</span> <span class="string">--threads=&lt;並行執行緒數量&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--time=&lt;持續執行時間&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--report-interval=&lt;間隔執行時間&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--db-driver=mysql</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--mysql-user=&lt;資料庫使用者&gt;</span> <span class="string">\l</span></span><br><span class="line">    <span class="string">--mysql-password=&lt;資料庫密碼&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--mysql-port=&lt;資料庫</span> <span class="string">port&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--mysql-host=&lt;資料庫</span> <span class="string">endpoint&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--mysql-db=&lt;資料庫名稱&gt;</span> <span class="string">&lt;測試腳本名稱&gt;</span> <span class="string">&lt;執行腳本的指令名稱&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看現有資料庫的 max_connection</p>
+<p>  <img src="/../images/aws/use-mariadb-with-rds-proxy4.png" alt="use-mariadb-with-rds-proxy4"></p>
+</li>
+</ul>
+<h2 id="無-Proxy-做壓測"><a href="#無-Proxy-做壓測" class="headerlink" title="無 Proxy 做壓測"></a>無 Proxy 做壓測</h2><ul>
+<li><p>執行指令</p>
+<ul>
+<li>要注意使用 DB endpoint 及 port</li>
+</ul>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=&lt;YOUR_DB_PORT&gt;</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">prepare</span></span><br><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=&lt;YOUR_DB_PORT&gt;</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">run</span></span><br><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=&lt;YOUR_DB_PORT&gt;</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">cleanup</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>執行成果</p>
+<p>  <img src="/../images/aws/use-mariadb-with-rds-proxy5.png" alt="use-mariadb-with-rds-proxy5"></p>
+</li>
+</ul>
+<h2 id="有-Proxy-做壓測"><a href="#有-Proxy-做壓測" class="headerlink" title="有 Proxy 做壓測"></a>有 Proxy 做壓測</h2><ul>
+<li><p>執行指令</p>
+<ul>
+<li>要注意使用 DB Proxy endpoint 及 port</li>
+</ul>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=3306</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">prepare</span></span><br><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=3306</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">run</span></span><br><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=3306</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">cleanup</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>執行成果</p>
+<p>  <img src="/../images/aws/use-mariadb-with-rds-proxy6.png" alt="use-mariadb-with-rds-proxy6"></p>
+</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://isdaniel.github.io/aws-rds-proxy/">AWS Postgres RDS Proxy</a></strong></li>
+<li><a target="_blank" rel="noopener" href="https://hktw-resources.awscloud.com/aws-hands-on-tutorial-hk/amazon-rds-proxy-%E7%B0%A1%E4%BB%8B%E5%8F%8A%E7%A4%BA%E7%AF%84"><strong>AWS實戰工作坊：Amazon RDS Proxy 簡介及示範</strong></a></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://www.programmersought.com/article/86587579173/">sysbench stress test–mysql</a></strong></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/39199173/difference-between-session-and-connection-in-sql-server">Difference between Session and Connection in SQL Server</a></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

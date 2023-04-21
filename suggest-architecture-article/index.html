@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Project Cases 系統設計學習地圖 實踐一個售票後台的思路 與設計架構當朋友  Tools 三款好用的繪圖工具來解決系統架構或流程圖  Code Style MVC 三層架構 是什麼? 我只知道三層肉 菜雞新訓記 (5): 使用 三層式架構 來切分服務的關注點和職責吧 軟體架構：分層架構模式 ( Layered Architecture ) 什麼是OO？物件導向與封裝 什麼是OO？物件導">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推薦Architecture文章">
+<meta property="og:url" content="https://jefferylee73.github.io/suggest-architecture-article/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="Project Cases 系統設計學習地圖 實踐一個售票後台的思路 與設計架構當朋友  Tools 三款好用的繪圖工具來解決系統架構或流程圖  Code Style MVC 三層架構 是什麼? 我只知道三層肉 菜雞新訓記 (5): 使用 三層式架構 來切分服務的關注點和職責吧 軟體架構：分層架構模式 ( Layered Architecture ) 什麼是OO？物件導向與封裝 什麼是OO？物件導">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-11-25T04:10:20.000Z">
+<meta property="article:modified_time" content="2023-04-21T01:45:34.280Z">
+<meta property="article:author" content="Jeffery Lee">
+<meta property="article:tag" content="Architecture">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://jefferylee73.github.io/suggest-architecture-article/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>推薦Architecture文章 | 傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/suggest-architecture-article/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          推薦Architecture文章
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-25 12:10:20" itemprop="dateCreated datePublished" datetime="2022-11-25T12:10:20+08:00">2022-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning/" itemprop="url" rel="index"><span itemprop="name">Learning</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>645</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Project-Cases"><a href="#Project-Cases" class="headerlink" title="Project Cases"></a>Project Cases</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E5%BE%8C%E7%AB%AF%E6%96%B0%E6%89%8B%E6%9D%91/%E7%B3%BB%E7%B5%B1%E8%A8%AD%E8%A8%88%E5%AD%B8%E7%BF%92%E5%9C%B0%E5%9C%96-de216ab211fb">系統設計學習地圖</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/jkopay-frontend/%E5%AF%A6%E8%B8%90%E4%B8%80%E5%80%8B%E5%94%AE%E7%A5%A8%E5%BE%8C%E5%8F%B0%E7%9A%84%E6%80%9D%E8%B7%AF-f6015cd897aa">實踐一個售票後台的思路</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.slideshare.net/kylinfish/ss-80020439">與設計架構當朋友</a></strong></li>
+</ul>
+<h2 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://blog.wu-boy.com/2022/09/three-tools-design-system-architecture-and-flow/?fbclid=IwAR1WotPK4u_Vfr1fK_A7wmU1TYo7pE3FiYDsHZ41kWhNQO4fqo5ztJYpCIU&fs=e&s=cl">三款好用的繪圖工具來解決系統架構或流程圖</a></strong></li>
+</ul>
+<h2 id="Code-Style"><a href="#Code-Style" class="headerlink" title="Code Style"></a>Code Style</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/@steph.c/%E4%B8%89%E5%B1%A4%E6%9E%B6%E6%A7%8B%E6%98%AF%E4%BB%80%E9%BA%BC-%E6%88%91%E5%8F%AA%E7%9F%A5%E9%81%93%E4%B8%89%E5%B1%A4%E8%82%89-efe542c38aaf">MVC 三層架構 是什麼? 我只知道三層肉</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://igouist.github.io/post/2021/10/newbie-5-3-layer-architecture/">菜雞新訓記 (5): 使用 三層式架構 來切分服務的關注點和職責吧</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E8%BB%9F%E9%AB%94%E6%9E%B6%E6%A7%8B-%E5%88%86%E5%B1%A4%E6%9E%B6%E6%A7%8B%E6%A8%A1%E5%BC%8F-layered-architecture-a959da09d1c6">軟體架構：分層架構模式 ( Layered Architecture )</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E4%BB%80%E9%BA%BC%E6%98%AFoo-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E8%88%87%E5%B0%81%E8%A3%9D-80379c24e62">什麼是OO？物件導向與封裝</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E4%BB%80%E9%BA%BC%E6%98%AFoo-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E8%88%87%E7%B9%BC%E6%89%BF-6955239576af">什麼是OO？物件導向與繼承</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E4%BB%80%E9%BA%BC%E6%98%AFoo-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E8%88%87%E5%A4%9A%E5%9E%8B-30690aa3934c">什麼是OO？物件導向與多型</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E4%B8%AD%E7%9A%84%E4%BB%8B%E9%9D%A2%E8%88%87%E6%8A%BD%E8%B1%A1%E9%A1%9E%E5%88%A5%E6%98%AF%E4%BB%80%E9%BA%BC-1199804ccc5f">物件導向中的介面與抽象類別是什麼 ?</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E4%BD%BF%E4%BA%BA%E7%98%8B%E7%8B%82%E7%9A%84-solid-%E5%8E%9F%E5%89%87-%E7%9B%AE%E9%8C%84-b33fdfc983ca">使人瘋狂的 SOLID 原則：目錄</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E8%AE%8A%E6%95%B8%E5%91%BD%E5%90%8D-f53cd1115076">基礎但不簡單: 變數命名規則</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E5%9F%BA%E7%A4%8E%E4%BD%86%E4%B8%8D%E7%B0%A1%E5%96%AE-%E4%BD%BF%E7%94%A8function-a3f6561cc9bd">基礎但不簡單：函數設計方法</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://github.com/Kantai235/php-design-pattern">設計模式 Design Pattern</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20111119/ironman/3269">PHP 大師之路 - 開源的技術淬練</a></strong></li>
+</ul>
+<h2 id="Microservices"><a href="#Microservices" class="headerlink" title="Microservices"></a>Microservices</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E8%BB%9F%E9%AB%94%E6%9E%B6%E6%A7%8B-%E5%BE%AE%E6%9C%8D%E5%8B%99%E6%A8%A1%E5%BC%8F-microservice-9fbb15bdeeed">軟體架構 : 微服務模式 (Microservice)</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E5%BE%AE%E6%9C%8D%E5%8B%99-%E9%99%90%E7%95%8C%E4%B8%8A%E4%B8%8B%E6%96%87-bounded-context-75cee43278af">微服務：限界上下文(Bounded Context)</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E5%BE%AE%E6%9C%8D%E5%8B%99-%E5%A6%82%E4%BD%95%E7%A2%BA%E5%AE%9A%E8%B3%87%E6%96%99%E4%B8%80%E8%87%B4%E6%80%A7-2adab03fdc7f">微服務：如何確定資料一致性？</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://cloud.google.com/learn/what-is-microservices-architecture?hl=zh-tw">什麼是微服務架構？</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://columns.chicken-house.net/2017/04/15/microservice8-case-study/#%E5%89%8D%E8%A8%80-%E5%BE%AE%E6%9C%8D%E5%8B%99%E6%9E%B6%E6%A7%8B-%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0%E5%B0%8E%E8%AE%80">微服務架構 系列文章導讀</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/microservices/">AWS 提供產品的 Solution</a></strong></li>
+</ul>
+<h2 id="API-Gateway-Pattern"><a href="#API-Gateway-Pattern" class="headerlink" title="API Gateway Pattern"></a>API Gateway Pattern</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/starbugs/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC%E8%80%85%E8%A9%B2%E8%B2%A0%E8%B2%AC%E5%AF%AB-api-endpoints-%E5%97%8E-the-backend-for-frontend-pattern-bff-in-microservices-world-1368362c141c">前端開發者該負責寫 API Endpoints 嗎？The Backend For Frontend Pattern (BFF) In Microservices World</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/tech-tajawal/backend-for-frontend-using-graphql-under-microservices-5b63bbfcd7d9">Backend-For-Frontend using GraphQL under Microservices</a></strong></li>
+</ul>
+<h2 id="Event-Driven-Pattern"><a href="#Event-Driven-Pattern" class="headerlink" title="Event-Driven Pattern"></a>Event-Driven Pattern</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/tech-tajawal/rabbitmq-at-your-servers-775d3dbd36e8">RabbitMQ At your Service</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/peerone-technology-%E7%9A%AE%E5%81%B6%E7%8E%A9%E4%BA%92%E5%8B%95%E7%A7%91%E6%8A%80/%E5%9F%BA%E6%96%BC-event-driven-architecture-%E7%82%BA%E5%BE%AE%E6%9C%8D%E5%8B%99%E6%9E%B6%E6%A7%8B%E6%89%93%E9%80%A0-auth-service-a81aac364b21">基於 Event-Driven Architecture 為微服務架構打造 Auth Service</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.readfog.com/a/1649430324632981504">EDA 事件驅動架構與 EventBridge 二三事</a></strong></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Architecture/" rel="tag"># Architecture</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/access-cross-db-by-vpc-peering/" rel="prev" title="使用 VPC Peering 連接不同 VPC 的 RDS">
+      <i class="fa fa-chevron-left"></i> 使用 VPC Peering 連接不同 VPC 的 RDS
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/search-elb-log-by-cloudwatch/" rel="next" title="如何搜尋 ELB 的 Access Log">
+      如何搜尋 ELB 的 Access Log <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Project-Cases"><span class="nav-number">1.</span> <span class="nav-text">Project Cases</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tools"><span class="nav-number">2.</span> <span class="nav-text">Tools</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-Style"><span class="nav-number">3.</span> <span class="nav-text">Code Style</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Microservices"><span class="nav-number">4.</span> <span class="nav-text">Microservices</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API-Gateway-Pattern"><span class="nav-number">5.</span> <span class="nav-text">API Gateway Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-Driven-Pattern"><span class="nav-number">6.</span> <span class="nav-text">Event-Driven Pattern</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

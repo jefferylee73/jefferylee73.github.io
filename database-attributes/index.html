@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="資料庫擴展要點Heavy Read  Cache Replica  高併發  Multi-Master RDS For Aurora  量太大  分資料表 (Partition)  線上交易處理(Online Transactional Processing OLTP) 指系統能夠處理大量的更新以及新增的查詢 Transactional 代表處理讀和寫 數據的正確性及一致性是首要達到的目標之一，所">
+<meta property="og:type" content="article">
+<meta property="og:title" content="資料庫專有名詞(必讀)">
+<meta property="og:url" content="https://jefferylee73.github.io/database-attributes/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="資料庫擴展要點Heavy Read  Cache Replica  高併發  Multi-Master RDS For Aurora  量太大  分資料表 (Partition)  線上交易處理(Online Transactional Processing OLTP) 指系統能夠處理大量的更新以及新增的查詢 Transactional 代表處理讀和寫 數據的正確性及一致性是首要達到的目標之一，所">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://jefferylee73.github.io/images/learning/database-attributes8.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/learning/database-attributes9.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/learning/database-attributes1.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/learning/database-attributes2.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/learning/database-attributes3.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/learning/database-attributes4.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/learning/database-attributes5.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/learning/database-attributes6.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/learning/database-attributes7.png">
+<meta property="article:published_time" content="2022-11-16T10:19:01.000Z">
+<meta property="article:modified_time" content="2023-04-21T01:45:34.277Z">
+<meta property="article:author" content="Jeffery Lee">
+<meta property="article:tag" content="Backend">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jefferylee73.github.io/images/learning/database-attributes8.png">
+
+<link rel="canonical" href="https://jefferylee73.github.io/database-attributes/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>資料庫專有名詞(必讀) | 傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/database-attributes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          資料庫專有名詞(必讀)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 18:19:01" itemprop="dateCreated datePublished" datetime="2022-11-16T18:19:01+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>3 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="資料庫擴展要點"><a href="#資料庫擴展要點" class="headerlink" title="資料庫擴展要點"></a>資料庫擴展要點</h2><p><strong>Heavy Read</strong></p>
+<ul>
+<li>Cache</li>
+<li>Replica</li>
+</ul>
+<p><strong>高併發</strong></p>
+<ul>
+<li>Multi-Master RDS For Aurora</li>
+</ul>
+<p><strong>量太大</strong></p>
+<ul>
+<li>分資料表 (Partition)</li>
+</ul>
+<h2 id="線上交易處理-Online-Transactional-Processing-OLTP"><a href="#線上交易處理-Online-Transactional-Processing-OLTP" class="headerlink" title="線上交易處理(Online Transactional Processing OLTP)"></a>線上交易處理(Online Transactional Processing OLTP)</h2><ul>
+<li>指系統能夠處理大量的更新以及新增的查詢</li>
+<li>Transactional 代表處理讀和寫</li>
+<li>數據的正確性及一致性是首要達到的目標之一，所以常在 OLTP 中聽到 ACID<ul>
+<li>一個事務 (Transaction) 完成後才會執行下一筆，確保整個系統的資料一致性</li>
+<li>OLTP 同時會有多位使用者操作，要確保每一個操作使用者能拿到最終的狀態，不然可能會有數據不一致以及不同步問題</li>
+</ul>
+</li>
+</ul>
+<h2 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h2><p><strong>Atomicity(原子性)</strong></p>
+<ul>
+<li>Transaction 要馬全部成功、要馬全部失敗，不能有部分結果</li>
+</ul>
+<p><strong>Consistency(一致性)</strong></p>
+<ul>
+<li>Transaction 前後，資料庫的完整性沒有被破壞</li>
+<li>寫入的資料必須完全符合所有(Constraint, Trigger, Rollback)特性</li>
+</ul>
+<p><strong>Isolation(隔離性)</strong></p>
+<ul>
+<li>資料庫允許多個 Transaction 同時對其資料進行操作，但也同時確保這些 Transaction 的交叉執行，不會導致數據的不一致</li>
+</ul>
+<p><strong>Durability(耐久性)</strong></p>
+<ul>
+<li>Transaction 完成後，對資料的操作就是永久的，即便系統故障也不會丟失</li>
+</ul>
+<h2 id="線上分析處理-Online-Analytical-Processing-OLAP"><a href="#線上分析處理-Online-Analytical-Processing-OLAP" class="headerlink" title="線上分析處理(Online Analytical Processing OLAP)"></a>線上分析處理(Online Analytical Processing OLAP)</h2><ul>
+<li><strong>讓數據聚合 (data aggregation) 以及批次處理 (Batch processing)</strong></li>
+<li>大部分是用來做歷史資料的分析以及報告</li>
+<li>可以快速使用 Query 去得到數據洞察得到數據聚合後的結果</li>
+<li>銀行有 OLTP 系統確保資料一致性，就能用 OLAP 系統做報告及商業智慧分析等應用<ul>
+<li>撈全台灣的使用者在過去一個月的交易做分析</li>
+</ul>
+</li>
+</ul>
+<h2 id="OLTP-與-OLAP-整合與差異"><a href="#OLTP-與-OLAP-整合與差異" class="headerlink" title="OLTP 與 OLAP 整合與差異"></a>OLTP 與 OLAP 整合與差異</h2><p><img src="/../images/learning/database-attributes8.png" alt="database-attributes8"><br><img src="/../images/learning/database-attributes9.png" alt="database-attributes9"></p>
+<h2 id="關聯式資料庫-RDBMS"><a href="#關聯式資料庫-RDBMS" class="headerlink" title="關聯式資料庫 RDBMS"></a>關聯式資料庫 RDBMS</h2><ul>
+<li><p><strong><strong><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=7yYbbKyyHvw&ab_channel=%E4%B8%8A%E7%8F%AD%E4%BA%86%E5%95%8A%E5%93%88">關聯式資料庫到底是什麼|生活中怎麼表達資料庫概念</a></strong></strong></p>
+</li>
+<li><p>MySQL &#x2F; MariaDB &#x2F; Postgresql 都支援 Transaction 並具備 ACID 特性</p>
+</li>
+<li><p>同時 ACID 保證可以到 Row 層級(MySQL5.5 後 InnoDB Default 是 Row Lock)</p>
+</li>
+<li><p>Transaction 是關聯式資料庫的強項</p>
+</li>
+<li><p>成本擴展的挑戰</p>
+<p>  <img src="/../images/learning/database-attributes1.png" alt="database-attributes1"></p>
+</li>
+</ul>
+<p><strong>存在缺點</strong></p>
+<ul>
+<li>Schema 擴展不方便(修改可能會長時間鎖表)</li>
+<li>全文搜尋功能弱</li>
+</ul>
+<h2 id="讀寫分離-R-x2F-W-Separation"><a href="#讀寫分離-R-x2F-W-Separation" class="headerlink" title="讀寫分離 (R&#x2F;W Separation)"></a>讀寫分離 (R&#x2F;W Separation)</h2><ul>
+<li>Master 拿來寫，Replica 拿來讀</li>
+<li>通常是資料庫初步擴充手段 (適合 Read 大於 Write 的情境)</li>
+<li>MySQL 複製延遲時間 1 ～ 60 秒都有可以</li>
+</ul>
+<h2 id="RDS-Proxy"><a href="#RDS-Proxy" class="headerlink" title="RDS Proxy"></a>RDS Proxy</h2><ul>
+<li><p>用來處理資料庫流量無法預測的突增情況，避免 Connection Fail 情況發生</p>
+</li>
+<li><p>應用程式更具可擴展性、提高對數據庫遇故障時的恢復能力</p>
+<p>  <img src="/../images/learning/database-attributes2.png" alt="database-attributes2"></p>
+</li>
+</ul>
+<h2 id="分表-Partition"><a href="#分表-Partition" class="headerlink" title="分表 (Partition)"></a>分表 (Partition)</h2><ul>
+<li><p>垂直或水平切割，複雜性都會大大提升</p>
+<ul>
+<li>提升 Query 數量</li>
+<li>商業邏輯容易有所遺落，造成資料不一致</li>
+</ul>
+</li>
+<li><p>業務資料集中在某些 Column上 ⇒ 適合垂直切割</p>
+</li>
+<li><p>業務資料較均勻分佈 ⇒ 適合水平切割</p>
+<p>  <img src="/../images/learning/database-attributes3.png" alt="database-attributes3"></p>
+</li>
+</ul>
+<h2 id="分片-Sharding"><a href="#分片-Sharding" class="headerlink" title="分片 (Sharding)"></a>分片 (Sharding)</h2><ul>
+<li><p>Sharding Key 會是各節點平衡的重點</p>
+<p>  <img src="/../images/learning/database-attributes4.png" alt="database-attributes4"></p>
+</li>
+</ul>
+<h2 id="NewSQL"><a href="#NewSQL" class="headerlink" title="NewSQL"></a>NewSQL</h2><ul>
+<li>NewSQL &#x3D; RDBMS (ACID) + SQL + NoSQL (擴展性)</li>
+<li>擁有 SQL 的 ACID 交易特性，同時也想擁抱 NoSQL 的擴展性能</li>
+<li>類似產品 Aurora 計算與儲存分離<ul>
+<li>將 MySQL 本體弱化為無狀態節點(stateless)，儲存拆離至 EBS，Redo log 拆離至 S3</li>
+<li>使用共享儲存層(EBS)解決擴展問題，將原本效能瓶頸為 I&#x2F;O 轉移為 Network</li>
+<li>無狀態節點，讓升級更容易做到不停機升級 (Zero downtime patching)</li>
+</ul>
+</li>
+<li>以 AWS 解決方案來看<ul>
+<li>RDS 為 oldSQL</li>
+<li>Aurora 為 NewSQL</li>
+</ul>
+</li>
+</ul>
+<h2 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h2><ul>
+<li><p>本質上是犧牲 ACID 中的某幾個特性</p>
+</li>
+<li><p>不能盲目地迷信 NoSQL 是銀彈，而是應該將 NoSQL 作為 SQL 的一個加強方式</p>
+</li>
+<li><p>常見使用方案</p>
+<ul>
+<li>Key&#x2F;Value Store：解決 RDBMS  無法儲存資料結構的問題 e.g. redis</li>
+<li>Document DB：解決 RDBMS 強 Schema 約束的問題 e.g. MongoDB</li>
+<li>Colume-Basae DB：解決 RDBMS 大數據場景下的 I&#x2F;O 問題 e.g. HBase</li>
+<li>全文搜尋引擎：解決 RDBMS 的全文搜尋性能問題 e.g. Elasticsearch</li>
+</ul>
+</li>
+<li><p>AWS 產品類型</p>
+<p>  <img src="/../images/learning/database-attributes5.png" alt="database-attributes5"></p>
+</li>
+</ul>
+<h2 id="RDBMS-和-NoSQL-DB-的選型"><a href="#RDBMS-和-NoSQL-DB-的選型" class="headerlink" title="RDBMS 和 NoSQL DB 的選型"></a>RDBMS 和 NoSQL DB 的選型</h2><p><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E9%81%B8%E6%93%87%E8%B3%87%E6%96%99%E5%BA%AB-db-%E7%9A%84%E4%BA%94%E5%A4%A7%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85-a719e134e7d">選擇資料庫 (DB) 的五大注意事項</a></strong></p>
+<ul>
+<li>管理型系統 (運營類系統)<ul>
+<li>首選 RDBMS</li>
+</ul>
+</li>
+<li>大流量系統 (電商單品頁的某個服務)<ul>
+<li>後台選 RDBMS，前台選記憶體(Key&#x2F;Value) 儲存</li>
+</ul>
+</li>
+<li>日誌型系統 (原始數據)<ul>
+<li>選 Colume-Based DB，事件記錄搜尋選搜尋引擎</li>
+</ul>
+</li>
+<li>搜尋型系統 (站內搜尋，非通用搜尋，如商品搜尋)<ul>
+<li>後台選 RDBMS，前台選搜尋引擎</li>
+</ul>
+</li>
+<li>事件型系統 (庫存、交易、記帳)<ul>
+<li>選關聯型 + cache + 一致性協議，或新型 RDBMS</li>
+</ul>
+</li>
+<li>離線計算 (大量數據分析)<ul>
+<li>首選 Colume-Based DB，RDBMS 也可以</li>
+</ul>
+</li>
+<li>即時計算 (即時監控)<ul>
+<li>可以選 Time-Series DB，或 Colume-Based DB</li>
+</ul>
+</li>
+</ul>
+<h2 id="資料表正規化"><a href="#資料表正規化" class="headerlink" title="資料表正規化"></a>資料表正規化</h2><ul>
+<li>使資料重複性(Redundancy)降到最低<ul>
+<li>減少開發&#x2F;儲存成本</li>
+<li>避免資料分歧(強一制性)</li>
+</ul>
+</li>
+<li>通常做到 3NF</li>
+<li>1NF<ul>
+<li>一個欄位裡不能放多個值</li>
+<li>每張表都要有 Primary Key(PK)</li>
+</ul>
+</li>
+<li>2NF<ul>
+<li>滿足 1NF</li>
+<li>將部份對應的資料拆出來</li>
+<li>取得文章資料也想同時得到作者名，如果把 user_name 欄位也開在 post table，這樣就不符合 2NF</li>
+</ul>
+</li>
+<li>3NF<ul>
+<li>滿足 2NF</li>
+<li>各欄位與 PK 間沒有間接相依的關係</li>
+<li>不要存放可被直接推算出的欄位<ul>
+<li>舉例來說：訂單表格中，同時有單價(price)、數量(quantity)、總價(total)，但總價是可以被推算出來的所以不該出現</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="資料表反正規化"><a href="#資料表反正規化" class="headerlink" title="資料表反正規化"></a>資料表反正規化</h2><ul>
+<li>正規化程度愈高，代表資料關聯性的約束性也愈高</li>
+<li>資料被切分為多張關聯表格，DB 的 I&#x2F;O 將更加繁忙<ul>
+<li>所以必要的時後也必須做 **”Denormalized”**，以避免無窮盡的 JOINs</li>
+</ul>
+</li>
+</ul>
+<h2 id="正規化與反正規化比較"><a href="#正規化與反正規化比較" class="headerlink" title="正規化與反正規化比較"></a>正規化與反正規化比較</h2><p><img src="/../images/learning/database-attributes6.png" alt="database-attributes6"></p>
+<p><img src="/../images/learning/database-attributes7.png" alt="database-attributes7"></p>
+<h2 id="資料表正規化考量"><a href="#資料表正規化考量" class="headerlink" title="資料表正規化考量"></a>資料表正規化考量</h2><ul>
+<li>Heavy Read 拆解<ul>
+<li>高頻查詢所用的表，建議把不相關的資料做正規劃拆解</li>
+<li>舉例來說: 將一張 users 表拆成 users 及 user_profiles 兩張表</li>
+</ul>
+</li>
+<li>Text 內容做拆表<ul>
+<li>Text 索引與一般 Btree 不同，更新也會產生大量碎片</li>
+<li>大部分的 Select Query 很有可能把不需要的 Text 資料也一同拉出來，建議可拆表做關聯</li>
+</ul>
+</li>
+</ul>
+<h2 id="資料表欄位設計"><a href="#資料表欄位設計" class="headerlink" title="資料表欄位設計"></a>資料表欄位設計</h2><ul>
+<li>有標準的就按照開 ISO,RFC,Schema.org<ul>
+<li>身分證、發票、幣值、區碼、電話號碼</li>
+</ul>
+</li>
+<li>Char 比 Varchar 搜尋速度更快<ul>
+<li>固定長度：選 Char</li>
+<li>高頻更新：選 Char</li>
+<li>彈性長度：選 Varchar(Size愈小愈好)</li>
+</ul>
+</li>
+<li>單選 ENUM 可用數字(常數)替代<ul>
+<li>數字型態比字串型態搜尋還快</li>
+<li>Status 由程式控制常數定義(閱讀不易需查文件)</li>
+<li>TINYINT 比 ENUM 省空間</li>
+</ul>
+</li>
+</ul>
+<h2 id="RDBMS-最討厭異動-Schema"><a href="#RDBMS-最討厭異動-Schema" class="headerlink" title="RDBMS 最討厭異動 Schema"></a>RDBMS 最討厭異動 Schema</h2><ul>
+<li>隨著時間演進，資料會愈長愈多，業務需求會持續變化</li>
+<li>當資料庫內筆數變多時，要異動 Scema 的成本就愈來愈高</li>
+<li>設計 Schema 時觀察<ul>
+<li>哪些需求會變成<strong>變數</strong>才是工程師在意的</li>
+<li>當需求出現的時候要<strong>預想變數</strong>有可能是什麼</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Backend/" rel="tag"># Backend</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/suggest-backend-article/" rel="prev" title="推薦Backend文章">
+      <i class="fa fa-chevron-left"></i> 推薦Backend文章
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/learning-auth/" rel="next" title="如何區分權限與授權">
+      如何區分權限與授權 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E5%BA%AB%E6%93%B4%E5%B1%95%E8%A6%81%E9%BB%9E"><span class="nav-number">1.</span> <span class="nav-text">資料庫擴展要點</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%9A%E4%B8%8A%E4%BA%A4%E6%98%93%E8%99%95%E7%90%86-Online-Transactional-Processing-OLTP"><span class="nav-number">2.</span> <span class="nav-text">線上交易處理(Online Transactional Processing OLTP)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACID"><span class="nav-number">3.</span> <span class="nav-text">ACID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%9A%E4%B8%8A%E5%88%86%E6%9E%90%E8%99%95%E7%90%86-Online-Analytical-Processing-OLAP"><span class="nav-number">4.</span> <span class="nav-text">線上分析處理(Online Analytical Processing OLAP)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OLTP-%E8%88%87-OLAP-%E6%95%B4%E5%90%88%E8%88%87%E5%B7%AE%E7%95%B0"><span class="nav-number">5.</span> <span class="nav-text">OLTP 與 OLAP 整合與差異</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%9C%E8%81%AF%E5%BC%8F%E8%B3%87%E6%96%99%E5%BA%AB-RDBMS"><span class="nav-number">6.</span> <span class="nav-text">關聯式資料庫 RDBMS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%80%E5%AF%AB%E5%88%86%E9%9B%A2-R-x2F-W-Separation"><span class="nav-number">7.</span> <span class="nav-text">讀寫分離 (R&#x2F;W Separation)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDS-Proxy"><span class="nav-number">8.</span> <span class="nav-text">RDS Proxy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E8%A1%A8-Partition"><span class="nav-number">9.</span> <span class="nav-text">分表 (Partition)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%89%87-Sharding"><span class="nav-number">10.</span> <span class="nav-text">分片 (Sharding)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NewSQL"><span class="nav-number">11.</span> <span class="nav-text">NewSQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NoSQL"><span class="nav-number">12.</span> <span class="nav-text">NoSQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDBMS-%E5%92%8C-NoSQL-DB-%E7%9A%84%E9%81%B8%E5%9E%8B"><span class="nav-number">13.</span> <span class="nav-text">RDBMS 和 NoSQL DB 的選型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E8%A1%A8%E6%AD%A3%E8%A6%8F%E5%8C%96"><span class="nav-number">14.</span> <span class="nav-text">資料表正規化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E8%A1%A8%E5%8F%8D%E6%AD%A3%E8%A6%8F%E5%8C%96"><span class="nav-number">15.</span> <span class="nav-text">資料表反正規化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E8%A6%8F%E5%8C%96%E8%88%87%E5%8F%8D%E6%AD%A3%E8%A6%8F%E5%8C%96%E6%AF%94%E8%BC%83"><span class="nav-number">16.</span> <span class="nav-text">正規化與反正規化比較</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E8%A1%A8%E6%AD%A3%E8%A6%8F%E5%8C%96%E8%80%83%E9%87%8F"><span class="nav-number">17.</span> <span class="nav-text">資料表正規化考量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E8%A1%A8%E6%AC%84%E4%BD%8D%E8%A8%AD%E8%A8%88"><span class="nav-number">18.</span> <span class="nav-text">資料表欄位設計</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDBMS-%E6%9C%80%E8%A8%8E%E5%8E%AD%E7%95%B0%E5%8B%95-Schema"><span class="nav-number">19.</span> <span class="nav-text">RDBMS 最討厭異動 Schema</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

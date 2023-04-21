@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+<meta property="og:type" content="website">
+<meta property="og:title" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:url" content="https://jefferylee73.github.io/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:author" content="Jeffery Lee">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://jefferylee73.github.io/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/aws-saa-prepare/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/aws-saa-prepare/" class="post-title-link" itemprop="url">SAA 證照筆記 - 準備到報考過程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2023-02-04 17:19:18" itemprop="dateCreated datePublished" datetime="2023-02-04T17:19:18+08:00">2023-02-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>616</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="為何會想考證照"><a href="#為何會想考證照" class="headerlink" title="為何會想考證照"></a>為何會想考證照</h2><ul>
+<li>放在履歷上，增加職場競爭力</li>
+<li>驗收自己的雲端知識</li>
+</ul>
+<h2 id="考前準備"><a href="#考前準備" class="headerlink" title="考前準備"></a>考前準備</h2><ul>
+<li>模擬試題<ul>
+<li>免費：<a target="_blank" rel="noopener" href="https://www.examtopics.com/exams/amazon/aws-certified-solutions-architect-associate-saa-c02/view/2/">Amazon AWS Certified Solutions Architect - Associate SAA-C02</a></li>
+<li>付費：<a target="_blank" rel="noopener" href="https://www.udemy.com/course/practice-exams-aws-certified-solutions-architect-associate/">Practice Exams | AWS Certified Solutions Architect Associate</a></li>
+</ul>
+</li>
+<li>做模擬試題至少都要 80 以上<ul>
+<li>紀錄錯誤的題型，把該 AWS 服務的知識補足起來(建議直接看 FAQ 比較快)</li>
+<li>把常見的<a target="_blank" rel="noopener" href="https://www.notion.so/d1b41a2f0cec426e863476f7124f1f0f">英文單字</a>背起來，這樣才看得懂題目</li>
+</ul>
+</li>
+<li>看 IT 邦幫忙文章<ul>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20100951/ironman/4671">無限手套 AWS 版：掌控一切的 5 + 1 雲端必學主題</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20129560/ironman/3159">AWS Certified Solution Architect</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20130683/ironman/3758?page=1">30天初探 Amazon Web Services</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20124610/ironman/3984?page=1">你用雲端，還敢談資安?AWS資安服務佈署之路</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="線上報考"><a href="#線上報考" class="headerlink" title="線上報考"></a>線上報考</h2><ul>
+<li><p>到 <a target="_blank" rel="noopener" href="https://www.aws.training/Certification">AWS certification</a> 網站線上選考試日期及地點</p>
+</li>
+<li><p>我考試地點選考試中心，這樣就算中途去上廁所也不會被取消資格</p>
+<ul>
+<li>需要帶身分證跟護照</li>
+<li>提前15分鐘到那邊填寫基本資料</li>
+</ul>
+</li>
+<li><p>從 2023&#x2F;1&#x2F;1 開始不能選考試中心(PSI)，只能選擇自己的考試空間 QQ</p>
+<p>  <img src="/../images/saa/aws-saa-prepare1.png" alt="aws-saa-prepare1"></p>
+</li>
+</ul>
+<h2 id="考試期間"><a href="#考試期間" class="headerlink" title="考試期間"></a>考試期間</h2><ul>
+<li>考試時間 120 分鐘，每題作答時間不要超過 2 分鐘，不然有可能做不完</li>
+<li>注意題目是要多選或是單選<ul>
+<li>多選也要注意要選幾個答案，不然少選一個也是錯</li>
+</ul>
+</li>
+</ul>
+<h2 id="成績公告"><a href="#成績公告" class="headerlink" title="成績公告"></a>成績公告</h2><ul>
+<li><p>考完隔天就收到信件，或是可以到 <a target="_blank" rel="noopener" href="https://www.aws.training/Certification">AWS certification</a>  網站線上查看分數</p>
+</li>
+<li><p>可以下載 PDF</p>
+<p>  <img src="/../images/saa/aws-saa-prepare2.png" alt="aws-saa-prepare2"></p>
+</li>
+<li><p>也可以登入 <strong><a target="_blank" rel="noopener" href="https://www.credly.com/users/sign_in">Credly Digital badges</a></strong> 拿到 badge 放在自己的個人 blog</p>
+<p>  <img src="/../images/saa/aws-saa-prepare3.png" alt="aws-saa-prepare3"></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/suggest-frontend-article/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/suggest-frontend-article/" class="post-title-link" itemprop="url">推薦Frontend文章</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2023-01-06 10:25:27" itemprop="dateCreated datePublished" datetime="2023-01-06T10:25:27+08:00">2023-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning/" itemprop="url" rel="index"><span itemprop="name">Learning</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>222</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20113277/ironman/3877?page=1">今晚，我想來點 Web 前端效能優化大補帖！</a></strong></li>
+</ul>
+<h2 id="CORS-amp-Cookie"><a href="#CORS-amp-Cookie" class="headerlink" title="CORS &amp; Cookie"></a>CORS &amp; Cookie</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://shubo.io/what-is-cors/">[教學] CORS 是什麼? 如何設定 CORS?</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://shubo.io/cookies/#samesite">[教學] Cookie 是什麼？如何用 JavaScript get&#x2F;set document.cookie?</a></strong></li>
+</ul>
+<h2 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20131472/ironman/4100?page=3">前端是該來學一下 TypeScript 了</a></strong></li>
+</ul>
+<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/dean-lin/3%E5%88%86%E9%90%98%E5%B8%B6%E4%BD%A0%E6%90%9E%E6%87%82-vue-vuex-vuetify-nuxt-js-%E4%B9%8B%E9%96%93%E7%9A%84%E9%97%9C%E4%BF%82-875a9c69d3fd">5 分鐘帶你搞懂 Vue、Vuex、Vuetify、Nuxt.js 之間的關係</a></strong></li>
+</ul>
+<h2 id="Nuxt"><a href="#Nuxt" class="headerlink" title="Nuxt"></a>Nuxt</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20129729/ironman/5297">Nuxt 3 - 因為還不穩定，所以來踩地雷</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20152617/ironman/5934">Nuxt 3 學習筆記</a></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/cicd-by-helm-in-argocd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/cicd-by-helm-in-argocd/" class="post-title-link" itemprop="url">設定 Helm 自動部署系列 (四) - ArgoCD 設定</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-19 17:30:11" itemprop="dateCreated datePublished" datetime="2022-12-19T17:30:11+08:00">2022-12-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Helm/" itemprop="url" rel="index"><span itemprop="name">Helm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>3k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>3 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>設定前建議要先了解 <a target="_blank" rel="noopener" href="https://argo-cd.readthedocs.io/en/stable/core_concepts/">ArgoCD 核心概念</a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我們是使用 Dependency Chart，所以除了要設定本身專案的 manifest 還要設定 ECR Repo</p>
+<h2 id="步驟一、設定-Repository-專案-Manifest"><a href="#步驟一、設定-Repository-專案-Manifest" class="headerlink" title="步驟一、設定 Repository - 專案 Manifest"></a>步驟一、設定 Repository - 專案 Manifest</h2><ul>
+<li>選擇 type 為 <code>git</code>，代表該專案有變更就會觸發部署</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">resource <span class="string">&quot;kubernetes_secret_v1&quot;</span> <span class="string">&quot;this&quot;</span> &#123;</span><br><span class="line">  count = var.enable_oci? 0 : 1</span><br><span class="line">  metadata &#123;</span><br><span class="line">    name      = <span class="string">&quot;repo-<span class="variable">$&#123;var.repo&#125;</span>&quot;</span></span><br><span class="line">    namespace = <span class="string">&quot;argocd&quot;</span></span><br><span class="line">    labels = &#123;</span><br><span class="line">      <span class="string">&quot;argocd.argoproj.io/secret-type&quot;</span> : <span class="string">&quot;repository&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  data = &#123;</span><br><span class="line">    name     = <span class="string">&quot;<span class="variable">$&#123;var.repo&#125;</span>&quot;</span></span><br><span class="line">    <span class="built_in">type</span>     = <span class="string">&quot;git&quot;</span></span><br><span class="line">    url      = data.aws_ssm_parameter.git_url.value</span><br><span class="line">    username = data.aws_ssm_parameter.git_username.value</span><br><span class="line">    password = data.aws_ssm_parameter.git_password.value</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="步驟二、設定-Repository-ECR-Repo"><a href="#步驟二、設定-Repository-ECR-Repo" class="headerlink" title="步驟二、設定 Repository - ECR Repo"></a>步驟二、設定 Repository - ECR Repo</h2><ul>
+<li>選擇 type 為 <code>helm</code>、enableOCI 為 <code>true</code>，設定為 helm registry，這樣在透過此 repo 建立 application</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">resource <span class="string">&quot;kubernetes_secret_v1&quot;</span> <span class="string">&quot;helm&quot;</span> &#123;</span><br><span class="line">  count = var.enable_oci? 1 : 0</span><br><span class="line">  metadata &#123;</span><br><span class="line">    name      = <span class="string">&quot;repo-<span class="variable">$&#123;var.repo&#125;</span>&quot;</span></span><br><span class="line">    namespace = <span class="string">&quot;argocd&quot;</span></span><br><span class="line">    labels = &#123;</span><br><span class="line">      <span class="string">&quot;argocd.argoproj.io/secret-type&quot;</span> : <span class="string">&quot;repository&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  data = &#123;</span><br><span class="line">    name      = <span class="string">&quot;<span class="variable">$&#123;var.repo&#125;</span>&quot;</span></span><br><span class="line">    <span class="built_in">type</span>      = <span class="string">&quot;helm&quot;</span></span><br><span class="line">    enableOCI = <span class="string">&quot;true&quot;</span></span><br><span class="line">    url      = data.aws_ssm_parameter.git_url.value</span><br><span class="line">    username = data.aws_ssm_parameter.git_username.value</span><br><span class="line">    password = data.aws_ssm_parameter.git_password.value</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以發現建立 Repository 就是建立 K8S 的 Secret，主要是讓 argocd 有權限進行存取</p>
+</blockquote>
+<p><img src="/../images/helm/cicd-by-helm-in-argocd1.png" alt="cicd-by-helm-in-argocd1"></p>
+<h2 id="步驟三、設定-Project"><a href="#步驟三、設定-Project" class="headerlink" title="步驟三、設定 Project"></a>步驟三、設定 Project</h2><ul>
+<li>設定該群組權限，可以操作的 source repository 及部署的 destination cluster</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">resource <span class="string">&quot;kubernetes_manifest&quot;</span> <span class="string">&quot;caribou_project&quot;</span> &#123;</span><br><span class="line">  manifest = &#123;</span><br><span class="line">    apiVersion = <span class="string">&quot;argoproj.io/v1alpha1&quot;</span></span><br><span class="line">    kind       = <span class="string">&quot;AppProject&quot;</span></span><br><span class="line">    metadata = &#123;</span><br><span class="line">      name      = <span class="string">&quot;caribou&quot;</span></span><br><span class="line">      namespace = <span class="string">&quot;argocd&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    spec = &#123;</span><br><span class="line">      description = <span class="string">&quot;caribou Project&quot;</span></span><br><span class="line">      sourceRepos = [</span><br><span class="line">        module.repository_caribou_caribou-manifest.url,</span><br><span class="line">        module.repository_caribou_evolabs-charts.url</span><br><span class="line">      ]</span><br><span class="line">      destinations = [</span><br><span class="line">        &#123;</span><br><span class="line">          namespace = <span class="string">&quot;caribou&quot;</span></span><br><span class="line">          server    = module.cluster_el-internal_stag.server</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          namespace = <span class="string">&quot;caribou&quot;</span></span><br><span class="line">          server    = module.cluster_el-internal_prod.server</span><br><span class="line">        &#125;,</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="步驟四、安裝-ArgoCD-ECR-Updater"><a href="#步驟四、安裝-ArgoCD-ECR-Updater" class="headerlink" title="步驟四、安裝 ArgoCD-ECR-Updater"></a>步驟四、安裝 ArgoCD-ECR-Updater</h2><p>由於 <code>aws ecr get-login-password</code> 取得的密碼，超過 12 小時就會過期，所以我們需要用 k8s 中的 cronjob 排程機制固定去更新密碼，剛好有別人寫好的 <a target="_blank" rel="noopener" href="https://github.com/smcavallo/argocd-ecr-updater">argocd-ecr-updater</a> helm 可以使用 👍</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">resource <span class="string">&quot;helm_release&quot;</span> <span class="string">&quot;evolabs-charts-updater&quot;</span> &#123;</span><br><span class="line">  name             = <span class="string">&quot;argocd-ecr-updater&quot;</span></span><br><span class="line">  chart            = <span class="string">&quot;argocd-ecr-updater&quot;</span></span><br><span class="line">  repository       = <span class="string">&quot;https://mike7515.github.io/argocd-ecr-updater&quot;</span></span><br><span class="line">  version          = <span class="string">&quot;2.4.0&quot;</span></span><br><span class="line">  namespace        = <span class="string">&quot;argocd-ecr&quot;</span></span><br><span class="line">  recreate_pods    = <span class="literal">true</span></span><br><span class="line">  <span class="built_in">set</span> &#123;</span><br><span class="line">    name  = <span class="string">&quot;cronjob.name&quot;</span></span><br><span class="line">    value = <span class="string">&quot;evolabs-charts-updater&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">set</span> &#123;</span><br><span class="line">    name = <span class="string">&quot;cronjob.argoNamespace&quot;</span></span><br><span class="line">    value = <span class="string">&quot;argocd&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">set</span> &#123;</span><br><span class="line">    name = <span class="string">&quot;cronjob.awsRegion&quot;</span></span><br><span class="line">    value = <span class="string">&quot;ap-northeast-1&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">set</span> &#123;</span><br><span class="line">    name = <span class="string">&quot;cronjob.awsAccount&quot;</span></span><br><span class="line">    value = <span class="string">&quot;672241579543&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">set</span> &#123;</span><br><span class="line">    name = <span class="string">&quot;cronjob.argocdRepoSecretName&quot;</span></span><br><span class="line">    value = <span class="string">&quot;repo-evolabs-charts&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="步驟五、建立-Application"><a href="#步驟五、建立-Application" class="headerlink" title="步驟五、建立 Application"></a>步驟五、建立 Application</h2><ul>
+<li>設定專案的 Manifest 當作 source repository</li>
+<li>設定要部署的 cluster 當作 destination</li>
+</ul>
+<p><img src="/../images/helm/cicd-by-helm-in-argocd2.png" alt="cicd-by-helm-in-argocd2"></p>
+<h2 id="步驟六、驗收"><a href="#步驟六、驗收" class="headerlink" title="步驟六、驗收"></a>步驟六、驗收</h2><p><img src="/../images/helm/cicd-by-helm-in-argocd3.png" alt="cicd-by-helm-in-argocd3"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/cicd-by-helm-in-ecr/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/cicd-by-helm-in-ecr/" class="post-title-link" itemprop="url">設定 Helm 自動部署系列 (三) - 安裝 ECR 上面的 Helm</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-19 17:28:20" itemprop="dateCreated datePublished" datetime="2022-12-19T17:28:20+08:00">2022-12-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Helm/" itemprop="url" rel="index"><span itemprop="name">Helm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="步驟一、登入-AWS-ECR"><a href="#步驟一、登入-AWS-ECR" class="headerlink" title="步驟一、登入 AWS ECR"></a>步驟一、登入 AWS ECR</h2><ul>
+<li>使用 SSO 登入 AWS 帳戶</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aws sso login --proflie &lt;permission-set&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>登入 ECR，讓 Helm 可以進行存取</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aws ecr get-login-password --region ap-northeast-1 | helm registry login --username AWS --password-stdin &lt;account_id&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="步驟二、建立-Manifest-資料夾"><a href="#步驟二、建立-Manifest-資料夾" class="headerlink" title="步驟二、建立 Manifest 資料夾"></a>步驟二、建立 Manifest 資料夾</h2><ul>
+<li>建立專案後端的 staging 環境</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> caribou-manifest/backend/staging</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在該資料夾建立 Chart.yaml 檔案，定義 dependencies</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v2</span><br><span class="line">name: caribou-backend</span><br><span class="line">description: Helm chart used <span class="keyword">for</span> deploying Laravel Application.</span><br><span class="line"><span class="built_in">type</span>: application</span><br><span class="line">version: 0.1.0</span><br><span class="line"></span><br><span class="line">dependencies:</span><br><span class="line">  - name: laravel-nginx-chart</span><br><span class="line">    version: <span class="string">&quot;0.1.0&quot;</span></span><br><span class="line">    repository: <span class="string">&quot;oci://672241579543.dkr.ecr.ap-northeast-1.amazonaws.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>下載依賴的 chart</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm dependency build</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更新依賴的 chart</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm dependency update</span><br></pre></td></tr></table></figure>
+
+<h2 id="步驟三、安裝-Chart"><a href="#步驟三、安裝-Chart" class="headerlink" title="步驟三、安裝 Chart"></a>步驟三、安裝 Chart</h2><ul>
+<li>建立 values.yaml<ul>
+<li>要變更 chart 的 values，必須前面要多加一層 chart name，以下方例子就是 <code>laravel-nginx-chart</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">laravel-nginx-chart:</span><br><span class="line">  nginxService:</span><br><span class="line">    repository: 672241579543.dkr.ecr.ap-northeast-1.amazonaws.com/caribou-backend-nginx</span><br><span class="line">    pullPolicy: IfNotPresent</span><br><span class="line">    tag: 2436e363</span><br><span class="line">    <span class="built_in">type</span>: NodePort</span><br><span class="line">    externalPort: 80</span><br><span class="line">    internalPort: 80</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 chart 建立環境</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> caribou-manifest/backend/staging</span><br><span class="line"></span><br><span class="line">helm install caribou-backend-stag .</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>看到下方訊息即完成</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NAME: caribou-backend-stag</span><br><span class="line">LAST DEPLOYED: Thu Sep 15 17:27:10 2022</span><br><span class="line">NAMESPACE: default</span><br><span class="line">STATUS: deployed</span><br><span class="line">REVISION: 1</span><br><span class="line">TEST SUITE: None</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/cicd-by-helm-gitlab-cicd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/cicd-by-helm-gitlab-cicd/" class="post-title-link" itemprop="url">設定 Helm 自動部署系列 (二) - GitLab CI/CD 設定</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-19 17:16:43" itemprop="dateCreated datePublished" datetime="2022-12-19T17:16:43+08:00">2022-12-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Helm/" itemprop="url" rel="index"><span itemprop="name">Helm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>2 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Helm 支援使用提供 OCI(Open Container Initiative) 標準的 Helm Chart Repository，因此像 AWS ECR 也可以當作 Chart Repository</p>
+<h2 id="手動部署"><a href="#手動部署" class="headerlink" title="手動部署"></a>手動部署</h2><ol>
+<li>使用 SSO 登入 AWS 帳戶</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aws sso login --proflie &lt;permission-set&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>登入 ECR，讓 Helm 可以進行存取</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aws ecr get-login-password --region ap-northeast-1 | helm registry login --username AWS --password-stdin &lt;account_id&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>打包 chart<ul>
+<li>chart_path：當前目錄指定 <code>.</code>，相對目錄則指定<code>相對路徑</code></li>
+</ul>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm package &lt;chart_path&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>部署到 ECR 上<ul>
+<li>chart_name：輸入在 Chart.yaml 檔案的 name 欄位</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm push &lt;chart_name&gt;-*.tgz oci://&lt;account <span class="built_in">id</span>&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com/</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-GitLab-CI-自動化部署"><a href="#使用-GitLab-CI-自動化部署" class="headerlink" title="使用 GitLab CI 自動化部署"></a>使用 GitLab CI 自動化部署</h2><p>手動做完之後，就離自動化不遠了～</p>
+<ol>
+<li><p>設定 AWS User 或 Rule，並加上 CI&#x2F;CD 的 variables 內</p>
+<p> <img src="/../images/helm/cicd-by-helm-gitlab-cicd1.png" alt="cicd-by-helm-gitlab-cicd1"></p>
+</li>
+<li><p>將手動指令寫成 .gitlab-ci.yml 檔案</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">image:</span><br><span class="line">  name: alpine/helm:3.9.4</span><br><span class="line">  entrypoint: [<span class="string">&quot;&quot;</span>]</span><br><span class="line"></span><br><span class="line">stages:</span><br><span class="line">  - <span class="string">&quot;build&quot;</span></span><br><span class="line">  - <span class="string">&quot;deploy&quot;</span></span><br><span class="line"></span><br><span class="line">workflow:</span><br><span class="line">  rules:</span><br><span class="line">    - <span class="keyword">if</span>: <span class="variable">$CI_COMMIT_BRANCH</span> == <span class="string">&#x27;master&#x27;</span></span><br><span class="line"></span><br><span class="line">variables:</span><br><span class="line">  AWS_REGION: ap-northeast-1</span><br><span class="line">  ECR_REGISTRY: YOUR_ECR_REGISTRY</span><br><span class="line">  CHART_NAME: YOUR_CHART_NAME</span><br><span class="line">  CHART_PATH: YOUR_CHART_PATH</span><br><span class="line"></span><br><span class="line">build-chart:</span><br><span class="line">  stage: build</span><br><span class="line">  script:</span><br><span class="line">    - helm package <span class="variable">$&#123;CHART_PATH&#125;</span></span><br><span class="line">  artifacts:</span><br><span class="line">    paths:</span><br><span class="line">      - <span class="string">&quot;<span class="variable">$&#123;CHART_NAME&#125;</span>-*.tgz&quot;</span></span><br><span class="line">    expire_in: <span class="string">&quot;1hr&quot;</span></span><br><span class="line"></span><br><span class="line">deploy-ecr:</span><br><span class="line">  stage: deploy</span><br><span class="line">  before_script:</span><br><span class="line">    - apk add --no-cache aws-cli</span><br><span class="line">    - aws ecr get-login-password --region <span class="variable">$&#123;AWS_REGION&#125;</span> | helm registry login --username AWS --password-stdin <span class="variable">$&#123;ECR_REGISTRY&#125;</span></span><br><span class="line">  script:</span><br><span class="line">    - helm push <span class="variable">$&#123;CHART_NAME&#125;</span>-*.tgz oci://<span class="variable">$&#123;ECR_REGISTRY&#125;</span>/</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="專案架構"><a href="#專案架構" class="headerlink" title="專案架構"></a>專案架構</h2><ul>
+<li>目前採取 monorepo 方式存放，stable 資料裡面存放共用的 charts</li>
+<li>GitLab CI&#x2F;CD 採取用 Parent-Child Pipeline</li>
+</ul>
+<h3 id="調整後做法："><a href="#調整後做法：" class="headerlink" title="調整後做法："></a>調整後做法：</h3><ol>
+<li><p>外層的 .gitlab-ci.yml</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">stages:</span><br><span class="line">  - <span class="string">&quot;trigger&quot;</span></span><br><span class="line"></span><br><span class="line">larave-nginx-chart:</span><br><span class="line">  stage: trigger</span><br><span class="line">  trigger:</span><br><span class="line">    include: stable/laravel-nginx/.gitlab-ci.yml</span><br><span class="line">  rules:</span><br><span class="line">    - changes:</span><br><span class="line">      - stable/laravel-nginx/*</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>內層的 .gitlab-ci.yml</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">include:</span><br><span class="line">  project: evolutivelabs/shared/ci-templates</span><br><span class="line">  file: /workflows/helm.gitlab-ci.yml</span><br><span class="line"></span><br><span class="line">variables:</span><br><span class="line">  AWS_REGION: ap-northeast-1</span><br><span class="line">  ECR_REGISTRY: &lt;account_id&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com</span><br><span class="line">  CHART_NAME: laravel-nginx-chart</span><br><span class="line">  CHART_PATH: stable/laravel-nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>觸發後 pipeline 畫面</p>
+<p> <img src="/../images/helm/cicd-by-helm-gitlab-cicd2.png" alt="cicd-by-helm-gitlab-cicd2"></p>
+</li>
+<li><p>AWS ECR 上可以看到部署後 Chart</p>
+<p> <img src="/../images/helm/cicd-by-helm-gitlab-cicd3.png" alt="cicd-by-helm-gitlab-cicd3"></p>
+</li>
+</ol>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://betterprogramming.pub/using-gitlab-as-helm-chart-registry-ab4d4ef42833">Using GitLab As Helm Chart Registry</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_tw/AmazonECR/latest/userguide/push-oci-artifact.html">手動推送 Helm Chart 到 ECR</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/cicd-by-helm-ecr-setting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/cicd-by-helm-ecr-setting/" class="post-title-link" itemprop="url">設定 Helm 自動部署系列(一) - 設定 ECR</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-19 17:11:39" itemprop="dateCreated datePublished" datetime="2022-12-19T17:11:39+08:00">2022-12-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Helm/" itemprop="url" rel="index"><span itemprop="name">Helm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>513</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="ECR-介紹"><a href="#ECR-介紹" class="headerlink" title="ECR 介紹"></a>ECR 介紹</h2><ul>
+<li>全名為 Elastic Container Registry，字面上就可以清楚知道，就是放容器化的 image 倉庫</li>
+<li>由於 Helm 有支援 OCI 機制，所以也可以存放在 ECR 上面</li>
+</ul>
+<h2 id="使用-Terraform-建立"><a href="#使用-Terraform-建立" class="headerlink" title="使用 Terraform 建立"></a>使用 Terraform 建立</h2><ul>
+<li>透過 <code>principals_readonly_access</code>、<code>principals_full_access</code> 去限制哪些 aws 資源可以進行存取，由於我們專案主要是用 EKS 部署，所以這邊會去設定 node group 的 arn</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module <span class="string">&quot;laravel&quot;</span> &#123;</span><br><span class="line">  <span class="built_in">source</span>                     = <span class="string">&quot;cloudposse/ecr/aws&quot;</span></span><br><span class="line">  version                    = <span class="string">&quot;~&gt; 0.34.0&quot;</span></span><br><span class="line">  image_tag_mutability       = <span class="string">&quot;MUTABLE&quot;</span></span><br><span class="line">  image_names                = [<span class="string">&quot;laravel-nginx-chart&quot;</span>]</span><br><span class="line">  principals_readonly_access = var.principals_readonly_access</span><br><span class="line">  principals_full_access     = var.principals_full_access</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立完驗收"><a href="#建立完驗收" class="headerlink" title="建立完驗收"></a>建立完驗收</h2><p><img src="/../images/helm/cicd-by-helm-ecr-setting1.png" alt="cicd-by-helm-ecr-setting1"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/write-helm-chart/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/write-helm-chart/" class="post-title-link" itemprop="url">Helm 語法筆記</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-19 16:42:11" itemprop="dateCreated datePublished" datetime="2022-12-19T16:42:11+08:00">2022-12-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Helm/" itemprop="url" rel="index"><span itemprop="name">Helm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>3 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Template-語法使用"><a href="#Template-語法使用" class="headerlink" title="Template 語法使用"></a>Template 語法使用</h2><h3 id="第一、賦值並取值"><a href="#第一、賦值並取值" class="headerlink" title="第一、賦值並取值"></a>第一、賦值並取值</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># deployment.yaml</span></span><br><span class="line"></span><br><span class="line">xxx: &#123;&#123; .Values.xxxx &#125;&#125;    &lt;= 在 values.yaml 檔案定義</span><br><span class="line">name: &#123;&#123; .Chart.name &#125;&#125;    &lt;= 在 chart.yaml 檔案定義</span><br><span class="line"></span><br><span class="line">name: &#123;&#123; include <span class="string">&quot;test.name&quot;</span> . &#125;&#125;  &lt;= 在 _helpers.tpl 檔案定義</span><br></pre></td></tr></table></figure>
+
+<h3 id="第二、陣列使用"><a href="#第二、陣列使用" class="headerlink" title="第二、陣列使用"></a>第二、陣列使用</h3><ul>
+<li>如果要在 range scope 裡面使用其他變數，<ul>
+<li>取用 <code>values.yaml</code> 檔案的值，必須在前面加上 <code>$</code> 改用全域變數方式取得</li>
+<li>取用 <code>_helpers.tpl</code> 檔案的值，必須把 <code>.</code> 改成 <code>$</code> 才可以正常取值</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># deployment.yaml</span></span><br><span class="line"></span><br><span class="line">&#123;&#123;- range .Values.list &#125;&#125;</span><br><span class="line">		name: &#123;&#123; . &#125;&#125;</span><br><span class="line">		othervalue: &#123;&#123; $.Values.othervalue &#125;&#125;</span><br><span class="line">		somename: &#123;&#123; include <span class="string">&quot;test.name&quot;</span> $ &#125;&#125;</span><br><span class="line">&#123;&#123;- end&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># values.yaml</span></span><br><span class="line">othervalue: cool</span><br><span class="line">list:</span><br><span class="line">  - name</span><br></pre></td></tr></table></figure>
+
+<h3 id="第三、Pipeline-應用"><a href="#第三、Pipeline-應用" class="headerlink" title="第三、Pipeline 應用"></a>第三、Pipeline 應用</h3><ul>
+<li>透過 pipeline 讓 value 套用多個 function</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 pipeline 套用多個 function</span></span><br><span class="line">projectCode2: &#123;&#123; .Values.projectCode | upper | quote &#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 中間的 date function 其實只是指定時間的格式而已，不會修改 now 的結果</span></span><br><span class="line">now: &#123;&#123; now | <span class="built_in">date</span> <span class="string">&quot;2006-01-02&quot;</span> | quote &#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若是 values.yaml 中沒有 contact 的值，就使用預設的</span></span><br><span class="line">contact: &#123;&#123; .Values.contact | default <span class="string">&quot;1-123-456-7890&quot;</span> | quote &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="第四、Flow-Control-if-x2F-else"><a href="#第四、Flow-Control-if-x2F-else" class="headerlink" title="第四、Flow Control- if &#x2F; else"></a>第四、Flow Control- if &#x2F; else</h3><h3 id="第五、使用-with-限定變數範圍"><a href="#第五、使用-with-限定變數範圍" class="headerlink" title="第五、使用 with 限定變數範圍"></a>第五、使用 with 限定變數範圍</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># deployment.yam</span></span><br><span class="line">&#123;&#123;- with .Values.course &#125;&#125;</span><br><span class="line">		k8s: &#123;&#123; .k8s | upper | quote &#125;&#125;</span><br><span class="line">		python: &#123;&#123; .python | repeat 3 | quote &#125;&#125;</span><br><span class="line">		release: &#123;&#123; .Release.Name &#125;&#125;</span><br><span class="line">&#123;&#123;- end &#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># values.yaml</span></span><br><span class="line">course:</span><br><span class="line">	k8s: devops</span><br><span class="line">	python: django</span><br></pre></td></tr></table></figure>
+
+<h3 id="第六、自訂-variable"><a href="#第六、自訂-variable" class="headerlink" title="第六、自訂 variable"></a>第六、自訂 variable</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: ConfigMap</span><br><span class="line">metadata:</span><br><span class="line">  name: &#123;&#123; .Release.Name &#125;&#125;-configmap</span><br><span class="line">data:</span><br><span class="line">	&#123;&#123;- <span class="variable">$releaseName</span> := .Release.Name -&#125;&#125;</span><br><span class="line">	release: &#123;&#123; <span class="variable">$releaseName</span> &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="第七、自訂-template"><a href="#第七、自訂-template" class="headerlink" title="第七、自訂 template"></a>第七、自訂 template</h3><ul>
+<li>透過 define 關鍵字可以自訂一個 template</li>
+<li>可以定義在獨立的檔案、也可以與引用它的檔案放一起</li>
+<li>自訂的 template 建議放在獨立的檔案，一般會定義在 <code>_helpers.tpl</code> 檔案中</li>
+<li>使用 <code>template</code> 或 <code>include</code> 語法，引用 define 定義的 template</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _helpers.tpl</span></span><br><span class="line">&#123;&#123;- define <span class="string">&quot;mychart.labels&quot;</span> &#125;&#125;</span><br><span class="line">  labels:</span><br><span class="line">    generator: helm</span><br><span class="line">    <span class="built_in">date</span>: &#123;&#123; now | htmlDate &#125;&#125;</span><br><span class="line">    chart: &#123;&#123; .Chart.Name &#125;&#125;</span><br><span class="line">    version: &#123;&#123; .Chart.Version &#125;&#125;</span><br><span class="line">&#123;&#123;- end &#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># deployment.yaml</span></span><br><span class="line">&#123;&#123;- template <span class="string">&quot;mychart.labels&quot;</span> . &#125;&#125;  &lt;= 正確的引用方式(<span class="string">&quot;.&quot;</span> 即為 scope)</span><br><span class="line">&#123;&#123; include <span class="string">&quot;mychart.labels&quot;</span> . | indent 4 &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="第八、Sub-Chart"><a href="#第八、Sub-Chart" class="headerlink" title="第八、Sub Chart"></a>第八、Sub Chart</h3><ul>
+<li>一個 Helm Chart 內再包一個 Helm Chart</li>
+<li>一個 Sub Chart  可以定義自己的 value，但 parent chart 中可以 override Sub Chart 中設定的值</li>
+<li>在 parent chart 中可以定義 global variable，讓 parent chart &amp; sub chart 都可以使用</li>
+</ul>
+<h2 id="指令介紹"><a href="#指令介紹" class="headerlink" title="指令介紹"></a>指令介紹</h2><h3 id="Repo"><a href="#Repo" class="headerlink" title="Repo"></a>Repo</h3><ul>
+<li>新增： <code>helm repo add &lt;repo name&gt; &lt;repo url&gt;</code></li>
+<li>列出清單： <code>helm repo list</code></li>
+<li>更新：<code>helm repo update</code></li>
+<li>搜尋該 repo 底下全部的 chart：<code>helm search repo &lt;repo name&gt;</code></li>
+</ul>
+<h3 id="Chart"><a href="#Chart" class="headerlink" title="Chart"></a>Chart</h3><ul>
+<li>安裝: <code>helm install &lt;release name&gt; &lt;chart path&gt;</code><ul>
+<li><code>-n</code>：指定 namespace</li>
+<li><code>-f</code>：指定 values.yaml</li>
+<li><code>--dry-run --debug</code>：用來驗證設定是否正確</li>
+</ul>
+</li>
+<li>列出清單：<code>helm list</code></li>
+<li>顯示建立的內容：<code>helm get all &lt;release name&gt;</code></li>
+<li>顯示 value：<code>helm get values &lt;release name&gt;</code></li>
+<li>升級：<code>helm upgrade &lt;release name&gt; &lt;chart repo name&gt;/&lt;chart name&gt; --version=0.2.1</code></li>
+<li>升級並安裝：<code>helm upgrade &lt;release name&gt; &lt;chart repo name&gt;/&lt;chart name&gt;</code><ul>
+<li><code>--values</code> ：指定 values.yaml</li>
+<li><code>--install</code> ：先安裝再升級</li>
+<li><code>--set</code> ：指定 key&#x3D;value，範例 <code>--set database.password=&quot;laravel_password&quot;</code></li>
+</ul>
+</li>
+<li>查詢歷史紀錄：<code>helm history &lt;release name&gt;</code></li>
+<li>退版：<code>helm rollback &lt;release name&gt; &lt;revision no&gt;</code></li>
+<li>測試&amp;驗證語法：<code>helm lint &lt;chart folder&gt;</code></li>
+</ul>
+<h3 id="Package"><a href="#Package" class="headerlink" title="Package"></a>Package</h3><ul>
+<li>打包：<code>helm package &lt;helm chart folder&gt;</code></li>
+<li>部署到 S3：<code>helm s3 push &lt;helm chart name&gt;-0.1.0.tgz &lt;repo name&gt;</code></li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://yu-jack.github.io/2021/11/24/helm-note/">helm 語法筆記</a></li>
+<li><a target="_blank" rel="noopener" href="https://godleon.github.io/blog/DevOps/learn-Helm/">Helm 學習筆記</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/deploy-helm-chart-to-artifact-hub/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/deploy-helm-chart-to-artifact-hub/" class="post-title-link" itemprop="url">如何部署到 Artifact Hub</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-19 16:16:47" itemprop="dateCreated datePublished" datetime="2022-12-19T16:16:47+08:00">2022-12-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Helm/" itemprop="url" rel="index"><span itemprop="name">Helm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>651</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="步驟一、打包現有的-Chart"><a href="#步驟一、打包現有的-Chart" class="headerlink" title="步驟一、打包現有的 Chart"></a>步驟一、打包現有的 Chart</h2><ol>
+<li><p>使用 <code>helm package &lt;chart name&gt;</code> 進行打包</p>
+ <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Successfully</span> packaged chart and saved it <span class="attr">to</span>: <span class="regexp">/Users/u</span>ser/<span class="title class_">Desktop</span>/helm-demo-<span class="number">0.1</span><span class="number">.0</span>.<span class="property">tgz</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立空資料夾 <code>helm-demo-chart</code> ，將打包的壓縮檔搬移進去</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> helm-demo-0.1.0.tgz helm-demo-chart</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立 index.yaml 檔案，一個 valid helm chart 必須有這個檔案</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">helm repo index helm-demo-chart</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立 Readme.md 檔案，撰寫安裝方式及使用說明</p>
+</li>
+</ol>
+<h2 id="步驟二、部署到-GitHub-並建立-Pages"><a href="#步驟二、部署到-GitHub-並建立-Pages" class="headerlink" title="步驟二、部署到 GitHub 並建立 Pages"></a>步驟二、部署到 GitHub 並建立 Pages</h2><ol>
+<li><p>建立 GitHub 專案，名稱為 helm-demo-chart</p>
+</li>
+<li><p>本地專案切出 gh-pages 分支，並推到遠端</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin &lt;ssh url&gt;</span><br><span class="line">git checkout -b gh-pages</span><br><span class="line">git push -u origin gh-pages</span><br></pre></td></tr></table></figure>
+
+<p> 推完後專案的架構</p>
+<p> <img src="/../images/helm/deploy-helm-chart-to-artifact-hub1.png" alt="deploy-helm-chart-to-artifact-hub1"></p>
+</li>
+<li><p>到專案的 setting&#x2F;page 查看 url</p>
+<p> <img src="/../images/helm/deploy-helm-chart-to-artifact-hub2.png" alt="deploy-helm-chart-to-artifact-hub2"></p>
+</li>
+</ol>
+<h2 id="步驟三、新增到-Artifact-Hub"><a href="#步驟三、新增到-Artifact-Hub" class="headerlink" title="步驟三、新增到 Artifact Hub"></a>步驟三、新增到 Artifact Hub</h2><ol>
+<li><p>登入完帳戶，點擊 Control Panel</p>
+<p> <img src="/../images/helm/deploy-helm-chart-to-artifact-hub3.png" alt="deploy-helm-chart-to-artifact-hub3"></p>
+</li>
+<li><p>新增 Repository</p>
+<p> <img src="/../images/helm/deploy-helm-chart-to-artifact-hub4.png" alt="deploy-helm-chart-to-artifact-hub4"></p>
+</li>
+<li><p>新增完後要等 Artifact Hub 發佈，大約 10 分鐘左右</p>
+<p> <img src="/../images/helm/deploy-helm-chart-to-artifact-hub5.png" alt="deploy-helm-chart-to-artifact-hub5"></p>
+</li>
+<li><p>發佈完後會顯示綠色勾勾，並可以被其他人搜尋並安裝</p>
+<p> <img src="/../images/helm/deploy-helm-chart-to-artifact-hub6.png" alt="deploy-helm-chart-to-artifact-hub6"></p>
+<p> 搜尋結果</p>
+<p> <img src="/../images/helm/deploy-helm-chart-to-artifact-hub7.png" alt="deploy-helm-chart-to-artifact-hub7"></p>
+</li>
+</ol>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://leeyoongti.medium.com/helm-in-kubernetes-part-4-publish-helm-chart-to-artifact-hub-using-github-pages-ab7f55904faa">Helm In Kubernetes — Part 4: Publish Helm Chart To Artifact Hub using Github Pages</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/create-own-helm-chart/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/create-own-helm-chart/" class="post-title-link" itemprop="url">如何建立自己的 Helm</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-19 16:14:03" itemprop="dateCreated datePublished" datetime="2022-12-19T16:14:03+08:00">2022-12-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Helm/" itemprop="url" rel="index"><span itemprop="name">Helm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>627</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="建立步驟"><a href="#建立步驟" class="headerlink" title="建立步驟"></a>建立步驟</h2><ol>
+<li><p>透過 CLI 的 create 語法建立樣板</p>
+<ul>
+<li><code>helm create helm-demo</code></li>
+</ul>
+</li>
+<li><p>修改 values.yaml</p>
+<ul>
+<li><p>nameOverride：<code>helm-demo-app</code></p>
+</li>
+<li><p>fullnameOverride：<code>helm-demo-chart</code></p>
+</li>
+<li><p>serviceAccount.name：<code>helm-demo-sa</code></p>
+</li>
+<li><p>service.type：<code>NodePort</code></p>
+</li>
+<li><p>resources</p>
+  <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">resources</span>:</span><br><span class="line">  <span class="attr">limits</span>:</span><br><span class="line">    <span class="attr">cpu</span>: 100m</span><br><span class="line">    <span class="attr">memory</span>: 128Mi</span><br><span class="line">  <span class="attr">requests</span>:</span><br><span class="line">    <span class="attr">cpu</span>: 100m</span><br><span class="line">    <span class="attr">memory</span>: 128Mi</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>使用 install 語法安裝元件</p>
+<ul>
+<li><code>cd helm-demo</code></li>
+<li><code>helm install my-demo-chart . -n default</code></li>
+</ul>
+</li>
+<li><p>查看部署狀態</p>
+<ul>
+<li>安裝過的 chart： <code>helm list</code></li>
+<li>安裝過的元件：<code>kubectl get all -n default</code></li>
+</ul>
+</li>
+<li><p>開啟瀏覽器檢查網頁</p>
+<ul>
+<li>取得 port：<code>kubectl get svc</code></li>
+</ul>
+ <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">NAME</span>              <span class="variable constant_">TYPE</span>        <span class="variable constant_">CLUSTER</span>-<span class="variable constant_">IP</span>     <span class="variable constant_">EXTERNAL</span>-<span class="variable constant_">IP</span>   <span class="title function_">PORT</span>(S)        <span class="variable constant_">AGE</span></span><br><span class="line">helm-demo-chart   <span class="title class_">NodePort</span>    <span class="number">10.97</span><span class="number">.56</span><span class="number">.253</span>   &lt;none&gt;        <span class="number">80</span>:<span class="number">30559</span>/<span class="variable constant_">TCP</span>   2m15s</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>打開 <code>[localhost:30559](http://localhost:30559)</code> 網頁，可以看到 Welcome to nginx! 文字</li>
+</ul>
+</li>
+</ol>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://opensource.com/article/20/5/helm-charts">How to make a Helm chart in 10 minutes</a></strong></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://github.com/renoki-co/laravel-helm-demo">renoki-co&#x2F;laravel-helm-demo</a></strong></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/google-oauth-setting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/google-oauth-setting/" class="post-title-link" itemprop="url">建立 Google OAuth2.0 Client ID</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-19 15:59:41" itemprop="dateCreated datePublished" datetime="2022-12-19T15:59:41+08:00">2022-12-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Google/" itemprop="url" rel="index"><span itemprop="name">Google</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>669</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="OAuth-流程"><a href="#OAuth-流程" class="headerlink" title="OAuth 流程"></a>OAuth 流程</h2><p><strong>前端與 Google 互動</strong></p>
+<ol>
+<li>使用者點下去 Google 登入，導向 Google 同意頁面</li>
+<li>使用者點下同意授權，Google 會回傳 response 給前端</li>
+</ol>
+<p><strong>前端與後端互動</strong></p>
+<ol>
+<li>前端把 google 回應的 Id Token 呼叫後端 API 去驗證是否為 Google 身分</li>
+<li>產生 JWT Token 給前端存在 local storage 或 cookie</li>
+</ol>
+<p><strong>程式範例</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">import</span> <span class="string">type</span> &#123; <span class="string">CallbackTypes</span> &#125; <span class="string">from</span> <span class="string">&#x27;vue3-google-login&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Google 回傳 callback 給前端</span></span><br><span class="line"><span class="attr">const callback:</span> <span class="string">CallbackTypes.CredentialCallback</span> <span class="string">=</span> <span class="string">async</span> <span class="string">(response)</span> <span class="string">=&gt;</span> &#123;</span><br><span class="line">  <span class="comment"># 使用者的 id token</span></span><br><span class="line">  <span class="string">const</span> <span class="string">idToken</span> <span class="string">=</span> <span class="string">response.credential</span></span><br><span class="line">  <span class="comment"># 呼叫後端 API 進行身分驗證</span></span><br><span class="line">  <span class="string">const</span> <span class="string">result</span> <span class="string">=</span> <span class="string">await</span> <span class="string">auth.login(idToken)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用者點下 Google 登入</span></span><br><span class="line"><span class="string">&lt;GoogleLogin</span> <span class="string">:callback=&quot;callback&quot;</span> <span class="string">/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="GCP-建立步驟"><a href="#GCP-建立步驟" class="headerlink" title="GCP 建立步驟"></a>GCP 建立步驟</h2><p><strong>步驟一、建立專案</strong></p>
+<p><strong>步驟二、設定同意畫面</strong></p>
+<ul>
+<li><p>user type 選擇 外部</p>
+</li>
+<li><p>設定讓 Google 信任該網域</p>
+<p>  <img src="/../images/google/google-oauth-setting1.png" alt="google-oauth-setting1"></p>
+</li>
+</ul>
+<p><strong>步驟三、點擊 Google Search Console，驗證網域</strong></p>
+<ul>
+<li><p>輸入要驗證的網域</p>
+<p>  <img src="/../images/google/google-oauth-setting2.png" alt="google-oauth-setting2"></p>
+</li>
+<li><p>產生 TXT 紀錄</p>
+<p>  <img src="/../images/google/google-oauth-setting3.png" alt="google-oauth-setting3"></p>
+</li>
+<li><p>新增到 Route53 的網域</p>
+<p>  <img src="/../images/google/google-oauth-setting4.png" alt="google-oauth-setting4"></p>
+</li>
+<li><p>新增完就可以驗證成功</p>
+<p>  <img src="/../images/google/google-oauth-setting5.png" alt="google-oauth-setting5"></p>
+</li>
+</ul>
+<p><strong>步驟四、建立 OAuth2.0 憑證</strong></p>
+<p><img src="/../images/google/google-oauth-setting6.png" alt="google-oauth-setting6"></p>
+<p><strong>最後、建立完成後可以下載金鑰</strong></p>
+<p><img src="/../images/google/google-oauth-setting7.png" alt="google-oauth-setting7"></p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10235929">Day 6 Google OAuth2</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

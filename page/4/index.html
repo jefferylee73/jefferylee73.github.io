@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+<meta property="og:type" content="website">
+<meta property="og:title" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:url" content="https://jefferylee73.github.io/page/4/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:author" content="Jeffery Lee">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://jefferylee73.github.io/page/4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/upload-s3-by-presigned-url/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/upload-s3-by-presigned-url/" class="post-title-link" itemprop="url">使用 presigned url 限制上傳 S3 權限</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-23 18:15:42" itemprop="dateCreated datePublished" datetime="2022-11-23T18:15:42+08:00">2022-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="為何需要"><a href="#為何需要" class="headerlink" title="為何需要"></a>為何需要</h2><ul>
+<li>後端透過 AWS SDK 產生已簽名的 URL 給前端上傳檔案，可以省下從前端上傳檔案到後端的錢</li>
+<li>已簽名的 URL 可以限制 Client 上傳的時間，相對安全</li>
+</ul>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><p><strong>步驟一、建立 NodeJS 專案</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化專案</span></span><br><span class="line"><span class="string">npm</span> <span class="string">init</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安裝 aws-sdk 套件</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">@aws-sdk/client-s3</span> <span class="string">@aws-sdk/s3-request-presigner</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟二、使用 SSO 進行登入</strong></p>
+<ul>
+<li>操作方式可以參考這篇文章 ⇒ <a href="/access-s3-from-cross-account">如何設定跨帳戶存取 S3 權限</a></li>
+</ul>
+<p><strong>步驟三、撰寫產生 presigned url 程式碼</strong></p>
+<ul>
+<li><p>如果要在程式碼使用 module 方式，需要在 package.json 檔案裡面加上 <code>&quot;type&quot;: &quot;module&quot;</code></p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">import</span> &#123; <span class="string">PutObjectCommand</span> &#125; <span class="string">from</span> <span class="string">&quot;@aws-sdk/client-s3&quot;</span><span class="string">;</span></span><br><span class="line"><span class="string">import</span> &#123; <span class="string">S3Client</span> &#125; <span class="string">from</span> <span class="string">&quot;@aws-sdk/client-s3&quot;</span><span class="string">;</span></span><br><span class="line"><span class="string">import</span> &#123; <span class="string">getSignedUrl</span> &#125; <span class="string">from</span> <span class="string">&quot;@aws-sdk/s3-request-presigner&quot;</span><span class="string">;</span></span><br><span class="line"></span><br><span class="line"><span class="string">const</span> <span class="string">s3Client</span> <span class="string">=</span> <span class="string">new</span> <span class="string">S3Client(&#123;</span> <span class="attr">region:</span> <span class="string">&quot;us-west-2&quot;</span> <span class="string">&#125;);</span></span><br><span class="line"></span><br><span class="line"><span class="string">export</span> <span class="string">const</span> <span class="string">bucketParams</span> <span class="string">=</span> &#123;</span><br><span class="line">    <span class="attr">Bucket:</span> <span class="string">&#x27;s3.rhinoshield.io&#x27;</span>,</span><br><span class="line">    <span class="attr">Key:</span> <span class="string">&#x27;customcase/customer/png/123.png&#x27;</span>,</span><br><span class="line">    <span class="attr">ACL:</span> <span class="string">&#x27;bucket-owner-full-control&#x27;</span></span><br><span class="line">&#125;<span class="string">;</span></span><br><span class="line"></span><br><span class="line"><span class="string">export</span> <span class="string">const</span> <span class="string">run</span> <span class="string">=</span> <span class="string">async</span> <span class="string">()</span> <span class="string">=&gt;</span> &#123;</span><br><span class="line">    <span class="string">try</span> &#123;</span><br><span class="line">        <span class="string">const</span> <span class="string">command</span> <span class="string">=</span> <span class="string">new</span> <span class="string">PutObjectCommand(bucketParams);</span></span><br><span class="line">        <span class="string">const</span> <span class="string">signedUrl</span> <span class="string">=</span> <span class="string">await</span> <span class="string">getSignedUrl(s3Client</span>, <span class="string">command</span>, &#123;</span><br><span class="line">          <span class="attr">expiresIn:</span> <span class="number">60</span>,</span><br><span class="line">        &#125;<span class="string">);</span></span><br><span class="line">        <span class="string">console.log(signedUrl);</span></span><br><span class="line">    &#125; <span class="string">catch</span> <span class="string">(err)</span> &#123;</span><br><span class="line">        <span class="string">console.log(&quot;Error</span> <span class="string">creating</span> <span class="string">presigned</span> <span class="string">URL&quot;</span>, <span class="string">err);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">run();</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>步驟四、執行程式</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ node generate.js</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/aws/upload_s3_by_presigned_url1.png" alt="upload_s3_by_presigned_url1"></p>
+<p><strong>步驟五、使用 Postman 上傳檔案</strong></p>
+<ul>
+<li><p>HTTP Method 選擇 PUT</p>
+</li>
+<li><p>Body 選擇 binary</p>
+</li>
+<li><p>上傳檔案的檔名需跟簽章 URL 的檔名一樣</p>
+<p>  <img src="/../images/aws/upload_s3_by_presigned_url2.png" alt="upload_s3_by_presigned_url2"></p>
+</li>
+</ul>
+<p><strong>步驟六、前端頁面使用 PUT 上傳檔案，要設定 S3 CORS 規則</strong></p>
+<p><img src="/../images/aws/upload_s3_by_presigned_url3.png" alt="upload_s3_by_presigned_url3"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/access-s3-from-cross-account/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/access-s3-from-cross-account/" class="post-title-link" itemprop="url">如何設定跨帳戶存取 S3 權限</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-23 18:11:01" itemprop="dateCreated datePublished" datetime="2022-11-23T18:11:01+08:00">2022-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>2 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="達成目標"><a href="#達成目標" class="headerlink" title="達成目標"></a>達成目標</h2><ul>
+<li>A 帳戶的角色可以上傳檔案到 B 帳戶的 S3 Bucket 的資料夾內</li>
+</ul>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><p><strong>步驟一、 繼承要用來操作 S3 的 A 帳戶角色</strong></p>
+<ul>
+<li>操作方式可以參考這篇文章 ⇒ <a href="/assume-role-by-sso">如何使用 SSO 角色再繼承 Role</a></li>
+</ul>
+<p> <strong>步驟二、修改 A 帳戶角色的 Policy</strong></p>
+<ul>
+<li><p>加上 S3 存取該 Bucket 權限</p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;Statement&quot;:</span> [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;Action&quot;:</span> <span class="string">&quot;s3:*&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;Effect&quot;:</span> <span class="string">&quot;Allow&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;Resource&quot;:</span> [</span><br><span class="line">        <span class="string">&quot;arn:aws:s3:::&lt;another account bucket name&gt;/*&quot;</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">&quot;Version&quot;:</span> <span class="string">&quot;2012-10-17&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># example</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;Statement&quot;:</span> [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;Action&quot;:</span> <span class="string">&quot;s3:*&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;Effect&quot;:</span> <span class="string">&quot;Allow&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;Resource&quot;:</span> [</span><br><span class="line">        <span class="string">&quot;arn:aws:s3:::s3.rhinoshield.io/customcase/customer/*&quot;</span>,</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">&quot;Version&quot;:</span> <span class="string">&quot;2012-10-17&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>步驟三、修改 B 帳戶的 S3 Bucket Policy</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;Sid&quot;:</span> <span class="string">&quot;GetCustomcaseCustomerData&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;Effect&quot;:</span> <span class="string">&quot;Allow&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;Principal&quot;:</span> &#123;</span><br><span class="line">    <span class="attr">&quot;AWS&quot;:</span> <span class="string">&quot;arn:aws:iam::&lt;account id&gt;:role/&lt;role name&gt;&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;Action&quot;:</span> [</span><br><span class="line">    <span class="string">&quot;s3:GetObject&quot;</span>,</span><br><span class="line">    <span class="string">&quot;s3:PutObject&quot;</span>,</span><br><span class="line">    <span class="string">&quot;s3:DeleteObject&quot;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">&quot;Resource&quot;:</span> <span class="string">&quot;arn:aws:s3:::&lt;bucket name&gt;/customcase/customer/*&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟四、測試存取權限</strong></p>
+<ul>
+<li><p>下載檔案</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aws s3 <span class="built_in">cp</span> s3://&lt;bucket name&gt;/customcase/customer/pdf/&lt;filename&gt;.pdf .</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上傳檔案</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aws s3 cp &lt;filename&gt;.pdf s3://&lt;bucket name&gt;/customcase/customer/pdf/&lt;filename&gt;.pdf --acl bucket-owner-full-control</span><br></pre></td></tr></table></figure>
+
+<p>  由於 Bucket 有設定 Object 擁有者是上傳的人，其他人會無法存取該檔案，所以需要加上 <code>--acl bucket-owner-full-control</code> 參數更改 Owner 人員</p>
+<p>  <img src="/../images/aws/access_s3_from_cross_account1.png" alt="access_s3_from_cross_account1"></p>
+</li>
+</ul>
+<h2 id="常見-S3-權限的小知識"><a href="#常見-S3-權限的小知識" class="headerlink" title="常見 S3 權限的小知識"></a>常見 S3 權限的小知識</h2><ul>
+<li>ListBucket 用來顯示 Bucket 內的物件清單， 資源後面不用加 <code>/*</code></li>
+<li>GetObject 用來顯示特定檔案，資源後面需加上 <code>/*</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;Effect&quot;: &quot;Allow&quot;,</span><br><span class="line">    &quot;Principal&quot;: &#123;</span><br><span class="line">        &quot;AWS&quot;: &quot;arn:aws:iam::xxxxxxxxxx:role/&lt;role name&gt;&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;Action&quot;: &quot;s3:ListBucket&quot;,</span><br><span class="line">    &quot;Resource&quot;: &quot;arn:aws:s3:::ditto-stag&quot;</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">    &quot;Effect&quot;: &quot;Allow&quot;,</span><br><span class="line">    &quot;Principal&quot;: &#123;</span><br><span class="line">        &quot;AWS&quot;: &quot;arn:aws:iam::xxxxxxxxxx:role/&lt;role name&gt;&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;Action&quot;: [</span><br><span class="line">        &quot;s3:GetObject&quot;,</span><br><span class="line">        &quot;s3:PutObject&quot;,</span><br><span class="line">        &quot;s3:DeleteObject&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;Resource&quot;: &quot;arn:aws:s3:::ditto-stag/*&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://awstip.com/how-to-access-s3-bucket-from-another-aws-account-55f1b0a878ed">How to access S3 bucket from another AWS account</a></strong></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/access-s3-object-url-methods/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/access-s3-object-url-methods/" class="post-title-link" itemprop="url">盤點存取 S3 圖片連結方式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-23 18:05:59" itemprop="dateCreated datePublished" datetime="2022-11-23T18:05:59+08:00">2022-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>2.6k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>2 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="方法一、設定-Object-Public-Access-最不建議"><a href="#方法一、設定-Object-Public-Access-最不建議" class="headerlink" title="方法一、設定 Object Public Access (最不建議)"></a>方法一、設定 Object Public Access (最不建議)</h2><p><img src="/../images/aws/access-s3-object-url-methods1.png" alt="access-s3-object-url-methods1"></p>
+<h2 id="方法二、設定-Bucket-Policy"><a href="#方法二、設定-Bucket-Policy" class="headerlink" title="方法二、設定 Bucket Policy"></a>方法二、設定 Bucket Policy</h2><ul>
+<li><p>用來取代方法一 ACL 方式</p>
+</li>
+<li><p>符合來源 role 或 user 才可以存取 (通常用在 <strong>EC2、Lambda 等運算資源</strong>)</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;Sid&quot;</span>: <span class="string">&quot;EC2Role&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Effect&quot;</span>: <span class="string">&quot;Allow&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Principal&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;AWS&quot;</span>: [</span><br><span class="line">      <span class="string">&quot;arn:aws:iam::&lt;account id&gt;:role/&lt;role name&gt;&quot;</span>,</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;Action&quot;</span>: <span class="string">&quot;s3:GetObject&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Resource&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;arn:aws:s3:::&lt;bucket name&gt;/customcase/customer/*&quot;</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>符合 Public IP 才可以存取 (通常用在<strong>公司內網</strong>)</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;Sid&quot;</span>: <span class="string">&quot;PublicIP&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Effect&quot;</span>: <span class="string">&quot;Allow&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Principal&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;AWS&quot;</span>: <span class="string">&quot;*&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;Action&quot;</span>: <span class="string">&quot;s3:GetObject&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Resource&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;arn:aws:s3:::&lt;bucket name&gt;/customcase/customer/*&quot;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">&quot;Condition&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;IpAddress&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;aws:SourceIp&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;xxx.xxx.xxx.xxx/32&quot;</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>符合 VPC Private IP 才可以存取 (通常用在<strong>AWS VPC 中的 EC2 存取</strong>)</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;Sid&quot;</span>: <span class="string">&quot;PrivateVPC&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Effect&quot;</span>: <span class="string">&quot;Allow&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Principal&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;AWS&quot;</span>: <span class="string">&quot;*&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;Action&quot;</span>: <span class="string">&quot;s3:GetObject&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Resource&quot;</span>: <span class="string">&quot;arn:aws:s3:::&lt;bucket name&gt;/customcase/customer/pdf/*&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Condition&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;IpAddress&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;aws:VpcSourceIp&quot;</span>: <span class="string">&quot;10.0.0.0/16&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>符合來源 domain 才可以存取(通常用在<strong>該域名顯示圖片</strong>)</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;Sid&quot;</span>: <span class="string">&quot;PrivateDomain&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Effect&quot;</span>: <span class="string">&quot;Allow&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Principal&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;AWS&quot;</span>: <span class="string">&quot;*&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;Action&quot;</span>: <span class="string">&quot;s3:GetObject&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Resource&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;arn:aws:s3:::&lt;bucket name&gt;/customcase/customer/*&quot;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">&quot;Condition&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;StringLike&quot;</span>:&#123;</span><br><span class="line">      <span class="string">&quot;aws:Referer&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;http://www.example.com/*&quot;</span>,</span><br><span class="line">        <span class="string">&quot;http://example.com/*&quot;</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>符合 AWS 資源才可以存取(通常用在<strong>CloudFront</strong>)</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;Sid&quot;</span>: <span class="string">&quot;AllowCloudFrontServicePrincipal&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Effect&quot;</span>: <span class="string">&quot;Allow&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Principal&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;Service&quot;</span>: <span class="string">&quot;cloudfront.amazonaws.com&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;Action&quot;</span>: <span class="string">&quot;s3:GetObject&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Resource&quot;</span>: <span class="string">&quot;arn:aws:s3:::&lt;bucket name&gt;/*&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Condition&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;StringEquals&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;AWS:SourceArn&quot;</span>: <span class="string">&quot;arn:aws:cloudfront::&lt;account id&gt;:distribution/&lt;distribution id&gt;&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="方法三、設定-Presigned-URL"><a href="#方法三、設定-Presigned-URL" class="headerlink" title="方法三、設定 Presigned URL"></a>方法三、設定 Presigned URL</h2><ul>
+<li><p>從 object action 建立 presigned url</p>
+</li>
+<li><p>最多設定 12 小時或 720 分鐘</p>
+<p>  <img src="/../images/aws/access-s3-object-url-methods2.png" alt="access-s3-object-url-methods2"></p>
+</li>
+</ul>
+<h2 id="方法四、CloudFront-WAF"><a href="#方法四、CloudFront-WAF" class="headerlink" title="方法四、CloudFront + WAF"></a>方法四、CloudFront + WAF</h2><p>參考文章 ⇒ 尚未完成</p>
+<h2 id="方法五、CloudFront-Signed-URL"><a href="#方法五、CloudFront-Signed-URL" class="headerlink" title="方法五、CloudFront Signed URL"></a>方法五、CloudFront Signed URL</h2><p>參考文章 ⇒ 尚未完成</p>
+<h2 id="方法六、CloudFront-Signed-Cookie"><a href="#方法六、CloudFront-Signed-Cookie" class="headerlink" title="方法六、CloudFront Signed Cookie"></a>方法六、CloudFront Signed Cookie</h2><p>參考文章 ⇒ 尚未完成</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/suggest-devops-article/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/suggest-devops-article/" class="post-title-link" itemprop="url">推薦DevOps文章</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-23 17:49:02" itemprop="dateCreated datePublished" datetime="2022-11-23T17:49:02+08:00">2022-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning/" itemprop="url" rel="index"><span itemprop="name">Learning</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>882</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="DevOps-文化"><a href="#DevOps-文化" class="headerlink" title="DevOps 文化"></a>DevOps 文化</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://www.cakeresume.com/resources/what-is-devops?locale=zh-TW">DevOps 介紹 》建立 DevOps 文化，消除開發、營運、品保斷層</a></strong></li>
+</ul>
+<h2 id="iThome-鐵人賽"><a href="#iThome-鐵人賽" class="headerlink" title="iThome 鐵人賽"></a>iThome 鐵人賽</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20130511/ironman/3644">AWS新手的30天之旅</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20072606/ironman/3827">用 GitLab CI 玩轉自動化測試與佈署</a></strong></li>
+</ul>
+<h2 id="AWS"><a href="#AWS" class="headerlink" title="AWS"></a>AWS</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://godleon.github.io/blog/AWS/learn-AWS-IAM-3-assuming-role/">[AWS IAM] 學習重點節錄(3) - Assuming IAM Role</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://jason-kao-blog.medium.com/aws%E7%9A%84%E9%9B%B2%E7%AB%AF%E6%9E%B6%E6%A7%8B%E6%A1%86%E6%9E%B6-%E6%95%88%E8%83%BD%E7%AF%87-8139e744a4b7">AWS的雲端架構框架-效能篇</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.nakivo.com/blog/the-definitive-guide-to-aws-ec2-instance-types/">The Definitive Guide to AWS EC2 Instance Types</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/starbugs/coding-your-cdn-%E5%85%85%E6%BB%BF%E9%A9%9A%E5%A5%87%E7%9A%84-aws-lambda-edge-763d9dd1f00d">Coding your CDN ! 充滿驚奇的 AWS Lambda@Edge</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://ikala.cloud/google-cloud-pub-sub-aws-sqs-comparison/">拆解雲端 Message Service：Google Cloud Pub&#x2F;Sub vs. AWS SQS 優劣分析</a></strong></li>
+</ul>
+<h2 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/starbugs/multi-tenancy-kubernetes-cluster-part-1-%E8%AA%8D%E5%91%BD%E5%90%A7-%E6%9C%89%E4%B8%80%E5%A5%BD-%E5%B0%B1%E6%B2%92%E5%85%A9%E5%A5%BD-3eddb75eeb4c">Multi-Tenancy Kubernetes Cluster Part 1: 認命吧！有一好，就沒兩好！</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/@pavanbelagatti/kubernetes-service-types-explained-2709cde3bc0c">Kubernetes Service Types Explained</a></strong></li>
+</ul>
+<h2 id="Grafana"><a href="#Grafana" class="headerlink" title="Grafana"></a>Grafana</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://pavolkutaj.medium.com/using-cloudwatch-dimension-values-as-grafana-variables-45c2c09f9fdd">Using Cloudwatch Dimension Values As Grafana Variables</a></strong></li>
+</ul>
+<h2 id="Domain"><a href="#Domain" class="headerlink" title="Domain"></a>Domain</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://its-okay.medium.com/%E6%90%9E%E6%87%82-ip-fqdn-dns-name-server-%E9%BC%A0%E5%B9%B4%E5%85%A8%E9%A6%AC%E9%90%B5%E4%BA%BA%E6%8C%91%E6%88%B0-05-aa60f45496fb">搞懂 IP、FQDN、DNS、Name Server</a></strong></li>
+</ul>
+<h2 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://totoroliu.medium.com/http-2-%E6%98%AF%E4%BB%80%E9%BA%BC-d7de699bdbae">Http&#x2F;2 是什麼?</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://its-okay.medium.com/%E9%97%9C%E6%96%BC-http-request-%E7%9A%84%E6%BC%8F%E6%B4%9E-%E9%BC%A0%E5%B9%B4%E5%85%A8%E9%A6%AC%E9%90%B5%E4%BA%BA%E6%8C%91%E6%88%B0-23-d215b1e819a7">關於 HTTP Request 的漏洞</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://yu-jack.github.io/2017/10/20/secure-header/">增加安全性的 HTTP Headers</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://notfalse.net/48/http-status-codes#302-Found-8212">HTTP 狀態碼 (Status Codes)</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://kknews.cc/news/yegpn6g.html">看圖學 HTTPS</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://codecharms.me/posts/security-ssl-https">[Security] SSL—HTTPS 背後功臣</a></strong></li>
+</ul>
+<h2 id="Session-amp-Cookie"><a href="#Session-amp-Cookie" class="headerlink" title="Session &amp; Cookie"></a>Session &amp; Cookie</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://yu-jack.github.io/2019/06/02/ajax-with-session/">前後端分離下之使用 session</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://its-okay.medium.com/same-origin-policy-%E5%90%8C%E6%BA%90%E6%94%BF%E7%AD%96%E7%AD%86%E8%A8%98-%E9%BC%A0%E5%B9%B4%E5%85%A8%E9%A6%AC%E9%90%B5%E4%BA%BA%E6%8C%91%E6%88%B0-22-eb9f38bf902b">Same Origin Policy 同源政策筆記</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://its-okay.medium.com/%E8%AA%8D%E8%AD%98%E7%B6%B2%E7%AB%99%E4%B8%89%E5%B1%A4%E5%BC%8F%E6%9E%B6%E6%A7%8B-cookie-%E9%BC%A0%E5%B9%B4%E5%85%A8%E9%A6%AC%E9%90%B5%E4%BA%BA%E6%8C%91%E6%88%B0-21-c3dddde1e5c4">認識網站三層式架構 、Cookie</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://blog.kenwsc.com/posts/2023/jwt-vs-session/">更好的選擇？用 JWT 取代 Session 的風險</a></strong></li>
+</ul>
+<h2 id="密碼學"><a href="#密碼學" class="headerlink" title="密碼學"></a>密碼學</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/starbugs/what-are-encoding-encrypt-and-hashing-4b03d40e7b0c">一次搞懂密碼學中的三兄弟 — Encode、Encrypt 跟 Hash</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/starbugs/how-to-store-password-in-database-sefely-6b20f48def92">聽說不能用明文存密碼，那到底該怎麼存？</a></strong></li>
+</ul>
+<h2 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://giboss.pixnet.net/blog/post/26798748-osi%E4%B8%83%E5%B1%A4%E7%B0%A1%E4%BB%8B">OSI七層簡介</a></strong></li>
+</ul>
+<h2 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://kknews.cc/zh-tw/code/34mlvqg.html">圖解 SSH 原理</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://codecharms.me/posts/security-ssh">[Security] 你該知道所有關於 SSH 的那些事</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://hackmd.io/@CynthiaChuang/Generating-a-Ssh-Key-and-Adding-It-to-the-Github">使用 SSH 金鑰與 GitHub 連線</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://huataihuang.gitbooks.io/cloud-atlas/content/service/ssh/ssh_key.html">SSH 密鑰</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://wangdoc.com/ssh/key">SSH 密钥登录</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://terryl.in/zh/ssh-key-login-without-password/">SSH Login 使用 Key 驗證，免密碼登入的設定方法</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E6%B5%A6%E5%B3%B6%E5%A4%AA%E9%83%8E%E7%9A%84%E6%B0%B4%E6%97%8F%E7%BC%B8/how-to-setup-ssh-config-%E4%BD%BF%E7%94%A8-ssh-%E8%A8%AD%E5%AE%9A%E6%AA%94-74ad46f99818">How to setup SSH config ：使用 SSH 設定檔簡化指令與連線網址</a></strong></li>
+</ul>
+<h2 id="Load-Testing"><a href="#Load-Testing" class="headerlink" title="Load Testing"></a>Load Testing</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://clouding.city/tool/k6/">k6 - 現代負載測試工具</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10305862">[Day24][負載測試] K6 使用上常見的參數設定(options)有哪些？</a></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/deploy-spa-project-by-cf-cdn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/deploy-spa-project-by-cf-cdn/" class="post-title-link" itemprop="url">如何部署前端專案(SPA)到 CloudFront</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-23 17:36:32" itemprop="dateCreated datePublished" datetime="2022-11-23T17:36:32+08:00">2022-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>3 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="為何考慮-CDN"><a href="#為何考慮-CDN" class="headerlink" title="為何考慮 CDN"></a>為何考慮 CDN</h2><ul>
+<li>純靜態資源用 CDN 可以壓縮內容並做快取，降低網路延遲及提升使用體驗</li>
+<li>搭配 WAF 防火牆，提升安全性</li>
+<li>使用 Signed URL 及 Signed Cookie 限制存取權限</li>
+<li>設定 Behavior 串 Lambda 做 resize image 行為等其他應用</li>
+</ul>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><p><strong>步驟一、建立 S3 Bucket</strong></p>
+<ul>
+<li>輸入 bucket name 及選擇 region</li>
+<li>Object Ownership 勾選 ACL enabled 及 Bucket owner preferred</li>
+</ul>
+<p><img src="/../images/aws/deploy_spa_project_by_cf_cdn1.png" alt="deploy_spa_project_by_cf_cdn1"></p>
+<ul>
+<li>其他設定照預設即可</li>
+</ul>
+<p><strong>步驟二、撰寫 .gitlab-ci.yml</strong></p>
+<ul>
+<li><p>需先設定 CI&#x2F;CD variables (AWS Key&#x2F;Secret、Env)</p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">image:</span> <span class="string">public.ecr.aws/docker/library/node:18-alpine3.15</span></span><br><span class="line"></span><br><span class="line"><span class="attr">stages:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">prepare</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">build</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">deploy</span></span><br><span class="line"></span><br><span class="line"><span class="attr">cache:</span> <span class="meta">&amp;global_cache</span></span><br><span class="line">  <span class="attr">key:</span> <span class="string">node_cache</span></span><br><span class="line">  <span class="attr">paths:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">node_modules/</span></span><br><span class="line">  <span class="attr">policy:</span> <span class="string">pull</span></span><br><span class="line"></span><br><span class="line"><span class="attr">install:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">prepare</span></span><br><span class="line">  <span class="attr">cache:</span></span><br><span class="line">    <span class="string">&lt;&lt;:</span> <span class="meta">*global_cache</span></span><br><span class="line">    <span class="attr">policy:</span> <span class="string">pull-push</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">yarn</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">if:</span> <span class="string">$CI_COMMIT_BRANCH</span> <span class="string">=~</span> <span class="string">/\b(staging|production)\b/</span></span><br><span class="line"></span><br><span class="line"><span class="string">.build:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">build</span></span><br><span class="line">  <span class="attr">cache:</span></span><br><span class="line">    <span class="string">&lt;&lt;:</span> <span class="meta">*global_cache</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">apk</span> <span class="string">add</span> <span class="string">gettext</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">envsubst</span> <span class="string">&lt;</span> <span class="string">.env.example</span> <span class="string">&gt;</span> <span class="string">.env</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">yarn</span> <span class="string">build</span></span><br><span class="line">  <span class="attr">artifacts:</span></span><br><span class="line">    <span class="attr">paths:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">dist</span></span><br><span class="line"></span><br><span class="line"><span class="attr">build:staging:</span></span><br><span class="line">  <span class="attr">extends:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">.build</span></span><br><span class="line">  <span class="attr">environment:</span> <span class="string">staging</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">if:</span> <span class="string">$CI_COMMIT_BRANCH</span> <span class="string">==</span> <span class="string">&#x27;staging&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">build:production:</span></span><br><span class="line">  <span class="attr">extends:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">.build</span></span><br><span class="line">  <span class="attr">environment:</span> <span class="string">production</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">if:</span> <span class="string">$CI_COMMIT_BRANCH</span> <span class="string">==</span> <span class="string">&#x27;production&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="string">.deploy:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">deploy</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">public.ecr.aws/docker/library/python:latest</span></span><br><span class="line">  <span class="attr">before_script:</span> []</span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">pip</span> <span class="string">install</span> <span class="string">awscli</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">aws</span> <span class="string">s3</span> <span class="string">sync</span> <span class="string">dist</span> <span class="string">$&#123;S3_PATH&#125;</span> <span class="string">--delete</span> <span class="string">--acl</span> <span class="string">bucket-owner-full-control</span></span><br><span class="line"></span><br><span class="line"><span class="attr">deploy:staging:</span></span><br><span class="line">  <span class="attr">extends:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">.deploy</span></span><br><span class="line">  <span class="attr">environment:</span> <span class="string">staging</span></span><br><span class="line">  <span class="attr">variables:</span></span><br><span class="line">    <span class="attr">S3_PATH:</span> <span class="string">s3://web2.rts-stag.be</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">if:</span> <span class="string">$CI_COMMIT_BRANCH</span> <span class="string">==</span> <span class="string">&#x27;staging&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">deploy:production:</span></span><br><span class="line">  <span class="attr">extends:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">.deploy</span></span><br><span class="line">  <span class="attr">environment:</span> <span class="string">production</span></span><br><span class="line">  <span class="attr">variables:</span></span><br><span class="line">    <span class="attr">S3_PATH:</span> <span class="string">s3://web2.rts-stag.be</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">if:</span> <span class="string">$CI_COMMIT_BRANCH</span> <span class="string">==</span> <span class="string">&#x27;production&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>步驟三、設定 S3 Bucket Policy，允許 pipeline 可以部署</strong></p>
+<ul>
+<li><p>設定 Pipeline 執行角色操作 S3 權限</p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;Version&quot;:</span> <span class="string">&quot;2008-10-17&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;Id&quot;:</span> <span class="string">&quot;PolicyForCloudFrontPrivateContent&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;Statement&quot;:</span> [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;Effect&quot;:</span> <span class="string">&quot;Allow&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;Principal&quot;:</span> &#123;</span><br><span class="line">                <span class="attr">&quot;AWS&quot;:</span> <span class="string">&quot;arn:aws:iam::xxx:user/rts-frontend-pipeline&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">&quot;Action&quot;:</span> [</span><br><span class="line">                <span class="string">&quot;s3:GetObject&quot;</span>,</span><br><span class="line">                <span class="string">&quot;s3:PutObject&quot;</span>,</span><br><span class="line">                <span class="string">&quot;s3:DeleteObject&quot;</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">&quot;Resource&quot;:</span> <span class="string">&quot;arn:aws:s3:::&lt;bucket name&gt;/*&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;Effect&quot;:</span> <span class="string">&quot;Allow&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;Principal&quot;:</span> &#123;</span><br><span class="line">                <span class="attr">&quot;AWS&quot;:</span> <span class="string">&quot;arn:aws:iam::xxx:user/rts-frontend-pipeline&quot;</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">&quot;Action&quot;:</span> <span class="string">&quot;s3:ListBucket&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;Resource&quot;:</span> <span class="string">&quot;arn:aws:s3:::&lt;bucket name&gt;&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>步驟四、建立 ACM</strong></p>
+<ul>
+<li><p>選擇 us-east-1 Region (CloudFront 只能選擇該 Region 的 SSL 憑證)</p>
+</li>
+<li><p>建立完到 route53 建立 CNAME 做驗證，驗證過才可以被 CF 使用</p>
+<p>  <img src="/../images/aws/deploy_spa_project_by_cf_cdn2.png" alt="deploy_spa_project_by_cf_cdn2"></p>
+</li>
+</ul>
+<p><strong>步驟五、建立 CloudFront 當作 CDN</strong></p>
+<ul>
+<li><p>Origin 區塊</p>
+<ul>
+<li>Origin Domain 選擇前面建立的 S3 Bucket</li>
+<li>Origin Access 選擇 Origin access control settings (recommended)</li>
+</ul>
+</li>
+<li><p>Default cache behavior 區塊</p>
+<ul>
+<li>Viewer protocol policy 選擇 Redirect HTTP to HTTPS</li>
+</ul>
+</li>
+<li><p>Settings 區塊</p>
+<ul>
+<li>Alternate domain name (CNAME) 輸入 Custom Domain 對應到 Route53 對應</li>
+<li>Custom SSL certificate 選擇前面建立的 SSL 憑證</li>
+</ul>
+</li>
+<li><p>其他設定照預設即可</p>
+</li>
+<li><p>建立完後設定 Error Pages</p>
+<ul>
+<li><p>設定 403, 404 Status Code 要導引到 index.html</p>
+<p>  <img src="/../images/aws/deploy_spa_project_by_cf_cdn3.png" alt="deploy_spa_project_by_cf_cdn3"></p>
+</li>
+</ul>
+<blockquote>
+<p>預設 HTTP Path 對應 S3 路徑，但前端使用 SPA 方式只會有 index.html 對應各種 HTTP Path，如果沒設定 error page 的 redirect 會出現 Access Denied 錯誤訊息 ⇒ 參考此<a target="_blank" rel="noopener" href="https://dev.to/aws-builders/how-to-preserve-spa-route-path-in-the-browser-using-aws-cloudfront-oai">連結</a></p>
+</blockquote>
+</li>
+</ul>
+<p><strong>步驟六、設定 S3 Bucket Policy，允許 CDN 可以存取 S3</strong></p>
+<ul>
+<li><p>到 Cloudfront 複製 Policy，並貼到 S3 Bucket Policy</p>
+<p>  <img src="/../images/aws/deploy_spa_project_by_cf_cdn4.png" alt="deploy_spa_project_by_cf_cdn4"></p>
+</li>
+</ul>
+<p><strong>步驟七、設定 Route53 Alias 到 CDN</strong></p>
+<ul>
+<li><p>設定畫面</p>
+<p>  <img src="/../images/aws/deploy_spa_project_by_cf_cdn5.png" alt="deploy_spa_project_by_cf_cdn5"></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/suggest-knowledge-article/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/suggest-knowledge-article/" class="post-title-link" itemprop="url">提升生產力的文章</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-23 11:13:12" itemprop="dateCreated datePublished" datetime="2022-11-23T11:13:12+08:00">2022-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning/" itemprop="url" rel="index"><span itemprop="name">Learning</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>196</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="ChatGPT"><a href="#ChatGPT" class="headerlink" title="ChatGPT"></a>ChatGPT</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://www.explainthis.io/zh-hant/chatgpt/website">我用 ChatGPT 寫了一個 ChatGPT 指令大全網站</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.holakevinfang.com/video-filiming/chatgpt-related-tool-increase-productivity/">ChatGPT 還有其他 AI 兄弟姊妹！利用 ChatGPT 衍生工具讓你變成生產力之王</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.futurepedia.io/">使用FUTUREPEDIA尋找其他AI工具</a></strong></li>
+</ul>
+<h2 id="Video-Editor"><a href="#Video-Editor" class="headerlink" title="Video Editor"></a>Video Editor</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://www.flexclip.com/">Flexclip</a></strong></li>
+</ul>
+<h2 id="文字轉圖片"><a href="#文字轉圖片" class="headerlink" title="文字轉圖片"></a>文字轉圖片</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://openai.com/product/dall-e-2">DALL·E</a></strong></li>
+</ul>
+<h2 id="電商平台"><a href="#電商平台" class="headerlink" title="電商平台"></a>電商平台</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://www.holakevinfang.com/online-earning/make-money-via-shopify/">【電商平台創業】7種利用Shopify創業賺錢的方式</a></strong></li>
+</ul>
+<h2 id="軟實力"><a href="#軟實力" class="headerlink" title="軟實力"></a>軟實力</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://rock070.me/thinks/soft-skills/2023-01-04-learn-in-public">如何在公開場合學習</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.meepshop.com/blog/2022/05/13/ec-shop-platform-compare/">2023年電商平台比較指南，教你如何選擇開店平台</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://haoeasy.fami.life/">全家電商開店</a></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/assume-role-by-sso/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/assume-role-by-sso/" class="post-title-link" itemprop="url">如何使用 SSO 角色再繼承 Role</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-18 18:46:48" itemprop="dateCreated datePublished" datetime="2022-11-18T18:46:48+08:00">2022-11-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="AWS-SSO-簡介"><a href="#AWS-SSO-簡介" class="headerlink" title="AWS SSO 簡介"></a>AWS SSO 簡介</h2><ul>
+<li><p>使用第三方服務(Google)認證身分，使用 AWS 資源</p>
+</li>
+<li><p>新增 user 才可以使用 sso</p>
+</li>
+<li><p>新增 group 設定使用者群組，用來設定 permission-set 的對象</p>
+</li>
+<li><p>使用 permission-set 限制存取權限，類似 AWS Role 元件</p>
+</li>
+<li><p>使用 assignments 指定各別 account 有的 permission set，並指定哪些 group 有權限</p>
+<p>  <img src="/../images/aws/assume-role-by-sso1.png" alt="assume-role-by-sso1"></p>
+</li>
+</ul>
+<h2 id="AWS-Role-簡介"><a href="#AWS-Role-簡介" class="headerlink" title="AWS Role 簡介"></a>AWS Role 簡介</h2><ul>
+<li>設定操作 aws 資源的權限，通常設定給 EC2 或本地開發環境繼承使用</li>
+<li><strong>繼承使用的前提需要先為 User 或是 SSO 的身分</strong></li>
+</ul>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><ol>
+<li><p>設定 sso 的 permission set 有 <code>sts:AssumeRole</code> 權限</p>
+</li>
+<li><p>設定 role 的 trust relationships 允許誰可以 assume 它</p>
+<p> <img src="/../images/aws/assume-role-by-sso2.png" alt="assume-role-by-sso2"></p>
+</li>
+<li><p>使用 sso 登入</p>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">export</span> <span class="string">AWS_PROFILE=developer-659650500219</span></span><br><span class="line"><span class="string">aws</span> <span class="string">sso</span> <span class="string">login</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看登入人員</p>
+<ul>
+<li><code>aws sts get-caller-identity</code></li>
+</ul>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;UserId&quot;:</span> <span class="string">&quot;xxx:jeffery.l@evolutivelabs.com&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;Account&quot;:</span> <span class="string">&quot;xxx&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;Arn&quot;:</span> <span class="string">&quot;arn:aws:sts::xxx:assumed-role/AWSReservedSSO_developer_04371fb42c683a27/jeffery.l@evolutivelabs.com&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 assume-role 指令繼承 Role，並指定為環境變數</p>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">export</span> <span class="string">$(printf</span> <span class="string">&quot;AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s&quot;</span> <span class="string">\</span></span><br><span class="line"><span class="string">$(aws</span> <span class="string">sts</span> <span class="string">assume-role</span> <span class="string">\</span></span><br><span class="line"><span class="string">--role-arn</span> <span class="string">arn:aws:iam::xxx:role/amuse-creator-prod-sa-rhinoshield-stag-for-dev</span> <span class="string">\</span></span><br><span class="line"><span class="string">--role-session-name</span> <span class="string">amuse-creator-prod-sa-rhinoshield-stag-for-dev</span> <span class="string">\</span></span><br><span class="line"><span class="string">--query</span> <span class="string">&quot;Credentials.[AccessKeyId,SecretAccessKey,SessionToken]&quot;</span> <span class="string">\</span></span><br><span class="line"><span class="string">--output</span> <span class="string">text))</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看登入人員，就成功換成指定的 Role</p>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;UserId&quot;:</span> <span class="string">&quot;xxx:amuse-creator-prod-sa-rhinoshield-stag-for-dev&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;Account&quot;:</span> <span class="string">&quot;xxx&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;Arn&quot;:</span> <span class="string">&quot;arn:aws:sts::xxx:assumed-role/amuse-creator-prod-sa-rhinoshield-stag-for-dev/amuse-creator-prod-sa-rhinoshield-stag-for-dev&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>Note: AWS 使用的身分會優先判斷 <strong>AWS_ACCESS_KEY_ID</strong>，所以容易直接替換 sso 的角色</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/line-notify-exercise/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/line-notify-exercise/" class="post-title-link" itemprop="url">如何串接 Line Notify</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 18:34:33" itemprop="dateCreated datePublished" datetime="2022-11-16T18:34:33+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Line-API/" itemprop="url" rel="index"><span itemprop="name">Line API</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>LINE Notify API 文件可參考此<a target="_blank" rel="noopener" href="https://notify-bot.line.me/doc/en/">連結</a></p>
+<h2 id="步驟一、登入-Line-Notify-後台"><a href="#步驟一、登入-Line-Notify-後台" class="headerlink" title="步驟一、登入 Line Notify 後台"></a>步驟一、登入 Line Notify 後台</h2><ul>
+<li><p>登入 <a target="_blank" rel="noopener" href="https://notify-bot.line.me/zh_TW/">連結</a></p>
+</li>
+<li><p>進去管理服務</p>
+<p>  <img src="/../images/line/line-notify-exercise1.png" alt="line-notify-exercise1"></p>
+</li>
+</ul>
+<h2 id="步驟二、建立-Line-機器人"><a href="#步驟二、建立-Line-機器人" class="headerlink" title="步驟二、建立 Line 機器人"></a>步驟二、建立 Line 機器人</h2><ul>
+<li><p>服務網址、callback url 要填入下個步驟要做授權用的 url</p>
+<p>  <img src="/../images/line/line-notify-exercise2.png" alt="line-notify-exercise2"></p>
+</li>
+<li><p>到 Gmail 收信來允許授權</p>
+<p>  <img src="/../images/line/line-notify-exercise3.png" alt="line-notify-exercise3"></p>
+</li>
+</ul>
+<h2 id="步驟三、授權-Line-Notify-可以通知給自己或-line-群組"><a href="#步驟三、授權-Line-Notify-可以通知給自己或-line-群組" class="headerlink" title="步驟三、授權 Line Notify 可以通知給自己或 line 群組"></a>步驟三、授權 Line Notify 可以通知給自己或 line 群組</h2><ul>
+<li><p>建立 index.html，並用 vscode 的 live server 啟動網頁 (預設 port <code>5500</code>)</p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&lt;!DOCTYPE</span> <span class="string">html&gt;</span></span><br><span class="line"><span class="string">&lt;html&gt;</span></span><br><span class="line">    <span class="string">&lt;head&gt;</span></span><br><span class="line">        <span class="string">&lt;title&gt;Notify&lt;/title&gt;</span></span><br><span class="line">        <span class="string">&lt;script&gt;</span></span><br><span class="line">            <span class="string">function</span> <span class="string">OAuth2()</span> &#123;</span><br><span class="line">                <span class="string">var</span> <span class="string">URL</span> <span class="string">=</span> <span class="string">&#x27;https://notify-bot.line.me/oauth/authorize?&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;response_type=code&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;client_id=&lt;YOUR_CLIENT_ID&gt;&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;redirect_uri=http://localhost:5500&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;scope=notify&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;state=NO_STATE&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">window.location.href</span> <span class="string">=</span> <span class="string">URL;</span></span><br><span class="line">            &#125;</span><br><span class="line">        <span class="string">&lt;/script&gt;</span></span><br><span class="line">    <span class="string">&lt;/head&gt;</span></span><br><span class="line">    <span class="string">&lt;body&gt;</span></span><br><span class="line">        <span class="string">&lt;button</span> <span class="string">onclick=&quot;OAuth2();&quot;&gt;連結到</span> <span class="string">LineNotify</span> <span class="string">按鈕&lt;/button&gt;</span></span><br><span class="line">    <span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>點擊按鈕做 redirect 到 line 的授權頁面</p>
+<p>  <img src="/../images/line/line-notify-exercise4.png" alt="line-notify-exercise4"></p>
+<p>  <img src="/../images/line/line-notify-exercise5.png" alt="line-notify-exercise5"></p>
+</li>
+<li><p>點擊同意後會在 redirect 回來，要取得 authorize code 給下一個步驟做 login 使用</p>
+<p>  <img src="/../images/line/line-notify-exercise6.png" alt="line-notify-exercise6"></p>
+</li>
+</ul>
+<h2 id="步驟四、登入-Line-Notify-取得-access-token"><a href="#步驟四、登入-Line-Notify-取得-access-token" class="headerlink" title="步驟四、登入 Line Notify 取得 access token"></a>步驟四、登入 Line Notify 取得 access token</h2><ul>
+<li><p>URL  <code>https://notify-bot.line.me/oauth/token</code></p>
+</li>
+<li><p>FormData</p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">grant_type:</span> <span class="string">authorization_code</span></span><br><span class="line"><span class="attr">code:</span> <span class="string">&lt;上個步驟取得的</span> <span class="string">CODE&gt;</span></span><br><span class="line"><span class="attr">redirect_uri:</span> <span class="string">http://localhost:5500</span></span><br><span class="line"><span class="attr">client_id:</span> <span class="string">&lt;YOUR</span> <span class="string">CLIENT</span> <span class="string">ID&gt;</span></span><br><span class="line"><span class="attr">client_secret:</span> <span class="string">&lt;YOUR</span> <span class="string">CLIENT</span> <span class="string">SECRET&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>回應結果</p>
+<p>  <img src="/../images/line/line-notify-exercise7.png" alt="line-notify-exercise7"></p>
+</li>
+</ul>
+<h2 id="步驟五、發送訊息"><a href="#步驟五、發送訊息" class="headerlink" title="步驟五、發送訊息"></a>步驟五、發送訊息</h2><ul>
+<li><p>URL <code>https://notify-api.line.me/api/notify</code></p>
+</li>
+<li><p>HEADER <code>Authorization Bearer&lt;YOUR TOKEN&gt;</code></p>
+</li>
+<li><p>FormData</p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">message:</span> <span class="string">&quot;Hello World&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>驗收結果</p>
+<p>  <img src="/../images/line/line-notify-exercise8.png" alt="line-notify-exercise8"></p>
+</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.slideshare.net/JiaYuLin6/step-by-step-to-use-line-notify-20190527">step by step to use LINE Notify - 20190527</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/google-login-auth/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/google-login-auth/" class="post-title-link" itemprop="url">使用 Google 作為第三方登入</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 18:30:49" itemprop="dateCreated datePublished" datetime="2022-11-16T18:30:49+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Auth/" itemprop="url" rel="index"><span itemprop="name">Auth</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>530</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前後端常見溝通"><a href="#前後端常見溝通" class="headerlink" title="前後端常見溝通"></a>前後端常見溝通</h2><ul>
+<li>使用 cookie-based session：後端把使用者資訊存到 session，前端對後端 API 發送請求時會自動帶上 cookie；但 Laravel API 無法使用 session guard，需要另外處理。</li>
+<li>使用 token-based (e.g. JWT)：後端 render view 並把 token 存到前端 storage (e.g. local storage, cookie)，前端從 storage 拿到 token 用 bearer token 方式對後端 API 發送請求。</li>
+</ul>
+<h2 id="Laravel-Socialite-套件介紹"><a href="#Laravel-Socialite-套件介紹" class="headerlink" title="Laravel Socialite 套件介紹"></a>Laravel <strong><strong>Socialite 套件介紹</strong></strong></h2><ul>
+<li>屬於 cookie-based session</li>
+<li>實作 Google login 是用 <a target="_blank" rel="noopener" href="https://developers.google.com/identity/oauth2/web/guides/how-user-authz-works#when_using_the_auth_code_flow">auth code flow</a>，此流程會是後端拿到 Google 發放的 access token</li>
+</ul>
+<h2 id="使用-token-based-做法"><a href="#使用-token-based-做法" class="headerlink" title="使用 token-based 做法"></a>使用 token-based 做法</h2><ul>
+<li>由於 OAuth2 本身是一個授權框架，我們的使用情境只拿 Google 作身份認證，沒有要拿使用者在 Google 的資源，在這個情境下，Google 建議使用 <a target="_blank" rel="noopener" href="https://developers.google.com/identity/gsi/web">Google Identity</a> 服務</li>
+<li>前端可以使用 <a target="_blank" rel="noopener" href="https://developers.google.com/identity/gsi/web/guides/overview">Sign in with Google</a> 拿到 Google 發放 OpenID connect 格式的 id token 後，傳給後端作 id token 的驗證，後端驗證 ok 後發放 JWT，整個流程的時序圖大致如下：</li>
+</ul>
+<p><img src="/../images/auth/google-login-auth.png" alt="google-login-auth"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/learning-auth/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/learning-auth/" class="post-title-link" itemprop="url">如何區分權限與授權</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 18:25:03" itemprop="dateCreated datePublished" datetime="2022-11-16T18:25:03+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Auth/" itemprop="url" rel="index"><span itemprop="name">Auth</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>471</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>權限管理 &#x3D; Authentication (身份驗証，你是誰) + Authorization (授權，你可以做什麼)</p>
+<h2 id="身份認證-Authentication"><a href="#身份認證-Authentication" class="headerlink" title="身份認證 (Authentication)"></a><strong>身份認證 (Authentication)</strong></h2><ul>
+<li>account&#x2F;password</li>
+<li>Token (API key)</li>
+<li>OpenID</li>
+</ul>
+<h2 id="授權-Authorization"><a href="#授權-Authorization" class="headerlink" title="授權 (Authorization)"></a><strong>授權 (Authorization)</strong></h2><ul>
+<li>JWT</li>
+<li>OAuth 2.0: 用來授權給第三方網站使用自身網站資源，過程中使用者無須提供帳密給第三方網站</li>
+</ul>
+<h2 id="常見訪問控制模型-Access-Control-Model"><a href="#常見訪問控制模型-Access-Control-Model" class="headerlink" title="常見訪問控制模型 (Access Control Model)"></a><strong>常見訪問控制模型 (Access Control Model)</strong></h2><ul>
+<li>ACL (Access Control List)<ul>
+<li>以 user 出發，設定每個 user 可以有哪些 permission</li>
+</ul>
+</li>
+<li>RBAC (Role-Based Access Control)<ul>
+<li>以 role 出發，設定每個 role 可以有哪些 permission，一個 user 可以有多個 role</li>
+</ul>
+</li>
+<li>ABAC (Attribute-Based Access Controll)<ul>
+<li>透過定義來描述使用者、資源、操作等的屬性來設定訪問控制，顆粒度相較於 ACL、RBAC 更細</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://hackmd.io/@coscup/rymNETD0O/%2F%40coscup%2Fry-7ETDAO">初試 Casbin - 快速搭建符合 99% 產品都需要的高彈性可維護之授權控制系統 - marcus</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

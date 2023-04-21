@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="達成目標 A 帳戶的角色可以上傳檔案到 B 帳戶的 S3 Bucket 的資料夾內  操作步驟步驟一、 繼承要用來操作 S3 的 A 帳戶角色  操作方式可以參考這篇文章 ⇒ 如何使用 SSO 角色再繼承 Role   步驟二、修改 A 帳戶角色的 Policy  加上 S3 存取該 Bucket 權限   1234567891011121314151617181920212223242526&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何設定跨帳戶存取 S3 權限">
+<meta property="og:url" content="https://jefferylee73.github.io/access-s3-from-cross-account/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="達成目標 A 帳戶的角色可以上傳檔案到 B 帳戶的 S3 Bucket 的資料夾內  操作步驟步驟一、 繼承要用來操作 S3 的 A 帳戶角色  操作方式可以參考這篇文章 ⇒ 如何使用 SSO 角色再繼承 Role   步驟二、修改 A 帳戶角色的 Policy  加上 S3 存取該 Bucket 權限   1234567891011121314151617181920212223242526&amp;#">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://jefferylee73.github.io/images/aws/access_s3_from_cross_account1.png">
+<meta property="article:published_time" content="2022-11-23T10:11:01.000Z">
+<meta property="article:modified_time" content="2023-04-21T01:45:34.276Z">
+<meta property="article:author" content="Jeffery Lee">
+<meta property="article:tag" content="S3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jefferylee73.github.io/images/aws/access_s3_from_cross_account1.png">
+
+<link rel="canonical" href="https://jefferylee73.github.io/access-s3-from-cross-account/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>如何設定跨帳戶存取 S3 權限 | 傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/access-s3-from-cross-account/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何設定跨帳戶存取 S3 權限
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-23 18:11:01" itemprop="dateCreated datePublished" datetime="2022-11-23T18:11:01+08:00">2022-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>2 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="達成目標"><a href="#達成目標" class="headerlink" title="達成目標"></a>達成目標</h2><ul>
+<li>A 帳戶的角色可以上傳檔案到 B 帳戶的 S3 Bucket 的資料夾內</li>
+</ul>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><p><strong>步驟一、 繼承要用來操作 S3 的 A 帳戶角色</strong></p>
+<ul>
+<li>操作方式可以參考這篇文章 ⇒ <a href="/assume-role-by-sso">如何使用 SSO 角色再繼承 Role</a></li>
+</ul>
+<p> <strong>步驟二、修改 A 帳戶角色的 Policy</strong></p>
+<ul>
+<li><p>加上 S3 存取該 Bucket 權限</p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;Statement&quot;:</span> [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;Action&quot;:</span> <span class="string">&quot;s3:*&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;Effect&quot;:</span> <span class="string">&quot;Allow&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;Resource&quot;:</span> [</span><br><span class="line">        <span class="string">&quot;arn:aws:s3:::&lt;another account bucket name&gt;/*&quot;</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">&quot;Version&quot;:</span> <span class="string">&quot;2012-10-17&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># example</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;Statement&quot;:</span> [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;Action&quot;:</span> <span class="string">&quot;s3:*&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;Effect&quot;:</span> <span class="string">&quot;Allow&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;Resource&quot;:</span> [</span><br><span class="line">        <span class="string">&quot;arn:aws:s3:::s3.rhinoshield.io/customcase/customer/*&quot;</span>,</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">&quot;Version&quot;:</span> <span class="string">&quot;2012-10-17&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>步驟三、修改 B 帳戶的 S3 Bucket Policy</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;Sid&quot;:</span> <span class="string">&quot;GetCustomcaseCustomerData&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;Effect&quot;:</span> <span class="string">&quot;Allow&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;Principal&quot;:</span> &#123;</span><br><span class="line">    <span class="attr">&quot;AWS&quot;:</span> <span class="string">&quot;arn:aws:iam::&lt;account id&gt;:role/&lt;role name&gt;&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;Action&quot;:</span> [</span><br><span class="line">    <span class="string">&quot;s3:GetObject&quot;</span>,</span><br><span class="line">    <span class="string">&quot;s3:PutObject&quot;</span>,</span><br><span class="line">    <span class="string">&quot;s3:DeleteObject&quot;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">&quot;Resource&quot;:</span> <span class="string">&quot;arn:aws:s3:::&lt;bucket name&gt;/customcase/customer/*&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟四、測試存取權限</strong></p>
+<ul>
+<li><p>下載檔案</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aws s3 <span class="built_in">cp</span> s3://&lt;bucket name&gt;/customcase/customer/pdf/&lt;filename&gt;.pdf .</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上傳檔案</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aws s3 cp &lt;filename&gt;.pdf s3://&lt;bucket name&gt;/customcase/customer/pdf/&lt;filename&gt;.pdf --acl bucket-owner-full-control</span><br></pre></td></tr></table></figure>
+
+<p>  由於 Bucket 有設定 Object 擁有者是上傳的人，其他人會無法存取該檔案，所以需要加上 <code>--acl bucket-owner-full-control</code> 參數更改 Owner 人員</p>
+<p>  <img src="/../images/aws/access_s3_from_cross_account1.png" alt="access_s3_from_cross_account1"></p>
+</li>
+</ul>
+<h2 id="常見-S3-權限的小知識"><a href="#常見-S3-權限的小知識" class="headerlink" title="常見 S3 權限的小知識"></a>常見 S3 權限的小知識</h2><ul>
+<li>ListBucket 用來顯示 Bucket 內的物件清單， 資源後面不用加 <code>/*</code></li>
+<li>GetObject 用來顯示特定檔案，資源後面需加上 <code>/*</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;Effect&quot;: &quot;Allow&quot;,</span><br><span class="line">    &quot;Principal&quot;: &#123;</span><br><span class="line">        &quot;AWS&quot;: &quot;arn:aws:iam::xxxxxxxxxx:role/&lt;role name&gt;&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;Action&quot;: &quot;s3:ListBucket&quot;,</span><br><span class="line">    &quot;Resource&quot;: &quot;arn:aws:s3:::ditto-stag&quot;</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">    &quot;Effect&quot;: &quot;Allow&quot;,</span><br><span class="line">    &quot;Principal&quot;: &#123;</span><br><span class="line">        &quot;AWS&quot;: &quot;arn:aws:iam::xxxxxxxxxx:role/&lt;role name&gt;&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;Action&quot;: [</span><br><span class="line">        &quot;s3:GetObject&quot;,</span><br><span class="line">        &quot;s3:PutObject&quot;,</span><br><span class="line">        &quot;s3:DeleteObject&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;Resource&quot;: &quot;arn:aws:s3:::ditto-stag/*&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://awstip.com/how-to-access-s3-bucket-from-another-aws-account-55f1b0a878ed">How to access S3 bucket from another AWS account</a></strong></strong></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/S3/" rel="tag"># S3</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/access-s3-object-url-methods/" rel="prev" title="盤點存取 S3 圖片連結方式">
+      <i class="fa fa-chevron-left"></i> 盤點存取 S3 圖片連結方式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/upload-s3-by-presigned-url/" rel="next" title="使用 presigned url 限制上傳 S3 權限">
+      使用 presigned url 限制上傳 S3 權限 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%94%E6%88%90%E7%9B%AE%E6%A8%99"><span class="nav-number">1.</span> <span class="nav-text">達成目標</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%A9%9F"><span class="nav-number">2.</span> <span class="nav-text">操作步驟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A6%8B-S3-%E6%AC%8A%E9%99%90%E7%9A%84%E5%B0%8F%E7%9F%A5%E8%AD%98"><span class="nav-number">3.</span> <span class="nav-text">常見 S3 權限的小知識</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E9%80%A3%E7%B5%90"><span class="nav-number">4.</span> <span class="nav-text">參考連結</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

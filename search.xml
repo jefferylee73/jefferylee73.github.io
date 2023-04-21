@@ -568,6 +568,28 @@
       </tags>
   </entry>
   <entry>
+    <title>設定 Helm 自動部署系列(一) - 設定 ECR</title>
+    <url>/cicd-by-helm-ecr-setting/</url>
+    <content><![CDATA[<h2 id="ECR-介紹"><a href="#ECR-介紹" class="headerlink" title="ECR 介紹"></a>ECR 介紹</h2><ul>
+<li>全名為 Elastic Container Registry，字面上就可以清楚知道，就是放容器化的 image 倉庫</li>
+<li>由於 Helm 有支援 OCI 機制，所以也可以存放在 ECR 上面</li>
+</ul>
+<h2 id="使用-Terraform-建立"><a href="#使用-Terraform-建立" class="headerlink" title="使用 Terraform 建立"></a>使用 Terraform 建立</h2><ul>
+<li>透過 <code>principals_readonly_access</code>、<code>principals_full_access</code> 去限制哪些 aws 資源可以進行存取，由於我們專案主要是用 EKS 部署，所以這邊會去設定 node group 的 arn</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">module <span class="string">&quot;laravel&quot;</span> &#123;</span><br><span class="line">  <span class="built_in">source</span>                     = <span class="string">&quot;cloudposse/ecr/aws&quot;</span></span><br><span class="line">  version                    = <span class="string">&quot;~&gt; 0.34.0&quot;</span></span><br><span class="line">  image_tag_mutability       = <span class="string">&quot;MUTABLE&quot;</span></span><br><span class="line">  image_names                = [<span class="string">&quot;laravel-nginx-chart&quot;</span>]</span><br><span class="line">  principals_readonly_access = var.principals_readonly_access</span><br><span class="line">  principals_full_access     = var.principals_full_access</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="建立完驗收"><a href="#建立完驗收" class="headerlink" title="建立完驗收"></a>建立完驗收</h2><p><img src="/../images/helm/cicd-by-helm-ecr-setting1.png" alt="cicd-by-helm-ecr-setting1"></p>
+]]></content>
+      <categories>
+        <category>Helm</category>
+      </categories>
+      <tags>
+        <tag>Helm</tag>
+        <tag>CICD</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>設定 Helm 自動部署系列 (二) - GitLab CI/CD 設定</title>
     <url>/cicd-by-helm-gitlab-cicd/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Helm 支援使用提供 OCI(Open Container Initiative) 標準的 Helm Chart Repository，因此像 AWS ECR 也可以當作 Chart Repository</p>
@@ -627,28 +649,6 @@
 <li><a href="https://betterprogramming.pub/using-gitlab-as-helm-chart-registry-ab4d4ef42833">Using GitLab As Helm Chart Registry</a></li>
 <li><a href="https://docs.aws.amazon.com/zh_tw/AmazonECR/latest/userguide/push-oci-artifact.html">手動推送 Helm Chart 到 ECR</a></li>
 </ul>
-]]></content>
-      <categories>
-        <category>Helm</category>
-      </categories>
-      <tags>
-        <tag>Helm</tag>
-        <tag>CICD</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>設定 Helm 自動部署系列(一) - 設定 ECR</title>
-    <url>/cicd-by-helm-ecr-setting/</url>
-    <content><![CDATA[<h2 id="ECR-介紹"><a href="#ECR-介紹" class="headerlink" title="ECR 介紹"></a>ECR 介紹</h2><ul>
-<li>全名為 Elastic Container Registry，字面上就可以清楚知道，就是放容器化的 image 倉庫</li>
-<li>由於 Helm 有支援 OCI 機制，所以也可以存放在 ECR 上面</li>
-</ul>
-<h2 id="使用-Terraform-建立"><a href="#使用-Terraform-建立" class="headerlink" title="使用 Terraform 建立"></a>使用 Terraform 建立</h2><ul>
-<li>透過 <code>principals_readonly_access</code>、<code>principals_full_access</code> 去限制哪些 aws 資源可以進行存取，由於我們專案主要是用 EKS 部署，所以這邊會去設定 node group 的 arn</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">module <span class="string">&quot;laravel&quot;</span> &#123;</span><br><span class="line">  <span class="built_in">source</span>                     = <span class="string">&quot;cloudposse/ecr/aws&quot;</span></span><br><span class="line">  version                    = <span class="string">&quot;~&gt; 0.34.0&quot;</span></span><br><span class="line">  image_tag_mutability       = <span class="string">&quot;MUTABLE&quot;</span></span><br><span class="line">  image_names                = [<span class="string">&quot;laravel-nginx-chart&quot;</span>]</span><br><span class="line">  principals_readonly_access = var.principals_readonly_access</span><br><span class="line">  principals_full_access     = var.principals_full_access</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="建立完驗收"><a href="#建立完驗收" class="headerlink" title="建立完驗收"></a>建立完驗收</h2><p><img src="/../images/helm/cicd-by-helm-ecr-setting1.png" alt="cicd-by-helm-ecr-setting1"></p>
 ]]></content>
       <categories>
         <category>Helm</category>
@@ -1314,92 +1314,6 @@
       </tags>
   </entry>
   <entry>
-    <title>如何處理 horizon 出現 inactive 問題</title>
-    <url>/horizon-inactive/</url>
-    <content><![CDATA[<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><ul>
-<li>light-worker 會透過 redis queue 建立 worker，只要 horizon dashboard 可以存取相同的 redis 即可監聽 worker 執行狀況，反之沒有存取成功就會出現下圖的 inactive 狀態</li>
-</ul>
-<p><img src="/../images/laravel/horizon-inactive1.png" alt="horizon-inactive1"></p>
-<h2 id="處理方式"><a href="#處理方式" class="headerlink" title="處理方式"></a>處理方式</h2><ol>
-<li><p>設定好 .env 確認 redis 可以連線成功</p>
-<ol>
-<li><p>使用 php artisan tinker 測試建立 cache 並存取是否成功</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Cache::put(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;jeff&#x27;</span>)</span><br><span class="line">=&gt; <span class="literal">true</span></span><br><span class="line">Cache::get(<span class="string">&#x27;name&#x27;</span>)</span><br><span class="line">=&gt; jeff</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>進去到 redis 容器搜尋是否有剛建立的 key</p>
-<p> <img src="/../images/laravel/horizon-inactive2.png" alt="horizon-inactive2"></p>
-</li>
-</ol>
-</li>
-<li><p>可以發現透過 Laravel 寫入到 redis 中 key 前面都會有 prefix</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># database.php</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;redis&#x27;</span> =&gt; [</span><br><span class="line">    <span class="string">&#x27;client&#x27;</span> =&gt; <span class="built_in">env</span>(<span class="string">&#x27;REDIS_CLIENT&#x27;</span>, <span class="string">&#x27;predis&#x27;</span>),</span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;options&#x27;</span> =&gt; [</span><br><span class="line">        <span class="string">&#x27;cluster&#x27;</span> =&gt; <span class="built_in">env</span>(<span class="string">&#x27;REDIS_CLUSTER&#x27;</span>, <span class="string">&#x27;predis&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;prefix&#x27;</span> =&gt; Str::slug(<span class="built_in">env</span>(<span class="string">&#x27;APP_NAME&#x27;</span>, <span class="string">&#x27;laravel&#x27;</span>), <span class="string">&#x27;_&#x27;</span>) . <span class="string">&#x27;_database_&#x27;</span>,</span><br><span class="line">    ],</span><br><span class="line">		...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>將兩個專案的 .env 檔案中的 <code>env(&#39;APP_NAME&#39;)</code> 改成相同就解決了</p>
-<p> <img src="/../images/laravel/horizon-inactive3.png" alt="horizon-inactive3"></p>
-</li>
-</ol>
-<h2 id="Horizon-註冊-queue"><a href="#Horizon-註冊-queue" class="headerlink" title="Horizon 註冊 queue"></a>Horizon 註冊 queue</h2><ul>
-<li>horizon.php 會根據 APP_ENV 環境來判斷要啟動的 queue</li>
-<li>特別注意當 <code>APP_ENV=local</code> ，要把 queue 新增到 local 的陣列，不然丟 queue 都不會被執行</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;environments&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">   <span class="string">&#x27;local&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">      <span class="string">&#x27;b2c_europe&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">          <span class="string">&#x27;queue&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">                <span class="string">&#x27;create-carrier-shipment-b2c-europe&#x27;</span>,</span><br><span class="line">            ]</span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Laravel</category>
-      </categories>
-      <tags>
-        <tag>Horizon</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何在 docker 的 ubuntu 環境中使用 php-fpm</title>
-    <url>/install-phpfpm-by-ubuntu/</url>
-    <content><![CDATA[<h2 id="為何需要"><a href="#為何需要" class="headerlink" title="為何需要"></a>為何需要</h2><ul>
-<li>建立與線上環境一樣的 ubuntu 作業系統</li>
-<li>有時 php-fpm 與 ubuntu 安裝的套件版本會不一致<ul>
-<li>查看套件版本 <code>apt show &lt;package name&gt;</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="建立步驟"><a href="#建立步驟" class="headerlink" title="建立步驟"></a>建立步驟</h2><p><strong>步驟一、把在 ubuntu 安裝 php 的指令寫成 docker file</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">FROM ubuntu:22.04</span><br><span class="line"></span><br><span class="line">RUN ln -fs &quot;/usr/share/zoneinfo/$TZ&quot; /etc/localtime</span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install -qqy software-properties-common \</span><br><span class="line">    &amp;&amp; add-apt-repository ppa:ondrej/php</span><br><span class="line"></span><br><span class="line">RUN apt-get install -qqy \</span><br><span class="line">    &quot;php$PHP_VERSION&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-fpm&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-common&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-gd&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-xml&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-curl&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-mbstring&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-gd&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-mysql&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-sqlite&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-redis&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-bcmath&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-tokenizer&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-zip&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-mongo&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-soap&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-intl&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-imagick&quot;</span><br><span class="line"></span><br><span class="line">RUN curl -sS https://getcomposer.org/installer | php</span><br><span class="line">RUN mv composer.phar /usr/local/bin/composer</span><br></pre></td></tr></table></figure>
-
-<p><strong>步驟二、將 php.ini , php-fpm.conf, <a href="http://www.conf/">www.conf</a> 從 docker 複製出來改，再 COPY 覆蓋原本設定</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run --rm -it rhitics-server-arm cat /etc/php/8.0/fpm/pool.d/www.conf &gt; deploy/docker/www.conf</span><br></pre></td></tr></table></figure>
-
-<p><strong>步驟三、修改 php.ini，更改上傳檔案大小</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">upload_max_filesize = 100M</span><br><span class="line"></span><br><span class="line">post_max_size = 100M</span><br></pre></td></tr></table></figure>
-
-<p><strong>步驟四、修改 php-fpm.conf，註解 pid 及修改 error_log 路徑，不然非 root 沒有權限啟動 php-fpm</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;pid = /tmp/php8.0-fpm.pid</span><br><span class="line"></span><br><span class="line">error_log = /var/log/app/php8.0-fpm.log</span><br></pre></td></tr></table></figure>
-
-<p><strong>步驟五、修改 <a href="http://www.conf,修改/">www.conf，修改</a> listen 值，與 NGINX 建立 stream</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">listen = /tmp/php8.0-fpm.sock =&gt; listen = 0.0.0.0:9000</span><br></pre></td></tr></table></figure>
-
-<p><strong>步驟六、設定 docker 預設啟動的 port 及 command</strong></p>
-<ul>
-<li>特別注意 php-fpm 指令一定要加上 <code>--nodaemonize</code>參數，讓啟動之後可以一直背景執行</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">USER app</span><br><span class="line">EXPOSE 9000</span><br><span class="line">CMD [&quot;php-fpm8.0&quot;, &quot;--nodaemonize&quot;]</span><br></pre></td></tr></table></figure>
-
-<p><strong>步驟七、設定 nginx.conf 可以與 php-fpm 建立 stream</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fastcgi_pass &lt;docker_service&gt;:9000;</span><br></pre></td></tr></table></figure>
-
-<h2 id="意外發現"><a href="#意外發現" class="headerlink" title="意外發現"></a>意外發現</h2><ul>
-<li>程式執行速度比 php-fpm 為 image base 還快 6 倍</li>
-</ul>
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
-<li><a href="https://github.com/wildpeaks/docker-php-fpm">Ubuntu 20.04 + PHP-FPM</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>PHP</category>
-      </categories>
-      <tags>
-        <tag>PHP-FPM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何區分權限與授權</title>
     <url>/learning-auth/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>權限管理 &#x3D; Authentication (身份驗証，你是誰) + Authorization (授權，你可以做什麼)</p>
@@ -1527,6 +1441,92 @@
       </categories>
   </entry>
   <entry>
+    <title>如何在 docker 的 ubuntu 環境中使用 php-fpm</title>
+    <url>/install-phpfpm-by-ubuntu/</url>
+    <content><![CDATA[<h2 id="為何需要"><a href="#為何需要" class="headerlink" title="為何需要"></a>為何需要</h2><ul>
+<li>建立與線上環境一樣的 ubuntu 作業系統</li>
+<li>有時 php-fpm 與 ubuntu 安裝的套件版本會不一致<ul>
+<li>查看套件版本 <code>apt show &lt;package name&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="建立步驟"><a href="#建立步驟" class="headerlink" title="建立步驟"></a>建立步驟</h2><p><strong>步驟一、把在 ubuntu 安裝 php 的指令寫成 docker file</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">FROM ubuntu:22.04</span><br><span class="line"></span><br><span class="line">RUN ln -fs &quot;/usr/share/zoneinfo/$TZ&quot; /etc/localtime</span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install -qqy software-properties-common \</span><br><span class="line">    &amp;&amp; add-apt-repository ppa:ondrej/php</span><br><span class="line"></span><br><span class="line">RUN apt-get install -qqy \</span><br><span class="line">    &quot;php$PHP_VERSION&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-fpm&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-common&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-gd&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-xml&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-curl&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-mbstring&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-gd&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-mysql&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-sqlite&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-redis&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-bcmath&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-tokenizer&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-zip&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-mongo&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-soap&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-intl&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-imagick&quot;</span><br><span class="line"></span><br><span class="line">RUN curl -sS https://getcomposer.org/installer | php</span><br><span class="line">RUN mv composer.phar /usr/local/bin/composer</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟二、將 php.ini , php-fpm.conf, <a href="http://www.conf/">www.conf</a> 從 docker 複製出來改，再 COPY 覆蓋原本設定</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run --rm -it rhitics-server-arm cat /etc/php/8.0/fpm/pool.d/www.conf &gt; deploy/docker/www.conf</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟三、修改 php.ini，更改上傳檔案大小</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">upload_max_filesize = 100M</span><br><span class="line"></span><br><span class="line">post_max_size = 100M</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟四、修改 php-fpm.conf，註解 pid 及修改 error_log 路徑，不然非 root 沒有權限啟動 php-fpm</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;pid = /tmp/php8.0-fpm.pid</span><br><span class="line"></span><br><span class="line">error_log = /var/log/app/php8.0-fpm.log</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟五、修改 <a href="http://www.conf,修改/">www.conf，修改</a> listen 值，與 NGINX 建立 stream</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">listen = /tmp/php8.0-fpm.sock =&gt; listen = 0.0.0.0:9000</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟六、設定 docker 預設啟動的 port 及 command</strong></p>
+<ul>
+<li>特別注意 php-fpm 指令一定要加上 <code>--nodaemonize</code>參數，讓啟動之後可以一直背景執行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">USER app</span><br><span class="line">EXPOSE 9000</span><br><span class="line">CMD [&quot;php-fpm8.0&quot;, &quot;--nodaemonize&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟七、設定 nginx.conf 可以與 php-fpm 建立 stream</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fastcgi_pass &lt;docker_service&gt;:9000;</span><br></pre></td></tr></table></figure>
+
+<h2 id="意外發現"><a href="#意外發現" class="headerlink" title="意外發現"></a>意外發現</h2><ul>
+<li>程式執行速度比 php-fpm 為 image base 還快 6 倍</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://github.com/wildpeaks/docker-php-fpm">Ubuntu 20.04 + PHP-FPM</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>PHP</category>
+      </categories>
+      <tags>
+        <tag>PHP-FPM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何處理 horizon 出現 inactive 問題</title>
+    <url>/horizon-inactive/</url>
+    <content><![CDATA[<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><ul>
+<li>light-worker 會透過 redis queue 建立 worker，只要 horizon dashboard 可以存取相同的 redis 即可監聽 worker 執行狀況，反之沒有存取成功就會出現下圖的 inactive 狀態</li>
+</ul>
+<p><img src="/../images/laravel/horizon-inactive1.png" alt="horizon-inactive1"></p>
+<h2 id="處理方式"><a href="#處理方式" class="headerlink" title="處理方式"></a>處理方式</h2><ol>
+<li><p>設定好 .env 確認 redis 可以連線成功</p>
+<ol>
+<li><p>使用 php artisan tinker 測試建立 cache 並存取是否成功</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Cache::put(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;jeff&#x27;</span>)</span><br><span class="line">=&gt; <span class="literal">true</span></span><br><span class="line">Cache::get(<span class="string">&#x27;name&#x27;</span>)</span><br><span class="line">=&gt; jeff</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>進去到 redis 容器搜尋是否有剛建立的 key</p>
+<p> <img src="/../images/laravel/horizon-inactive2.png" alt="horizon-inactive2"></p>
+</li>
+</ol>
+</li>
+<li><p>可以發現透過 Laravel 寫入到 redis 中 key 前面都會有 prefix</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># database.php</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;redis&#x27;</span> =&gt; [</span><br><span class="line">    <span class="string">&#x27;client&#x27;</span> =&gt; <span class="built_in">env</span>(<span class="string">&#x27;REDIS_CLIENT&#x27;</span>, <span class="string">&#x27;predis&#x27;</span>),</span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;options&#x27;</span> =&gt; [</span><br><span class="line">        <span class="string">&#x27;cluster&#x27;</span> =&gt; <span class="built_in">env</span>(<span class="string">&#x27;REDIS_CLUSTER&#x27;</span>, <span class="string">&#x27;predis&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;prefix&#x27;</span> =&gt; Str::slug(<span class="built_in">env</span>(<span class="string">&#x27;APP_NAME&#x27;</span>, <span class="string">&#x27;laravel&#x27;</span>), <span class="string">&#x27;_&#x27;</span>) . <span class="string">&#x27;_database_&#x27;</span>,</span><br><span class="line">    ],</span><br><span class="line">		...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>將兩個專案的 .env 檔案中的 <code>env(&#39;APP_NAME&#39;)</code> 改成相同就解決了</p>
+<p> <img src="/../images/laravel/horizon-inactive3.png" alt="horizon-inactive3"></p>
+</li>
+</ol>
+<h2 id="Horizon-註冊-queue"><a href="#Horizon-註冊-queue" class="headerlink" title="Horizon 註冊 queue"></a>Horizon 註冊 queue</h2><ul>
+<li>horizon.php 會根據 APP_ENV 環境來判斷要啟動的 queue</li>
+<li>特別注意當 <code>APP_ENV=local</code> ，要把 queue 新增到 local 的陣列，不然丟 queue 都不會被執行</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;environments&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">   <span class="string">&#x27;local&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">      <span class="string">&#x27;b2c_europe&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">          <span class="string">&#x27;queue&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">                <span class="string">&#x27;create-carrier-shipment-b2c-europe&#x27;</span>,</span><br><span class="line">            ]</span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Laravel</category>
+      </categories>
+      <tags>
+        <tag>Horizon</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>探討 Nginx 架構</title>
     <url>/learning-nginx-infra/</url>
     <content><![CDATA[<h2 id="Nginx-簡介"><a href="#Nginx-簡介" class="headerlink" title="Nginx 簡介"></a>Nginx 簡介</h2><ul>
@@ -1595,6 +1595,67 @@
       <tags>
         <tag>Nginx</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>如何串接 Line Notify</title>
+    <url>/line-notify-exercise/</url>
+    <content><![CDATA[<p>LINE Notify API 文件可參考此<a href="https://notify-bot.line.me/doc/en/">連結</a></p>
+<h2 id="步驟一、登入-Line-Notify-後台"><a href="#步驟一、登入-Line-Notify-後台" class="headerlink" title="步驟一、登入 Line Notify 後台"></a>步驟一、登入 Line Notify 後台</h2><ul>
+<li><p>登入 <a href="https://notify-bot.line.me/zh_TW/">連結</a></p>
+</li>
+<li><p>進去管理服務</p>
+<p>  <img src="/../images/line/line-notify-exercise1.png" alt="line-notify-exercise1"></p>
+</li>
+</ul>
+<h2 id="步驟二、建立-Line-機器人"><a href="#步驟二、建立-Line-機器人" class="headerlink" title="步驟二、建立 Line 機器人"></a>步驟二、建立 Line 機器人</h2><ul>
+<li><p>服務網址、callback url 要填入下個步驟要做授權用的 url</p>
+<p>  <img src="/../images/line/line-notify-exercise2.png" alt="line-notify-exercise2"></p>
+</li>
+<li><p>到 Gmail 收信來允許授權</p>
+<p>  <img src="/../images/line/line-notify-exercise3.png" alt="line-notify-exercise3"></p>
+</li>
+</ul>
+<h2 id="步驟三、授權-Line-Notify-可以通知給自己或-line-群組"><a href="#步驟三、授權-Line-Notify-可以通知給自己或-line-群組" class="headerlink" title="步驟三、授權 Line Notify 可以通知給自己或 line 群組"></a>步驟三、授權 Line Notify 可以通知給自己或 line 群組</h2><ul>
+<li><p>建立 index.html，並用 vscode 的 live server 啟動網頁 (預設 port <code>5500</code>)</p>
+  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">&lt;!DOCTYPE</span> <span class="string">html&gt;</span></span><br><span class="line"><span class="string">&lt;html&gt;</span></span><br><span class="line">    <span class="string">&lt;head&gt;</span></span><br><span class="line">        <span class="string">&lt;title&gt;Notify&lt;/title&gt;</span></span><br><span class="line">        <span class="string">&lt;script&gt;</span></span><br><span class="line">            <span class="string">function</span> <span class="string">OAuth2()</span> &#123;</span><br><span class="line">                <span class="string">var</span> <span class="string">URL</span> <span class="string">=</span> <span class="string">&#x27;https://notify-bot.line.me/oauth/authorize?&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;response_type=code&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;client_id=&lt;YOUR_CLIENT_ID&gt;&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;redirect_uri=http://localhost:5500&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;scope=notify&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;state=NO_STATE&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">window.location.href</span> <span class="string">=</span> <span class="string">URL;</span></span><br><span class="line">            &#125;</span><br><span class="line">        <span class="string">&lt;/script&gt;</span></span><br><span class="line">    <span class="string">&lt;/head&gt;</span></span><br><span class="line">    <span class="string">&lt;body&gt;</span></span><br><span class="line">        <span class="string">&lt;button</span> <span class="string">onclick=&quot;OAuth2();&quot;&gt;連結到</span> <span class="string">LineNotify</span> <span class="string">按鈕&lt;/button&gt;</span></span><br><span class="line">    <span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>點擊按鈕做 redirect 到 line 的授權頁面</p>
+<p>  <img src="/../images/line/line-notify-exercise4.png" alt="line-notify-exercise4"></p>
+<p>  <img src="/../images/line/line-notify-exercise5.png" alt="line-notify-exercise5"></p>
+</li>
+<li><p>點擊同意後會在 redirect 回來，要取得 authorize code 給下一個步驟做 login 使用</p>
+<p>  <img src="/../images/line/line-notify-exercise6.png" alt="line-notify-exercise6"></p>
+</li>
+</ul>
+<h2 id="步驟四、登入-Line-Notify-取得-access-token"><a href="#步驟四、登入-Line-Notify-取得-access-token" class="headerlink" title="步驟四、登入 Line Notify 取得 access token"></a>步驟四、登入 Line Notify 取得 access token</h2><ul>
+<li><p>URL  <code>https://notify-bot.line.me/oauth/token</code></p>
+</li>
+<li><p>FormData</p>
+  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">grant_type:</span> <span class="string">authorization_code</span></span><br><span class="line"><span class="attr">code:</span> <span class="string">&lt;上個步驟取得的</span> <span class="string">CODE&gt;</span></span><br><span class="line"><span class="attr">redirect_uri:</span> <span class="string">http://localhost:5500</span></span><br><span class="line"><span class="attr">client_id:</span> <span class="string">&lt;YOUR</span> <span class="string">CLIENT</span> <span class="string">ID&gt;</span></span><br><span class="line"><span class="attr">client_secret:</span> <span class="string">&lt;YOUR</span> <span class="string">CLIENT</span> <span class="string">SECRET&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>回應結果</p>
+<p>  <img src="/../images/line/line-notify-exercise7.png" alt="line-notify-exercise7"></p>
+</li>
+</ul>
+<h2 id="步驟五、發送訊息"><a href="#步驟五、發送訊息" class="headerlink" title="步驟五、發送訊息"></a>步驟五、發送訊息</h2><ul>
+<li><p>URL <code>https://notify-api.line.me/api/notify</code></p>
+</li>
+<li><p>HEADER <code>Authorization Bearer&lt;YOUR TOKEN&gt;</code></p>
+</li>
+<li><p>FormData</p>
+  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">message:</span> <span class="string">&quot;Hello World&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>驗收結果</p>
+<p>  <img src="/../images/line/line-notify-exercise8.png" alt="line-notify-exercise8"></p>
+</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://www.slideshare.net/JiaYuLin6/step-by-step-to-use-line-notify-20190527">step by step to use LINE Notify - 20190527</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Line API</category>
+      </categories>
   </entry>
   <entry>
     <title>深入認識 PHP-FPM</title>
@@ -1690,67 +1751,6 @@
       </tags>
   </entry>
   <entry>
-    <title>如何串接 Line Notify</title>
-    <url>/line-notify-exercise/</url>
-    <content><![CDATA[<p>LINE Notify API 文件可參考此<a href="https://notify-bot.line.me/doc/en/">連結</a></p>
-<h2 id="步驟一、登入-Line-Notify-後台"><a href="#步驟一、登入-Line-Notify-後台" class="headerlink" title="步驟一、登入 Line Notify 後台"></a>步驟一、登入 Line Notify 後台</h2><ul>
-<li><p>登入 <a href="https://notify-bot.line.me/zh_TW/">連結</a></p>
-</li>
-<li><p>進去管理服務</p>
-<p>  <img src="/../images/line/line-notify-exercise1.png" alt="line-notify-exercise1"></p>
-</li>
-</ul>
-<h2 id="步驟二、建立-Line-機器人"><a href="#步驟二、建立-Line-機器人" class="headerlink" title="步驟二、建立 Line 機器人"></a>步驟二、建立 Line 機器人</h2><ul>
-<li><p>服務網址、callback url 要填入下個步驟要做授權用的 url</p>
-<p>  <img src="/../images/line/line-notify-exercise2.png" alt="line-notify-exercise2"></p>
-</li>
-<li><p>到 Gmail 收信來允許授權</p>
-<p>  <img src="/../images/line/line-notify-exercise3.png" alt="line-notify-exercise3"></p>
-</li>
-</ul>
-<h2 id="步驟三、授權-Line-Notify-可以通知給自己或-line-群組"><a href="#步驟三、授權-Line-Notify-可以通知給自己或-line-群組" class="headerlink" title="步驟三、授權 Line Notify 可以通知給自己或 line 群組"></a>步驟三、授權 Line Notify 可以通知給自己或 line 群組</h2><ul>
-<li><p>建立 index.html，並用 vscode 的 live server 啟動網頁 (預設 port <code>5500</code>)</p>
-  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">&lt;!DOCTYPE</span> <span class="string">html&gt;</span></span><br><span class="line"><span class="string">&lt;html&gt;</span></span><br><span class="line">    <span class="string">&lt;head&gt;</span></span><br><span class="line">        <span class="string">&lt;title&gt;Notify&lt;/title&gt;</span></span><br><span class="line">        <span class="string">&lt;script&gt;</span></span><br><span class="line">            <span class="string">function</span> <span class="string">OAuth2()</span> &#123;</span><br><span class="line">                <span class="string">var</span> <span class="string">URL</span> <span class="string">=</span> <span class="string">&#x27;https://notify-bot.line.me/oauth/authorize?&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;response_type=code&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;client_id=&lt;YOUR_CLIENT_ID&gt;&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;redirect_uri=http://localhost:5500&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;scope=notify&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;state=NO_STATE&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">window.location.href</span> <span class="string">=</span> <span class="string">URL;</span></span><br><span class="line">            &#125;</span><br><span class="line">        <span class="string">&lt;/script&gt;</span></span><br><span class="line">    <span class="string">&lt;/head&gt;</span></span><br><span class="line">    <span class="string">&lt;body&gt;</span></span><br><span class="line">        <span class="string">&lt;button</span> <span class="string">onclick=&quot;OAuth2();&quot;&gt;連結到</span> <span class="string">LineNotify</span> <span class="string">按鈕&lt;/button&gt;</span></span><br><span class="line">    <span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>點擊按鈕做 redirect 到 line 的授權頁面</p>
-<p>  <img src="/../images/line/line-notify-exercise4.png" alt="line-notify-exercise4"></p>
-<p>  <img src="/../images/line/line-notify-exercise5.png" alt="line-notify-exercise5"></p>
-</li>
-<li><p>點擊同意後會在 redirect 回來，要取得 authorize code 給下一個步驟做 login 使用</p>
-<p>  <img src="/../images/line/line-notify-exercise6.png" alt="line-notify-exercise6"></p>
-</li>
-</ul>
-<h2 id="步驟四、登入-Line-Notify-取得-access-token"><a href="#步驟四、登入-Line-Notify-取得-access-token" class="headerlink" title="步驟四、登入 Line Notify 取得 access token"></a>步驟四、登入 Line Notify 取得 access token</h2><ul>
-<li><p>URL  <code>https://notify-bot.line.me/oauth/token</code></p>
-</li>
-<li><p>FormData</p>
-  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">grant_type:</span> <span class="string">authorization_code</span></span><br><span class="line"><span class="attr">code:</span> <span class="string">&lt;上個步驟取得的</span> <span class="string">CODE&gt;</span></span><br><span class="line"><span class="attr">redirect_uri:</span> <span class="string">http://localhost:5500</span></span><br><span class="line"><span class="attr">client_id:</span> <span class="string">&lt;YOUR</span> <span class="string">CLIENT</span> <span class="string">ID&gt;</span></span><br><span class="line"><span class="attr">client_secret:</span> <span class="string">&lt;YOUR</span> <span class="string">CLIENT</span> <span class="string">SECRET&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>回應結果</p>
-<p>  <img src="/../images/line/line-notify-exercise7.png" alt="line-notify-exercise7"></p>
-</li>
-</ul>
-<h2 id="步驟五、發送訊息"><a href="#步驟五、發送訊息" class="headerlink" title="步驟五、發送訊息"></a>步驟五、發送訊息</h2><ul>
-<li><p>URL <code>https://notify-api.line.me/api/notify</code></p>
-</li>
-<li><p>HEADER <code>Authorization Bearer&lt;YOUR TOKEN&gt;</code></p>
-</li>
-<li><p>FormData</p>
-  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">message:</span> <span class="string">&quot;Hello World&quot;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>驗收結果</p>
-<p>  <img src="/../images/line/line-notify-exercise8.png" alt="line-notify-exercise8"></p>
-</li>
-</ul>
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
-<li><a href="https://www.slideshare.net/JiaYuLin6/step-by-step-to-use-line-notify-20190527">step by step to use LINE Notify - 20190527</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Line API</category>
-      </categories>
-  </entry>
-  <entry>
     <title>如何解決 php-fpm 造成 OOM 問題</title>
     <url>/phpfpm-oom-problem/</url>
     <content><![CDATA[<h2 id="問題釐清"><a href="#問題釐清" class="headerlink" title="問題釐清"></a>問題釐清</h2><p>發生問題的原因是因為 php8.0-fpm 的 process 開太多造成 OOM (Out Of Memory)問題發生，php8.0-fpm 程式自動關閉，所以 nginx 的 error.log 才會跳出 <code>/var/run/php/php8.0-fpm.sock</code><br>找不到檔案，瀏覽器才跳出 502 Bad Gateway</p>
@@ -1783,64 +1783,6 @@
       </categories>
       <tags>
         <tag>PHP-FPM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis 連線逾時</title>
-    <url>/redis-connection-timeout/</url>
-    <content><![CDATA[<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><ul>
-<li><p>Laravel Job 讀取 redis 快取資料等待時間，超過 job 上限時間造成 timeout 程式無法執行完</p>
-</li>
-<li><p>查看 AWS metrics 發現 Network Bandwidth 超過限制，造成封包遺失或斷線問題</p>
-<ul>
-<li>redis 背後運行是一台 <a href="https://aws.amazon.com/tw/ec2/instance-types/">instance</a>，大部分網路頻寬上限都是 10 Gbps，所以當取得的值太大又同時被很多 client 存取，很容易就會達到上限</li>
-</ul>
-<p>  <img src="/../images/redis/redis-connection-timeout1.png" alt="redis-connection-timeout1"></p>
-</li>
-<li><p>現有 redis 架構是 standalone，隨著使用需求提高，如果沒有擴展機器數量或提升機器規格，容易機器回應較慢</p>
-</li>
-</ul>
-<h2 id="AWS-提供解決方法"><a href="#AWS-提供解決方法" class="headerlink" title="AWS 提供解決方法"></a>AWS 提供解決方法</h2><ol>
-<li>最簡單方式：就是提高機器等級</li>
-<li>最佳方式：使用 redis cluster 架構，透過 data partition and sharding 將資料分成小部分並分散在不同機器，再透過 autoscaling 方式水平擴展 shards，降低單一機器的負載</li>
-</ol>
-<h2 id="Redis-架構：從-Standalone-改成-Cluster"><a href="#Redis-架構：從-Standalone-改成-Cluster" class="headerlink" title="Redis 架構：從 Standalone 改成 Cluster"></a>Redis 架構：從 Standalone 改成 Cluster</h2><ul>
-<li>需要更了解 redis，可以參考 redis 系列筆記</li>
-<li>standalone 支援多個 db，但 cluster 只支援 db0</li>
-</ul>
-<p><strong>操作步驟</strong></p>
-<ol>
-<li><p>建立 EC2</p>
- <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安裝 redis-cli</span><br><span class="line">$ sudo amazon-linux-extras install redis6</span><br><span class="line"></span><br><span class="line"># 安裝 docker</span><br><span class="line">$ sudo yum install -y docker</span><br><span class="line">$ sudo service docker restart</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>將原本的 Redis 搬移資料到 db0</p>
-<ul>
-<li>如果只有一台 Redis 要搬遷資料，可以直接使用第 4 步加上 –db 參數</li>
-<li>使用 redis-cli 指令連線或 <strong><a href="https://github.com/qishibo/AnotherRedisDesktopManager">AnotherRedisDesktopManager</a></strong> 應用程式</li>
-</ul>
- <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># numkeys: 0</span><br><span class="line"># ARGV[1]: the cursor for SCAN, initially 0</span><br><span class="line"># ARGV[2]: the destination database. E.g. 0</span><br><span class="line"></span><br><span class="line">127.0.0.1 6379 &gt; EVAL &quot;local result = redis.call(&#x27;SCAN&#x27;, ARGV[1]) \n local conflict = &#123;&#125; \n local moved = &#123;&#125; \n for _,key in ipairs(result[2]) do \n     if redis.call(&#x27;MOVE&#x27;, key, ARGV[2]) == 0 then \n         table.insert(conflict, key) \n else \n     table.insert(moved, key) \n     end \n end \n result[2] = conflict \n result[3] = moved \n return result&quot; 0 0 0</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>建立 redis cluster</p>
-<p> <img src="/../images/redis/redis-connection-timeout2.png" alt="redis-connection-timeout2"></p>
-</li>
-<li><p>連線到 EC2 執行同步指令(<strong><a href="https://developer.redis.com/riot/riot-redis/index.html#_install">RIOT-Redis</a></strong>)</p>
-<ul>
-<li>預設 db 0 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker run fieldengineering/riot-redis -h &lt;source endpoint&gt; -p 6379 \</span><br><span class="line">replicate -h &lt;target endpoint&gt; -p 6379 --cluster --mode live</span><br></pre></td></tr></table></figure></li>
-<li>指定其他 db <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker run fieldengineering/riot-redis -h &lt;source endpoint&gt; -p 6379 --db &lt;db number&gt; \</span><br><span class="line">replicate -h &lt;target endpoint&gt; -p 6379 --cluster --mode live</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ol>
-<h2 id="參考文件"><a href="#參考文件" class="headerlink" title="參考文件"></a>參考文件</h2><ul>
-<li><a href="https://docs.aws.amazon.com/zh_tw/AmazonElastiCache/latest/red-ug/TroubleshootingConnections.html#Network-limits"><strong>Elasticache 故障排除</strong></a></li>
-<li><strong><strong><a href="https://repost.aws/questions/QUv105xDmfQMGUiBbfeYW-iQ/elasticache-shows-network-in-and-out-as-exceeded-but-how">Elasticache shows network in and out as exceeded, but how?</a></strong></strong></li>
-<li><strong><a href="https://stackoverflow.com/questions/59936252/it-is-possible-to-merge-two-separate-dbs-e-g-db0-db1-running-in-one-single-r">It is possible to merge two separate DBs (e.g. db0, db1) running in one single Redis instance (6379) into one single DB (db0)?</a></strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Database</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
@@ -1939,6 +1881,87 @@
       </tags>
   </entry>
   <entry>
+    <title>Redis 連線逾時</title>
+    <url>/redis-connection-timeout/</url>
+    <content><![CDATA[<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><ul>
+<li><p>Laravel Job 讀取 redis 快取資料等待時間，超過 job 上限時間造成 timeout 程式無法執行完</p>
+</li>
+<li><p>查看 AWS metrics 發現 Network Bandwidth 超過限制，造成封包遺失或斷線問題</p>
+<ul>
+<li>redis 背後運行是一台 <a href="https://aws.amazon.com/tw/ec2/instance-types/">instance</a>，大部分網路頻寬上限都是 10 Gbps，所以當取得的值太大又同時被很多 client 存取，很容易就會達到上限</li>
+</ul>
+<p>  <img src="/../images/redis/redis-connection-timeout1.png" alt="redis-connection-timeout1"></p>
+</li>
+<li><p>現有 redis 架構是 standalone，隨著使用需求提高，如果沒有擴展機器數量或提升機器規格，容易機器回應較慢</p>
+</li>
+</ul>
+<h2 id="AWS-提供解決方法"><a href="#AWS-提供解決方法" class="headerlink" title="AWS 提供解決方法"></a>AWS 提供解決方法</h2><ol>
+<li>最簡單方式：就是提高機器等級</li>
+<li>最佳方式：使用 redis cluster 架構，透過 data partition and sharding 將資料分成小部分並分散在不同機器，再透過 autoscaling 方式水平擴展 shards，降低單一機器的負載</li>
+</ol>
+<h2 id="Redis-架構：從-Standalone-改成-Cluster"><a href="#Redis-架構：從-Standalone-改成-Cluster" class="headerlink" title="Redis 架構：從 Standalone 改成 Cluster"></a>Redis 架構：從 Standalone 改成 Cluster</h2><ul>
+<li>需要更了解 redis，可以參考 redis 系列筆記</li>
+<li>standalone 支援多個 db，但 cluster 只支援 db0</li>
+</ul>
+<p><strong>操作步驟</strong></p>
+<ol>
+<li><p>建立 EC2</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安裝 redis-cli</span><br><span class="line">$ sudo amazon-linux-extras install redis6</span><br><span class="line"></span><br><span class="line"># 安裝 docker</span><br><span class="line">$ sudo yum install -y docker</span><br><span class="line">$ sudo service docker restart</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>將原本的 Redis 搬移資料到 db0</p>
+<ul>
+<li>如果只有一台 Redis 要搬遷資料，可以直接使用第 4 步加上 –db 參數</li>
+<li>使用 redis-cli 指令連線或 <strong><a href="https://github.com/qishibo/AnotherRedisDesktopManager">AnotherRedisDesktopManager</a></strong> 應用程式</li>
+</ul>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># numkeys: 0</span><br><span class="line"># ARGV[1]: the cursor for SCAN, initially 0</span><br><span class="line"># ARGV[2]: the destination database. E.g. 0</span><br><span class="line"></span><br><span class="line">127.0.0.1 6379 &gt; EVAL &quot;local result = redis.call(&#x27;SCAN&#x27;, ARGV[1]) \n local conflict = &#123;&#125; \n local moved = &#123;&#125; \n for _,key in ipairs(result[2]) do \n     if redis.call(&#x27;MOVE&#x27;, key, ARGV[2]) == 0 then \n         table.insert(conflict, key) \n else \n     table.insert(moved, key) \n     end \n end \n result[2] = conflict \n result[3] = moved \n return result&quot; 0 0 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立 redis cluster</p>
+<p> <img src="/../images/redis/redis-connection-timeout2.png" alt="redis-connection-timeout2"></p>
+</li>
+<li><p>連線到 EC2 執行同步指令(<strong><a href="https://developer.redis.com/riot/riot-redis/index.html#_install">RIOT-Redis</a></strong>)</p>
+<ul>
+<li>預設 db 0 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker run fieldengineering/riot-redis -h &lt;source endpoint&gt; -p 6379 \</span><br><span class="line">replicate -h &lt;target endpoint&gt; -p 6379 --cluster --mode live</span><br></pre></td></tr></table></figure></li>
+<li>指定其他 db <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker run fieldengineering/riot-redis -h &lt;source endpoint&gt; -p 6379 --db &lt;db number&gt; \</span><br><span class="line">replicate -h &lt;target endpoint&gt; -p 6379 --cluster --mode live</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="參考文件"><a href="#參考文件" class="headerlink" title="參考文件"></a>參考文件</h2><ul>
+<li><a href="https://docs.aws.amazon.com/zh_tw/AmazonElastiCache/latest/red-ug/TroubleshootingConnections.html#Network-limits"><strong>Elasticache 故障排除</strong></a></li>
+<li><strong><strong><a href="https://repost.aws/questions/QUv105xDmfQMGUiBbfeYW-iQ/elasticache-shows-network-in-and-out-as-exceeded-but-how">Elasticache shows network in and out as exceeded, but how?</a></strong></strong></li>
+<li><strong><a href="https://stackoverflow.com/questions/59936252/it-is-possible-to-merge-two-separate-dbs-e-g-db0-db1-running-in-one-single-r">It is possible to merge two separate DBs (e.g. db0, db1) running in one single Redis instance (6379) into one single DB (db0)?</a></strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Database</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis 架構 - 哨兵(Sentinel)</title>
+    <url>/redis-infra-sentinel/</url>
+    <content><![CDATA[<h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><ul>
+<li><p>是一種系統設計，透過監控、通知、故障轉移、配置，幫助管理 redis instance，確保 master 與 slave 運行狀態</p>
+</li>
+<li><p>提供 instance failover 來提高可用性</p>
+</li>
+<li><p>所有行為都是透過 API 實作，所以需要注意 client 授權問題</p>
+<p>  <img src="/../images/redis/redis-infra-sentinel.png" alt="redis-infra-sentinel"></p>
+</li>
+</ul>
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
+<li><strong><strong><a href="https://cloudinfrastructureservices.co.uk/redis-sentinel-vs-cluster/">Redis Sentinel vs Cluster – Which is Better? (Pros and Cons)</a></strong></strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Database</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Redis 架構 - Master/Slave(高可用性)</title>
     <url>/redis-infra-master-slave/</url>
     <content><![CDATA[<h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><ul>
@@ -1994,29 +2017,6 @@
 <li><strong><a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html">Comparing Memcached and Redis</a></strong></li>
 <li><strong><a href="https://docs.amazonaws.cn/en_us/AmazonElastiCache/latest/red-ug/Replication.Redis-RedisCluster.html">Replication: Redis (Cluster Mode Disabled) vs. Redis (Cluster Mode Enabled)</a></strong></li>
 <li><strong><strong><a href="https://medium.com/hepsiburadatech/redis-solutions-standalone-vs-sentinel-vs-cluster-f46e703307a9">Redis Solutions: Standalone vs Sentinel vs Cluster</a></strong></strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Database</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis 架構 - 哨兵(Sentinel)</title>
-    <url>/redis-infra-sentinel/</url>
-    <content><![CDATA[<h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><ul>
-<li><p>是一種系統設計，透過監控、通知、故障轉移、配置，幫助管理 redis instance，確保 master 與 slave 運行狀態</p>
-</li>
-<li><p>提供 instance failover 來提高可用性</p>
-</li>
-<li><p>所有行為都是透過 API 實作，所以需要注意 client 授權問題</p>
-<p>  <img src="/../images/redis/redis-infra-sentinel.png" alt="redis-infra-sentinel"></p>
-</li>
-</ul>
-<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
-<li><strong><strong><a href="https://cloudinfrastructureservices.co.uk/redis-sentinel-vs-cluster/">Redis Sentinel vs Cluster – Which is Better? (Pros and Cons)</a></strong></strong></li>
 </ul>
 ]]></content>
       <categories>
@@ -2083,94 +2083,66 @@
       </tags>
   </entry>
   <entry>
-    <title>使用 SQS + Lambda - NodeJS 篇</title>
-    <url>/sqs-lambda-for-nodejs/</url>
-    <content><![CDATA[<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><p><strong>步驟一、建立 IAM Role</strong></p>
+    <title>使用 VSFTPD 架設 FTP  Server</title>
+    <url>/setup-ftp-by-vsftpd/</url>
+    <content><![CDATA[<h2 id="FTP-連線模式"><a href="#FTP-連線模式" class="headerlink" title="FTP 連線模式"></a>FTP 連線模式</h2><p><strong>主動 FTP：</strong></p>
 <ul>
-<li>名稱為 role-for-sqs-lambda</li>
-<li>use case 選擇 Lambda</li>
-<li>加入 Policy<ul>
-<li>讓 Lambda 使用 CloudWatch 服務 <code>AWSLambdaBasicExecutionRole</code></li>
-<li>讓 Lambda 使用 SQS 服務 <code>AmazonSQSFullAccess</code></li>
+<li>命令連接：客戶端 &gt;1024 端口 → 服務器 21 端口</li>
+<li>數據連接：客戶端 &gt;1024 端口 ← 服務器 20 端口</li>
 </ul>
-</li>
-</ul>
-<p><strong>步驟二、建立 Lambda Function</strong></p>
+<p><strong>被動 FTP：</strong></p>
 <ul>
-<li><p>名稱為 sqs-lambda</p>
-</li>
-<li><p>Runtime 選擇 Node.js</p>
-</li>
-<li><p>Permission 選擇前面建立的 role</p>
-</li>
-<li><p>到 Configuraion 更改 timeout 為 20 秒，切記不要超過 SQS Visibility Timeout 時間</p>
-</li>
-<li><p>撰寫 Node.js Code</p>
-  <figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="built_in">exports</span>.<span class="property">handler</span> = <span class="keyword">async</span> (event) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; event.<span class="property">Records</span>.<span class="property">length</span> ; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> record = event.<span class="property">Records</span>[i]</span><br><span class="line">        <span class="keyword">let</span> &#123; body &#125; = record;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;body: &quot;</span>, body);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;type of body: &quot;</span> + (<span class="keyword">typeof</span> body))</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> body === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">            body = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(body)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;body.process_time_ms: &quot;</span>, body.<span class="property">process_time_ms</span>);</span><br><span class="line">        <span class="keyword">let</span> &#123; process_time_ms &#125; = body;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;start processing: &quot;</span> + process_time_ms);</span><br><span class="line">        <span class="keyword">await</span> <span class="title function_">delay</span>(process_time_ms);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;ends processing.&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> response = &#123;</span><br><span class="line">        <span class="attr">statusCode</span>: <span class="number">200</span>,</span><br><span class="line">        <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(<span class="string">&#x27;Successfully finished! &#x27;</span>),</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">delay</span>(<span class="params">time</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">setTimeout</span>(resolve, time));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>命令連接：客戶端 &gt;1024 端口 → 服務器 21 端口</li>
+<li>數據連接：客戶端 &gt;1024 端口 ← 服務器 &gt;1024 端口</li>
 </ul>
-<p><strong>步驟三、建立 SQS</strong></p>
+<h2 id="建立步驟"><a href="#建立步驟" class="headerlink" title="建立步驟"></a>建立步驟</h2><ol>
+<li><p>建立 ubuntu 作業系統的 EC2，設定 security group</p>
 <ul>
-<li>名稱為 sqs-for-lambda</li>
-</ul>
-<p><strong>步驟四、設定 Lambda trigger</strong></p>
-<ul>
-<li>選擇前面建立的 SQS  queue</li>
-<li>batch size 設定為 1 來測試即可<ul>
-<li>設定啟動一個 Lambda 一次要抓取多少個 message 數量</li>
-<li>數值設定越高，Lambda 效能越好</li>
+<li>新增inbound rule 新增 20,21(ftp)、 22(ssh) port</li>
 </ul>
 </li>
-</ul>
-<p>步驟五、整合測試 SQS + Lambda</p>
+<li><p>安裝 vsftpd</p>
 <ul>
-<li><p>到 SQS 發送 message</p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;process_time_ms&quot;: 1001</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>到 Lambda 的 Monitor 連到 Cloudwatch 查看 log stream</p>
-</li>
-</ul>
-<h2 id="發送高流量請求的步驟"><a href="#發送高流量請求的步驟" class="headerlink" title="發送高流量請求的步驟"></a>發送高流量請求的步驟</h2><p><strong>步驟一、建立 IAM</strong></p>
-<ul>
-<li>名稱為 role-for-sqs-ec2</li>
-<li>use case 選擇 EC2</li>
-<li>加入 Policy<ul>
-<li>讓 EC2 使用 SQS 服務 <code>AmazonSQSFullAccess</code></li>
+<li>安裝指令 <code>sudo apt update -y &amp;&amp; sudo apt install vsftpd -y</code></li>
+<li>查看狀態 <code>sudo service vsftpd status</code></li>
 </ul>
 </li>
-</ul>
-<p><strong>步驟二、建立 EC2</strong></p>
+<li><p>編輯 vsftpd 設定檔</p>
 <ul>
-<li>AMI 選擇預設 Amazon Linux AMI</li>
-<li>選擇前面建立的 role</li>
-<li>建立新的 security group 開發 22, 8080 port</li>
+<li>編輯完要重啟服務 <code>sudo service vsftpd restart</code></li>
 </ul>
-<p><strong>步驟三、進去 EC2 安裝套件</strong></p>
+ <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 不接受匿名用戶</span></span><br><span class="line"><span class="string">anonymous_enable=NO</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 允許用戶上傳檔案或建立資料夾</span></span><br><span class="line"><span class="string">write_enable=YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 鎖定使用者只可以操作家目錄</span></span><br><span class="line"><span class="string">chroot_local_user=YES</span></span><br><span class="line"><span class="string">allow_writeable_chroot=YES**</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增使用者</p>
 <ul>
-<li><p>安裝指令</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo yum install -y git</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/uopsdod/aws-advanced-course-project.git</span><br><span class="line">$ <span class="built_in">cd</span> aws-advanced-course-project</span><br><span class="line">$ git checkout sqs_lambda</span><br><span class="line">$ git branch</span><br><span class="line">$ sudo amazon-linux-extras install -y docker</span><br><span class="line">$ sudo service docker start</span><br><span class="line">$ sudo docker build --no-cache -t myapp001 .</span><br><span class="line">$ sudo docker images</span><br><span class="line">$ sudo docker run -d -p 8080:8080 myapp001</span><br><span class="line">$ sudo docker ps</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><strong>步驟四、批次發送訊息到 SQS</strong></p>
-<ul>
-<li>複製 Instance DNS URL 到瀏覽器，進行開啟</li>
-<li>選擇 SQS + Lambda 後，更改設定<ul>
-<li>backend url 為 <code>&lt;instance dns url&gt;:8080</code></li>
-<li>sqs url 為前面建立的 SQS url</li>
-<li>message batch 為批次發送的數量</li>
+<li>預設只有該用戶才可以在該家目錄建立資料夾跟建立檔案 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo adduser ata</span><br></pre></td></tr></table></figure></li>
+<li>建立完後，使用 <code>su ata</code> 切換到該用戶</li>
+<li>使用 <code>sudo</code> 指令透過 root 也可以，不過建立的資料夾就不能給 ata 用戶使用</li>
 </ul>
 </li>
-<li>點 Track SQS Message Count 追蹤 SQS 變化<ul>
-<li>會有大幅度起伏是因為 SQS 背後的 server 是分散式架構，同步會需要一段時間</li>
-<li>同步過一段時間後，就會穩定成一個數量</li>
-</ul>
+</ol>
+<h2 id="使用-Filezilla-進行連線"><a href="#使用-Filezilla-進行連線" class="headerlink" title="使用 Filezilla 進行連線"></a>使用 Filezilla 進行連線</h2><ul>
+<li><p>由於只開放 20, 21 port 所以要切換主動模式進行連線</p>
 </li>
+<li><p>到 <strong>編輯 → 設定</strong>選擇主動模式</p>
+<p>  <img src="/../images/linux/ftp1.png" alt="ftp1"></p>
+</li>
+<li><p>建立<strong>新站台</strong>的連線</p>
+<p>  <img src="/../images/linux/ftp2.png" alt="ftp2"></p>
+</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><strong><strong><a href="https://adamtheautomator.com/vsftpd/#Opening_Ports_for_FTP_Client_Connections">How to Setup FTP Server with VSFTPD</a></strong></strong></li>
+<li><strong><strong><a href="https://ithelp.ithome.com.tw/questions/10190157">filezilla 一直連不上伺服器？</a></strong></strong></li>
+<li><strong><strong><a href="http://blog.udn.com/nigerchen/2261345#ixzz20seS3Qm6">ubuntu FTP SERVER 安裝設置( vsftp 版本 )</a></strong></strong></li>
 </ul>
 ]]></content>
       <categories>
-        <category>NodeJS</category>
+        <category>Linux</category>
       </categories>
       <tags>
-        <tag>SQS</tag>
-        <tag>Lambda</tag>
+        <tag>VSFTPD</tag>
+        <tag>FTP</tag>
       </tags>
   </entry>
   <entry>
@@ -2271,66 +2243,94 @@
       </tags>
   </entry>
   <entry>
-    <title>使用 VSFTPD 架設 FTP  Server</title>
-    <url>/setup-ftp-by-vsftpd/</url>
-    <content><![CDATA[<h2 id="FTP-連線模式"><a href="#FTP-連線模式" class="headerlink" title="FTP 連線模式"></a>FTP 連線模式</h2><p><strong>主動 FTP：</strong></p>
+    <title>使用 SQS + Lambda - NodeJS 篇</title>
+    <url>/sqs-lambda-for-nodejs/</url>
+    <content><![CDATA[<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><p><strong>步驟一、建立 IAM Role</strong></p>
 <ul>
-<li>命令連接：客戶端 &gt;1024 端口 → 服務器 21 端口</li>
-<li>數據連接：客戶端 &gt;1024 端口 ← 服務器 20 端口</li>
+<li>名稱為 role-for-sqs-lambda</li>
+<li>use case 選擇 Lambda</li>
+<li>加入 Policy<ul>
+<li>讓 Lambda 使用 CloudWatch 服務 <code>AWSLambdaBasicExecutionRole</code></li>
+<li>讓 Lambda 使用 SQS 服務 <code>AmazonSQSFullAccess</code></li>
 </ul>
-<p><strong>被動 FTP：</strong></p>
+</li>
+</ul>
+<p><strong>步驟二、建立 Lambda Function</strong></p>
 <ul>
-<li>命令連接：客戶端 &gt;1024 端口 → 服務器 21 端口</li>
-<li>數據連接：客戶端 &gt;1024 端口 ← 服務器 &gt;1024 端口</li>
+<li><p>名稱為 sqs-lambda</p>
+</li>
+<li><p>Runtime 選擇 Node.js</p>
+</li>
+<li><p>Permission 選擇前面建立的 role</p>
+</li>
+<li><p>到 Configuraion 更改 timeout 為 20 秒，切記不要超過 SQS Visibility Timeout 時間</p>
+</li>
+<li><p>撰寫 Node.js Code</p>
+  <figure class="highlight jsx"><table><tr><td class="code"><pre><span class="line"><span class="built_in">exports</span>.<span class="property">handler</span> = <span class="keyword">async</span> (event) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; event.<span class="property">Records</span>.<span class="property">length</span> ; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> record = event.<span class="property">Records</span>[i]</span><br><span class="line">        <span class="keyword">let</span> &#123; body &#125; = record;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;body: &quot;</span>, body);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;type of body: &quot;</span> + (<span class="keyword">typeof</span> body))</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> body === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">            body = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(body)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;body.process_time_ms: &quot;</span>, body.<span class="property">process_time_ms</span>);</span><br><span class="line">        <span class="keyword">let</span> &#123; process_time_ms &#125; = body;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;start processing: &quot;</span> + process_time_ms);</span><br><span class="line">        <span class="keyword">await</span> <span class="title function_">delay</span>(process_time_ms);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;ends processing.&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> response = &#123;</span><br><span class="line">        <span class="attr">statusCode</span>: <span class="number">200</span>,</span><br><span class="line">        <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(<span class="string">&#x27;Successfully finished! &#x27;</span>),</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">delay</span>(<span class="params">time</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">setTimeout</span>(resolve, time));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="建立步驟"><a href="#建立步驟" class="headerlink" title="建立步驟"></a>建立步驟</h2><ol>
-<li><p>建立 ubuntu 作業系統的 EC2，設定 security group</p>
+<p><strong>步驟三、建立 SQS</strong></p>
 <ul>
-<li>新增inbound rule 新增 20,21(ftp)、 22(ssh) port</li>
+<li>名稱為 sqs-for-lambda</li>
 </ul>
-</li>
-<li><p>安裝 vsftpd</p>
+<p><strong>步驟四、設定 Lambda trigger</strong></p>
 <ul>
-<li>安裝指令 <code>sudo apt update -y &amp;&amp; sudo apt install vsftpd -y</code></li>
-<li>查看狀態 <code>sudo service vsftpd status</code></li>
+<li>選擇前面建立的 SQS  queue</li>
+<li>batch size 設定為 1 來測試即可<ul>
+<li>設定啟動一個 Lambda 一次要抓取多少個 message 數量</li>
+<li>數值設定越高，Lambda 效能越好</li>
 </ul>
 </li>
-<li><p>編輯 vsftpd 設定檔</p>
+</ul>
+<p>步驟五、整合測試 SQS + Lambda</p>
 <ul>
-<li>編輯完要重啟服務 <code>sudo service vsftpd restart</code></li>
-</ul>
- <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 不接受匿名用戶</span></span><br><span class="line"><span class="string">anonymous_enable=NO</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 允許用戶上傳檔案或建立資料夾</span></span><br><span class="line"><span class="string">write_enable=YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 鎖定使用者只可以操作家目錄</span></span><br><span class="line"><span class="string">chroot_local_user=YES</span></span><br><span class="line"><span class="string">allow_writeable_chroot=YES**</span></span><br></pre></td></tr></table></figure>
+<li><p>到 SQS 發送 message</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;process_time_ms&quot;: 1001</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>新增使用者</p>
+<li><p>到 Lambda 的 Monitor 連到 Cloudwatch 查看 log stream</p>
+</li>
+</ul>
+<h2 id="發送高流量請求的步驟"><a href="#發送高流量請求的步驟" class="headerlink" title="發送高流量請求的步驟"></a>發送高流量請求的步驟</h2><p><strong>步驟一、建立 IAM</strong></p>
 <ul>
-<li>預設只有該用戶才可以在該家目錄建立資料夾跟建立檔案 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo adduser ata</span><br></pre></td></tr></table></figure></li>
-<li>建立完後，使用 <code>su ata</code> 切換到該用戶</li>
-<li>使用 <code>sudo</code> 指令透過 root 也可以，不過建立的資料夾就不能給 ata 用戶使用</li>
+<li>名稱為 role-for-sqs-ec2</li>
+<li>use case 選擇 EC2</li>
+<li>加入 Policy<ul>
+<li>讓 EC2 使用 SQS 服務 <code>AmazonSQSFullAccess</code></li>
 </ul>
 </li>
-</ol>
-<h2 id="使用-Filezilla-進行連線"><a href="#使用-Filezilla-進行連線" class="headerlink" title="使用 Filezilla 進行連線"></a>使用 Filezilla 進行連線</h2><ul>
-<li><p>由於只開放 20, 21 port 所以要切換主動模式進行連線</p>
-</li>
-<li><p>到 <strong>編輯 → 設定</strong>選擇主動模式</p>
-<p>  <img src="/../images/linux/ftp1.png" alt="ftp1"></p>
-</li>
-<li><p>建立<strong>新站台</strong>的連線</p>
-<p>  <img src="/../images/linux/ftp2.png" alt="ftp2"></p>
-</li>
 </ul>
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
-<li><strong><strong><a href="https://adamtheautomator.com/vsftpd/#Opening_Ports_for_FTP_Client_Connections">How to Setup FTP Server with VSFTPD</a></strong></strong></li>
-<li><strong><strong><a href="https://ithelp.ithome.com.tw/questions/10190157">filezilla 一直連不上伺服器？</a></strong></strong></li>
-<li><strong><strong><a href="http://blog.udn.com/nigerchen/2261345#ixzz20seS3Qm6">ubuntu FTP SERVER 安裝設置( vsftp 版本 )</a></strong></strong></li>
+<p><strong>步驟二、建立 EC2</strong></p>
+<ul>
+<li>AMI 選擇預設 Amazon Linux AMI</li>
+<li>選擇前面建立的 role</li>
+<li>建立新的 security group 開發 22, 8080 port</li>
+</ul>
+<p><strong>步驟三、進去 EC2 安裝套件</strong></p>
+<ul>
+<li><p>安裝指令</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo yum install -y git</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/uopsdod/aws-advanced-course-project.git</span><br><span class="line">$ <span class="built_in">cd</span> aws-advanced-course-project</span><br><span class="line">$ git checkout sqs_lambda</span><br><span class="line">$ git branch</span><br><span class="line">$ sudo amazon-linux-extras install -y docker</span><br><span class="line">$ sudo service docker start</span><br><span class="line">$ sudo docker build --no-cache -t myapp001 .</span><br><span class="line">$ sudo docker images</span><br><span class="line">$ sudo docker run -d -p 8080:8080 myapp001</span><br><span class="line">$ sudo docker ps</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>步驟四、批次發送訊息到 SQS</strong></p>
+<ul>
+<li>複製 Instance DNS URL 到瀏覽器，進行開啟</li>
+<li>選擇 SQS + Lambda 後，更改設定<ul>
+<li>backend url 為 <code>&lt;instance dns url&gt;:8080</code></li>
+<li>sqs url 為前面建立的 SQS url</li>
+<li>message batch 為批次發送的數量</li>
+</ul>
+</li>
+<li>點 Track SQS Message Count 追蹤 SQS 變化<ul>
+<li>會有大幅度起伏是因為 SQS 背後的 server 是分散式架構，同步會需要一段時間</li>
+<li>同步過一段時間後，就會穩定成一個數量</li>
+</ul>
+</li>
 </ul>
 ]]></content>
       <categories>
-        <category>Linux</category>
+        <category>NodeJS</category>
       </categories>
       <tags>
-        <tag>VSFTPD</tag>
-        <tag>FTP</tag>
+        <tag>SQS</tag>
+        <tag>Lambda</tag>
       </tags>
   </entry>
   <entry>
@@ -2529,35 +2529,31 @@
       </tags>
   </entry>
   <entry>
-    <title>如何設定 Supervisor 用 app 執行</title>
-    <url>/supervisor-use-app-user/</url>
-    <content><![CDATA[<h2 id="步驟一、建立-Supervisord-conf"><a href="#步驟一、建立-Supervisord-conf" class="headerlink" title="步驟一、建立 Supervisord.conf"></a>步驟一、建立 Supervisord.conf</h2><ul>
-<li><p>資料夾路徑改成自定義，來放執行檔 ⇒ supervisor.sock</p>
-<ul>
-<li>將原本定義 <code>/var/run</code> 改成 <code>/var/supervisor</code></li>
+    <title>推薦Frontend文章</title>
+    <url>/suggest-frontend-article/</url>
+    <content><![CDATA[<h2 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h2><ul>
+<li><strong><a href="https://ithelp.ithome.com.tw/users/20113277/ironman/3877?page=1">今晚，我想來點 Web 前端效能優化大補帖！</a></strong></li>
 </ul>
-</li>
-<li><p>更改原因：<code>/var/run</code> 資料夾必須是用 root 使用者才可以讀取</p>
-</li>
-<li><p>修改 supervisord.conf 檔案的 unix_http_server、supervisord 區塊</p>
-  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">;</span> <span class="string">supervisor</span> <span class="string">config</span> <span class="string">file</span></span><br><span class="line"></span><br><span class="line">[<span class="string">unix_http_server</span>]</span><br><span class="line"><span class="string">file=/var/supervisor/supervisor.sock</span>   <span class="string">;</span> <span class="string">(the</span> <span class="string">path</span> <span class="string">to</span> <span class="string">the</span> <span class="string">socket</span> <span class="string">file)</span></span><br><span class="line"><span class="string">chmod=0700</span>                       <span class="string">;</span> <span class="string">sockef</span> <span class="string">file</span> <span class="string">mode</span> <span class="string">(default</span> <span class="number">0700</span><span class="string">)</span></span><br><span class="line"></span><br><span class="line">[<span class="string">supervisord</span>]</span><br><span class="line"><span class="string">;logfile=/var/log/supervisor/supervisord.log</span> <span class="string">;</span> <span class="string">(main</span> <span class="string">log</span> <span class="string">file;default</span> <span class="string">$CWD/supervisord.log)</span></span><br><span class="line"><span class="string">pidfile=/var/supervisor/supervisord.pid</span> <span class="string">;</span> <span class="string">(supervisord</span> <span class="string">pidfile;default</span> <span class="string">supervisord.pid)</span></span><br><span class="line"><span class="string">;childlogdir=/var/log/supervisor</span>            <span class="string">;</span> <span class="string">(&#x27;AUTO&#x27;</span> <span class="string">child</span> <span class="string">log</span> <span class="string">dir,</span> <span class="string">default</span> <span class="string">$TEMP)</span></span><br><span class="line"></span><br><span class="line"><span class="string">;</span> <span class="string">the</span> <span class="string">below</span> <span class="string">section</span> <span class="string">must</span> <span class="string">remain</span> <span class="string">in</span> <span class="string">the</span> <span class="string">config</span> <span class="string">file</span> <span class="string">for</span> <span class="string">RPC</span></span><br><span class="line"><span class="string">;</span> <span class="string">(supervisorctl/web</span> <span class="string">interface)</span> <span class="string">to</span> <span class="string">work,</span> <span class="string">additional</span> <span class="string">interfaces</span> <span class="string">may</span> <span class="string">be</span></span><br><span class="line"><span class="string">;</span> <span class="attr">added by defining them in separate rpcinterface:</span> <span class="string">sections</span></span><br><span class="line">[<span class="string">rpcinterface:supervisor</span>]</span><br><span class="line"><span class="string">supervisor.rpcinterface_factory</span> <span class="string">=</span> <span class="string">supervisor.rpcinterface:make_main_rpcinterface</span></span><br><span class="line"></span><br><span class="line">[<span class="string">supervisorctl</span>]</span><br><span class="line"><span class="string">serverurl=unix:///var/supervisor/supervisor.sock</span> <span class="string">;</span> <span class="string">use</span> <span class="string">a</span> <span class="string">unix://</span> <span class="string">URL</span>  <span class="string">for</span> <span class="string">a</span> <span class="string">unix</span> <span class="string">socket</span></span><br><span class="line"></span><br><span class="line"><span class="string">;</span> <span class="string">The</span> [<span class="string">include</span>] <span class="string">section</span> <span class="string">can</span> <span class="string">just</span> <span class="string">contain</span> <span class="string">the</span> <span class="string">&quot;files&quot;</span> <span class="string">setting.</span>  <span class="string">This</span></span><br><span class="line"><span class="string">;</span> <span class="string">setting</span> <span class="string">can</span> <span class="string">list</span> <span class="string">multiple</span> <span class="string">files</span> <span class="string">(separated</span> <span class="string">by</span> <span class="string">whitespace</span> <span class="string">or</span></span><br><span class="line"><span class="string">;</span> <span class="string">newlines).</span>  <span class="string">It</span> <span class="string">can</span> <span class="string">also</span> <span class="string">contain</span> <span class="string">wildcards.</span>  <span class="string">The</span> <span class="string">filenames</span> <span class="string">are</span></span><br><span class="line"><span class="string">;</span> <span class="string">interpreted</span> <span class="string">as</span> <span class="string">relative</span> <span class="string">to</span> <span class="string">this</span> <span class="string">file.</span>  <span class="string">Included</span> <span class="string">files</span> <span class="string">*cannot*</span></span><br><span class="line"><span class="string">;</span> <span class="string">include</span> <span class="string">files</span> <span class="string">themselves.</span></span><br><span class="line"></span><br><span class="line">[<span class="string">include</span>]</span><br><span class="line"><span class="string">files</span> <span class="string">=</span> <span class="string">/etc/supervisor/conf.d/*.conf</span></span><br></pre></td></tr></table></figure></li>
+<h2 id="CORS-amp-Cookie"><a href="#CORS-amp-Cookie" class="headerlink" title="CORS &amp; Cookie"></a>CORS &amp; Cookie</h2><ul>
+<li><strong><a href="https://shubo.io/what-is-cors/">[教學] CORS 是什麼? 如何設定 CORS?</a></strong></li>
+<li><strong><a href="https://shubo.io/cookies/#samesite">[教學] Cookie 是什麼？如何用 JavaScript get&#x2F;set document.cookie?</a></strong></li>
 </ul>
-<h2 id="步驟二、更改-Dockerfile-的指令"><a href="#步驟二、更改-Dockerfile-的指令" class="headerlink" title="步驟二、更改 Dockerfile 的指令"></a>步驟二、更改 Dockerfile 的指令</h2><ul>
-<li>複製 supervisord.conf 到 <code>/etc/supervisor</code> 資料夾</li>
-<li>使用 root 角色建立資料夾並更改資料夾的 owner 使用者為 app</li>
+<h2 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h2><ul>
+<li><strong><a href="https://ithelp.ithome.com.tw/users/20131472/ironman/4100?page=3">前端是該來學一下 TypeScript 了</a></strong></li>
 </ul>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">USER</span> <span class="string">root</span></span><br><span class="line"></span><br><span class="line"><span class="string">COPY</span> <span class="string">deploy/supervisord.conf</span> <span class="string">/etc/supervisor/supervisord.conf</span></span><br><span class="line"><span class="string">RUN</span> <span class="string">mkdir</span> <span class="string">/var/supervisor</span> <span class="string">&amp;&amp;</span> <span class="string">chown</span> <span class="string">-R</span> <span class="string">app:app</span> <span class="string">/var/supervisor</span></span><br><span class="line"></span><br><span class="line"><span class="string">...</span></span><br><span class="line"></span><br><span class="line"><span class="string">USER</span> <span class="string">app</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="最後步驟、設定容器啟動指令"><a href="#最後步驟、設定容器啟動指令" class="headerlink" title="最後步驟、設定容器啟動指令"></a>最後步驟、設定容器啟動指令</h2><ul>
-<li>用 <code>supervisord</code> 指令去執行第一步建立的設定檔， <code>-n</code> 代表用 dameon 背景執行</li>
+<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><ul>
+<li><strong><a href="https://medium.com/dean-lin/3%E5%88%86%E9%90%98%E5%B8%B6%E4%BD%A0%E6%90%9E%E6%87%82-vue-vuex-vuetify-nuxt-js-%E4%B9%8B%E9%96%93%E7%9A%84%E9%97%9C%E4%BF%82-875a9c69d3fd">5 分鐘帶你搞懂 Vue、Vuex、Vuetify、Nuxt.js 之間的關係</a></strong></li>
 </ul>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">heavy-worker:</span></span><br><span class="line">    <span class="attr">extends:</span></span><br><span class="line">      <span class="attr">file:</span> <span class="string">common-services.yml</span></span><br><span class="line">      <span class="attr">service:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">rhitics-heavy-worker</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">$&#123;SERVER_PATH&#125;/deploy/heavy_workers/laravel-worker.conf:/etc/supervisor/conf.d/laravel-worker.conf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">$&#123;SERVER_PATH&#125;/deploy/heavy_workers/horizon.php:/var/www/api.rhitics.com/config/horizon.php</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">&quot;supervisord&quot;</span>, <span class="string">&quot;-n&quot;</span>, <span class="string">&quot;-c&quot;</span>, <span class="string">&quot;/etc/supervisor/supervisord.conf&quot;</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="Nuxt"><a href="#Nuxt" class="headerlink" title="Nuxt"></a>Nuxt</h2><ul>
+<li><strong><a href="https://ithelp.ithome.com.tw/users/20129729/ironman/5297">Nuxt 3 - 因為還不穩定，所以來踩地雷</a></strong></li>
+<li><strong><a href="https://ithelp.ithome.com.tw/users/20152617/ironman/5934">Nuxt 3 學習筆記</a></strong></li>
+</ul>
 ]]></content>
       <categories>
-        <category>Linux</category>
+        <category>Learning</category>
       </categories>
       <tags>
-        <tag>Supervisor</tag>
+        <tag>Frontend</tag>
       </tags>
   </entry>
   <entry>
@@ -2591,31 +2587,35 @@
       </tags>
   </entry>
   <entry>
-    <title>推薦Frontend文章</title>
-    <url>/suggest-frontend-article/</url>
-    <content><![CDATA[<h2 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h2><ul>
-<li><strong><a href="https://ithelp.ithome.com.tw/users/20113277/ironman/3877?page=1">今晚，我想來點 Web 前端效能優化大補帖！</a></strong></li>
+    <title>如何設定 Supervisor 用 app 執行</title>
+    <url>/supervisor-use-app-user/</url>
+    <content><![CDATA[<h2 id="步驟一、建立-Supervisord-conf"><a href="#步驟一、建立-Supervisord-conf" class="headerlink" title="步驟一、建立 Supervisord.conf"></a>步驟一、建立 Supervisord.conf</h2><ul>
+<li><p>資料夾路徑改成自定義，來放執行檔 ⇒ supervisor.sock</p>
+<ul>
+<li>將原本定義 <code>/var/run</code> 改成 <code>/var/supervisor</code></li>
 </ul>
-<h2 id="CORS-amp-Cookie"><a href="#CORS-amp-Cookie" class="headerlink" title="CORS &amp; Cookie"></a>CORS &amp; Cookie</h2><ul>
-<li><strong><a href="https://shubo.io/what-is-cors/">[教學] CORS 是什麼? 如何設定 CORS?</a></strong></li>
-<li><strong><a href="https://shubo.io/cookies/#samesite">[教學] Cookie 是什麼？如何用 JavaScript get&#x2F;set document.cookie?</a></strong></li>
+</li>
+<li><p>更改原因：<code>/var/run</code> 資料夾必須是用 root 使用者才可以讀取</p>
+</li>
+<li><p>修改 supervisord.conf 檔案的 unix_http_server、supervisord 區塊</p>
+  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">;</span> <span class="string">supervisor</span> <span class="string">config</span> <span class="string">file</span></span><br><span class="line"></span><br><span class="line">[<span class="string">unix_http_server</span>]</span><br><span class="line"><span class="string">file=/var/supervisor/supervisor.sock</span>   <span class="string">;</span> <span class="string">(the</span> <span class="string">path</span> <span class="string">to</span> <span class="string">the</span> <span class="string">socket</span> <span class="string">file)</span></span><br><span class="line"><span class="string">chmod=0700</span>                       <span class="string">;</span> <span class="string">sockef</span> <span class="string">file</span> <span class="string">mode</span> <span class="string">(default</span> <span class="number">0700</span><span class="string">)</span></span><br><span class="line"></span><br><span class="line">[<span class="string">supervisord</span>]</span><br><span class="line"><span class="string">;logfile=/var/log/supervisor/supervisord.log</span> <span class="string">;</span> <span class="string">(main</span> <span class="string">log</span> <span class="string">file;default</span> <span class="string">$CWD/supervisord.log)</span></span><br><span class="line"><span class="string">pidfile=/var/supervisor/supervisord.pid</span> <span class="string">;</span> <span class="string">(supervisord</span> <span class="string">pidfile;default</span> <span class="string">supervisord.pid)</span></span><br><span class="line"><span class="string">;childlogdir=/var/log/supervisor</span>            <span class="string">;</span> <span class="string">(&#x27;AUTO&#x27;</span> <span class="string">child</span> <span class="string">log</span> <span class="string">dir,</span> <span class="string">default</span> <span class="string">$TEMP)</span></span><br><span class="line"></span><br><span class="line"><span class="string">;</span> <span class="string">the</span> <span class="string">below</span> <span class="string">section</span> <span class="string">must</span> <span class="string">remain</span> <span class="string">in</span> <span class="string">the</span> <span class="string">config</span> <span class="string">file</span> <span class="string">for</span> <span class="string">RPC</span></span><br><span class="line"><span class="string">;</span> <span class="string">(supervisorctl/web</span> <span class="string">interface)</span> <span class="string">to</span> <span class="string">work,</span> <span class="string">additional</span> <span class="string">interfaces</span> <span class="string">may</span> <span class="string">be</span></span><br><span class="line"><span class="string">;</span> <span class="attr">added by defining them in separate rpcinterface:</span> <span class="string">sections</span></span><br><span class="line">[<span class="string">rpcinterface:supervisor</span>]</span><br><span class="line"><span class="string">supervisor.rpcinterface_factory</span> <span class="string">=</span> <span class="string">supervisor.rpcinterface:make_main_rpcinterface</span></span><br><span class="line"></span><br><span class="line">[<span class="string">supervisorctl</span>]</span><br><span class="line"><span class="string">serverurl=unix:///var/supervisor/supervisor.sock</span> <span class="string">;</span> <span class="string">use</span> <span class="string">a</span> <span class="string">unix://</span> <span class="string">URL</span>  <span class="string">for</span> <span class="string">a</span> <span class="string">unix</span> <span class="string">socket</span></span><br><span class="line"></span><br><span class="line"><span class="string">;</span> <span class="string">The</span> [<span class="string">include</span>] <span class="string">section</span> <span class="string">can</span> <span class="string">just</span> <span class="string">contain</span> <span class="string">the</span> <span class="string">&quot;files&quot;</span> <span class="string">setting.</span>  <span class="string">This</span></span><br><span class="line"><span class="string">;</span> <span class="string">setting</span> <span class="string">can</span> <span class="string">list</span> <span class="string">multiple</span> <span class="string">files</span> <span class="string">(separated</span> <span class="string">by</span> <span class="string">whitespace</span> <span class="string">or</span></span><br><span class="line"><span class="string">;</span> <span class="string">newlines).</span>  <span class="string">It</span> <span class="string">can</span> <span class="string">also</span> <span class="string">contain</span> <span class="string">wildcards.</span>  <span class="string">The</span> <span class="string">filenames</span> <span class="string">are</span></span><br><span class="line"><span class="string">;</span> <span class="string">interpreted</span> <span class="string">as</span> <span class="string">relative</span> <span class="string">to</span> <span class="string">this</span> <span class="string">file.</span>  <span class="string">Included</span> <span class="string">files</span> <span class="string">*cannot*</span></span><br><span class="line"><span class="string">;</span> <span class="string">include</span> <span class="string">files</span> <span class="string">themselves.</span></span><br><span class="line"></span><br><span class="line">[<span class="string">include</span>]</span><br><span class="line"><span class="string">files</span> <span class="string">=</span> <span class="string">/etc/supervisor/conf.d/*.conf</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h2><ul>
-<li><strong><a href="https://ithelp.ithome.com.tw/users/20131472/ironman/4100?page=3">前端是該來學一下 TypeScript 了</a></strong></li>
+<h2 id="步驟二、更改-Dockerfile-的指令"><a href="#步驟二、更改-Dockerfile-的指令" class="headerlink" title="步驟二、更改 Dockerfile 的指令"></a>步驟二、更改 Dockerfile 的指令</h2><ul>
+<li>複製 supervisord.conf 到 <code>/etc/supervisor</code> 資料夾</li>
+<li>使用 root 角色建立資料夾並更改資料夾的 owner 使用者為 app</li>
 </ul>
-<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><ul>
-<li><strong><a href="https://medium.com/dean-lin/3%E5%88%86%E9%90%98%E5%B8%B6%E4%BD%A0%E6%90%9E%E6%87%82-vue-vuex-vuetify-nuxt-js-%E4%B9%8B%E9%96%93%E7%9A%84%E9%97%9C%E4%BF%82-875a9c69d3fd">5 分鐘帶你搞懂 Vue、Vuex、Vuetify、Nuxt.js 之間的關係</a></strong></li>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">USER</span> <span class="string">root</span></span><br><span class="line"></span><br><span class="line"><span class="string">COPY</span> <span class="string">deploy/supervisord.conf</span> <span class="string">/etc/supervisor/supervisord.conf</span></span><br><span class="line"><span class="string">RUN</span> <span class="string">mkdir</span> <span class="string">/var/supervisor</span> <span class="string">&amp;&amp;</span> <span class="string">chown</span> <span class="string">-R</span> <span class="string">app:app</span> <span class="string">/var/supervisor</span></span><br><span class="line"></span><br><span class="line"><span class="string">...</span></span><br><span class="line"></span><br><span class="line"><span class="string">USER</span> <span class="string">app</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="最後步驟、設定容器啟動指令"><a href="#最後步驟、設定容器啟動指令" class="headerlink" title="最後步驟、設定容器啟動指令"></a>最後步驟、設定容器啟動指令</h2><ul>
+<li>用 <code>supervisord</code> 指令去執行第一步建立的設定檔， <code>-n</code> 代表用 dameon 背景執行</li>
 </ul>
-<h2 id="Nuxt"><a href="#Nuxt" class="headerlink" title="Nuxt"></a>Nuxt</h2><ul>
-<li><strong><a href="https://ithelp.ithome.com.tw/users/20129729/ironman/5297">Nuxt 3 - 因為還不穩定，所以來踩地雷</a></strong></li>
-<li><strong><a href="https://ithelp.ithome.com.tw/users/20152617/ironman/5934">Nuxt 3 學習筆記</a></strong></li>
-</ul>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">heavy-worker:</span></span><br><span class="line">    <span class="attr">extends:</span></span><br><span class="line">      <span class="attr">file:</span> <span class="string">common-services.yml</span></span><br><span class="line">      <span class="attr">service:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">rhitics-heavy-worker</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">$&#123;SERVER_PATH&#125;/deploy/heavy_workers/laravel-worker.conf:/etc/supervisor/conf.d/laravel-worker.conf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">$&#123;SERVER_PATH&#125;/deploy/heavy_workers/horizon.php:/var/www/api.rhitics.com/config/horizon.php</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">&quot;supervisord&quot;</span>, <span class="string">&quot;-n&quot;</span>, <span class="string">&quot;-c&quot;</span>, <span class="string">&quot;/etc/supervisor/supervisord.conf&quot;</span>]</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>Learning</category>
+        <category>Linux</category>
       </categories>
       <tags>
-        <tag>Frontend</tag>
+        <tag>Supervisor</tag>
       </tags>
   </entry>
   <entry>
@@ -2659,6 +2659,188 @@
       </categories>
       <tags>
         <tag>S3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Redis Benchmark 進行壓力測試</title>
+    <url>/use-redis-benchmark-stress-test/</url>
+    <content><![CDATA[<h2 id="Redis-Benchmark"><a href="#Redis-Benchmark" class="headerlink" title="Redis Benchmark"></a>Redis Benchmark</h2><ul>
+<li>Redis 版本 6 才會有 <code>--cluster</code> 參數使用</li>
+<li>Cluster 的 master node 必須要 2 台以上，才可以進行壓測</li>
+<li>只會針對 master node 進行壓測，slave node 則不會</li>
+<li>用來模擬 N 個客戶端同時發出 M 個請求</li>
+<li>參數認識<ul>
+<li><code>-n &lt;requests&gt;</code>：要發送的 request 數量 (預設 100,000)</li>
+<li><code>-d &lt;data size&gt;</code>：執行 SET&#x2F;GET 指令操作的資料大小 (預設 2 bytes )</li>
+<li><code>-c &lt;clients&gt;</code>：平行的連線數 (預設 50)</li>
+<li><code>-t &lt;tests&gt;</code>：指定要執行的指令(預設是全跑)</li>
+<li><code>-r &lt;random keyspacelen&gt;</code>：使用隨機的 key (指定範圍)</li>
+<li><code>-P &lt;pipeline&gt;</code>：發送 Request 的 Pipeline 數量 (預設 1 條)</li>
+<li><code>-q &lt;quite&gt;</code>：只顯示 query&#x2F;sec 值 (預設會顯示詳細報告)</li>
+<li><code>-h &lt;host&gt;</code>：Redis Endpoint</li>
+<li><code>-p &lt;port&gt;</code>：開放 Port</li>
+<li><code>--cluster</code>：指定 Redis Cluster 模式</li>
+</ul>
+</li>
+</ul>
+<h2 id="Elasticache-AutoScaling-Limit"><a href="#Elasticache-AutoScaling-Limit" class="headerlink" title="Elasticache AutoScaling Limit"></a>Elasticache AutoScaling Limit</h2><p>參考連結 ⇒ <strong><a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoScaling.html">Auto Scaling ElastiCache for Redis clusters</a></strong></p>
+<ul>
+<li>Redis 版本必須 6 以上</li>
+<li>Instance Family：R5, R6g, M5, M6g</li>
+<li>Instance size：large, xlarge, 2xlarge</li>
+</ul>
+<h2 id="Elasticache-AutoScaling-Policy"><a href="#Elasticache-AutoScaling-Policy" class="headerlink" title="Elasticache AutoScaling Policy"></a>Elasticache AutoScaling Policy</h2><ul>
+<li>每一個 target metrics 只會有一個 auto scaling policy</li>
+<li>Target metrics 支援 memory 及 primary cpu utilization</li>
+<li>Scale 類型可以選擇 shards 或 replicas</li>
+<li>Minimum and maximum capacity 設定區間，如果要調整上限可以到 aws service limit 填寫<ul>
+<li>shards 設定區間為 1~250</li>
+<li>replicas 設定區間為 1~5</li>
+</ul>
+</li>
+<li>Cold Down 預設 scale-out 為 600 秒，scale-in 為 900 秒</li>
+<li>Target Value 設定區間為 35~70</li>
+</ul>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><ul>
+<li><p><strong>步驟一、設定 auto scaling policy</strong></p>
+<ul>
+<li>當 memory 使用量達到 50% 可以增加到 3 個 shards，沒在使用可以縮減為 1 個 shard</li>
+</ul>
+</li>
+<li><p><strong>步驟二、確認 Cluster 的 Node 數量</strong></p>
+<ul>
+<li>使用 redis-benchmark 工具需要至少兩台 Node</li>
+</ul>
+</li>
+<li><p><strong>步驟三、建立 EC2 環境</strong></p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安裝 redis 6</span></span><br><span class="line">$ sudo amazon-linux-extras install redis6</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看工具版本</span></span><br><span class="line">$ redis-benchmark -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>步驟四、連線到 EC2 執行壓測指令</strong></p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 連線 redis 測試</span></span><br><span class="line">$ redis-cli -h &lt;endpoint&gt; -p 6379 -c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 連線進去 redis 查看 cluster 節點</span></span><br><span class="line">$ cluster nodes</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用set,get指令，來操作10240Bytes(10MB)資料大小，預設一次並行50個client總共會發十萬個請求</span></span><br><span class="line">$ redis-benchmark -t <span class="built_in">set</span>,get -d 10240 -h &lt;redis endpoint&gt; -p 6379 --cluster</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>步驟五、查看執行結果</strong></p>
+<ul>
+<li><p>執行完出現 <code>ERROR: ERR unknown command ‘Config’</code> 錯誤訊息，是因為 Elasticache 不支援該語法(<a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/RestrictedCommands.html">Restricted Redis Commands</a>)，但不影響壓測功能</p>
+</li>
+<li><p>顯示呼叫 SET 指令的資料(request數量、並行數量、資料大小等等)</p>
+<p>  <img src="/../images/redis/use-redis-benchmark-stress-test1.png" alt="use-redis-benchmark-stress-test1"></p>
+</li>
+<li><p>回報全部請求的平均速度(msec)</p>
+<p>  <img src="/../images/redis/use-redis-benchmark-stress-test2.png" alt="use-redis-benchmark-stress-test2"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>步驟六、觸發 Scale Out 機制</strong></p>
+<ul>
+<li><p>將壓測的資料大小改成 200 KB、並發 100 個且總共發 1百萬個請求</p>
+<p>  <img src="/../images/redis/use-redis-benchmark-stress-test3.png" alt="use-redis-benchmark-stress-test3"></p>
+</li>
+<li><p>伸縮機器都會觸發 resharding 機制，設定完大約會花費 17 分鐘左右，還是可以正常使用</p>
+</li>
+</ul>
+</li>
+<li><p><strong>步驟七、觸發 Scale In 機制</strong></p>
+<ul>
+<li><p>使用 flushall 將 Redis 資料清掉</p>
+<p>  <img src="/../images/redis/use-redis-benchmark-stress-test4.png" alt="use-redis-benchmark-stress-test4"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="影響-Redis-效能"><a href="#影響-Redis-效能" class="headerlink" title="影響 Redis 效能"></a>影響 Redis 效能</h2><ul>
+<li><strong>Network bandwidth and latency</strong><ul>
+<li>建議提高機器的網卡速度(1 GBits&#x2F;s → 10 GBits&#x2F;s)，來提高吞吐量</li>
+</ul>
+</li>
+<li><strong>CPU</strong><ul>
+<li>Redis 是單線程模型，適合大緩存快速 CPU 而不是多核，官方推薦 Intel CPU (AMD CPU 只有 Intel CPU 效能的一半)</li>
+</ul>
+</li>
+<li><strong>VM</strong><ul>
+<li>Redis 在 VM 上會變慢，因為虛擬化對普通操作會有額外的消耗</li>
+<li>建議把 Redis 運行在物理機器上，特別是很在意延遲</li>
+</ul>
+</li>
+<li><strong>Server 和 Client 都運行在同一個機器上</strong><ul>
+<li>同一台機器上，TCP&#x2F;IP loopback 和 unix domain sockets 都可以使用，對 Linux 來說，使用unix socket 可以比 TCP&#x2F;IP loopback 快 50%，Redis 預設會使用 TCP&#x2F;IP loopback</li>
+<li>使用大量的 pipeline，unix domain sockets 優勢就沒這麼明顯</li>
+<li>建議把 Server 和 Clinet 運行在不同機器上</li>
+</ul>
+</li>
+<li><strong>Memory</strong><ul>
+<li>盡可能大內存，千萬不要使用SWAP。注意32 位和64 位Redis 有不同的內存限制</li>
+</ul>
+</li>
+</ul>
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
+<li><strong><a href="https://medium.com/jerrynotes/redis-benchmark-316dca7d91a8">Jerry - Redis Benchmark</a></strong></li>
+<li><strong><a href="http://www.redis.cn/topics/benchmarks.html">Redis有多快?</a></strong></li>
+<li><strong><a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoScaling-Scaling-Adding-Policy-Shards.html">Adding a scaling policy</a></strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Database</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis - Replication 運作機制</title>
+    <url>/what-is-redis-replication/</url>
+    <content><![CDATA[<h2 id="Replica-類型"><a href="#Replica-類型" class="headerlink" title="Replica 類型"></a>Replica 類型</h2><ul>
+<li>整台機器：單一實例</li>
+<li>Shard：Cluster 模式</li>
+</ul>
+<h2 id="運作流程"><a href="#運作流程" class="headerlink" title="運作流程"></a>運作流程</h2><p><strong>名詞解釋</strong></p>
+<ul>
+<li>主節點(primary node )<ul>
+<li>主要用來 read&#x2F;write</li>
+</ul>
+</li>
+<li>從節點(replica node)<ul>
+<li>只能 read 不能 write，負責與主節點同步資料</li>
+</ul>
+</li>
+<li>Replication ID(runId)<ul>
+<li>每一個主節點都會有自己的 Replication ID，由 40 個隨機的十六進制字符組成</li>
+<li>當從節點初次複製主節點時，主節點會把 Replication ID 發給從節點保存，這樣從節點重新連線，主節點會拿 Replication ID 與自己的 ID 做比對來判斷是否為同一個</li>
+</ul>
+</li>
+<li>Replication id 和 offset (偏移量)<ul>
+<li>Replication ID 用來標記 data set 的歷史紀錄</li>
+<li>主從節點會各自維護 record (offset) 記錄</li>
+<li>offset 記錄的偏移量，用於判斷主從之間的數據差</li>
+</ul>
+</li>
+<li>Replication backlog<ul>
+<li>backlog buffer 是緩衝區，主節點只會有一個 backlog 與所有的從節點共用</li>
+<li>backlog 會累積主節點最近沒有同步給從節點的資料</li>
+<li>大小透過 repl-backlog-size 設置，預設大小為 1 MB</li>
+<li>TTL 透過 repl-backlog-ttl 設置，預設為 3600 秒</li>
+</ul>
+</li>
+</ul>
+<p><strong>流程</strong></p>
+<ul>
+<li>從節點使用**非同步(asynchronous)**的方式，從主節點複制資料到從節點上，當從節點加入到 redis cluster 後，從節點會拿 replication-id 及 offset 向主節點發起 psync (增量&#x2F;部分同步)，此時主節點會比對 replication-id 是否一致，若不一致 ，則會 reject psync，而執行 full-sync (全同步)，若 replication-id 一致，則會比對 offset 資料是否在 backlog buffer 中，若 offset 資料在 backlog buffer 中則執行 psync，反之 reject psync 而執行 full-sync。</li>
+<li>當主節點與從節點連線成功，主節點會持續送指令給從節點，當某些原因造成連線異常會延遲複製，之後從節點 reconnect 主節點會要求 partial sync (又稱為 psync)，如果 partial sync 失敗則會用 full sync 方式來同步</li>
+</ul>
+<h2 id="Replica-特性"><a href="#Replica-特性" class="headerlink" title="Replica 特性"></a><strong>Replica 特性</strong></h2><ul>
+<li>Replica 節點使用異步方式與 Primary 節點保持同步</li>
+<li>應用程式可以從任一節點(Primary&#x2F;Replica)進行讀取，但只能從主節點寫入資料</li>
+<li>Read Replicas 透過多個不同的 endpoints 來增加擴展性</li>
+<li>Read Replicas 透過複製主節點資料來改善容錯機制</li>
+</ul>
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
+<li><strong><strong><a href="https://medium.com/jerrynotes/redis-replication-%E5%90%8C%E6%AD%A5%E5%A6%82%E4%BD%95%E5%9F%B7%E8%A1%8C-ef48675f6918">Redis Replication 同步如何執行？</a></strong></strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Database</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
@@ -2832,130 +3014,6 @@
       </tags>
   </entry>
   <entry>
-    <title>使用 Redis Benchmark 進行壓力測試</title>
-    <url>/use-redis-benchmark-stress-test/</url>
-    <content><![CDATA[<h2 id="Redis-Benchmark"><a href="#Redis-Benchmark" class="headerlink" title="Redis Benchmark"></a>Redis Benchmark</h2><ul>
-<li>Redis 版本 6 才會有 <code>--cluster</code> 參數使用</li>
-<li>Cluster 的 master node 必須要 2 台以上，才可以進行壓測</li>
-<li>只會針對 master node 進行壓測，slave node 則不會</li>
-<li>用來模擬 N 個客戶端同時發出 M 個請求</li>
-<li>參數認識<ul>
-<li><code>-n &lt;requests&gt;</code>：要發送的 request 數量 (預設 100,000)</li>
-<li><code>-d &lt;data size&gt;</code>：執行 SET&#x2F;GET 指令操作的資料大小 (預設 2 bytes )</li>
-<li><code>-c &lt;clients&gt;</code>：平行的連線數 (預設 50)</li>
-<li><code>-t &lt;tests&gt;</code>：指定要執行的指令(預設是全跑)</li>
-<li><code>-r &lt;random keyspacelen&gt;</code>：使用隨機的 key (指定範圍)</li>
-<li><code>-P &lt;pipeline&gt;</code>：發送 Request 的 Pipeline 數量 (預設 1 條)</li>
-<li><code>-q &lt;quite&gt;</code>：只顯示 query&#x2F;sec 值 (預設會顯示詳細報告)</li>
-<li><code>-h &lt;host&gt;</code>：Redis Endpoint</li>
-<li><code>-p &lt;port&gt;</code>：開放 Port</li>
-<li><code>--cluster</code>：指定 Redis Cluster 模式</li>
-</ul>
-</li>
-</ul>
-<h2 id="Elasticache-AutoScaling-Limit"><a href="#Elasticache-AutoScaling-Limit" class="headerlink" title="Elasticache AutoScaling Limit"></a>Elasticache AutoScaling Limit</h2><p>參考連結 ⇒ <strong><a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoScaling.html">Auto Scaling ElastiCache for Redis clusters</a></strong></p>
-<ul>
-<li>Redis 版本必須 6 以上</li>
-<li>Instance Family：R5, R6g, M5, M6g</li>
-<li>Instance size：large, xlarge, 2xlarge</li>
-</ul>
-<h2 id="Elasticache-AutoScaling-Policy"><a href="#Elasticache-AutoScaling-Policy" class="headerlink" title="Elasticache AutoScaling Policy"></a>Elasticache AutoScaling Policy</h2><ul>
-<li>每一個 target metrics 只會有一個 auto scaling policy</li>
-<li>Target metrics 支援 memory 及 primary cpu utilization</li>
-<li>Scale 類型可以選擇 shards 或 replicas</li>
-<li>Minimum and maximum capacity 設定區間，如果要調整上限可以到 aws service limit 填寫<ul>
-<li>shards 設定區間為 1~250</li>
-<li>replicas 設定區間為 1~5</li>
-</ul>
-</li>
-<li>Cold Down 預設 scale-out 為 600 秒，scale-in 為 900 秒</li>
-<li>Target Value 設定區間為 35~70</li>
-</ul>
-<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><ul>
-<li><p><strong>步驟一、設定 auto scaling policy</strong></p>
-<ul>
-<li>當 memory 使用量達到 50% 可以增加到 3 個 shards，沒在使用可以縮減為 1 個 shard</li>
-</ul>
-</li>
-<li><p><strong>步驟二、確認 Cluster 的 Node 數量</strong></p>
-<ul>
-<li>使用 redis-benchmark 工具需要至少兩台 Node</li>
-</ul>
-</li>
-<li><p><strong>步驟三、建立 EC2 環境</strong></p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安裝 redis 6</span></span><br><span class="line">$ sudo amazon-linux-extras install redis6</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看工具版本</span></span><br><span class="line">$ redis-benchmark -v</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>步驟四、連線到 EC2 執行壓測指令</strong></p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 連線 redis 測試</span></span><br><span class="line">$ redis-cli -h &lt;endpoint&gt; -p 6379 -c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 連線進去 redis 查看 cluster 節點</span></span><br><span class="line">$ cluster nodes</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用set,get指令，來操作10240Bytes(10MB)資料大小，預設一次並行50個client總共會發十萬個請求</span></span><br><span class="line">$ redis-benchmark -t <span class="built_in">set</span>,get -d 10240 -h &lt;redis endpoint&gt; -p 6379 --cluster</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>步驟五、查看執行結果</strong></p>
-<ul>
-<li><p>執行完出現 <code>ERROR: ERR unknown command ‘Config’</code> 錯誤訊息，是因為 Elasticache 不支援該語法(<a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/RestrictedCommands.html">Restricted Redis Commands</a>)，但不影響壓測功能</p>
-</li>
-<li><p>顯示呼叫 SET 指令的資料(request數量、並行數量、資料大小等等)</p>
-<p>  <img src="/../images/redis/use-redis-benchmark-stress-test1.png" alt="use-redis-benchmark-stress-test1"></p>
-</li>
-<li><p>回報全部請求的平均速度(msec)</p>
-<p>  <img src="/../images/redis/use-redis-benchmark-stress-test2.png" alt="use-redis-benchmark-stress-test2"></p>
-</li>
-</ul>
-</li>
-<li><p><strong>步驟六、觸發 Scale Out 機制</strong></p>
-<ul>
-<li><p>將壓測的資料大小改成 200 KB、並發 100 個且總共發 1百萬個請求</p>
-<p>  <img src="/../images/redis/use-redis-benchmark-stress-test3.png" alt="use-redis-benchmark-stress-test3"></p>
-</li>
-<li><p>伸縮機器都會觸發 resharding 機制，設定完大約會花費 17 分鐘左右，還是可以正常使用</p>
-</li>
-</ul>
-</li>
-<li><p><strong>步驟七、觸發 Scale In 機制</strong></p>
-<ul>
-<li><p>使用 flushall 將 Redis 資料清掉</p>
-<p>  <img src="/../images/redis/use-redis-benchmark-stress-test4.png" alt="use-redis-benchmark-stress-test4"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="影響-Redis-效能"><a href="#影響-Redis-效能" class="headerlink" title="影響 Redis 效能"></a>影響 Redis 效能</h2><ul>
-<li><strong>Network bandwidth and latency</strong><ul>
-<li>建議提高機器的網卡速度(1 GBits&#x2F;s → 10 GBits&#x2F;s)，來提高吞吐量</li>
-</ul>
-</li>
-<li><strong>CPU</strong><ul>
-<li>Redis 是單線程模型，適合大緩存快速 CPU 而不是多核，官方推薦 Intel CPU (AMD CPU 只有 Intel CPU 效能的一半)</li>
-</ul>
-</li>
-<li><strong>VM</strong><ul>
-<li>Redis 在 VM 上會變慢，因為虛擬化對普通操作會有額外的消耗</li>
-<li>建議把 Redis 運行在物理機器上，特別是很在意延遲</li>
-</ul>
-</li>
-<li><strong>Server 和 Client 都運行在同一個機器上</strong><ul>
-<li>同一台機器上，TCP&#x2F;IP loopback 和 unix domain sockets 都可以使用，對 Linux 來說，使用unix socket 可以比 TCP&#x2F;IP loopback 快 50%，Redis 預設會使用 TCP&#x2F;IP loopback</li>
-<li>使用大量的 pipeline，unix domain sockets 優勢就沒這麼明顯</li>
-<li>建議把 Server 和 Clinet 運行在不同機器上</li>
-</ul>
-</li>
-<li><strong>Memory</strong><ul>
-<li>盡可能大內存，千萬不要使用SWAP。注意32 位和64 位Redis 有不同的內存限制</li>
-</ul>
-</li>
-</ul>
-<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
-<li><strong><a href="https://medium.com/jerrynotes/redis-benchmark-316dca7d91a8">Jerry - Redis Benchmark</a></strong></li>
-<li><strong><a href="http://www.redis.cn/topics/benchmarks.html">Redis有多快?</a></strong></li>
-<li><strong><a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoScaling-Scaling-Adding-Policy-Shards.html">Adding a scaling policy</a></strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Database</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Redis 簡介</title>
     <url>/what-is-redis/</url>
     <content><![CDATA[<h2 id="什麼是-Redis"><a href="#什麼是-Redis" class="headerlink" title="什麼是 Redis"></a>什麼是 Redis</h2><ul>
@@ -3079,64 +3137,6 @@
 <li><strong><strong><a href="https://www.readfog.com/a/1636087731802181632">Redis 爲什麼要分 16 個庫</a></strong></strong></li>
 <li><strong><strong><a href="https://www.readfog.com/a/1678019908615639040">Redis 內存淘汰機制詳解</a></strong></strong></li>
 <li><strong><strong><a href="https://www.readfog.com/a/1657226667469410304">Redis 多線程演進</a></strong></strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Database</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis - Replication 運作機制</title>
-    <url>/what-is-redis-replication/</url>
-    <content><![CDATA[<h2 id="Replica-類型"><a href="#Replica-類型" class="headerlink" title="Replica 類型"></a>Replica 類型</h2><ul>
-<li>整台機器：單一實例</li>
-<li>Shard：Cluster 模式</li>
-</ul>
-<h2 id="運作流程"><a href="#運作流程" class="headerlink" title="運作流程"></a>運作流程</h2><p><strong>名詞解釋</strong></p>
-<ul>
-<li>主節點(primary node )<ul>
-<li>主要用來 read&#x2F;write</li>
-</ul>
-</li>
-<li>從節點(replica node)<ul>
-<li>只能 read 不能 write，負責與主節點同步資料</li>
-</ul>
-</li>
-<li>Replication ID(runId)<ul>
-<li>每一個主節點都會有自己的 Replication ID，由 40 個隨機的十六進制字符組成</li>
-<li>當從節點初次複製主節點時，主節點會把 Replication ID 發給從節點保存，這樣從節點重新連線，主節點會拿 Replication ID 與自己的 ID 做比對來判斷是否為同一個</li>
-</ul>
-</li>
-<li>Replication id 和 offset (偏移量)<ul>
-<li>Replication ID 用來標記 data set 的歷史紀錄</li>
-<li>主從節點會各自維護 record (offset) 記錄</li>
-<li>offset 記錄的偏移量，用於判斷主從之間的數據差</li>
-</ul>
-</li>
-<li>Replication backlog<ul>
-<li>backlog buffer 是緩衝區，主節點只會有一個 backlog 與所有的從節點共用</li>
-<li>backlog 會累積主節點最近沒有同步給從節點的資料</li>
-<li>大小透過 repl-backlog-size 設置，預設大小為 1 MB</li>
-<li>TTL 透過 repl-backlog-ttl 設置，預設為 3600 秒</li>
-</ul>
-</li>
-</ul>
-<p><strong>流程</strong></p>
-<ul>
-<li>從節點使用**非同步(asynchronous)**的方式，從主節點複制資料到從節點上，當從節點加入到 redis cluster 後，從節點會拿 replication-id 及 offset 向主節點發起 psync (增量&#x2F;部分同步)，此時主節點會比對 replication-id 是否一致，若不一致 ，則會 reject psync，而執行 full-sync (全同步)，若 replication-id 一致，則會比對 offset 資料是否在 backlog buffer 中，若 offset 資料在 backlog buffer 中則執行 psync，反之 reject psync 而執行 full-sync。</li>
-<li>當主節點與從節點連線成功，主節點會持續送指令給從節點，當某些原因造成連線異常會延遲複製，之後從節點 reconnect 主節點會要求 partial sync (又稱為 psync)，如果 partial sync 失敗則會用 full sync 方式來同步</li>
-</ul>
-<h2 id="Replica-特性"><a href="#Replica-特性" class="headerlink" title="Replica 特性"></a><strong>Replica 特性</strong></h2><ul>
-<li>Replica 節點使用異步方式與 Primary 節點保持同步</li>
-<li>應用程式可以從任一節點(Primary&#x2F;Replica)進行讀取，但只能從主節點寫入資料</li>
-<li>Read Replicas 透過多個不同的 endpoints 來增加擴展性</li>
-<li>Read Replicas 透過複製主節點資料來改善容錯機制</li>
-</ul>
-<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
-<li><strong><strong><a href="https://medium.com/jerrynotes/redis-replication-%E5%90%8C%E6%AD%A5%E5%A6%82%E4%BD%95%E5%9F%B7%E8%A1%8C-ef48675f6918">Redis Replication 同步如何執行？</a></strong></strong></li>
 </ul>
 ]]></content>
       <categories>

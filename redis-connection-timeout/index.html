@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="問題描述 Laravel Job 讀取 redis 快取資料等待時間，超過 job 上限時間造成 timeout 程式無法執行完  查看 AWS metrics 發現 Network Bandwidth 超過限制，造成封包遺失或斷線問題  redis 背後運行是一台 instance，大部分網路頻寬上限都是 10 Gbps，所以當取得的值太大又同時被很多 client 存取，很容易就會達到上限">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 連線逾時">
+<meta property="og:url" content="https://jefferylee73.github.io/redis-connection-timeout/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="問題描述 Laravel Job 讀取 redis 快取資料等待時間，超過 job 上限時間造成 timeout 程式無法執行完  查看 AWS metrics 發現 Network Bandwidth 超過限制，造成封包遺失或斷線問題  redis 背後運行是一台 instance，大部分網路頻寬上限都是 10 Gbps，所以當取得的值太大又同時被很多 client 存取，很容易就會達到上限">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://jefferylee73.github.io/images/redis/redis-connection-timeout1.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/redis/redis-connection-timeout2.png">
+<meta property="article:published_time" content="2022-12-15T03:40:54.000Z">
+<meta property="article:modified_time" content="2023-04-21T01:45:34.279Z">
+<meta property="article:author" content="Jeffery Lee">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jefferylee73.github.io/images/redis/redis-connection-timeout1.png">
+
+<link rel="canonical" href="https://jefferylee73.github.io/redis-connection-timeout/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Redis 連線逾時 | 傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/redis-connection-timeout/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis 連線逾時
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-12-15 11:40:54" itemprop="dateCreated datePublished" datetime="2022-12-15T11:40:54+08:00">2022-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><ul>
+<li><p>Laravel Job 讀取 redis 快取資料等待時間，超過 job 上限時間造成 timeout 程式無法執行完</p>
+</li>
+<li><p>查看 AWS metrics 發現 Network Bandwidth 超過限制，造成封包遺失或斷線問題</p>
+<ul>
+<li>redis 背後運行是一台 <a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/ec2/instance-types/">instance</a>，大部分網路頻寬上限都是 10 Gbps，所以當取得的值太大又同時被很多 client 存取，很容易就會達到上限</li>
+</ul>
+<p>  <img src="/../images/redis/redis-connection-timeout1.png" alt="redis-connection-timeout1"></p>
+</li>
+<li><p>現有 redis 架構是 standalone，隨著使用需求提高，如果沒有擴展機器數量或提升機器規格，容易機器回應較慢</p>
+</li>
+</ul>
+<h2 id="AWS-提供解決方法"><a href="#AWS-提供解決方法" class="headerlink" title="AWS 提供解決方法"></a>AWS 提供解決方法</h2><ol>
+<li>最簡單方式：就是提高機器等級</li>
+<li>最佳方式：使用 redis cluster 架構，透過 data partition and sharding 將資料分成小部分並分散在不同機器，再透過 autoscaling 方式水平擴展 shards，降低單一機器的負載</li>
+</ol>
+<h2 id="Redis-架構：從-Standalone-改成-Cluster"><a href="#Redis-架構：從-Standalone-改成-Cluster" class="headerlink" title="Redis 架構：從 Standalone 改成 Cluster"></a>Redis 架構：從 Standalone 改成 Cluster</h2><ul>
+<li>需要更了解 redis，可以參考 redis 系列筆記</li>
+<li>standalone 支援多個 db，但 cluster 只支援 db0</li>
+</ul>
+<p><strong>操作步驟</strong></p>
+<ol>
+<li><p>建立 EC2</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 安裝 redis-cli</span><br><span class="line">$ sudo amazon-linux-extras install redis6</span><br><span class="line"></span><br><span class="line"># 安裝 docker</span><br><span class="line">$ sudo yum install -y docker</span><br><span class="line">$ sudo service docker restart</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>將原本的 Redis 搬移資料到 db0</p>
+<ul>
+<li>如果只有一台 Redis 要搬遷資料，可以直接使用第 4 步加上 –db 參數</li>
+<li>使用 redis-cli 指令連線或 <strong><a target="_blank" rel="noopener" href="https://github.com/qishibo/AnotherRedisDesktopManager">AnotherRedisDesktopManager</a></strong> 應用程式</li>
+</ul>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># numkeys: 0</span><br><span class="line"># ARGV[1]: the cursor for SCAN, initially 0</span><br><span class="line"># ARGV[2]: the destination database. E.g. 0</span><br><span class="line"></span><br><span class="line">127.0.0.1 6379 &gt; EVAL &quot;local result = redis.call(&#x27;SCAN&#x27;, ARGV[1]) \n local conflict = &#123;&#125; \n local moved = &#123;&#125; \n for _,key in ipairs(result[2]) do \n     if redis.call(&#x27;MOVE&#x27;, key, ARGV[2]) == 0 then \n         table.insert(conflict, key) \n else \n     table.insert(moved, key) \n     end \n end \n result[2] = conflict \n result[3] = moved \n return result&quot; 0 0 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立 redis cluster</p>
+<p> <img src="/../images/redis/redis-connection-timeout2.png" alt="redis-connection-timeout2"></p>
+</li>
+<li><p>連線到 EC2 執行同步指令(<strong><a target="_blank" rel="noopener" href="https://developer.redis.com/riot/riot-redis/index.html#_install">RIOT-Redis</a></strong>)</p>
+<ul>
+<li>預設 db 0 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run fieldengineering/riot-redis -h &lt;source endpoint&gt; -p 6379 \</span><br><span class="line">replicate -h &lt;target endpoint&gt; -p 6379 --cluster --mode live</span><br></pre></td></tr></table></figure></li>
+<li>指定其他 db <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run fieldengineering/riot-redis -h &lt;source endpoint&gt; -p 6379 --db &lt;db number&gt; \</span><br><span class="line">replicate -h &lt;target endpoint&gt; -p 6379 --cluster --mode live</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="參考文件"><a href="#參考文件" class="headerlink" title="參考文件"></a>參考文件</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_tw/AmazonElastiCache/latest/red-ug/TroubleshootingConnections.html#Network-limits"><strong>Elasticache 故障排除</strong></a></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://repost.aws/questions/QUv105xDmfQMGUiBbfeYW-iQ/elasticache-shows-network-in-and-out-as-exceeded-but-how">Elasticache shows network in and out as exceeded, but how?</a></strong></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/59936252/it-is-possible-to-merge-two-separate-dbs-e-g-db0-db1-running-in-one-single-r">It is possible to merge two separate DBs (e.g. db0, db1) running in one single Redis instance (6379) into one single DB (db0)?</a></strong></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/redis-infra-sentinel/" rel="prev" title="Redis 架構 - 哨兵(Sentinel)">
+      <i class="fa fa-chevron-left"></i> Redis 架構 - 哨兵(Sentinel)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/use-redis-benchmark-stress-test/" rel="next" title="使用 Redis Benchmark 進行壓力測試">
+      使用 Redis Benchmark 進行壓力測試 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%95%8F%E9%A1%8C%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">問題描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AWS-%E6%8F%90%E4%BE%9B%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">AWS 提供解決方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-%E6%9E%B6%E6%A7%8B%EF%BC%9A%E5%BE%9E-Standalone-%E6%94%B9%E6%88%90-Cluster"><span class="nav-number">3.</span> <span class="nav-text">Redis 架構：從 Standalone 改成 Cluster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">參考文件</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

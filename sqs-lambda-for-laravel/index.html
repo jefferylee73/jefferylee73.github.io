@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言提要 Lambda 預設沒有提供 PHP 語言，需要透過 bref 套件引用 custom runtime 才可以跑 Laravel  雲端前置步驟步驟一、建立 IAM  名稱為 role-for-lambda use case 選擇 Lambda 加入 Policy 讓 Lambda 使用 CloudWatch 服務 AWSLambdaBasicExecutionRole 讓 Lambda">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 SQS + Lambda - Laravel 篇">
+<meta property="og:url" content="https://jefferylee73.github.io/sqs-lambda-for-laravel/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="前言提要 Lambda 預設沒有提供 PHP 語言，需要透過 bref 套件引用 custom runtime 才可以跑 Laravel  雲端前置步驟步驟一、建立 IAM  名稱為 role-for-lambda use case 選擇 Lambda 加入 Policy 讓 Lambda 使用 CloudWatch 服務 AWSLambdaBasicExecutionRole 讓 Lambda">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://jefferylee73.github.io/images/laravel/sqs-lambda-for-laravel1.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/laravel/sqs-lambda-for-laravel2.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/laravel/sqs-lambda-for-laravel3.png">
+<meta property="article:published_time" content="2022-11-16T08:53:05.000Z">
+<meta property="article:modified_time" content="2023-04-21T01:45:34.279Z">
+<meta property="article:author" content="Jeffery Lee">
+<meta property="article:tag" content="SQS">
+<meta property="article:tag" content="Lambda">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jefferylee73.github.io/images/laravel/sqs-lambda-for-laravel1.png">
+
+<link rel="canonical" href="https://jefferylee73.github.io/sqs-lambda-for-laravel/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>使用 SQS + Lambda - Laravel 篇 | 傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/sqs-lambda-for-laravel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用 SQS + Lambda - Laravel 篇
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 16:53:05" itemprop="dateCreated datePublished" datetime="2022-11-16T16:53:05+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laravel/" itemprop="url" rel="index"><span itemprop="name">Laravel</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>4 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言提要"><a href="#前言提要" class="headerlink" title="前言提要"></a>前言提要</h2><ul>
+<li>Lambda 預設沒有提供 PHP 語言，需要透過 bref 套件引用 custom runtime 才可以跑 Laravel</li>
+</ul>
+<h2 id="雲端前置步驟"><a href="#雲端前置步驟" class="headerlink" title="雲端前置步驟"></a>雲端前置步驟</h2><p><strong>步驟一、建立 IAM</strong></p>
+<ul>
+<li>名稱為 role-for-lambda</li>
+<li>use case 選擇 Lambda</li>
+<li>加入 Policy<ul>
+<li>讓 Lambda 使用 CloudWatch 服務 <code>AWSLambdaBasicExecutionRole</code></li>
+<li>讓 Lambda 使用 SQS 服務 <code>AmazonSQSFullAccess</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>步驟二、建立兩個 SQS</strong></p>
+<ul>
+<li>名稱分別為 <code>default-queue</code>、<code>another-queue</code></li>
+<li>其他設定照預設即可</li>
+</ul>
+<blockquote>
+<p>serverless 整合 CDK 可以使用 <a target="_blank" rel="noopener" href="https://github.com/getlift/lift">Lift Plugin</a>，可以省去手動建立的時間</p>
+</blockquote>
+<h2 id="專案啟動到部署步驟"><a href="#專案啟動到部署步驟" class="headerlink" title="專案啟動到部署步驟"></a>專案啟動到部署步驟</h2><p><strong>步驟一、建立 Laravel 專案</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安裝 composer</span></span><br><span class="line">brew install composer</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立專案</span></span><br><span class="line">composer create-project laravel/laravel &lt;專案名稱 ex: sqs-lambda-for-laravel&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 啟動專案測試</span></span><br><span class="line">php artisan serve</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟二、使用 bref 套件</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安裝 bref 套件</span></span><br><span class="line">composer require bref/bref bref/laravel-bridge</span><br><span class="line"></span><br><span class="line"><span class="comment"># 套用 bref 的 serverless.yml</span></span><br><span class="line">php artisan vendor:publish --tag=serverless-config</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟三、建立 worker.php，用來當作 Lambda 的入口</strong></p>
+<p>參考專案 ⇒ <strong><strong><a target="_blank" rel="noopener" href="https://github.com/brefphp/examples">Bref example applications</a></strong></strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Bref</span>\<span class="title">LaravelBridge</span>\<span class="title">Queue</span>\<span class="title">LaravelSqsHandler</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Application</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span> <span class="keyword">__DIR__</span> . <span class="string">&#x27;/vendor/autoload.php&#x27;</span>;</span><br><span class="line"><span class="comment">/** <span class="doctag">@var</span> Application $app */</span></span><br><span class="line"><span class="variable">$app</span> = <span class="keyword">require</span> <span class="keyword">__DIR__</span> . <span class="string">&#x27;/bootstrap/app.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$kernel</span> = <span class="variable">$app</span>-&gt;<span class="title function_ invoke__">make</span>(<span class="title class_">Illuminate\Contracts\Console\Kernel</span>::<span class="variable language_">class</span>);</span><br><span class="line"><span class="variable">$kernel</span>-&gt;<span class="title function_ invoke__">bootstrap</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="variable">$app</span>-&gt;<span class="title function_ invoke__">makeWith</span>(<span class="title class_">LaravelSqsHandler</span>::<span class="variable language_">class</span>, [</span><br><span class="line">    <span class="string">&#x27;connection&#x27;</span> =&gt; <span class="string">&#x27;sqs&#x27;</span>, // this is the Laravel Queue connection</span><br><span class="line">    <span class="string">&#x27;queue&#x27;</span> =&gt; <span class="title function_ invoke__">getenv</span>(<span class="string">&#x27;SQS_QUEUE&#x27;</span>),</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟四、修改 serverless.yml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 當作建立 AWS 服務的 prefix</span></span><br><span class="line"><span class="attr">service:</span> <span class="string">sqs-lambda-for-laravel</span></span><br><span class="line"></span><br><span class="line"><span class="attr">provider:</span></span><br><span class="line">    <span class="comment"># 設定 Lambda execute role</span></span><br><span class="line">    <span class="attr">iam:</span></span><br><span class="line">      <span class="attr">role:</span> <span class="string">arn:aws:iam::&lt;account</span> <span class="string">id&gt;:role/example-sqs-lambda-for-laravel</span></span><br><span class="line">    <span class="comment"># 設定 Lambda 環境變數</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">APP_ENV:</span> <span class="string">local</span></span><br><span class="line">      <span class="attr">APP_DEBUG:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">APP_KEY:</span> <span class="string">&#x27;base64:WQUEgE4Jjbn4ixFeyxLFkYi03gYM4Kl6Q9WgzZpThh8=&#x27;</span></span><br><span class="line">      <span class="attr">SQS_PREFIX:</span> <span class="string">https://sqs.&lt;region&gt;.amazonaws.com/&lt;account</span> <span class="string">id&gt;</span></span><br><span class="line">      <span class="attr">SQS_QUEUE:</span> <span class="string">&lt;default</span> <span class="string">queue</span> <span class="string">name&gt;</span></span><br><span class="line">      <span class="attr">QUEUE_CONNECTION:</span> <span class="string">sqs</span></span><br><span class="line">      <span class="attr">LOG_CHANNEL:</span> <span class="string">stderr</span>     <span class="string">&lt;=</span> <span class="string">將</span> <span class="string">log</span> <span class="string">傳送到</span> <span class="string">cloudwatch</span></span><br><span class="line">      <span class="attr">CACHE_DRIVER:</span> <span class="string">array</span></span><br><span class="line">      <span class="attr">SESSION_DRIVER:</span> <span class="string">array</span></span><br><span class="line">    <span class="attr">apiGateway:</span></span><br><span class="line">      <span class="attr">shouldStartNameWithService:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 設定打包 zip 略過的資料夾或檔案</span></span><br><span class="line"><span class="attr">package:</span></span><br><span class="line">    <span class="attr">patterns:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&#x27;!node_modules/**&#x27;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&#x27;!public/storage&#x27;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&#x27;!resources/assets/**&#x27;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&#x27;!storage/**&#x27;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&#x27;!tests/**&#x27;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&#x27;!.env&#x27;</span>    <span class="string">&lt;=</span> <span class="string">不要包</span> <span class="string">.env</span> <span class="string">檔案</span></span><br><span class="line"></span><br><span class="line"><span class="attr">functions:</span></span><br><span class="line">    <span class="comment"># 設定後端 API (此範例用來發 job 給 SQS)</span></span><br><span class="line">    <span class="attr">api:</span></span><br><span class="line">      <span class="attr">handler:</span> <span class="string">public/index.php</span></span><br><span class="line">      <span class="attr">timeout:</span> <span class="number">28</span></span><br><span class="line">      <span class="attr">layers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">$&#123;bref:layer.php-81-fpm&#125;</span></span><br><span class="line">      <span class="attr">events:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">httpApi:</span> <span class="string">&#x27;*&#x27;</span></span><br><span class="line">    <span class="comment"># 設定 default lambda worker 及監聽對應的 Queue</span></span><br><span class="line">    <span class="attr">defaultWorker:</span></span><br><span class="line">      <span class="attr">handler:</span> <span class="string">worker.php</span></span><br><span class="line">      <span class="attr">layers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">$&#123;bref:layer.php-81&#125;</span></span><br><span class="line">      <span class="attr">environment:</span></span><br><span class="line">        <span class="attr">SQS_QUEUE:</span> <span class="string">default-queue</span></span><br><span class="line">      <span class="attr">events:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">sqs:</span></span><br><span class="line">            <span class="attr">arn:</span> <span class="string">arn:aws:sqs:us-west-2:&lt;account</span> <span class="string">id&gt;:default-queue</span></span><br><span class="line">            <span class="attr">batchSize:</span> <span class="number">1</span></span><br><span class="line">    <span class="comment"># 設定 another lambda worker 及監聽對應的 Queue</span></span><br><span class="line">    <span class="attr">anotherWorker:</span></span><br><span class="line">      <span class="attr">handler:</span> <span class="string">worker.php</span></span><br><span class="line">      <span class="attr">layers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">$&#123;bref:layer.php-81&#125;</span></span><br><span class="line">      <span class="attr">environment:</span></span><br><span class="line">        <span class="attr">SQS_QUEUE:</span> <span class="string">another-queue</span></span><br><span class="line">      <span class="attr">events:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">sqs:</span></span><br><span class="line">            <span class="attr">arn:</span> <span class="string">arn:aws:sqs:us-west-2:&lt;account</span> <span class="string">id&gt;:another-queue</span></span><br><span class="line">            <span class="attr">batchSize:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟五、修改 queue.php</strong></p>
+<ul>
+<li><p>加上 token 參數</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;sqs&#x27;</span> =&gt; [</span><br><span class="line">		...</span><br><span class="line">    <span class="string">&#x27;token&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;AWS_SESSION_TOKEN&#x27;</span>)</span><br><span class="line">		...</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>步驟六、建立 Job</strong></p>
+<ul>
+<li><p>建立 CreateOrder Job</p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">php</span> <span class="string">artisan</span> <span class="string">make:job</span> <span class="string">CreateOrder</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改 CreateOrder Job 程式碼</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Jobs</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Bus</span>\<span class="title">Queueable</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Contracts</span>\<span class="title">Queue</span>\<span class="title">ShouldBeUnique</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Contracts</span>\<span class="title">Queue</span>\<span class="title">ShouldQueue</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Bus</span>\<span class="title">Dispatchable</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Queue</span>\<span class="title">InteractsWithQueue</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Queue</span>\<span class="title">SerializesModels</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Log</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CreateOrder</span> <span class="keyword">implements</span> <span class="title">ShouldQueue</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">use</span> <span class="title">Dispatchable</span>, <span class="title">InteractsWithQueue</span>, <span class="title">Queueable</span>, <span class="title">SerializesModels</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** <span class="doctag">@var</span> int <span class="doctag">@orderId</span> */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$orderId</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Create a new job instance.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$orderId</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;orderId = <span class="variable">$orderId</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Execute the job.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="title class_">Log</span>::<span class="title function_ invoke__">info</span>(<span class="string">&quot;建立 Order ID: $&#123;orderId&#125;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>步驟七、發送 Job 到 SQS</strong></p>
+<ul>
+<li><p>修改 routes&#x2F;web.php</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Route</span>::<span class="title function_ invoke__">get</span>(<span class="string">&#x27;/create-order/&#123;id&#125;/&#123;queue&#125;&#x27;</span>, function(<span class="variable">$id</span>, <span class="variable">$queue</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="title function_ invoke__">in_array</span>(<span class="variable">$queue</span>, [<span class="string">&#x27;default-queue&#x27;</span>, <span class="string">&#x27;another-queue&#x27;</span>])) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_ invoke__">response</span>()-&gt;<span class="title function_ invoke__">json</span>([</span><br><span class="line">            <span class="string">&#x27;error_message&#x27;</span> =&gt; <span class="string">&quot;目前沒有提供 $&#123;queue&#125; Queue&quot;</span></span><br><span class="line">        ]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title class_">CreateOrder</span>::<span class="title function_ invoke__">dispatch</span>(<span class="variable">$id</span>)-&gt;<span class="title function_ invoke__">onQueue</span>(<span class="variable">$queue</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">response</span>()-&gt;<span class="title function_ invoke__">json</span>([</span><br><span class="line">        <span class="string">&#x27;status&#x27;</span>    =&gt; <span class="string">&#x27;done&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;orderId&#x27;</span>   =&gt; <span class="variable">$id</span>,</span><br><span class="line">        <span class="string">&#x27;queue&#x27;</span>     =&gt; <span class="variable">$queue</span></span><br><span class="line">    ]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>步驟八、使用 serverless 部署</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安裝 serverless</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">-g</span> <span class="string">serverless</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 設定 credentials</span></span><br><span class="line"></span><br><span class="line"><span class="string">serverless</span> <span class="string">config</span> <span class="string">credentials</span> <span class="string">--provider</span> <span class="string">aws</span> <span class="string">--key</span> <span class="string">&lt;key&gt;</span> <span class="string">--secret</span> <span class="string">&lt;secret&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清除快取</span></span><br><span class="line"><span class="string">php</span> <span class="string">artisan</span> <span class="string">config:clear</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 部署</span></span><br><span class="line"><span class="string">serverless</span> <span class="string">deploy</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>原始碼可參考 <a target="_blank" rel="noopener" href="https://github.com/jefferylee73/sqs-lambda-for-laravel">sqs-lambda-for-laravel</a></p>
+</blockquote>
+<h2 id="SQS-Lambda-整合測試"><a href="#SQS-Lambda-整合測試" class="headerlink" title="SQS + Lambda 整合測試"></a>SQS + Lambda 整合測試</h2><ul>
+<li><p>呼叫前面建立的 api</p>
+<p>  <img src="/../images/laravel/sqs-lambda-for-laravel1.png" alt="sqs-lambda-for-laravel1"></p>
+</li>
+<li><p>查看 SQS receive message 數量</p>
+<p>  <img src="/../images/laravel/sqs-lambda-for-laravel2.png" alt="sqs-lambda-for-laravel2"></p>
+</li>
+<li><p>查看 Lambda Log 結果</p>
+<p>  <img src="/../images/laravel/sqs-lambda-for-laravel3.png" alt="sqs-lambda-for-laravel3"></p>
+</li>
+</ul>
+<h2 id="Laravel-注意事項"><a href="#Laravel-注意事項" class="headerlink" title="Laravel 注意事項"></a>Laravel 注意事項</h2><ul>
+<li>Lambda 的 &#x2F;tmp 資料夾是 read-only</li>
+<li>FILESYSTEM_DRIVER 建議改成用 S3</li>
+<li>當程式碼 size 增加，也會增加 Cold Star 時間</li>
+</ul>
+<h2 id="TroubleShoot"><a href="#TroubleShoot" class="headerlink" title="TroubleShoot"></a>TroubleShoot</h2><p><strong>問題一、當遇到權限問題可以使用 StsClient 類別查看 IAM 身份</strong></p>
+<ul>
+<li>Classes 相關使用可參考 ⇒ <strong><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/aws-sdk-php/v3/api/index.html">AWS SDK for PHP 3.x</a></strong></li>
+<li>可參考下方程式碼</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$client</span> = <span class="keyword">new</span> <span class="title class_">StsClient</span>([</span><br><span class="line">    <span class="string">&#x27;region&#x27;</span> =&gt; <span class="string">&#x27;us-west-2&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;version&#x27;</span> =&gt; <span class="string">&#x27;latest&#x27;</span></span><br><span class="line">]);</span><br><span class="line"><span class="keyword">return</span> <span class="variable">$client</span>-&gt;<span class="title function_ invoke__">getCallerIdentity</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://aws.plainenglish.io/serverless-laravel-made-easy-with-bref-cdbeeed53ef4">Serverless Laravel Made Easy with Bref</a></strong></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://azole.medium.com/%E7%94%A8-bref-1-0-%E8%AE%93-laravel-8-serverless-%E8%B5%B7%E4%BE%86-6f2b5416c372">用 Bref 1.0 讓 Laravel 8 serverless 起來</a></strong></strong></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SQS/" rel="tag"># SQS</a>
+              <a href="/tags/Lambda/" rel="tag"># Lambda</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/setup-ftp-by-vsftpd/" rel="prev" title="使用 VSFTPD 架設 FTP  Server">
+      <i class="fa fa-chevron-left"></i> 使用 VSFTPD 架設 FTP  Server
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/sqs-lambda-for-nodejs/" rel="next" title="使用 SQS + Lambda - NodeJS 篇">
+      使用 SQS + Lambda - NodeJS 篇 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80%E6%8F%90%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">前言提要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%B2%E7%AB%AF%E5%89%8D%E7%BD%AE%E6%AD%A5%E9%A9%9F"><span class="nav-number">2.</span> <span class="nav-text">雲端前置步驟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%88%E6%A1%88%E5%95%9F%E5%8B%95%E5%88%B0%E9%83%A8%E7%BD%B2%E6%AD%A5%E9%A9%9F"><span class="nav-number">3.</span> <span class="nav-text">專案啟動到部署步驟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQS-Lambda-%E6%95%B4%E5%90%88%E6%B8%AC%E8%A9%A6"><span class="nav-number">4.</span> <span class="nav-text">SQS + Lambda 整合測試</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Laravel-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85"><span class="nav-number">5.</span> <span class="nav-text">Laravel 注意事項</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TroubleShoot"><span class="nav-number">6.</span> <span class="nav-text">TroubleShoot</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">7.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

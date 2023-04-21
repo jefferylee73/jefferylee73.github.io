@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="為何需要 不同 VPC 需要互相存取走 Internet 會比較貴且危險 設定 VPC Peering 功能，可以將兩個不同 VPC 的 CIDR 位址串連在一起，透過 Private IP Address 互相連結，走內網相較安全且便宜 支援同一個 Region 兩個 VPC 或不同 Region 各別 VPC，也支援多個 Account 需要注意 VPC 的 CIDR 不同重複  達成目標 從">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 VPC Peering 連接不同 VPC 的 RDS">
+<meta property="og:url" content="https://jefferylee73.github.io/access-cross-db-by-vpc-peering/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="為何需要 不同 VPC 需要互相存取走 Internet 會比較貴且危險 設定 VPC Peering 功能，可以將兩個不同 VPC 的 CIDR 位址串連在一起，透過 Private IP Address 互相連結，走內網相較安全且便宜 支援同一個 Region 兩個 VPC 或不同 Region 各別 VPC，也支援多個 Account 需要注意 VPC 的 CIDR 不同重複  達成目標 從">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://jefferylee73.github.io/images/aws/access_cross_db_by_vpc_peering1.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/aws/access_cross_db_by_vpc_peering2.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/aws/access_cross_db_by_vpc_peering3.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/aws/access_cross_db_by_vpc_peering4.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/aws/access_cross_db_by_vpc_peering5.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/aws/access_cross_db_by_vpc_peering6.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/aws/access_cross_db_by_vpc_peering7.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/aws/access_cross_db_by_vpc_peering8.png">
+<meta property="og:image" content="https://jefferylee73.github.io/images/aws/access_cross_db_by_vpc_peering9.png">
+<meta property="article:published_time" content="2022-11-24T10:26:33.000Z">
+<meta property="article:modified_time" content="2023-04-21T01:45:34.276Z">
+<meta property="article:author" content="Jeffery Lee">
+<meta property="article:tag" content="VPC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jefferylee73.github.io/images/aws/access_cross_db_by_vpc_peering1.png">
+
+<link rel="canonical" href="https://jefferylee73.github.io/access-cross-db-by-vpc-peering/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>使用 VPC Peering 連接不同 VPC 的 RDS | 傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/access-cross-db-by-vpc-peering/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用 VPC Peering 連接不同 VPC 的 RDS
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-24 18:26:33" itemprop="dateCreated datePublished" datetime="2022-11-24T18:26:33+08:00">2022-11-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="為何需要"><a href="#為何需要" class="headerlink" title="為何需要"></a>為何需要</h2><ul>
+<li>不同 VPC 需要互相存取走 Internet 會比較貴且危險</li>
+<li>設定 VPC Peering 功能，可以將兩個不同 VPC 的 CIDR 位址串連在一起，透過 Private IP Address 互相連結，走內網相較安全且便宜</li>
+<li>支援同一個 Region 兩個 VPC 或不同 Region 各別 VPC，也支援多個 Account</li>
+<li><strong>需要注意 VPC 的 CIDR 不同重複</strong></li>
+</ul>
+<h2 id="達成目標"><a href="#達成目標" class="headerlink" title="達成目標"></a>達成目標</h2><ul>
+<li>從 A 帳戶 EC2 存取 B 帳戶的 RDS，每個帳戶會有各自 VPC</li>
+</ul>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><p><strong>步驟一、在 A 帳戶建立 VPC</strong></p>
+<ul>
+<li>選擇 public&#x2F;private 各一個 subnet</li>
+</ul>
+<p><strong>步驟二、在 B 帳戶建立 VPC</strong></p>
+<ul>
+<li>選擇 public&#x2F;private 各一個 subnet</li>
+</ul>
+<p><strong>步驟三、在 A 帳戶建立 VPC Peering Connection</strong></p>
+<ul>
+<li><p>輸入 Peering 名稱</p>
+</li>
+<li><p>選擇 local vpc id 及 another vpc id (記得要填 region, account)</p>
+</li>
+<li><p>建立完後要啟動 DNS，才可以將 RDS Domain Name 解析為內網 IP</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering1.png" alt="access_cross_db_by_vpc_peering1"></p>
+</li>
+</ul>
+<p><strong>步驟四、在 B 帳戶的 VPC Peering Connection</strong></p>
+<ul>
+<li><p>點擊 Accept Request，狀態就會變成 Active</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering2.png" alt="access_cross_db_by_vpc_peering2"></p>
+</li>
+<li><p>Accept 之後，再啟動 DNS</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering3.png" alt="access_cross_db_by_vpc_peering3"></p>
+</li>
+</ul>
+<p><strong>步驟五、在 A 帳戶修改 public subnet 的 route table</strong></p>
+<ul>
+<li><p>設定 private subnet 的 route table 會無效哦</p>
+</li>
+<li><p>設定 B 帳戶 VPC 的 CIDR</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering4.png" alt="access_cross_db_by_vpc_peering4"></p>
+</li>
+</ul>
+<p><strong>步驟六、在 B 帳戶修改 public subnet 的 route table</strong></p>
+<ul>
+<li><p>設定 A 帳戶 VPC 的 CIDR</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering5.png" alt="access_cross_db_by_vpc_peering5"></p>
+</li>
+</ul>
+<p><strong>步驟七、在 A, B 帳戶都建立 EC2</strong></p>
+<ul>
+<li>選擇 public subnet 並 auto assign ip</li>
+<li>security group 開放 22, ICMP port (有 ICMP 才可以 ping 對方 IP)</li>
+</ul>
+<p><strong>步驟八、互相 Ping 對方內網 IP 進行測試</strong></p>
+<ul>
+<li><p>A 帳戶的 EC2</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering6.png" alt="access_cross_db_by_vpc_peering6"></p>
+</li>
+<li><p>B 帳戶的 EC2</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering7.png" alt="access_cross_db_by_vpc_peering7"></p>
+</li>
+</ul>
+<p><strong>步驟九、在 B 帳戶修改 RDS 的 Security Group</strong></p>
+<ul>
+<li><p>新增 A 帳戶的 VPC CIDR 的 Inbound rule</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering8.png" alt="access_cross_db_by_vpc_peering8"></p>
+</li>
+</ul>
+<p><strong>步驟十、測試從 A 帳戶 EC2 連 B 帳戶的 RDS</strong></p>
+<ul>
+<li><p>使用 nslookup 解析 RDS endpoint 是否有轉換成內網 IP (如果沒有到步驟三啟動 DNS 設定)</p>
+<p>  <img src="/../images/aws/access_cross_db_by_vpc_peering9.png" alt="access_cross_db_by_vpc_peering9"></p>
+</li>
+<li><p>安裝 mysql 進行連線</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安裝 mysql</span></span><br><span class="line">$ sudo yum install mysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 mysql client 連線</span></span><br><span class="line">$ mysql -h &lt;endpoint&gt; -P 3306 -u &lt;mysql user&gt; --password &lt;mysql password&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://rdpapa.tw/2022/09/10/aws-vpc-peering/">《AWS 教學–如何在不同的VPC建立一條可互通的通道》VPC PEERING操作分享 | 學習筆記</a></strong></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/premiumsupport/knowledge-center/vpc-peering-troubleshoot-dns-resolution/">為什麼我無法透過 VPC 對等互連解析網域名稱？</a></strong></strong></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/VPC/" rel="tag"># VPC</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/access-sqs-by-vpc-internet-endpoint/" rel="prev" title="如何使用 VPC Interface Endpoint 存取 SQS 資源">
+      <i class="fa fa-chevron-left"></i> 如何使用 VPC Interface Endpoint 存取 SQS 資源
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/suggest-architecture-article/" rel="next" title="推薦Architecture文章">
+      推薦Architecture文章 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%BA%E4%BD%95%E9%9C%80%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">為何需要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%94%E6%88%90%E7%9B%AE%E6%A8%99"><span class="nav-number">2.</span> <span class="nav-text">達成目標</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%A9%9F"><span class="nav-number">3.</span> <span class="nav-text">操作步驟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E9%80%A3%E7%B5%90"><span class="nav-number">4.</span> <span class="nav-text">參考連結</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

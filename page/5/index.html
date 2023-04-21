@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jefferylee73.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+<meta property="og:type" content="website">
+<meta property="og:title" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:url" content="https://jefferylee73.github.io/page/5/index.html">
+<meta property="og:site_name" content="傑佛瑞的 IT 學習筆記">
+<meta property="og:description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:author" content="Jeffery Lee">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://jefferylee73.github.io/page/5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>傑佛瑞的 IT 學習筆記</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">傑佛瑞的 IT 學習筆記</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/database-attributes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/database-attributes/" class="post-title-link" itemprop="url">資料庫專有名詞(必讀)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 18:19:01" itemprop="dateCreated datePublished" datetime="2022-11-16T18:19:01+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index"><span itemprop="name">Database</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>3 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="資料庫擴展要點"><a href="#資料庫擴展要點" class="headerlink" title="資料庫擴展要點"></a>資料庫擴展要點</h2><p><strong>Heavy Read</strong></p>
+<ul>
+<li>Cache</li>
+<li>Replica</li>
+</ul>
+<p><strong>高併發</strong></p>
+<ul>
+<li>Multi-Master RDS For Aurora</li>
+</ul>
+<p><strong>量太大</strong></p>
+<ul>
+<li>分資料表 (Partition)</li>
+</ul>
+<h2 id="線上交易處理-Online-Transactional-Processing-OLTP"><a href="#線上交易處理-Online-Transactional-Processing-OLTP" class="headerlink" title="線上交易處理(Online Transactional Processing OLTP)"></a>線上交易處理(Online Transactional Processing OLTP)</h2><ul>
+<li>指系統能夠處理大量的更新以及新增的查詢</li>
+<li>Transactional 代表處理讀和寫</li>
+<li>數據的正確性及一致性是首要達到的目標之一，所以常在 OLTP 中聽到 ACID<ul>
+<li>一個事務 (Transaction) 完成後才會執行下一筆，確保整個系統的資料一致性</li>
+<li>OLTP 同時會有多位使用者操作，要確保每一個操作使用者能拿到最終的狀態，不然可能會有數據不一致以及不同步問題</li>
+</ul>
+</li>
+</ul>
+<h2 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h2><p><strong>Atomicity(原子性)</strong></p>
+<ul>
+<li>Transaction 要馬全部成功、要馬全部失敗，不能有部分結果</li>
+</ul>
+<p><strong>Consistency(一致性)</strong></p>
+<ul>
+<li>Transaction 前後，資料庫的完整性沒有被破壞</li>
+<li>寫入的資料必須完全符合所有(Constraint, Trigger, Rollback)特性</li>
+</ul>
+<p><strong>Isolation(隔離性)</strong></p>
+<ul>
+<li>資料庫允許多個 Transaction 同時對其資料進行操作，但也同時確保這些 Transaction 的交叉執行，不會導致數據的不一致</li>
+</ul>
+<p><strong>Durability(耐久性)</strong></p>
+<ul>
+<li>Transaction 完成後，對資料的操作就是永久的，即便系統故障也不會丟失</li>
+</ul>
+<h2 id="線上分析處理-Online-Analytical-Processing-OLAP"><a href="#線上分析處理-Online-Analytical-Processing-OLAP" class="headerlink" title="線上分析處理(Online Analytical Processing OLAP)"></a>線上分析處理(Online Analytical Processing OLAP)</h2><ul>
+<li><strong>讓數據聚合 (data aggregation) 以及批次處理 (Batch processing)</strong></li>
+<li>大部分是用來做歷史資料的分析以及報告</li>
+<li>可以快速使用 Query 去得到數據洞察得到數據聚合後的結果</li>
+<li>銀行有 OLTP 系統確保資料一致性，就能用 OLAP 系統做報告及商業智慧分析等應用<ul>
+<li>撈全台灣的使用者在過去一個月的交易做分析</li>
+</ul>
+</li>
+</ul>
+<h2 id="OLTP-與-OLAP-整合與差異"><a href="#OLTP-與-OLAP-整合與差異" class="headerlink" title="OLTP 與 OLAP 整合與差異"></a>OLTP 與 OLAP 整合與差異</h2><p><img src="/../images/learning/database-attributes8.png" alt="database-attributes8"><br><img src="/../images/learning/database-attributes9.png" alt="database-attributes9"></p>
+<h2 id="關聯式資料庫-RDBMS"><a href="#關聯式資料庫-RDBMS" class="headerlink" title="關聯式資料庫 RDBMS"></a>關聯式資料庫 RDBMS</h2><ul>
+<li><p><strong><strong><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=7yYbbKyyHvw&ab_channel=%E4%B8%8A%E7%8F%AD%E4%BA%86%E5%95%8A%E5%93%88">關聯式資料庫到底是什麼|生活中怎麼表達資料庫概念</a></strong></strong></p>
+</li>
+<li><p>MySQL &#x2F; MariaDB &#x2F; Postgresql 都支援 Transaction 並具備 ACID 特性</p>
+</li>
+<li><p>同時 ACID 保證可以到 Row 層級(MySQL5.5 後 InnoDB Default 是 Row Lock)</p>
+</li>
+<li><p>Transaction 是關聯式資料庫的強項</p>
+</li>
+<li><p>成本擴展的挑戰</p>
+<p>  <img src="/../images/learning/database-attributes1.png" alt="database-attributes1"></p>
+</li>
+</ul>
+<p><strong>存在缺點</strong></p>
+<ul>
+<li>Schema 擴展不方便(修改可能會長時間鎖表)</li>
+<li>全文搜尋功能弱</li>
+</ul>
+<h2 id="讀寫分離-R-x2F-W-Separation"><a href="#讀寫分離-R-x2F-W-Separation" class="headerlink" title="讀寫分離 (R&#x2F;W Separation)"></a>讀寫分離 (R&#x2F;W Separation)</h2><ul>
+<li>Master 拿來寫，Replica 拿來讀</li>
+<li>通常是資料庫初步擴充手段 (適合 Read 大於 Write 的情境)</li>
+<li>MySQL 複製延遲時間 1 ～ 60 秒都有可以</li>
+</ul>
+<h2 id="RDS-Proxy"><a href="#RDS-Proxy" class="headerlink" title="RDS Proxy"></a>RDS Proxy</h2><ul>
+<li><p>用來處理資料庫流量無法預測的突增情況，避免 Connection Fail 情況發生</p>
+</li>
+<li><p>應用程式更具可擴展性、提高對數據庫遇故障時的恢復能力</p>
+<p>  <img src="/../images/learning/database-attributes2.png" alt="database-attributes2"></p>
+</li>
+</ul>
+<h2 id="分表-Partition"><a href="#分表-Partition" class="headerlink" title="分表 (Partition)"></a>分表 (Partition)</h2><ul>
+<li><p>垂直或水平切割，複雜性都會大大提升</p>
+<ul>
+<li>提升 Query 數量</li>
+<li>商業邏輯容易有所遺落，造成資料不一致</li>
+</ul>
+</li>
+<li><p>業務資料集中在某些 Column上 ⇒ 適合垂直切割</p>
+</li>
+<li><p>業務資料較均勻分佈 ⇒ 適合水平切割</p>
+<p>  <img src="/../images/learning/database-attributes3.png" alt="database-attributes3"></p>
+</li>
+</ul>
+<h2 id="分片-Sharding"><a href="#分片-Sharding" class="headerlink" title="分片 (Sharding)"></a>分片 (Sharding)</h2><ul>
+<li><p>Sharding Key 會是各節點平衡的重點</p>
+<p>  <img src="/../images/learning/database-attributes4.png" alt="database-attributes4"></p>
+</li>
+</ul>
+<h2 id="NewSQL"><a href="#NewSQL" class="headerlink" title="NewSQL"></a>NewSQL</h2><ul>
+<li>NewSQL &#x3D; RDBMS (ACID) + SQL + NoSQL (擴展性)</li>
+<li>擁有 SQL 的 ACID 交易特性，同時也想擁抱 NoSQL 的擴展性能</li>
+<li>類似產品 Aurora 計算與儲存分離<ul>
+<li>將 MySQL 本體弱化為無狀態節點(stateless)，儲存拆離至 EBS，Redo log 拆離至 S3</li>
+<li>使用共享儲存層(EBS)解決擴展問題，將原本效能瓶頸為 I&#x2F;O 轉移為 Network</li>
+<li>無狀態節點，讓升級更容易做到不停機升級 (Zero downtime patching)</li>
+</ul>
+</li>
+<li>以 AWS 解決方案來看<ul>
+<li>RDS 為 oldSQL</li>
+<li>Aurora 為 NewSQL</li>
+</ul>
+</li>
+</ul>
+<h2 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h2><ul>
+<li><p>本質上是犧牲 ACID 中的某幾個特性</p>
+</li>
+<li><p>不能盲目地迷信 NoSQL 是銀彈，而是應該將 NoSQL 作為 SQL 的一個加強方式</p>
+</li>
+<li><p>常見使用方案</p>
+<ul>
+<li>Key&#x2F;Value Store：解決 RDBMS  無法儲存資料結構的問題 e.g. redis</li>
+<li>Document DB：解決 RDBMS 強 Schema 約束的問題 e.g. MongoDB</li>
+<li>Colume-Basae DB：解決 RDBMS 大數據場景下的 I&#x2F;O 問題 e.g. HBase</li>
+<li>全文搜尋引擎：解決 RDBMS 的全文搜尋性能問題 e.g. Elasticsearch</li>
+</ul>
+</li>
+<li><p>AWS 產品類型</p>
+<p>  <img src="/../images/learning/database-attributes5.png" alt="database-attributes5"></p>
+</li>
+</ul>
+<h2 id="RDBMS-和-NoSQL-DB-的選型"><a href="#RDBMS-和-NoSQL-DB-的選型" class="headerlink" title="RDBMS 和 NoSQL DB 的選型"></a>RDBMS 和 NoSQL DB 的選型</h2><p><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E9%81%B8%E6%93%87%E8%B3%87%E6%96%99%E5%BA%AB-db-%E7%9A%84%E4%BA%94%E5%A4%A7%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85-a719e134e7d">選擇資料庫 (DB) 的五大注意事項</a></strong></p>
+<ul>
+<li>管理型系統 (運營類系統)<ul>
+<li>首選 RDBMS</li>
+</ul>
+</li>
+<li>大流量系統 (電商單品頁的某個服務)<ul>
+<li>後台選 RDBMS，前台選記憶體(Key&#x2F;Value) 儲存</li>
+</ul>
+</li>
+<li>日誌型系統 (原始數據)<ul>
+<li>選 Colume-Based DB，事件記錄搜尋選搜尋引擎</li>
+</ul>
+</li>
+<li>搜尋型系統 (站內搜尋，非通用搜尋，如商品搜尋)<ul>
+<li>後台選 RDBMS，前台選搜尋引擎</li>
+</ul>
+</li>
+<li>事件型系統 (庫存、交易、記帳)<ul>
+<li>選關聯型 + cache + 一致性協議，或新型 RDBMS</li>
+</ul>
+</li>
+<li>離線計算 (大量數據分析)<ul>
+<li>首選 Colume-Based DB，RDBMS 也可以</li>
+</ul>
+</li>
+<li>即時計算 (即時監控)<ul>
+<li>可以選 Time-Series DB，或 Colume-Based DB</li>
+</ul>
+</li>
+</ul>
+<h2 id="資料表正規化"><a href="#資料表正規化" class="headerlink" title="資料表正規化"></a>資料表正規化</h2><ul>
+<li>使資料重複性(Redundancy)降到最低<ul>
+<li>減少開發&#x2F;儲存成本</li>
+<li>避免資料分歧(強一制性)</li>
+</ul>
+</li>
+<li>通常做到 3NF</li>
+<li>1NF<ul>
+<li>一個欄位裡不能放多個值</li>
+<li>每張表都要有 Primary Key(PK)</li>
+</ul>
+</li>
+<li>2NF<ul>
+<li>滿足 1NF</li>
+<li>將部份對應的資料拆出來</li>
+<li>取得文章資料也想同時得到作者名，如果把 user_name 欄位也開在 post table，這樣就不符合 2NF</li>
+</ul>
+</li>
+<li>3NF<ul>
+<li>滿足 2NF</li>
+<li>各欄位與 PK 間沒有間接相依的關係</li>
+<li>不要存放可被直接推算出的欄位<ul>
+<li>舉例來說：訂單表格中，同時有單價(price)、數量(quantity)、總價(total)，但總價是可以被推算出來的所以不該出現</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="資料表反正規化"><a href="#資料表反正規化" class="headerlink" title="資料表反正規化"></a>資料表反正規化</h2><ul>
+<li>正規化程度愈高，代表資料關聯性的約束性也愈高</li>
+<li>資料被切分為多張關聯表格，DB 的 I&#x2F;O 將更加繁忙<ul>
+<li>所以必要的時後也必須做 **”Denormalized”**，以避免無窮盡的 JOINs</li>
+</ul>
+</li>
+</ul>
+<h2 id="正規化與反正規化比較"><a href="#正規化與反正規化比較" class="headerlink" title="正規化與反正規化比較"></a>正規化與反正規化比較</h2><p><img src="/../images/learning/database-attributes6.png" alt="database-attributes6"></p>
+<p><img src="/../images/learning/database-attributes7.png" alt="database-attributes7"></p>
+<h2 id="資料表正規化考量"><a href="#資料表正規化考量" class="headerlink" title="資料表正規化考量"></a>資料表正規化考量</h2><ul>
+<li>Heavy Read 拆解<ul>
+<li>高頻查詢所用的表，建議把不相關的資料做正規劃拆解</li>
+<li>舉例來說: 將一張 users 表拆成 users 及 user_profiles 兩張表</li>
+</ul>
+</li>
+<li>Text 內容做拆表<ul>
+<li>Text 索引與一般 Btree 不同，更新也會產生大量碎片</li>
+<li>大部分的 Select Query 很有可能把不需要的 Text 資料也一同拉出來，建議可拆表做關聯</li>
+</ul>
+</li>
+</ul>
+<h2 id="資料表欄位設計"><a href="#資料表欄位設計" class="headerlink" title="資料表欄位設計"></a>資料表欄位設計</h2><ul>
+<li>有標準的就按照開 ISO,RFC,Schema.org<ul>
+<li>身分證、發票、幣值、區碼、電話號碼</li>
+</ul>
+</li>
+<li>Char 比 Varchar 搜尋速度更快<ul>
+<li>固定長度：選 Char</li>
+<li>高頻更新：選 Char</li>
+<li>彈性長度：選 Varchar(Size愈小愈好)</li>
+</ul>
+</li>
+<li>單選 ENUM 可用數字(常數)替代<ul>
+<li>數字型態比字串型態搜尋還快</li>
+<li>Status 由程式控制常數定義(閱讀不易需查文件)</li>
+<li>TINYINT 比 ENUM 省空間</li>
+</ul>
+</li>
+</ul>
+<h2 id="RDBMS-最討厭異動-Schema"><a href="#RDBMS-最討厭異動-Schema" class="headerlink" title="RDBMS 最討厭異動 Schema"></a>RDBMS 最討厭異動 Schema</h2><ul>
+<li>隨著時間演進，資料會愈長愈多，業務需求會持續變化</li>
+<li>當資料庫內筆數變多時，要異動 Scema 的成本就愈來愈高</li>
+<li>設計 Schema 時觀察<ul>
+<li>哪些需求會變成<strong>變數</strong>才是工程師在意的</li>
+<li>當需求出現的時候要<strong>預想變數</strong>有可能是什麼</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/suggest-backend-article/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/suggest-backend-article/" class="post-title-link" itemprop="url">推薦Backend文章</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 17:32:40" itemprop="dateCreated datePublished" datetime="2022-11-16T17:32:40+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:47:41" itemprop="dateModified" datetime="2023-04-21T09:47:41+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Learning/" itemprop="url" rel="index"><span itemprop="name">Learning</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>791</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="必讀文章"><a href="#必讀文章" class="headerlink" title="必讀文章"></a>必讀文章</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20103256/ironman/4227">全端工程師生存筆記</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.cakeresume.com/resources/backend-engineers-salary-jobs-interview#backend-salary-report">後端工程師求職／自學之前，先懂後端薪水、熱門職缺與履歷面試技巧！</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20113277/ironman/2937?page=1">前端工程師一起來種一棵後端技能樹吧！</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20119970/ironman/2774?page=1">前端工程師也該會的後端技倆</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.maxlist.xyz/">Max行銷誌</a></strong></li>
+</ul>
+<h2 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h2><ul>
+<li><p><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20130701/ironman/3783">作者超囉嗦，但一天只要十分鐘的MYSQL真．新手教學 </a></strong></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10229472">Day 32 資料庫正規化(一~三)</a></strong></p>
+</li>
+<li><p><strong><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E7%8C%BF%E5%90%83%E9%A6%99%E8%95%89/mysql-innodb-%E6%95%99%E6%88%91%E7%9A%84%E4%BA%8B-index-%E7%B4%A2%E5%BC%95-%E9%8E%96-%E8%B3%87%E6%BA%90%E5%90%84%E5%8F%B8%E5%85%B6%E8%81%B7-5c5747bc988f">MySQL🐬 InnoDB 教我的事： Index 索引、鎖、資源各司其職</a></strong></strong></p>
+</li>
+<li><p><strong><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E7%8C%BF%E5%90%83%E9%A6%99%E8%95%89/mysql-innodb-%E6%95%99%E6%88%91%E7%9A%84%E4%BA%8B-%E6%9C%80%E8%BF%91%E6%9C%80%E5%B0%91%E4%BD%BF%E7%94%A8-lru-%E4%B8%B2%E5%88%97%E7%9A%84%E5%84%AA%E5%8C%96-fb1781cdc90e">MySQL🐬 InnoDB 教我的事： 最近最少使用 LRU 串列的優化</a></strong></strong></p>
+</li>
+<li><p><strong><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E7%8C%BF%E5%90%83%E9%A6%99%E8%95%89/%E4%BD%B5%E7%99%BC%E7%B7%A8%E7%A8%8B-%E8%AB%87%E8%AB%87%E9%8E%96%E8%88%87%E8%B3%87%E6%BA%90-ac0acdba24c4">併發編程⚡談談鎖與資源</a></strong></strong></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://blog.scottchayaa.com/post/2019/01/09/how-to-handle-the-high-concurrency-on-laravel/">在laravel上處理高併發問題</a></strong></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://oldmo860617.medium.com/database-transaction-acid-156a3b75845e"><strong>Database Transaction &amp; ACID</strong></a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://oldmo860617.medium.com/transaction-%E4%BD%B5%E7%99%BC%E9%8C%AF%E8%AA%A4%E8%88%87%E9%9A%94%E9%9B%A2%E5%B1%A4%E7%B4%9A-51b8af6178ae"><strong>Transaction 併發錯誤與隔離層級</strong></a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://oldmo860617.medium.com/%E8%B3%87%E6%96%99%E5%BA%AB%E6%87%89%E7%94%A8%E7%B6%93%E5%85%B8%E5%95%8F%E9%A1%8C-double-booking-problem-ccde5267b26f"><strong>資料庫應用經典問題 — Double Booking Problem</strong></a></p>
+</li>
+<li><p><strong><strong><a target="_blank" rel="noopener" href="https://oldmo860617.medium.com/%E4%BB%A5-postgressql-%E7%82%BA%E4%BE%8B%E4%BA%86%E8%A7%A3%E8%B3%87%E6%96%99%E5%BA%AB%E7%9A%84-query-plans-abd8b5f54c66">以 PostgresSQL 為例了解資料庫的 Query Plans</a></strong></strong></p>
+</li>
+<li><p><strong><strong><a target="_blank" rel="noopener" href="https://blog.twjoin.com/%E9%8E%96-lock-%E7%9A%84%E4%BB%8B%E7%B4%B9%E8%88%87%E6%AD%BB%E9%8E%96%E5%88%86%E6%9E%90-19833c18baab">鎖( Lock )的介紹與死鎖分析</a></strong></strong></p>
+</li>
+<li><p><strong><strong><a target="_blank" rel="noopener" href="https://blog.twjoin.com/%E9%AB%98%E4%BD%B5%E7%99%BC%E6%83%85%E6%B3%81%E4%B8%8B%E6%AD%A3%E7%A2%BA%E8%99%95%E7%90%86%E5%85%B1%E4%BA%AB%E8%B3%87%E6%96%99%E7%AD%86%E8%A8%98-5e80ab488686">高併發情況下正確處理共享資料筆記</a></strong></strong></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E4%BB%80%E9%BA%BC%E6%98%AF-olap-2c7cccf55c42">什麼是 OLAP ？</a></strong></p>
+</li>
+</ul>
+<h2 id="Laravel"><a href="#Laravel" class="headerlink" title="Laravel"></a>Laravel</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20105865/ironman/2466">iThome 鐵人賽 - 使用 Laravel 打造 RESTful API </a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20130722/ironman/3818?page=1">iThome 鐵人賽 - Laravel 實戰經驗分享</a></strong> ⇒ 還會介紹如何手動建立 GitLab Runner</li>
+<li><a target="_blank" rel="noopener" href="https://slides.com/lili668668/deck-21de46/?fbclid=IwAR2pM2g5JuGBnWsColwvL2SzWds2cPXl1Elt07qgD41pkxjXmE7IJvKOQjM&fs"><strong>探索 Laravel 源碼 發現好用的小工具</strong></a></li>
+<li><strong><a target="_blank" rel="noopener" href="https://growingdna.com/php-laravel-opay-api/">PHP + Laravel 雞排聯盟API實作: 串接歐付寶金流API</a></strong></li>
+</ul>
+<h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20140721/ironman/4944">資料三十-那些最基本的資料處理與分析技能</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20107514/ironman/1399">使用Python進行資料分析</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://myapollo.com.tw/zh-tw/python-typing-module/">使用 Python typing 模組對你的同事好一點</a></strong><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html">Type hints cheat sheet</a></strong></li>
+</ul>
+</li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E4%B9%BE%E8%B2%A8/python-redis-v-s-mysql-%E6%9F%A5%E8%A9%A2%E5%AF%A6%E4%BD%9C-9f0cc0d9b32b">[Python] Redis v.s Mysql 查詢實作</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://medium.com/%E7%A8%8B%E5%BC%8F%E4%B9%BE%E8%B2%A8/python-%E4%B8%A6%E8%A1%8C%E8%88%87%E5%B9%B3%E8%A1%8C-%E5%BD%B1%E5%88%86%E8%BA%AB%E4%B9%8B%E8%A1%93-2b8238916297">[Python] 並行與平行 — 影分身之術！</a></strong></li>
+</ul>
+<h2 id="NodeJS"><a href="#NodeJS" class="headerlink" title="NodeJS"></a>NodeJS</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20107247/ironman/1312?page=1">從無到有，打造一個漂亮乾淨俐落的 RESTful API</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10274828">DAY18: 淺談Stream</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20119338/ironman/3880">NestJS 帶你飛！</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://blog.typeart.cc/using-puppeteer-crawler-common-skills/">Puppeteer爬蟲常用技巧</a></strong></li>
+</ul>
+<h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://linyencheng.github.io/2019/07/13/tool-nginx/">Nginx Config 與常用指令教學</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.javatpoint.com/nginx-minimal-configuration">NGINX Minimal Configuration</a></strong></li>
+</ul>
+<h2 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h2><ul>
+<li><strong><a target="_blank" rel="noopener" href="https://blog.kenwsc.com/posts/2020/a-full-duplex-protocol-websocket/">雙向互動的即時訊息：Websocket 入門</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://blog.twjoin.com/websocket-%E6%8A%80%E8%A1%93-2c46ae5f1cfd">WebSocket 技術</a></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/learning-phpfpm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/learning-phpfpm/" class="post-title-link" itemprop="url">深入認識 PHP-FPM</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 17:14:30" itemprop="dateCreated datePublished" datetime="2022-11-16T17:14:30+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="認識-CGI-協議"><a href="#認識-CGI-協議" class="headerlink" title="認識 CGI 協議"></a>認識 CGI 協議</h2><p><strong>CGI 協議</strong></p>
+<ul>
+<li>為了保證 web server 傳過來的資料是標準格式(像是 post 或是 url 還有 http header 等)</li>
+</ul>
+<p><strong>FastCGI 協議</strong></p>
+<ul>
+<li>用來提高 CGI 處理 process 性能</li>
+<li>當 php 啟動時，會去尋找 php.ini、進行環境的初始化，如果不使用 FastCGI 的情況下，每一個請求都會做這個動作，很明顯浪費系統資源</li>
+<li>FastCGI 會先啟動一個 master，解析配置文件用，接下來再啟動 worker，當請求過來時 master 會遞資訊給 worker，然後接下來等下一個請求，有這個機制就不用每一次重新跑一次初始化的動作了</li>
+</ul>
+<h2 id="PHP-FPM-介紹"><a href="#PHP-FPM-介紹" class="headerlink" title="PHP-FPM 介紹"></a>PHP-FPM 介紹</h2><ul>
+<li>實作 FastCGI 協議，php-fpm 會解析配置檔(php.ini)產生出 master 程式，並用來接收 nginx 請求，在 php-fpm 有 process manager 會自動增減 process 數量(worker 數量)，每啟動 worker 會 fork master 程式，所以每次如果有更改 php.ini 就一定要重啟 php-fpm</li>
+</ul>
+<h2 id="安裝後建議"><a href="#安裝後建議" class="headerlink" title="安裝後建議"></a>安裝後建議</h2><ul>
+<li><p>設定檔路徑  ⇒ <code>/etc/php/$&#123;PHP_VERSION&#125;/fpm/pool.d/www.conf</code></p>
+</li>
+<li><p>根據現有機器的 Memory 去調整 process manager 相關設定，讓伺服器的效能更好一點</p>
+<p>  ⇒ <a target="_blank" rel="noopener" href="https://cmorrell.com/php-fpm/">線上換算參數</a></p>
+</li>
+<li><p>避免開太多 process，把系統的記憶體耗盡</p>
+</li>
+</ul>
+<h2 id="設定檔規則"><a href="#設定檔規則" class="headerlink" title="設定檔規則"></a>設定檔規則</h2><p><strong>process manager 類型</strong> <code>pm=dynamic</code></p>
+<ul>
+<li>static：固定行程數量<ul>
+<li>優點：效能很好</li>
+<li>缺點：很吃記憶體資源</li>
+</ul>
+</li>
+<li>dynamic：根據網路流量動態行程數量<ul>
+<li>優點：讓流量大的時候開啟多一點工作行程，而在沒有流量時，也會保留一些行程等待隨時接收新的連線</li>
+</ul>
+</li>
+<li>ondemand：根據網路流量動態行程數量<ul>
+<li>優點：看需要多少行程就建立多少，沒用的就關閉，最節省記憶體</li>
+<li>缺點：開關行程頻繁，所以效能較差</li>
+</ul>
+</li>
+</ul>
+<p><strong><strong>最大行程數量</strong></strong> <code>pm.max_children=50</code></p>
+<ul>
+<li>static：預設開啟數量</li>
+<li>dynamic、ondemand：最多可以開啟數量</li>
+</ul>
+<p><strong>初始行程數量</strong> <code>pm.start_servers=5</code></p>
+<ul>
+<li>服務在一開始啟動時，要配置多少個行程</li>
+</ul>
+<p><strong><strong>最小閒置行程數量</strong></strong> <code>pm.min_spare_servers = 5</code></p>
+<p><strong><strong>最大閒置行程數量</strong></strong> <code>pm.max_spare_servers = 35</code></p>
+<p><strong><strong>單一行程可處理連線數</strong></strong> <code>pm.max_requests = 500</code></p>
+<ul>
+<li>當一個工作行程處理的連線數達到這個值的時候，就會強制關閉此行程，重新產生另一個新的行程</li>
+</ul>
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.gtwang.org/linux/nginx-php-fpm-configuration-optimization/">Nginx 與 PHP-FPM 最佳化效能設定教學與技巧</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.astralweb.com.tw/what-is-differences-between-fastcgi-php-fpm/">秒懂PHP的FastCGI跟PHP-FPM有什麼關係</a></li>
+<li><a target="_blank" rel="noopener" href="https://iter01.com/581116.html">PHP-FPM 是什麼？</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/phpfpm-oom-problem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/phpfpm-oom-problem/" class="post-title-link" itemprop="url">如何解決 php-fpm 造成 OOM 問題</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 17:14:09" itemprop="dateCreated datePublished" datetime="2022-11-16T17:14:09+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>679</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="問題釐清"><a href="#問題釐清" class="headerlink" title="問題釐清"></a>問題釐清</h2><p>發生問題的原因是因為 php8.0-fpm 的 process 開太多造成 OOM (Out Of Memory)問題發生，php8.0-fpm 程式自動關閉，所以 nginx 的 error.log 才會跳出 <code>/var/run/php/php8.0-fpm.sock</code><br>找不到檔案，瀏覽器才跳出 502 Bad Gateway</p>
+<h2 id="查找問題"><a href="#查找問題" class="headerlink" title="查找問題"></a>查找問題</h2><ol>
+<li>查看 php8.0-fpm 狀態  ⇒ <code>service php8.0-fpm status</code></li>
+</ol>
+<p><img src="/../images/PHP/phpfpm-oom-problem1.png" alt="phpfpm-oom-problem1"></p>
+<ol>
+<li>查看 php-fpm 進程 ⇒  <code>ps ax | grep php</code></li>
+<li>查看系統 log ⇒ <code>cat /var/log/syslog</code></li>
+</ol>
+<p><img src="/../images/PHP/phpfpm-oom-problem2.png" alt="phpfpm-oom-problem2"></p>
+<ol>
+<li>查看 nginx error log ⇒ <code>cat /var/log/nginx/error.log</code></li>
+</ol>
+<h2 id="問題排解時間軸"><a href="#問題排解時間軸" class="headerlink" title="問題排解時間軸"></a>問題排解時間軸</h2><ol>
+<li>緊急重啟 php-fpm 服務 ⇒ <code>sudo service php8.0-fpm restart</code></li>
+<li>調整 instance 數量為 6 台</li>
+<li>調整 php-fpm 的 <a target="_blank" rel="noopener" href="http://www.conf/">www.conf</a> 參數</li>
+</ol>
+<p>線上公式換算參數 ⇒ <a target="_blank" rel="noopener" href="https://cmorrell.com/php-fpm/">Tuning dynamic php-fpm settings</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pm = dynamic  &lt;= 動態增減</span><br><span class="line">pm.max_children = 85  &lt;= process 上限</span><br><span class="line">pm.start_servers = 40 &lt;= 預設啟動的 process 數量</span><br><span class="line">pm.min_spare_servers = 40 &lt;= 最少會閒置的 process 數量</span><br><span class="line">pm.max_spare_servers = 65 &lt;= 最多會閒置的 process 數量</span><br><span class="line">pm.max_requests = 200 &lt;= 每個 process 最多可以處理的 request</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://mini.nidbox.com/diary/read/9924593">php-fpm：解決 memory leak 問題、 pm.max_children 相關設定</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/install-phpfpm-by-ubuntu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/install-phpfpm-by-ubuntu/" class="post-title-link" itemprop="url">如何在 docker 的 ubuntu 環境中使用 php-fpm</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 17:13:39" itemprop="dateCreated datePublished" datetime="2022-11-16T17:13:39+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>2 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="為何需要"><a href="#為何需要" class="headerlink" title="為何需要"></a>為何需要</h2><ul>
+<li>建立與線上環境一樣的 ubuntu 作業系統</li>
+<li>有時 php-fpm 與 ubuntu 安裝的套件版本會不一致<ul>
+<li>查看套件版本 <code>apt show &lt;package name&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="建立步驟"><a href="#建立步驟" class="headerlink" title="建立步驟"></a>建立步驟</h2><p><strong>步驟一、把在 ubuntu 安裝 php 的指令寫成 docker file</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:22.04</span><br><span class="line"></span><br><span class="line">RUN ln -fs &quot;/usr/share/zoneinfo/$TZ&quot; /etc/localtime</span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install -qqy software-properties-common \</span><br><span class="line">    &amp;&amp; add-apt-repository ppa:ondrej/php</span><br><span class="line"></span><br><span class="line">RUN apt-get install -qqy \</span><br><span class="line">    &quot;php$PHP_VERSION&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-fpm&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-common&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-gd&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-xml&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-curl&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-mbstring&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-gd&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-mysql&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-sqlite&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-redis&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-bcmath&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-tokenizer&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-zip&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-mongo&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-soap&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-intl&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-imagick&quot;</span><br><span class="line"></span><br><span class="line">RUN curl -sS https://getcomposer.org/installer | php</span><br><span class="line">RUN mv composer.phar /usr/local/bin/composer</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟二、將 php.ini , php-fpm.conf, <a target="_blank" rel="noopener" href="http://www.conf/">www.conf</a> 從 docker 複製出來改，再 COPY 覆蓋原本設定</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -it rhitics-server-arm cat /etc/php/8.0/fpm/pool.d/www.conf &gt; deploy/docker/www.conf</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟三、修改 php.ini，更改上傳檔案大小</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">upload_max_filesize = 100M</span><br><span class="line"></span><br><span class="line">post_max_size = 100M</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟四、修改 php-fpm.conf，註解 pid 及修改 error_log 路徑，不然非 root 沒有權限啟動 php-fpm</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">;pid = /tmp/php8.0-fpm.pid</span><br><span class="line"></span><br><span class="line">error_log = /var/log/app/php8.0-fpm.log</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟五、修改 <a target="_blank" rel="noopener" href="http://www.conf,修改/">www.conf，修改</a> listen 值，與 NGINX 建立 stream</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listen = /tmp/php8.0-fpm.sock =&gt; listen = 0.0.0.0:9000</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟六、設定 docker 預設啟動的 port 及 command</strong></p>
+<ul>
+<li>特別注意 php-fpm 指令一定要加上 <code>--nodaemonize</code>參數，讓啟動之後可以一直背景執行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">USER app</span><br><span class="line">EXPOSE 9000</span><br><span class="line">CMD [&quot;php-fpm8.0&quot;, &quot;--nodaemonize&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟七、設定 nginx.conf 可以與 php-fpm 建立 stream</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastcgi_pass &lt;docker_service&gt;:9000;</span><br></pre></td></tr></table></figure>
+
+<h2 id="意外發現"><a href="#意外發現" class="headerlink" title="意外發現"></a>意外發現</h2><ul>
+<li>程式執行速度比 php-fpm 為 image base 還快 6 倍</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/wildpeaks/docker-php-fpm">Ubuntu 20.04 + PHP-FPM</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/horizon-inactive/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/horizon-inactive/" class="post-title-link" itemprop="url">如何處理 horizon 出現 inactive 問題</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 17:12:57" itemprop="dateCreated datePublished" datetime="2022-11-16T17:12:57+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laravel/" itemprop="url" rel="index"><span itemprop="name">Laravel</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>972</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><ul>
+<li>light-worker 會透過 redis queue 建立 worker，只要 horizon dashboard 可以存取相同的 redis 即可監聽 worker 執行狀況，反之沒有存取成功就會出現下圖的 inactive 狀態</li>
+</ul>
+<p><img src="/../images/laravel/horizon-inactive1.png" alt="horizon-inactive1"></p>
+<h2 id="處理方式"><a href="#處理方式" class="headerlink" title="處理方式"></a>處理方式</h2><ol>
+<li><p>設定好 .env 確認 redis 可以連線成功</p>
+<ol>
+<li><p>使用 php artisan tinker 測試建立 cache 並存取是否成功</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Cache::put(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;jeff&#x27;</span>)</span><br><span class="line">=&gt; <span class="literal">true</span></span><br><span class="line">Cache::get(<span class="string">&#x27;name&#x27;</span>)</span><br><span class="line">=&gt; jeff</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>進去到 redis 容器搜尋是否有剛建立的 key</p>
+<p> <img src="/../images/laravel/horizon-inactive2.png" alt="horizon-inactive2"></p>
+</li>
+</ol>
+</li>
+<li><p>可以發現透過 Laravel 寫入到 redis 中 key 前面都會有 prefix</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># database.php</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;redis&#x27;</span> =&gt; [</span><br><span class="line">    <span class="string">&#x27;client&#x27;</span> =&gt; <span class="built_in">env</span>(<span class="string">&#x27;REDIS_CLIENT&#x27;</span>, <span class="string">&#x27;predis&#x27;</span>),</span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;options&#x27;</span> =&gt; [</span><br><span class="line">        <span class="string">&#x27;cluster&#x27;</span> =&gt; <span class="built_in">env</span>(<span class="string">&#x27;REDIS_CLUSTER&#x27;</span>, <span class="string">&#x27;predis&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;prefix&#x27;</span> =&gt; Str::slug(<span class="built_in">env</span>(<span class="string">&#x27;APP_NAME&#x27;</span>, <span class="string">&#x27;laravel&#x27;</span>), <span class="string">&#x27;_&#x27;</span>) . <span class="string">&#x27;_database_&#x27;</span>,</span><br><span class="line">    ],</span><br><span class="line">		...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>將兩個專案的 .env 檔案中的 <code>env(&#39;APP_NAME&#39;)</code> 改成相同就解決了</p>
+<p> <img src="/../images/laravel/horizon-inactive3.png" alt="horizon-inactive3"></p>
+</li>
+</ol>
+<h2 id="Horizon-註冊-queue"><a href="#Horizon-註冊-queue" class="headerlink" title="Horizon 註冊 queue"></a>Horizon 註冊 queue</h2><ul>
+<li>horizon.php 會根據 APP_ENV 環境來判斷要啟動的 queue</li>
+<li>特別注意當 <code>APP_ENV=local</code> ，要把 queue 新增到 local 的陣列，不然丟 queue 都不會被執行</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;environments&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">   <span class="string">&#x27;local&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">      <span class="string">&#x27;b2c_europe&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">          <span class="string">&#x27;queue&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">                <span class="string">&#x27;create-carrier-shipment-b2c-europe&#x27;</span>,</span><br><span class="line">            ]</span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/supervisor-use-app-user/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/supervisor-use-app-user/" class="post-title-link" itemprop="url">如何設定 Supervisor 用 app 執行</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 17:07:57" itemprop="dateCreated datePublished" datetime="2022-11-16T17:07:57+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>2 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="步驟一、建立-Supervisord-conf"><a href="#步驟一、建立-Supervisord-conf" class="headerlink" title="步驟一、建立 Supervisord.conf"></a>步驟一、建立 Supervisord.conf</h2><ul>
+<li><p>資料夾路徑改成自定義，來放執行檔 ⇒ supervisor.sock</p>
+<ul>
+<li>將原本定義 <code>/var/run</code> 改成 <code>/var/supervisor</code></li>
+</ul>
+</li>
+<li><p>更改原因：<code>/var/run</code> 資料夾必須是用 root 使用者才可以讀取</p>
+</li>
+<li><p>修改 supervisord.conf 檔案的 unix_http_server、supervisord 區塊</p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">;</span> <span class="string">supervisor</span> <span class="string">config</span> <span class="string">file</span></span><br><span class="line"></span><br><span class="line">[<span class="string">unix_http_server</span>]</span><br><span class="line"><span class="string">file=/var/supervisor/supervisor.sock</span>   <span class="string">;</span> <span class="string">(the</span> <span class="string">path</span> <span class="string">to</span> <span class="string">the</span> <span class="string">socket</span> <span class="string">file)</span></span><br><span class="line"><span class="string">chmod=0700</span>                       <span class="string">;</span> <span class="string">sockef</span> <span class="string">file</span> <span class="string">mode</span> <span class="string">(default</span> <span class="number">0700</span><span class="string">)</span></span><br><span class="line"></span><br><span class="line">[<span class="string">supervisord</span>]</span><br><span class="line"><span class="string">;logfile=/var/log/supervisor/supervisord.log</span> <span class="string">;</span> <span class="string">(main</span> <span class="string">log</span> <span class="string">file;default</span> <span class="string">$CWD/supervisord.log)</span></span><br><span class="line"><span class="string">pidfile=/var/supervisor/supervisord.pid</span> <span class="string">;</span> <span class="string">(supervisord</span> <span class="string">pidfile;default</span> <span class="string">supervisord.pid)</span></span><br><span class="line"><span class="string">;childlogdir=/var/log/supervisor</span>            <span class="string">;</span> <span class="string">(&#x27;AUTO&#x27;</span> <span class="string">child</span> <span class="string">log</span> <span class="string">dir,</span> <span class="string">default</span> <span class="string">$TEMP)</span></span><br><span class="line"></span><br><span class="line"><span class="string">;</span> <span class="string">the</span> <span class="string">below</span> <span class="string">section</span> <span class="string">must</span> <span class="string">remain</span> <span class="string">in</span> <span class="string">the</span> <span class="string">config</span> <span class="string">file</span> <span class="string">for</span> <span class="string">RPC</span></span><br><span class="line"><span class="string">;</span> <span class="string">(supervisorctl/web</span> <span class="string">interface)</span> <span class="string">to</span> <span class="string">work,</span> <span class="string">additional</span> <span class="string">interfaces</span> <span class="string">may</span> <span class="string">be</span></span><br><span class="line"><span class="string">;</span> <span class="attr">added by defining them in separate rpcinterface:</span> <span class="string">sections</span></span><br><span class="line">[<span class="string">rpcinterface:supervisor</span>]</span><br><span class="line"><span class="string">supervisor.rpcinterface_factory</span> <span class="string">=</span> <span class="string">supervisor.rpcinterface:make_main_rpcinterface</span></span><br><span class="line"></span><br><span class="line">[<span class="string">supervisorctl</span>]</span><br><span class="line"><span class="string">serverurl=unix:///var/supervisor/supervisor.sock</span> <span class="string">;</span> <span class="string">use</span> <span class="string">a</span> <span class="string">unix://</span> <span class="string">URL</span>  <span class="string">for</span> <span class="string">a</span> <span class="string">unix</span> <span class="string">socket</span></span><br><span class="line"></span><br><span class="line"><span class="string">;</span> <span class="string">The</span> [<span class="string">include</span>] <span class="string">section</span> <span class="string">can</span> <span class="string">just</span> <span class="string">contain</span> <span class="string">the</span> <span class="string">&quot;files&quot;</span> <span class="string">setting.</span>  <span class="string">This</span></span><br><span class="line"><span class="string">;</span> <span class="string">setting</span> <span class="string">can</span> <span class="string">list</span> <span class="string">multiple</span> <span class="string">files</span> <span class="string">(separated</span> <span class="string">by</span> <span class="string">whitespace</span> <span class="string">or</span></span><br><span class="line"><span class="string">;</span> <span class="string">newlines).</span>  <span class="string">It</span> <span class="string">can</span> <span class="string">also</span> <span class="string">contain</span> <span class="string">wildcards.</span>  <span class="string">The</span> <span class="string">filenames</span> <span class="string">are</span></span><br><span class="line"><span class="string">;</span> <span class="string">interpreted</span> <span class="string">as</span> <span class="string">relative</span> <span class="string">to</span> <span class="string">this</span> <span class="string">file.</span>  <span class="string">Included</span> <span class="string">files</span> <span class="string">*cannot*</span></span><br><span class="line"><span class="string">;</span> <span class="string">include</span> <span class="string">files</span> <span class="string">themselves.</span></span><br><span class="line"></span><br><span class="line">[<span class="string">include</span>]</span><br><span class="line"><span class="string">files</span> <span class="string">=</span> <span class="string">/etc/supervisor/conf.d/*.conf</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="步驟二、更改-Dockerfile-的指令"><a href="#步驟二、更改-Dockerfile-的指令" class="headerlink" title="步驟二、更改 Dockerfile 的指令"></a>步驟二、更改 Dockerfile 的指令</h2><ul>
+<li>複製 supervisord.conf 到 <code>/etc/supervisor</code> 資料夾</li>
+<li>使用 root 角色建立資料夾並更改資料夾的 owner 使用者為 app</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">USER</span> <span class="string">root</span></span><br><span class="line"></span><br><span class="line"><span class="string">COPY</span> <span class="string">deploy/supervisord.conf</span> <span class="string">/etc/supervisor/supervisord.conf</span></span><br><span class="line"><span class="string">RUN</span> <span class="string">mkdir</span> <span class="string">/var/supervisor</span> <span class="string">&amp;&amp;</span> <span class="string">chown</span> <span class="string">-R</span> <span class="string">app:app</span> <span class="string">/var/supervisor</span></span><br><span class="line"></span><br><span class="line"><span class="string">...</span></span><br><span class="line"></span><br><span class="line"><span class="string">USER</span> <span class="string">app</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="最後步驟、設定容器啟動指令"><a href="#最後步驟、設定容器啟動指令" class="headerlink" title="最後步驟、設定容器啟動指令"></a>最後步驟、設定容器啟動指令</h2><ul>
+<li>用 <code>supervisord</code> 指令去執行第一步建立的設定檔， <code>-n</code> 代表用 dameon 背景執行</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">heavy-worker:</span></span><br><span class="line">    <span class="attr">extends:</span></span><br><span class="line">      <span class="attr">file:</span> <span class="string">common-services.yml</span></span><br><span class="line">      <span class="attr">service:</span> <span class="string">server</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">rhitics-heavy-worker</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">$&#123;SERVER_PATH&#125;/deploy/heavy_workers/laravel-worker.conf:/etc/supervisor/conf.d/laravel-worker.conf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">$&#123;SERVER_PATH&#125;/deploy/heavy_workers/horizon.php:/var/www/api.rhitics.com/config/horizon.php</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">&quot;supervisord&quot;</span>, <span class="string">&quot;-n&quot;</span>, <span class="string">&quot;-c&quot;</span>, <span class="string">&quot;/etc/supervisor/supervisord.conf&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/sqs-lambda-for-nodejs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/sqs-lambda-for-nodejs/" class="post-title-link" itemprop="url">使用 SQS + Lambda - NodeJS 篇</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 17:01:27" itemprop="dateCreated datePublished" datetime="2022-11-16T17:01:27+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NodeJS/" itemprop="url" rel="index"><span itemprop="name">NodeJS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>2 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><p><strong>步驟一、建立 IAM Role</strong></p>
+<ul>
+<li>名稱為 role-for-sqs-lambda</li>
+<li>use case 選擇 Lambda</li>
+<li>加入 Policy<ul>
+<li>讓 Lambda 使用 CloudWatch 服務 <code>AWSLambdaBasicExecutionRole</code></li>
+<li>讓 Lambda 使用 SQS 服務 <code>AmazonSQSFullAccess</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>步驟二、建立 Lambda Function</strong></p>
+<ul>
+<li><p>名稱為 sqs-lambda</p>
+</li>
+<li><p>Runtime 選擇 Node.js</p>
+</li>
+<li><p>Permission 選擇前面建立的 role</p>
+</li>
+<li><p>到 Configuraion 更改 timeout 為 20 秒，切記不要超過 SQS Visibility Timeout 時間</p>
+</li>
+<li><p>撰寫 Node.js Code</p>
+  <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exports</span>.<span class="property">handler</span> = <span class="keyword">async</span> (event) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; event.<span class="property">Records</span>.<span class="property">length</span> ; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> record = event.<span class="property">Records</span>[i]</span><br><span class="line">        <span class="keyword">let</span> &#123; body &#125; = record;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;body: &quot;</span>, body);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;type of body: &quot;</span> + (<span class="keyword">typeof</span> body))</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> body === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">            body = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(body)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;body.process_time_ms: &quot;</span>, body.<span class="property">process_time_ms</span>);</span><br><span class="line">        <span class="keyword">let</span> &#123; process_time_ms &#125; = body;</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;start processing: &quot;</span> + process_time_ms);</span><br><span class="line">        <span class="keyword">await</span> <span class="title function_">delay</span>(process_time_ms);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;ends processing.&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> response = &#123;</span><br><span class="line">        <span class="attr">statusCode</span>: <span class="number">200</span>,</span><br><span class="line">        <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(<span class="string">&#x27;Successfully finished! &#x27;</span>),</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">delay</span>(<span class="params">time</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">setTimeout</span>(resolve, time));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>步驟三、建立 SQS</strong></p>
+<ul>
+<li>名稱為 sqs-for-lambda</li>
+</ul>
+<p><strong>步驟四、設定 Lambda trigger</strong></p>
+<ul>
+<li>選擇前面建立的 SQS  queue</li>
+<li>batch size 設定為 1 來測試即可<ul>
+<li>設定啟動一個 Lambda 一次要抓取多少個 message 數量</li>
+<li>數值設定越高，Lambda 效能越好</li>
+</ul>
+</li>
+</ul>
+<p>步驟五、整合測試 SQS + Lambda</p>
+<ul>
+<li><p>到 SQS 發送 message</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;process_time_ms&quot;: 1001</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>到 Lambda 的 Monitor 連到 Cloudwatch 查看 log stream</p>
+</li>
+</ul>
+<h2 id="發送高流量請求的步驟"><a href="#發送高流量請求的步驟" class="headerlink" title="發送高流量請求的步驟"></a>發送高流量請求的步驟</h2><p><strong>步驟一、建立 IAM</strong></p>
+<ul>
+<li>名稱為 role-for-sqs-ec2</li>
+<li>use case 選擇 EC2</li>
+<li>加入 Policy<ul>
+<li>讓 EC2 使用 SQS 服務 <code>AmazonSQSFullAccess</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>步驟二、建立 EC2</strong></p>
+<ul>
+<li>AMI 選擇預設 Amazon Linux AMI</li>
+<li>選擇前面建立的 role</li>
+<li>建立新的 security group 開發 22, 8080 port</li>
+</ul>
+<p><strong>步驟三、進去 EC2 安裝套件</strong></p>
+<ul>
+<li><p>安裝指令</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install -y git</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/uopsdod/aws-advanced-course-project.git</span><br><span class="line">$ <span class="built_in">cd</span> aws-advanced-course-project</span><br><span class="line">$ git checkout sqs_lambda</span><br><span class="line">$ git branch</span><br><span class="line">$ sudo amazon-linux-extras install -y docker</span><br><span class="line">$ sudo service docker start</span><br><span class="line">$ sudo docker build --no-cache -t myapp001 .</span><br><span class="line">$ sudo docker images</span><br><span class="line">$ sudo docker run -d -p 8080:8080 myapp001</span><br><span class="line">$ sudo docker ps</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>步驟四、批次發送訊息到 SQS</strong></p>
+<ul>
+<li>複製 Instance DNS URL 到瀏覽器，進行開啟</li>
+<li>選擇 SQS + Lambda 後，更改設定<ul>
+<li>backend url 為 <code>&lt;instance dns url&gt;:8080</code></li>
+<li>sqs url 為前面建立的 SQS url</li>
+<li>message batch 為批次發送的數量</li>
+</ul>
+</li>
+<li>點 Track SQS Message Count 追蹤 SQS 變化<ul>
+<li>會有大幅度起伏是因為 SQS 背後的 server 是分散式架構，同步會需要一段時間</li>
+<li>同步過一段時間後，就會穩定成一個數量</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/sqs-lambda-for-laravel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/sqs-lambda-for-laravel/" class="post-title-link" itemprop="url">使用 SQS + Lambda - Laravel 篇</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-16 16:53:05" itemprop="dateCreated datePublished" datetime="2022-11-16T16:53:05+08:00">2022-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Laravel/" itemprop="url" rel="index"><span itemprop="name">Laravel</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>4 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言提要"><a href="#前言提要" class="headerlink" title="前言提要"></a>前言提要</h2><ul>
+<li>Lambda 預設沒有提供 PHP 語言，需要透過 bref 套件引用 custom runtime 才可以跑 Laravel</li>
+</ul>
+<h2 id="雲端前置步驟"><a href="#雲端前置步驟" class="headerlink" title="雲端前置步驟"></a>雲端前置步驟</h2><p><strong>步驟一、建立 IAM</strong></p>
+<ul>
+<li>名稱為 role-for-lambda</li>
+<li>use case 選擇 Lambda</li>
+<li>加入 Policy<ul>
+<li>讓 Lambda 使用 CloudWatch 服務 <code>AWSLambdaBasicExecutionRole</code></li>
+<li>讓 Lambda 使用 SQS 服務 <code>AmazonSQSFullAccess</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>步驟二、建立兩個 SQS</strong></p>
+<ul>
+<li>名稱分別為 <code>default-queue</code>、<code>another-queue</code></li>
+<li>其他設定照預設即可</li>
+</ul>
+<blockquote>
+<p>serverless 整合 CDK 可以使用 <a target="_blank" rel="noopener" href="https://github.com/getlift/lift">Lift Plugin</a>，可以省去手動建立的時間</p>
+</blockquote>
+<h2 id="專案啟動到部署步驟"><a href="#專案啟動到部署步驟" class="headerlink" title="專案啟動到部署步驟"></a>專案啟動到部署步驟</h2><p><strong>步驟一、建立 Laravel 專案</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安裝 composer</span></span><br><span class="line">brew install composer</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立專案</span></span><br><span class="line">composer create-project laravel/laravel &lt;專案名稱 ex: sqs-lambda-for-laravel&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 啟動專案測試</span></span><br><span class="line">php artisan serve</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟二、使用 bref 套件</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安裝 bref 套件</span></span><br><span class="line">composer require bref/bref bref/laravel-bridge</span><br><span class="line"></span><br><span class="line"><span class="comment"># 套用 bref 的 serverless.yml</span></span><br><span class="line">php artisan vendor:publish --tag=serverless-config</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟三、建立 worker.php，用來當作 Lambda 的入口</strong></p>
+<p>參考專案 ⇒ <strong><strong><a target="_blank" rel="noopener" href="https://github.com/brefphp/examples">Bref example applications</a></strong></strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Bref</span>\<span class="title">LaravelBridge</span>\<span class="title">Queue</span>\<span class="title">LaravelSqsHandler</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Application</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">require</span> <span class="keyword">__DIR__</span> . <span class="string">&#x27;/vendor/autoload.php&#x27;</span>;</span><br><span class="line"><span class="comment">/** <span class="doctag">@var</span> Application $app */</span></span><br><span class="line"><span class="variable">$app</span> = <span class="keyword">require</span> <span class="keyword">__DIR__</span> . <span class="string">&#x27;/bootstrap/app.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$kernel</span> = <span class="variable">$app</span>-&gt;<span class="title function_ invoke__">make</span>(<span class="title class_">Illuminate\Contracts\Console\Kernel</span>::<span class="variable language_">class</span>);</span><br><span class="line"><span class="variable">$kernel</span>-&gt;<span class="title function_ invoke__">bootstrap</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="variable">$app</span>-&gt;<span class="title function_ invoke__">makeWith</span>(<span class="title class_">LaravelSqsHandler</span>::<span class="variable language_">class</span>, [</span><br><span class="line">    <span class="string">&#x27;connection&#x27;</span> =&gt; <span class="string">&#x27;sqs&#x27;</span>, // this is the Laravel Queue connection</span><br><span class="line">    <span class="string">&#x27;queue&#x27;</span> =&gt; <span class="title function_ invoke__">getenv</span>(<span class="string">&#x27;SQS_QUEUE&#x27;</span>),</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟四、修改 serverless.yml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 當作建立 AWS 服務的 prefix</span></span><br><span class="line"><span class="attr">service:</span> <span class="string">sqs-lambda-for-laravel</span></span><br><span class="line"></span><br><span class="line"><span class="attr">provider:</span></span><br><span class="line">    <span class="comment"># 設定 Lambda execute role</span></span><br><span class="line">    <span class="attr">iam:</span></span><br><span class="line">      <span class="attr">role:</span> <span class="string">arn:aws:iam::&lt;account</span> <span class="string">id&gt;:role/example-sqs-lambda-for-laravel</span></span><br><span class="line">    <span class="comment"># 設定 Lambda 環境變數</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">APP_ENV:</span> <span class="string">local</span></span><br><span class="line">      <span class="attr">APP_DEBUG:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">APP_KEY:</span> <span class="string">&#x27;base64:WQUEgE4Jjbn4ixFeyxLFkYi03gYM4Kl6Q9WgzZpThh8=&#x27;</span></span><br><span class="line">      <span class="attr">SQS_PREFIX:</span> <span class="string">https://sqs.&lt;region&gt;.amazonaws.com/&lt;account</span> <span class="string">id&gt;</span></span><br><span class="line">      <span class="attr">SQS_QUEUE:</span> <span class="string">&lt;default</span> <span class="string">queue</span> <span class="string">name&gt;</span></span><br><span class="line">      <span class="attr">QUEUE_CONNECTION:</span> <span class="string">sqs</span></span><br><span class="line">      <span class="attr">LOG_CHANNEL:</span> <span class="string">stderr</span>     <span class="string">&lt;=</span> <span class="string">將</span> <span class="string">log</span> <span class="string">傳送到</span> <span class="string">cloudwatch</span></span><br><span class="line">      <span class="attr">CACHE_DRIVER:</span> <span class="string">array</span></span><br><span class="line">      <span class="attr">SESSION_DRIVER:</span> <span class="string">array</span></span><br><span class="line">    <span class="attr">apiGateway:</span></span><br><span class="line">      <span class="attr">shouldStartNameWithService:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 設定打包 zip 略過的資料夾或檔案</span></span><br><span class="line"><span class="attr">package:</span></span><br><span class="line">    <span class="attr">patterns:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&#x27;!node_modules/**&#x27;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&#x27;!public/storage&#x27;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&#x27;!resources/assets/**&#x27;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&#x27;!storage/**&#x27;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&#x27;!tests/**&#x27;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&#x27;!.env&#x27;</span>    <span class="string">&lt;=</span> <span class="string">不要包</span> <span class="string">.env</span> <span class="string">檔案</span></span><br><span class="line"></span><br><span class="line"><span class="attr">functions:</span></span><br><span class="line">    <span class="comment"># 設定後端 API (此範例用來發 job 給 SQS)</span></span><br><span class="line">    <span class="attr">api:</span></span><br><span class="line">      <span class="attr">handler:</span> <span class="string">public/index.php</span></span><br><span class="line">      <span class="attr">timeout:</span> <span class="number">28</span></span><br><span class="line">      <span class="attr">layers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">$&#123;bref:layer.php-81-fpm&#125;</span></span><br><span class="line">      <span class="attr">events:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">httpApi:</span> <span class="string">&#x27;*&#x27;</span></span><br><span class="line">    <span class="comment"># 設定 default lambda worker 及監聽對應的 Queue</span></span><br><span class="line">    <span class="attr">defaultWorker:</span></span><br><span class="line">      <span class="attr">handler:</span> <span class="string">worker.php</span></span><br><span class="line">      <span class="attr">layers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">$&#123;bref:layer.php-81&#125;</span></span><br><span class="line">      <span class="attr">environment:</span></span><br><span class="line">        <span class="attr">SQS_QUEUE:</span> <span class="string">default-queue</span></span><br><span class="line">      <span class="attr">events:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">sqs:</span></span><br><span class="line">            <span class="attr">arn:</span> <span class="string">arn:aws:sqs:us-west-2:&lt;account</span> <span class="string">id&gt;:default-queue</span></span><br><span class="line">            <span class="attr">batchSize:</span> <span class="number">1</span></span><br><span class="line">    <span class="comment"># 設定 another lambda worker 及監聽對應的 Queue</span></span><br><span class="line">    <span class="attr">anotherWorker:</span></span><br><span class="line">      <span class="attr">handler:</span> <span class="string">worker.php</span></span><br><span class="line">      <span class="attr">layers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">$&#123;bref:layer.php-81&#125;</span></span><br><span class="line">      <span class="attr">environment:</span></span><br><span class="line">        <span class="attr">SQS_QUEUE:</span> <span class="string">another-queue</span></span><br><span class="line">      <span class="attr">events:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">sqs:</span></span><br><span class="line">            <span class="attr">arn:</span> <span class="string">arn:aws:sqs:us-west-2:&lt;account</span> <span class="string">id&gt;:another-queue</span></span><br><span class="line">            <span class="attr">batchSize:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟五、修改 queue.php</strong></p>
+<ul>
+<li><p>加上 token 參數</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;sqs&#x27;</span> =&gt; [</span><br><span class="line">		...</span><br><span class="line">    <span class="string">&#x27;token&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;AWS_SESSION_TOKEN&#x27;</span>)</span><br><span class="line">		...</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>步驟六、建立 Job</strong></p>
+<ul>
+<li><p>建立 CreateOrder Job</p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">php</span> <span class="string">artisan</span> <span class="string">make:job</span> <span class="string">CreateOrder</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改 CreateOrder Job 程式碼</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Jobs</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Bus</span>\<span class="title">Queueable</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Contracts</span>\<span class="title">Queue</span>\<span class="title">ShouldBeUnique</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Contracts</span>\<span class="title">Queue</span>\<span class="title">ShouldQueue</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Bus</span>\<span class="title">Dispatchable</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Queue</span>\<span class="title">InteractsWithQueue</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Queue</span>\<span class="title">SerializesModels</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Log</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CreateOrder</span> <span class="keyword">implements</span> <span class="title">ShouldQueue</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">use</span> <span class="title">Dispatchable</span>, <span class="title">InteractsWithQueue</span>, <span class="title">Queueable</span>, <span class="title">SerializesModels</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** <span class="doctag">@var</span> int <span class="doctag">@orderId</span> */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$orderId</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Create a new job instance.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$orderId</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;orderId = <span class="variable">$orderId</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Execute the job.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="title class_">Log</span>::<span class="title function_ invoke__">info</span>(<span class="string">&quot;建立 Order ID: $&#123;orderId&#125;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>步驟七、發送 Job 到 SQS</strong></p>
+<ul>
+<li><p>修改 routes&#x2F;web.php</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Route</span>::<span class="title function_ invoke__">get</span>(<span class="string">&#x27;/create-order/&#123;id&#125;/&#123;queue&#125;&#x27;</span>, function(<span class="variable">$id</span>, <span class="variable">$queue</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="title function_ invoke__">in_array</span>(<span class="variable">$queue</span>, [<span class="string">&#x27;default-queue&#x27;</span>, <span class="string">&#x27;another-queue&#x27;</span>])) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_ invoke__">response</span>()-&gt;<span class="title function_ invoke__">json</span>([</span><br><span class="line">            <span class="string">&#x27;error_message&#x27;</span> =&gt; <span class="string">&quot;目前沒有提供 $&#123;queue&#125; Queue&quot;</span></span><br><span class="line">        ]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title class_">CreateOrder</span>::<span class="title function_ invoke__">dispatch</span>(<span class="variable">$id</span>)-&gt;<span class="title function_ invoke__">onQueue</span>(<span class="variable">$queue</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">response</span>()-&gt;<span class="title function_ invoke__">json</span>([</span><br><span class="line">        <span class="string">&#x27;status&#x27;</span>    =&gt; <span class="string">&#x27;done&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;orderId&#x27;</span>   =&gt; <span class="variable">$id</span>,</span><br><span class="line">        <span class="string">&#x27;queue&#x27;</span>     =&gt; <span class="variable">$queue</span></span><br><span class="line">    ]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>步驟八、使用 serverless 部署</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安裝 serverless</span></span><br><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">-g</span> <span class="string">serverless</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 設定 credentials</span></span><br><span class="line"></span><br><span class="line"><span class="string">serverless</span> <span class="string">config</span> <span class="string">credentials</span> <span class="string">--provider</span> <span class="string">aws</span> <span class="string">--key</span> <span class="string">&lt;key&gt;</span> <span class="string">--secret</span> <span class="string">&lt;secret&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清除快取</span></span><br><span class="line"><span class="string">php</span> <span class="string">artisan</span> <span class="string">config:clear</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 部署</span></span><br><span class="line"><span class="string">serverless</span> <span class="string">deploy</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>原始碼可參考 <a target="_blank" rel="noopener" href="https://github.com/jefferylee73/sqs-lambda-for-laravel">sqs-lambda-for-laravel</a></p>
+</blockquote>
+<h2 id="SQS-Lambda-整合測試"><a href="#SQS-Lambda-整合測試" class="headerlink" title="SQS + Lambda 整合測試"></a>SQS + Lambda 整合測試</h2><ul>
+<li><p>呼叫前面建立的 api</p>
+<p>  <img src="/../images/laravel/sqs-lambda-for-laravel1.png" alt="sqs-lambda-for-laravel1"></p>
+</li>
+<li><p>查看 SQS receive message 數量</p>
+<p>  <img src="/../images/laravel/sqs-lambda-for-laravel2.png" alt="sqs-lambda-for-laravel2"></p>
+</li>
+<li><p>查看 Lambda Log 結果</p>
+<p>  <img src="/../images/laravel/sqs-lambda-for-laravel3.png" alt="sqs-lambda-for-laravel3"></p>
+</li>
+</ul>
+<h2 id="Laravel-注意事項"><a href="#Laravel-注意事項" class="headerlink" title="Laravel 注意事項"></a>Laravel 注意事項</h2><ul>
+<li>Lambda 的 &#x2F;tmp 資料夾是 read-only</li>
+<li>FILESYSTEM_DRIVER 建議改成用 S3</li>
+<li>當程式碼 size 增加，也會增加 Cold Star 時間</li>
+</ul>
+<h2 id="TroubleShoot"><a href="#TroubleShoot" class="headerlink" title="TroubleShoot"></a>TroubleShoot</h2><p><strong>問題一、當遇到權限問題可以使用 StsClient 類別查看 IAM 身份</strong></p>
+<ul>
+<li>Classes 相關使用可參考 ⇒ <strong><a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/aws-sdk-php/v3/api/index.html">AWS SDK for PHP 3.x</a></strong></li>
+<li>可參考下方程式碼</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$client</span> = <span class="keyword">new</span> <span class="title class_">StsClient</span>([</span><br><span class="line">    <span class="string">&#x27;region&#x27;</span> =&gt; <span class="string">&#x27;us-west-2&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;version&#x27;</span> =&gt; <span class="string">&#x27;latest&#x27;</span></span><br><span class="line">]);</span><br><span class="line"><span class="keyword">return</span> <span class="variable">$client</span>-&gt;<span class="title function_ invoke__">getCallerIdentity</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://aws.plainenglish.io/serverless-laravel-made-easy-with-bref-cdbeeed53ef4">Serverless Laravel Made Easy with Bref</a></strong></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://azole.medium.com/%E7%94%A8-bref-1-0-%E8%AE%93-laravel-8-serverless-%E8%B5%B7%E4%BE%86-6f2b5416c372">用 Bref 1.0 讓 Laravel 8 serverless 起來</a></strong></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://jefferylee73.github.io/setup-ftp-by-vsftpd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+      <meta itemprop="name" content="Jeffery Lee">
+      <meta itemprop="description" content="今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="傑佛瑞的 IT 學習筆記">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/setup-ftp-by-vsftpd/" class="post-title-link" itemprop="url">使用 VSFTPD 架設 FTP  Server</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-11 15:29:01" itemprop="dateCreated datePublished" datetime="2022-11-11T15:29:01+08:00">2022-11-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2023-04-21 09:45:34" itemprop="dateModified" datetime="2023-04-21T09:45:34+08:00">2023-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>703</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="FTP-連線模式"><a href="#FTP-連線模式" class="headerlink" title="FTP 連線模式"></a>FTP 連線模式</h2><p><strong>主動 FTP：</strong></p>
+<ul>
+<li>命令連接：客戶端 &gt;1024 端口 → 服務器 21 端口</li>
+<li>數據連接：客戶端 &gt;1024 端口 ← 服務器 20 端口</li>
+</ul>
+<p><strong>被動 FTP：</strong></p>
+<ul>
+<li>命令連接：客戶端 &gt;1024 端口 → 服務器 21 端口</li>
+<li>數據連接：客戶端 &gt;1024 端口 ← 服務器 &gt;1024 端口</li>
+</ul>
+<h2 id="建立步驟"><a href="#建立步驟" class="headerlink" title="建立步驟"></a>建立步驟</h2><ol>
+<li><p>建立 ubuntu 作業系統的 EC2，設定 security group</p>
+<ul>
+<li>新增inbound rule 新增 20,21(ftp)、 22(ssh) port</li>
+</ul>
+</li>
+<li><p>安裝 vsftpd</p>
+<ul>
+<li>安裝指令 <code>sudo apt update -y &amp;&amp; sudo apt install vsftpd -y</code></li>
+<li>查看狀態 <code>sudo service vsftpd status</code></li>
+</ul>
+</li>
+<li><p>編輯 vsftpd 設定檔</p>
+<ul>
+<li>編輯完要重啟服務 <code>sudo service vsftpd restart</code></li>
+</ul>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不接受匿名用戶</span></span><br><span class="line"><span class="string">anonymous_enable=NO</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 允許用戶上傳檔案或建立資料夾</span></span><br><span class="line"><span class="string">write_enable=YES</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 鎖定使用者只可以操作家目錄</span></span><br><span class="line"><span class="string">chroot_local_user=YES</span></span><br><span class="line"><span class="string">allow_writeable_chroot=YES**</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增使用者</p>
+<ul>
+<li>預設只有該用戶才可以在該家目錄建立資料夾跟建立檔案 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo adduser ata</span><br></pre></td></tr></table></figure></li>
+<li>建立完後，使用 <code>su ata</code> 切換到該用戶</li>
+<li>使用 <code>sudo</code> 指令透過 root 也可以，不過建立的資料夾就不能給 ata 用戶使用</li>
+</ul>
+</li>
+</ol>
+<h2 id="使用-Filezilla-進行連線"><a href="#使用-Filezilla-進行連線" class="headerlink" title="使用 Filezilla 進行連線"></a>使用 Filezilla 進行連線</h2><ul>
+<li><p>由於只開放 20, 21 port 所以要切換主動模式進行連線</p>
+</li>
+<li><p>到 <strong>編輯 → 設定</strong>選擇主動模式</p>
+<p>  <img src="/../images/linux/ftp1.png" alt="ftp1"></p>
+</li>
+<li><p>建立<strong>新站台</strong>的連線</p>
+<p>  <img src="/../images/linux/ftp2.png" alt="ftp2"></p>
+</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://adamtheautomator.com/vsftpd/#Opening_Ports_for_FTP_Client_Connections">How to Setup FTP Server with VSFTPD</a></strong></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/questions/10190157">filezilla 一直連不上伺服器？</a></strong></strong></li>
+<li><strong><strong><a target="_blank" rel="noopener" href="http://blog.udn.com/nigerchen/2261345#ixzz20seS3Qm6">ubuntu FTP SERVER 安裝設置( vsftp 版本 )</a></strong></strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jeffery Lee"
+      src="https://avatars.githubusercontent.com/u/16631807?s=400&v=4">
+  <p class="site-author-name" itemprop="name">Jeffery Lee</p>
+  <div class="site-description" itemprop="description">今天的成功是因為昨天的積累，明天的成功則依賴於今天的努力</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffery Lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">69k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">1:02</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
