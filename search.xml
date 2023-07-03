@@ -1314,6 +1314,92 @@
       </tags>
   </entry>
   <entry>
+    <title>如何處理 horizon 出現 inactive 問題</title>
+    <url>/horizon-inactive/</url>
+    <content><![CDATA[<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><ul>
+<li>light-worker 會透過 redis queue 建立 worker，只要 horizon dashboard 可以存取相同的 redis 即可監聽 worker 執行狀況，反之沒有存取成功就會出現下圖的 inactive 狀態</li>
+</ul>
+<p><img src="/../images/laravel/horizon-inactive1.png" alt="horizon-inactive1"></p>
+<h2 id="處理方式"><a href="#處理方式" class="headerlink" title="處理方式"></a>處理方式</h2><ol>
+<li><p>設定好 .env 確認 redis 可以連線成功</p>
+<ol>
+<li><p>使用 php artisan tinker 測試建立 cache 並存取是否成功</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Cache::put(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;jeff&#x27;</span>)</span><br><span class="line">=&gt; <span class="literal">true</span></span><br><span class="line">Cache::get(<span class="string">&#x27;name&#x27;</span>)</span><br><span class="line">=&gt; jeff</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>進去到 redis 容器搜尋是否有剛建立的 key</p>
+<p> <img src="/../images/laravel/horizon-inactive2.png" alt="horizon-inactive2"></p>
+</li>
+</ol>
+</li>
+<li><p>可以發現透過 Laravel 寫入到 redis 中 key 前面都會有 prefix</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># database.php</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;redis&#x27;</span> =&gt; [</span><br><span class="line">    <span class="string">&#x27;client&#x27;</span> =&gt; <span class="built_in">env</span>(<span class="string">&#x27;REDIS_CLIENT&#x27;</span>, <span class="string">&#x27;predis&#x27;</span>),</span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;options&#x27;</span> =&gt; [</span><br><span class="line">        <span class="string">&#x27;cluster&#x27;</span> =&gt; <span class="built_in">env</span>(<span class="string">&#x27;REDIS_CLUSTER&#x27;</span>, <span class="string">&#x27;predis&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;prefix&#x27;</span> =&gt; Str::slug(<span class="built_in">env</span>(<span class="string">&#x27;APP_NAME&#x27;</span>, <span class="string">&#x27;laravel&#x27;</span>), <span class="string">&#x27;_&#x27;</span>) . <span class="string">&#x27;_database_&#x27;</span>,</span><br><span class="line">    ],</span><br><span class="line">		...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>將兩個專案的 .env 檔案中的 <code>env(&#39;APP_NAME&#39;)</code> 改成相同就解決了</p>
+<p> <img src="/../images/laravel/horizon-inactive3.png" alt="horizon-inactive3"></p>
+</li>
+</ol>
+<h2 id="Horizon-註冊-queue"><a href="#Horizon-註冊-queue" class="headerlink" title="Horizon 註冊 queue"></a>Horizon 註冊 queue</h2><ul>
+<li>horizon.php 會根據 APP_ENV 環境來判斷要啟動的 queue</li>
+<li>特別注意當 <code>APP_ENV=local</code> ，要把 queue 新增到 local 的陣列，不然丟 queue 都不會被執行</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;environments&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">   <span class="string">&#x27;local&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">      <span class="string">&#x27;b2c_europe&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">          <span class="string">&#x27;queue&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">                <span class="string">&#x27;create-carrier-shipment-b2c-europe&#x27;</span>,</span><br><span class="line">            ]</span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Laravel</category>
+      </categories>
+      <tags>
+        <tag>Horizon</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何在 docker 的 ubuntu 環境中使用 php-fpm</title>
+    <url>/install-phpfpm-by-ubuntu/</url>
+    <content><![CDATA[<h2 id="為何需要"><a href="#為何需要" class="headerlink" title="為何需要"></a>為何需要</h2><ul>
+<li>建立與線上環境一樣的 ubuntu 作業系統</li>
+<li>有時 php-fpm 與 ubuntu 安裝的套件版本會不一致<ul>
+<li>查看套件版本 <code>apt show &lt;package name&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="建立步驟"><a href="#建立步驟" class="headerlink" title="建立步驟"></a>建立步驟</h2><p><strong>步驟一、把在 ubuntu 安裝 php 的指令寫成 docker file</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">FROM ubuntu:22.04</span><br><span class="line"></span><br><span class="line">RUN ln -fs &quot;/usr/share/zoneinfo/$TZ&quot; /etc/localtime</span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install -qqy software-properties-common \</span><br><span class="line">    &amp;&amp; add-apt-repository ppa:ondrej/php</span><br><span class="line"></span><br><span class="line">RUN apt-get install -qqy \</span><br><span class="line">    &quot;php$PHP_VERSION&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-fpm&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-common&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-gd&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-xml&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-curl&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-mbstring&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-gd&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-mysql&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-sqlite&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-redis&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-bcmath&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-tokenizer&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-zip&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-mongo&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-soap&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-intl&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-imagick&quot;</span><br><span class="line"></span><br><span class="line">RUN curl -sS https://getcomposer.org/installer | php</span><br><span class="line">RUN mv composer.phar /usr/local/bin/composer</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟二、將 php.ini , php-fpm.conf, <a href="http://www.conf/">www.conf</a> 從 docker 複製出來改，再 COPY 覆蓋原本設定</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run --rm -it rhitics-server-arm cat /etc/php/8.0/fpm/pool.d/www.conf &gt; deploy/docker/www.conf</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟三、修改 php.ini，更改上傳檔案大小</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">upload_max_filesize = 100M</span><br><span class="line"></span><br><span class="line">post_max_size = 100M</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟四、修改 php-fpm.conf，註解 pid 及修改 error_log 路徑，不然非 root 沒有權限啟動 php-fpm</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;pid = /tmp/php8.0-fpm.pid</span><br><span class="line"></span><br><span class="line">error_log = /var/log/app/php8.0-fpm.log</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟五、修改 <a href="http://www.conf,修改/">www.conf，修改</a> listen 值，與 NGINX 建立 stream</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">listen = /tmp/php8.0-fpm.sock =&gt; listen = 0.0.0.0:9000</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟六、設定 docker 預設啟動的 port 及 command</strong></p>
+<ul>
+<li>特別注意 php-fpm 指令一定要加上 <code>--nodaemonize</code>參數，讓啟動之後可以一直背景執行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">USER app</span><br><span class="line">EXPOSE 9000</span><br><span class="line">CMD [&quot;php-fpm8.0&quot;, &quot;--nodaemonize&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><strong>步驟七、設定 nginx.conf 可以與 php-fpm 建立 stream</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fastcgi_pass &lt;docker_service&gt;:9000;</span><br></pre></td></tr></table></figure>
+
+<h2 id="意外發現"><a href="#意外發現" class="headerlink" title="意外發現"></a>意外發現</h2><ul>
+<li>程式執行速度比 php-fpm 為 image base 還快 6 倍</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://github.com/wildpeaks/docker-php-fpm">Ubuntu 20.04 + PHP-FPM</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>PHP</category>
+      </categories>
+      <tags>
+        <tag>PHP-FPM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何區分權限與授權</title>
     <url>/learning-auth/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>權限管理 &#x3D; Authentication (身份驗証，你是誰) + Authorization (授權，你可以做什麼)</p>
@@ -1441,92 +1527,6 @@
       </categories>
   </entry>
   <entry>
-    <title>如何在 docker 的 ubuntu 環境中使用 php-fpm</title>
-    <url>/install-phpfpm-by-ubuntu/</url>
-    <content><![CDATA[<h2 id="為何需要"><a href="#為何需要" class="headerlink" title="為何需要"></a>為何需要</h2><ul>
-<li>建立與線上環境一樣的 ubuntu 作業系統</li>
-<li>有時 php-fpm 與 ubuntu 安裝的套件版本會不一致<ul>
-<li>查看套件版本 <code>apt show &lt;package name&gt;</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="建立步驟"><a href="#建立步驟" class="headerlink" title="建立步驟"></a>建立步驟</h2><p><strong>步驟一、把在 ubuntu 安裝 php 的指令寫成 docker file</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">FROM ubuntu:22.04</span><br><span class="line"></span><br><span class="line">RUN ln -fs &quot;/usr/share/zoneinfo/$TZ&quot; /etc/localtime</span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install -qqy software-properties-common \</span><br><span class="line">    &amp;&amp; add-apt-repository ppa:ondrej/php</span><br><span class="line"></span><br><span class="line">RUN apt-get install -qqy \</span><br><span class="line">    &quot;php$PHP_VERSION&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-fpm&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-common&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-gd&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-xml&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-curl&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-mbstring&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-gd&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-mysql&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-sqlite&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-redis&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-bcmath&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-tokenizer&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-zip&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-mongo&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-soap&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-intl&quot; \</span><br><span class="line">    &quot;php$PHP_VERSION-imagick&quot;</span><br><span class="line"></span><br><span class="line">RUN curl -sS https://getcomposer.org/installer | php</span><br><span class="line">RUN mv composer.phar /usr/local/bin/composer</span><br></pre></td></tr></table></figure>
-
-<p><strong>步驟二、將 php.ini , php-fpm.conf, <a href="http://www.conf/">www.conf</a> 從 docker 複製出來改，再 COPY 覆蓋原本設定</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run --rm -it rhitics-server-arm cat /etc/php/8.0/fpm/pool.d/www.conf &gt; deploy/docker/www.conf</span><br></pre></td></tr></table></figure>
-
-<p><strong>步驟三、修改 php.ini，更改上傳檔案大小</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">upload_max_filesize = 100M</span><br><span class="line"></span><br><span class="line">post_max_size = 100M</span><br></pre></td></tr></table></figure>
-
-<p><strong>步驟四、修改 php-fpm.conf，註解 pid 及修改 error_log 路徑，不然非 root 沒有權限啟動 php-fpm</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;pid = /tmp/php8.0-fpm.pid</span><br><span class="line"></span><br><span class="line">error_log = /var/log/app/php8.0-fpm.log</span><br></pre></td></tr></table></figure>
-
-<p><strong>步驟五、修改 <a href="http://www.conf,修改/">www.conf，修改</a> listen 值，與 NGINX 建立 stream</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">listen = /tmp/php8.0-fpm.sock =&gt; listen = 0.0.0.0:9000</span><br></pre></td></tr></table></figure>
-
-<p><strong>步驟六、設定 docker 預設啟動的 port 及 command</strong></p>
-<ul>
-<li>特別注意 php-fpm 指令一定要加上 <code>--nodaemonize</code>參數，讓啟動之後可以一直背景執行</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">USER app</span><br><span class="line">EXPOSE 9000</span><br><span class="line">CMD [&quot;php-fpm8.0&quot;, &quot;--nodaemonize&quot;]</span><br></pre></td></tr></table></figure>
-
-<p><strong>步驟七、設定 nginx.conf 可以與 php-fpm 建立 stream</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fastcgi_pass &lt;docker_service&gt;:9000;</span><br></pre></td></tr></table></figure>
-
-<h2 id="意外發現"><a href="#意外發現" class="headerlink" title="意外發現"></a>意外發現</h2><ul>
-<li>程式執行速度比 php-fpm 為 image base 還快 6 倍</li>
-</ul>
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
-<li><a href="https://github.com/wildpeaks/docker-php-fpm">Ubuntu 20.04 + PHP-FPM</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>PHP</category>
-      </categories>
-      <tags>
-        <tag>PHP-FPM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何處理 horizon 出現 inactive 問題</title>
-    <url>/horizon-inactive/</url>
-    <content><![CDATA[<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><ul>
-<li>light-worker 會透過 redis queue 建立 worker，只要 horizon dashboard 可以存取相同的 redis 即可監聽 worker 執行狀況，反之沒有存取成功就會出現下圖的 inactive 狀態</li>
-</ul>
-<p><img src="/../images/laravel/horizon-inactive1.png" alt="horizon-inactive1"></p>
-<h2 id="處理方式"><a href="#處理方式" class="headerlink" title="處理方式"></a>處理方式</h2><ol>
-<li><p>設定好 .env 確認 redis 可以連線成功</p>
-<ol>
-<li><p>使用 php artisan tinker 測試建立 cache 並存取是否成功</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Cache::put(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;jeff&#x27;</span>)</span><br><span class="line">=&gt; <span class="literal">true</span></span><br><span class="line">Cache::get(<span class="string">&#x27;name&#x27;</span>)</span><br><span class="line">=&gt; jeff</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>進去到 redis 容器搜尋是否有剛建立的 key</p>
-<p> <img src="/../images/laravel/horizon-inactive2.png" alt="horizon-inactive2"></p>
-</li>
-</ol>
-</li>
-<li><p>可以發現透過 Laravel 寫入到 redis 中 key 前面都會有 prefix</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># database.php</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;redis&#x27;</span> =&gt; [</span><br><span class="line">    <span class="string">&#x27;client&#x27;</span> =&gt; <span class="built_in">env</span>(<span class="string">&#x27;REDIS_CLIENT&#x27;</span>, <span class="string">&#x27;predis&#x27;</span>),</span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;options&#x27;</span> =&gt; [</span><br><span class="line">        <span class="string">&#x27;cluster&#x27;</span> =&gt; <span class="built_in">env</span>(<span class="string">&#x27;REDIS_CLUSTER&#x27;</span>, <span class="string">&#x27;predis&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;prefix&#x27;</span> =&gt; Str::slug(<span class="built_in">env</span>(<span class="string">&#x27;APP_NAME&#x27;</span>, <span class="string">&#x27;laravel&#x27;</span>), <span class="string">&#x27;_&#x27;</span>) . <span class="string">&#x27;_database_&#x27;</span>,</span><br><span class="line">    ],</span><br><span class="line">		...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>將兩個專案的 .env 檔案中的 <code>env(&#39;APP_NAME&#39;)</code> 改成相同就解決了</p>
-<p> <img src="/../images/laravel/horizon-inactive3.png" alt="horizon-inactive3"></p>
-</li>
-</ol>
-<h2 id="Horizon-註冊-queue"><a href="#Horizon-註冊-queue" class="headerlink" title="Horizon 註冊 queue"></a>Horizon 註冊 queue</h2><ul>
-<li>horizon.php 會根據 APP_ENV 環境來判斷要啟動的 queue</li>
-<li>特別注意當 <code>APP_ENV=local</code> ，要把 queue 新增到 local 的陣列，不然丟 queue 都不會被執行</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;environments&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">   <span class="string">&#x27;local&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">      <span class="string">&#x27;b2c_europe&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">          <span class="string">&#x27;queue&#x27;</span> <span class="string">=&gt;</span> [</span><br><span class="line">                <span class="string">&#x27;create-carrier-shipment-b2c-europe&#x27;</span>,</span><br><span class="line">            ]</span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Laravel</category>
-      </categories>
-      <tags>
-        <tag>Horizon</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>探討 Nginx 架構</title>
     <url>/learning-nginx-infra/</url>
     <content><![CDATA[<h2 id="Nginx-簡介"><a href="#Nginx-簡介" class="headerlink" title="Nginx 簡介"></a>Nginx 簡介</h2><ul>
@@ -1595,67 +1595,6 @@
       <tags>
         <tag>Nginx</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>如何串接 Line Notify</title>
-    <url>/line-notify-exercise/</url>
-    <content><![CDATA[<p>LINE Notify API 文件可參考此<a href="https://notify-bot.line.me/doc/en/">連結</a></p>
-<h2 id="步驟一、登入-Line-Notify-後台"><a href="#步驟一、登入-Line-Notify-後台" class="headerlink" title="步驟一、登入 Line Notify 後台"></a>步驟一、登入 Line Notify 後台</h2><ul>
-<li><p>登入 <a href="https://notify-bot.line.me/zh_TW/">連結</a></p>
-</li>
-<li><p>進去管理服務</p>
-<p>  <img src="/../images/line/line-notify-exercise1.png" alt="line-notify-exercise1"></p>
-</li>
-</ul>
-<h2 id="步驟二、建立-Line-機器人"><a href="#步驟二、建立-Line-機器人" class="headerlink" title="步驟二、建立 Line 機器人"></a>步驟二、建立 Line 機器人</h2><ul>
-<li><p>服務網址、callback url 要填入下個步驟要做授權用的 url</p>
-<p>  <img src="/../images/line/line-notify-exercise2.png" alt="line-notify-exercise2"></p>
-</li>
-<li><p>到 Gmail 收信來允許授權</p>
-<p>  <img src="/../images/line/line-notify-exercise3.png" alt="line-notify-exercise3"></p>
-</li>
-</ul>
-<h2 id="步驟三、授權-Line-Notify-可以通知給自己或-line-群組"><a href="#步驟三、授權-Line-Notify-可以通知給自己或-line-群組" class="headerlink" title="步驟三、授權 Line Notify 可以通知給自己或 line 群組"></a>步驟三、授權 Line Notify 可以通知給自己或 line 群組</h2><ul>
-<li><p>建立 index.html，並用 vscode 的 live server 啟動網頁 (預設 port <code>5500</code>)</p>
-  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">&lt;!DOCTYPE</span> <span class="string">html&gt;</span></span><br><span class="line"><span class="string">&lt;html&gt;</span></span><br><span class="line">    <span class="string">&lt;head&gt;</span></span><br><span class="line">        <span class="string">&lt;title&gt;Notify&lt;/title&gt;</span></span><br><span class="line">        <span class="string">&lt;script&gt;</span></span><br><span class="line">            <span class="string">function</span> <span class="string">OAuth2()</span> &#123;</span><br><span class="line">                <span class="string">var</span> <span class="string">URL</span> <span class="string">=</span> <span class="string">&#x27;https://notify-bot.line.me/oauth/authorize?&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;response_type=code&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;client_id=&lt;YOUR_CLIENT_ID&gt;&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;redirect_uri=http://localhost:5500&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;scope=notify&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;state=NO_STATE&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">window.location.href</span> <span class="string">=</span> <span class="string">URL;</span></span><br><span class="line">            &#125;</span><br><span class="line">        <span class="string">&lt;/script&gt;</span></span><br><span class="line">    <span class="string">&lt;/head&gt;</span></span><br><span class="line">    <span class="string">&lt;body&gt;</span></span><br><span class="line">        <span class="string">&lt;button</span> <span class="string">onclick=&quot;OAuth2();&quot;&gt;連結到</span> <span class="string">LineNotify</span> <span class="string">按鈕&lt;/button&gt;</span></span><br><span class="line">    <span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>點擊按鈕做 redirect 到 line 的授權頁面</p>
-<p>  <img src="/../images/line/line-notify-exercise4.png" alt="line-notify-exercise4"></p>
-<p>  <img src="/../images/line/line-notify-exercise5.png" alt="line-notify-exercise5"></p>
-</li>
-<li><p>點擊同意後會在 redirect 回來，要取得 authorize code 給下一個步驟做 login 使用</p>
-<p>  <img src="/../images/line/line-notify-exercise6.png" alt="line-notify-exercise6"></p>
-</li>
-</ul>
-<h2 id="步驟四、登入-Line-Notify-取得-access-token"><a href="#步驟四、登入-Line-Notify-取得-access-token" class="headerlink" title="步驟四、登入 Line Notify 取得 access token"></a>步驟四、登入 Line Notify 取得 access token</h2><ul>
-<li><p>URL  <code>https://notify-bot.line.me/oauth/token</code></p>
-</li>
-<li><p>FormData</p>
-  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">grant_type:</span> <span class="string">authorization_code</span></span><br><span class="line"><span class="attr">code:</span> <span class="string">&lt;上個步驟取得的</span> <span class="string">CODE&gt;</span></span><br><span class="line"><span class="attr">redirect_uri:</span> <span class="string">http://localhost:5500</span></span><br><span class="line"><span class="attr">client_id:</span> <span class="string">&lt;YOUR</span> <span class="string">CLIENT</span> <span class="string">ID&gt;</span></span><br><span class="line"><span class="attr">client_secret:</span> <span class="string">&lt;YOUR</span> <span class="string">CLIENT</span> <span class="string">SECRET&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>回應結果</p>
-<p>  <img src="/../images/line/line-notify-exercise7.png" alt="line-notify-exercise7"></p>
-</li>
-</ul>
-<h2 id="步驟五、發送訊息"><a href="#步驟五、發送訊息" class="headerlink" title="步驟五、發送訊息"></a>步驟五、發送訊息</h2><ul>
-<li><p>URL <code>https://notify-api.line.me/api/notify</code></p>
-</li>
-<li><p>HEADER <code>Authorization Bearer&lt;YOUR TOKEN&gt;</code></p>
-</li>
-<li><p>FormData</p>
-  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">message:</span> <span class="string">&quot;Hello World&quot;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>驗收結果</p>
-<p>  <img src="/../images/line/line-notify-exercise8.png" alt="line-notify-exercise8"></p>
-</li>
-</ul>
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
-<li><a href="https://www.slideshare.net/JiaYuLin6/step-by-step-to-use-line-notify-20190527">step by step to use LINE Notify - 20190527</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Line API</category>
-      </categories>
   </entry>
   <entry>
     <title>深入認識 PHP-FPM</title>
@@ -1751,6 +1690,67 @@
       </tags>
   </entry>
   <entry>
+    <title>如何串接 Line Notify</title>
+    <url>/line-notify-exercise/</url>
+    <content><![CDATA[<p>LINE Notify API 文件可參考此<a href="https://notify-bot.line.me/doc/en/">連結</a></p>
+<h2 id="步驟一、登入-Line-Notify-後台"><a href="#步驟一、登入-Line-Notify-後台" class="headerlink" title="步驟一、登入 Line Notify 後台"></a>步驟一、登入 Line Notify 後台</h2><ul>
+<li><p>登入 <a href="https://notify-bot.line.me/zh_TW/">連結</a></p>
+</li>
+<li><p>進去管理服務</p>
+<p>  <img src="/../images/line/line-notify-exercise1.png" alt="line-notify-exercise1"></p>
+</li>
+</ul>
+<h2 id="步驟二、建立-Line-機器人"><a href="#步驟二、建立-Line-機器人" class="headerlink" title="步驟二、建立 Line 機器人"></a>步驟二、建立 Line 機器人</h2><ul>
+<li><p>服務網址、callback url 要填入下個步驟要做授權用的 url</p>
+<p>  <img src="/../images/line/line-notify-exercise2.png" alt="line-notify-exercise2"></p>
+</li>
+<li><p>到 Gmail 收信來允許授權</p>
+<p>  <img src="/../images/line/line-notify-exercise3.png" alt="line-notify-exercise3"></p>
+</li>
+</ul>
+<h2 id="步驟三、授權-Line-Notify-可以通知給自己或-line-群組"><a href="#步驟三、授權-Line-Notify-可以通知給自己或-line-群組" class="headerlink" title="步驟三、授權 Line Notify 可以通知給自己或 line 群組"></a>步驟三、授權 Line Notify 可以通知給自己或 line 群組</h2><ul>
+<li><p>建立 index.html，並用 vscode 的 live server 啟動網頁 (預設 port <code>5500</code>)</p>
+  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">&lt;!DOCTYPE</span> <span class="string">html&gt;</span></span><br><span class="line"><span class="string">&lt;html&gt;</span></span><br><span class="line">    <span class="string">&lt;head&gt;</span></span><br><span class="line">        <span class="string">&lt;title&gt;Notify&lt;/title&gt;</span></span><br><span class="line">        <span class="string">&lt;script&gt;</span></span><br><span class="line">            <span class="string">function</span> <span class="string">OAuth2()</span> &#123;</span><br><span class="line">                <span class="string">var</span> <span class="string">URL</span> <span class="string">=</span> <span class="string">&#x27;https://notify-bot.line.me/oauth/authorize?&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;response_type=code&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;client_id=&lt;YOUR_CLIENT_ID&gt;&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;redirect_uri=http://localhost:5500&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;scope=notify&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">URL</span> <span class="string">+=</span> <span class="string">&#x27;&amp;state=NO_STATE&#x27;</span><span class="string">;</span></span><br><span class="line">                <span class="string">window.location.href</span> <span class="string">=</span> <span class="string">URL;</span></span><br><span class="line">            &#125;</span><br><span class="line">        <span class="string">&lt;/script&gt;</span></span><br><span class="line">    <span class="string">&lt;/head&gt;</span></span><br><span class="line">    <span class="string">&lt;body&gt;</span></span><br><span class="line">        <span class="string">&lt;button</span> <span class="string">onclick=&quot;OAuth2();&quot;&gt;連結到</span> <span class="string">LineNotify</span> <span class="string">按鈕&lt;/button&gt;</span></span><br><span class="line">    <span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>點擊按鈕做 redirect 到 line 的授權頁面</p>
+<p>  <img src="/../images/line/line-notify-exercise4.png" alt="line-notify-exercise4"></p>
+<p>  <img src="/../images/line/line-notify-exercise5.png" alt="line-notify-exercise5"></p>
+</li>
+<li><p>點擊同意後會在 redirect 回來，要取得 authorize code 給下一個步驟做 login 使用</p>
+<p>  <img src="/../images/line/line-notify-exercise6.png" alt="line-notify-exercise6"></p>
+</li>
+</ul>
+<h2 id="步驟四、登入-Line-Notify-取得-access-token"><a href="#步驟四、登入-Line-Notify-取得-access-token" class="headerlink" title="步驟四、登入 Line Notify 取得 access token"></a>步驟四、登入 Line Notify 取得 access token</h2><ul>
+<li><p>URL  <code>https://notify-bot.line.me/oauth/token</code></p>
+</li>
+<li><p>FormData</p>
+  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">grant_type:</span> <span class="string">authorization_code</span></span><br><span class="line"><span class="attr">code:</span> <span class="string">&lt;上個步驟取得的</span> <span class="string">CODE&gt;</span></span><br><span class="line"><span class="attr">redirect_uri:</span> <span class="string">http://localhost:5500</span></span><br><span class="line"><span class="attr">client_id:</span> <span class="string">&lt;YOUR</span> <span class="string">CLIENT</span> <span class="string">ID&gt;</span></span><br><span class="line"><span class="attr">client_secret:</span> <span class="string">&lt;YOUR</span> <span class="string">CLIENT</span> <span class="string">SECRET&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>回應結果</p>
+<p>  <img src="/../images/line/line-notify-exercise7.png" alt="line-notify-exercise7"></p>
+</li>
+</ul>
+<h2 id="步驟五、發送訊息"><a href="#步驟五、發送訊息" class="headerlink" title="步驟五、發送訊息"></a>步驟五、發送訊息</h2><ul>
+<li><p>URL <code>https://notify-api.line.me/api/notify</code></p>
+</li>
+<li><p>HEADER <code>Authorization Bearer&lt;YOUR TOKEN&gt;</code></p>
+</li>
+<li><p>FormData</p>
+  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">message:</span> <span class="string">&quot;Hello World&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>驗收結果</p>
+<p>  <img src="/../images/line/line-notify-exercise8.png" alt="line-notify-exercise8"></p>
+</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://www.slideshare.net/JiaYuLin6/step-by-step-to-use-line-notify-20190527">step by step to use LINE Notify - 20190527</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Line API</category>
+      </categories>
+  </entry>
+  <entry>
     <title>如何解決 php-fpm 造成 OOM 問題</title>
     <url>/phpfpm-oom-problem/</url>
     <content><![CDATA[<h2 id="問題釐清"><a href="#問題釐清" class="headerlink" title="問題釐清"></a>問題釐清</h2><p>發生問題的原因是因為 php8.0-fpm 的 process 開太多造成 OOM (Out Of Memory)問題發生，php8.0-fpm 程式自動關閉，所以 nginx 的 error.log 才會跳出 <code>/var/run/php/php8.0-fpm.sock</code><br>找不到檔案，瀏覽器才跳出 502 Bad Gateway</p>
@@ -1783,6 +1783,64 @@
       </categories>
       <tags>
         <tag>PHP-FPM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis 連線逾時</title>
+    <url>/redis-connection-timeout/</url>
+    <content><![CDATA[<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><ul>
+<li><p>Laravel Job 讀取 redis 快取資料等待時間，超過 job 上限時間造成 timeout 程式無法執行完</p>
+</li>
+<li><p>查看 AWS metrics 發現 Network Bandwidth 超過限制，造成封包遺失或斷線問題</p>
+<ul>
+<li>redis 背後運行是一台 <a href="https://aws.amazon.com/tw/ec2/instance-types/">instance</a>，大部分網路頻寬上限都是 10 Gbps，所以當取得的值太大又同時被很多 client 存取，很容易就會達到上限</li>
+</ul>
+<p>  <img src="/../images/redis/redis-connection-timeout1.png" alt="redis-connection-timeout1"></p>
+</li>
+<li><p>現有 redis 架構是 standalone，隨著使用需求提高，如果沒有擴展機器數量或提升機器規格，容易機器回應較慢</p>
+</li>
+</ul>
+<h2 id="AWS-提供解決方法"><a href="#AWS-提供解決方法" class="headerlink" title="AWS 提供解決方法"></a>AWS 提供解決方法</h2><ol>
+<li>最簡單方式：就是提高機器等級</li>
+<li>最佳方式：使用 redis cluster 架構，透過 data partition and sharding 將資料分成小部分並分散在不同機器，再透過 autoscaling 方式水平擴展 shards，降低單一機器的負載</li>
+</ol>
+<h2 id="Redis-架構：從-Standalone-改成-Cluster"><a href="#Redis-架構：從-Standalone-改成-Cluster" class="headerlink" title="Redis 架構：從 Standalone 改成 Cluster"></a>Redis 架構：從 Standalone 改成 Cluster</h2><ul>
+<li>需要更了解 redis，可以參考 redis 系列筆記</li>
+<li>standalone 支援多個 db，但 cluster 只支援 db0</li>
+</ul>
+<p><strong>操作步驟</strong></p>
+<ol>
+<li><p>建立 EC2</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安裝 redis-cli</span><br><span class="line">$ sudo amazon-linux-extras install redis6</span><br><span class="line"></span><br><span class="line"># 安裝 docker</span><br><span class="line">$ sudo yum install -y docker</span><br><span class="line">$ sudo service docker restart</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>將原本的 Redis 搬移資料到 db0</p>
+<ul>
+<li>如果只有一台 Redis 要搬遷資料，可以直接使用第 4 步加上 –db 參數</li>
+<li>使用 redis-cli 指令連線或 <strong><a href="https://github.com/qishibo/AnotherRedisDesktopManager">AnotherRedisDesktopManager</a></strong> 應用程式</li>
+</ul>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># numkeys: 0</span><br><span class="line"># ARGV[1]: the cursor for SCAN, initially 0</span><br><span class="line"># ARGV[2]: the destination database. E.g. 0</span><br><span class="line"></span><br><span class="line">127.0.0.1 6379 &gt; EVAL &quot;local result = redis.call(&#x27;SCAN&#x27;, ARGV[1]) \n local conflict = &#123;&#125; \n local moved = &#123;&#125; \n for _,key in ipairs(result[2]) do \n     if redis.call(&#x27;MOVE&#x27;, key, ARGV[2]) == 0 then \n         table.insert(conflict, key) \n else \n     table.insert(moved, key) \n     end \n end \n result[2] = conflict \n result[3] = moved \n return result&quot; 0 0 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立 redis cluster</p>
+<p> <img src="/../images/redis/redis-connection-timeout2.png" alt="redis-connection-timeout2"></p>
+</li>
+<li><p>連線到 EC2 執行同步指令(<strong><a href="https://developer.redis.com/riot/riot-redis/index.html#_install">RIOT-Redis</a></strong>)</p>
+<ul>
+<li>預設 db 0 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker run fieldengineering/riot-redis -h &lt;source endpoint&gt; -p 6379 \</span><br><span class="line">replicate -h &lt;target endpoint&gt; -p 6379 --cluster --mode live</span><br></pre></td></tr></table></figure></li>
+<li>指定其他 db <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker run fieldengineering/riot-redis -h &lt;source endpoint&gt; -p 6379 --db &lt;db number&gt; \</span><br><span class="line">replicate -h &lt;target endpoint&gt; -p 6379 --cluster --mode live</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="參考文件"><a href="#參考文件" class="headerlink" title="參考文件"></a>參考文件</h2><ul>
+<li><a href="https://docs.aws.amazon.com/zh_tw/AmazonElastiCache/latest/red-ug/TroubleshootingConnections.html#Network-limits"><strong>Elasticache 故障排除</strong></a></li>
+<li><strong><strong><a href="https://repost.aws/questions/QUv105xDmfQMGUiBbfeYW-iQ/elasticache-shows-network-in-and-out-as-exceeded-but-how">Elasticache shows network in and out as exceeded, but how?</a></strong></strong></li>
+<li><strong><a href="https://stackoverflow.com/questions/59936252/it-is-possible-to-merge-two-separate-dbs-e-g-db0-db1-running-in-one-single-r">It is possible to merge two separate DBs (e.g. db0, db1) running in one single Redis instance (6379) into one single DB (db0)?</a></strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Database</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
       </tags>
   </entry>
   <entry>
@@ -1881,54 +1939,23 @@
       </tags>
   </entry>
   <entry>
-    <title>Redis 連線逾時</title>
-    <url>/redis-connection-timeout/</url>
-    <content><![CDATA[<h2 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h2><ul>
-<li><p>Laravel Job 讀取 redis 快取資料等待時間，超過 job 上限時間造成 timeout 程式無法執行完</p>
-</li>
-<li><p>查看 AWS metrics 發現 Network Bandwidth 超過限制，造成封包遺失或斷線問題</p>
-<ul>
-<li>redis 背後運行是一台 <a href="https://aws.amazon.com/tw/ec2/instance-types/">instance</a>，大部分網路頻寬上限都是 10 Gbps，所以當取得的值太大又同時被很多 client 存取，很容易就會達到上限</li>
+    <title>Redis 架構 - Master/Slave(高可用性)</title>
+    <url>/redis-infra-master-slave/</url>
+    <content><![CDATA[<h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><ul>
+<li>主從部署方式，當資料寫入到 master 後，會建立副本到 slave，提供故障轉移機制</li>
+<li>1 個 Master 會有 0~1 個 Slave (replicas)</li>
+<li>全部的寫入請求，都會經過 Master 節點</li>
+<li>如果 Master 節點壞掉，就會出現 SPOF (Single point of failure)</li>
+<li>此架構並不會隨著使用量而自動 scaling</li>
+<li>是一種 active-passive 機制，由多個 master-slave 組成</li>
 </ul>
-<p>  <img src="/../images/redis/redis-connection-timeout1.png" alt="redis-connection-timeout1"></p>
+<h2 id="使用情境"><a href="#使用情境" class="headerlink" title="使用情境"></a>使用情境</h2><ul>
+<li><p>單一實例 (Standalone)</p>
+<p>  <img src="/../images/redis/redis-infra-master-slave1.png" alt="redis-infra-master-slave1"></p>
 </li>
-<li><p>現有 redis 架構是 standalone，隨著使用需求提高，如果沒有擴展機器數量或提升機器規格，容易機器回應較慢</p>
+<li><p>Cluster 模式</p>
+<p>  <img src="/../images/redis/redis-infra-master-slave2.png" alt="redis-infra-master-slave2"></p>
 </li>
-</ul>
-<h2 id="AWS-提供解決方法"><a href="#AWS-提供解決方法" class="headerlink" title="AWS 提供解決方法"></a>AWS 提供解決方法</h2><ol>
-<li>最簡單方式：就是提高機器等級</li>
-<li>最佳方式：使用 redis cluster 架構，透過 data partition and sharding 將資料分成小部分並分散在不同機器，再透過 autoscaling 方式水平擴展 shards，降低單一機器的負載</li>
-</ol>
-<h2 id="Redis-架構：從-Standalone-改成-Cluster"><a href="#Redis-架構：從-Standalone-改成-Cluster" class="headerlink" title="Redis 架構：從 Standalone 改成 Cluster"></a>Redis 架構：從 Standalone 改成 Cluster</h2><ul>
-<li>需要更了解 redis，可以參考 redis 系列筆記</li>
-<li>standalone 支援多個 db，但 cluster 只支援 db0</li>
-</ul>
-<p><strong>操作步驟</strong></p>
-<ol>
-<li><p>建立 EC2</p>
- <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安裝 redis-cli</span><br><span class="line">$ sudo amazon-linux-extras install redis6</span><br><span class="line"></span><br><span class="line"># 安裝 docker</span><br><span class="line">$ sudo yum install -y docker</span><br><span class="line">$ sudo service docker restart</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>將原本的 Redis 搬移資料到 db0</p>
-<ul>
-<li>如果只有一台 Redis 要搬遷資料，可以直接使用第 4 步加上 –db 參數</li>
-<li>使用 redis-cli 指令連線或 <strong><a href="https://github.com/qishibo/AnotherRedisDesktopManager">AnotherRedisDesktopManager</a></strong> 應用程式</li>
-</ul>
- <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># numkeys: 0</span><br><span class="line"># ARGV[1]: the cursor for SCAN, initially 0</span><br><span class="line"># ARGV[2]: the destination database. E.g. 0</span><br><span class="line"></span><br><span class="line">127.0.0.1 6379 &gt; EVAL &quot;local result = redis.call(&#x27;SCAN&#x27;, ARGV[1]) \n local conflict = &#123;&#125; \n local moved = &#123;&#125; \n for _,key in ipairs(result[2]) do \n     if redis.call(&#x27;MOVE&#x27;, key, ARGV[2]) == 0 then \n         table.insert(conflict, key) \n else \n     table.insert(moved, key) \n     end \n end \n result[2] = conflict \n result[3] = moved \n return result&quot; 0 0 0</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>建立 redis cluster</p>
-<p> <img src="/../images/redis/redis-connection-timeout2.png" alt="redis-connection-timeout2"></p>
-</li>
-<li><p>連線到 EC2 執行同步指令(<strong><a href="https://developer.redis.com/riot/riot-redis/index.html#_install">RIOT-Redis</a></strong>)</p>
-<ul>
-<li>預設 db 0 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker run fieldengineering/riot-redis -h &lt;source endpoint&gt; -p 6379 \</span><br><span class="line">replicate -h &lt;target endpoint&gt; -p 6379 --cluster --mode live</span><br></pre></td></tr></table></figure></li>
-<li>指定其他 db <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo docker run fieldengineering/riot-redis -h &lt;source endpoint&gt; -p 6379 --db &lt;db number&gt; \</span><br><span class="line">replicate -h &lt;target endpoint&gt; -p 6379 --cluster --mode live</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ol>
-<h2 id="參考文件"><a href="#參考文件" class="headerlink" title="參考文件"></a>參考文件</h2><ul>
-<li><a href="https://docs.aws.amazon.com/zh_tw/AmazonElastiCache/latest/red-ug/TroubleshootingConnections.html#Network-limits"><strong>Elasticache 故障排除</strong></a></li>
-<li><strong><strong><a href="https://repost.aws/questions/QUv105xDmfQMGUiBbfeYW-iQ/elasticache-shows-network-in-and-out-as-exceeded-but-how">Elasticache shows network in and out as exceeded, but how?</a></strong></strong></li>
-<li><strong><a href="https://stackoverflow.com/questions/59936252/it-is-possible-to-merge-two-separate-dbs-e-g-db0-db1-running-in-one-single-r">It is possible to merge two separate DBs (e.g. db0, db1) running in one single Redis instance (6379) into one single DB (db0)?</a></strong></li>
 </ul>
 ]]></content>
       <categories>
@@ -1952,33 +1979,6 @@
 </ul>
 <h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
 <li><strong><strong><a href="https://cloudinfrastructureservices.co.uk/redis-sentinel-vs-cluster/">Redis Sentinel vs Cluster – Which is Better? (Pros and Cons)</a></strong></strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Database</category>
-      </categories>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis 架構 - Master/Slave(高可用性)</title>
-    <url>/redis-infra-master-slave/</url>
-    <content><![CDATA[<h2 id="介紹"><a href="#介紹" class="headerlink" title="介紹"></a>介紹</h2><ul>
-<li>主從部署方式，當資料寫入到 master 後，會建立副本到 slave，提供故障轉移機制</li>
-<li>1 個 Master 會有 0~1 個 Slave (replicas)</li>
-<li>全部的寫入請求，都會經過 Master 節點</li>
-<li>如果 Master 節點壞掉，就會出現 SPOF (Single point of failure)</li>
-<li>此架構並不會隨著使用量而自動 scaling</li>
-<li>是一種 active-passive 機制，由多個 master-slave 組成</li>
-</ul>
-<h2 id="使用情境"><a href="#使用情境" class="headerlink" title="使用情境"></a>使用情境</h2><ul>
-<li><p>單一實例 (Standalone)</p>
-<p>  <img src="/../images/redis/redis-infra-master-slave1.png" alt="redis-infra-master-slave1"></p>
-</li>
-<li><p>Cluster 模式</p>
-<p>  <img src="/../images/redis/redis-infra-master-slave2.png" alt="redis-infra-master-slave2"></p>
-</li>
 </ul>
 ]]></content>
       <categories>
@@ -2531,8 +2531,9 @@
   <entry>
     <title>推薦Frontend文章</title>
     <url>/suggest-frontend-article/</url>
-    <content><![CDATA[<h2 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h2><ul>
+    <content><![CDATA[<h2 id="必讀文章"><a href="#必讀文章" class="headerlink" title="必讀文章"></a>必讀文章</h2><ul>
 <li><strong><a href="https://ithelp.ithome.com.tw/users/20113277/ironman/3877?page=1">今晚，我想來點 Web 前端效能優化大補帖！</a></strong></li>
+<li><strong><a href="https://medium.com/starbugs/%E9%9D%A2%E8%A9%A6-%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%AB%E4%B8%80%E5%AE%9A%E8%A6%81%E6%9C%83%E7%9A%84-js-%E8%A7%80%E5%BF%B5%E9%A1%8C-%E4%B8%AD%E8%8B%B1%E5%B0%8D%E7%85%A7%E4%B9%8B%E4%B8%8A%E7%AF%87-3b0a3feda14f">[面試] 前端工程師一定要會的 JS 觀念題-中英對照之上篇</a></strong></li>
 </ul>
 <h2 id="CORS-amp-Cookie"><a href="#CORS-amp-Cookie" class="headerlink" title="CORS &amp; Cookie"></a>CORS &amp; Cookie</h2><ul>
 <li><strong><a href="https://shubo.io/what-is-cors/">[教學] CORS 是什麼? 如何設定 CORS?</a></strong></li>
@@ -2659,6 +2660,176 @@
       </categories>
       <tags>
         <tag>S3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何使用 AWS RDS Proxy</title>
+    <url>/use-mariadb-with-rds-proxy/</url>
+    <content><![CDATA[<h2 id="發生問題"><a href="#發生問題" class="headerlink" title="發生問題"></a>發生問題</h2><ul>
+<li>資料庫有 max_connection 參數來限制最大連線數</li>
+<li>當 Worker 數量變多與資料庫的連線達到上限值，新 worker 機器就會出現 connection fail</li>
+</ul>
+<h2 id="RDS-Proxy"><a href="#RDS-Proxy" class="headerlink" title="RDS Proxy"></a>RDS Proxy</h2><ul>
+<li><p>用來處理資料庫流量無法預測的突增情況，避免 Connection Fail 情況發生</p>
+</li>
+<li><p>應用程式更具可擴展性、提高對數據庫遇故障時的恢復能力</p>
+</li>
+<li><p>實作原理</p>
+<p>  <img src="/../images/aws/use-mariadb-with-rds-proxy1.png" alt="use-mariadb-with-rds-proxy1"></p>
+</li>
+</ul>
+<h2 id="Connection-Pool"><a href="#Connection-Pool" class="headerlink" title="Connection Pool"></a>Connection Pool</h2><p>主要功能是<strong>降低對資料庫連線&#x2F;關閉的次數</strong>，讓每次的 connection 都可以從 pool 中取得，為了達到該主要功能需要了解以下三個元素：</p>
+<ul>
+<li><strong>multiplexing:</strong> 為 transaction-level reuse，就是 session 中的每個 transaction 做完後可以在被重複使用，連線不會因此而中斷</li>
+<li><strong>borrowing connection:</strong> 移除現有的 connection，重新將連線在加入到 pool 中，根據 Connection borrow timeout 參數來做動</li>
+<li><strong>pinning:</strong> 當 Proxy 判斷該目前的 session 不安全無法共用連線就會進行鎖定，直到該 session 結束就會恢復可共用</li>
+</ul>
+<blockquote>
+<p>注意：RDS Proxy 不會主動去關閉 connection，所以才會一直處於一樣的連線數，透過 Connection Pool 去達到 connection reuse ，讓每次請求進來不用重新建立連線加快執行效率</p>
+</blockquote>
+<p><strong>參考連結</strong></p>
+<ul>
+<li><strong><strong><a href="https://vocus.cc/article/5f800406fd89780001365d17">Connection Pool (連線池)</a></strong></strong></li>
+<li><strong><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.howitworks.html">RDS Proxy concepts and terminology</a></strong></li>
+</ul>
+<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><p>詳細步驟可參考此 <a href="https://aws.amazon.com/tw/getting-started/hands-on/set-up-shared-database-connection-amazon-rds-proxy/">link</a></p>
+<p><strong>步驟一、建立 VPC</strong></p>
+<ul>
+<li>兩個 public 及 private subnet</li>
+</ul>
+<p><strong>步驟二、建立 DB</strong></p>
+<ul>
+<li>建立 subnet group 只包含 private subnet</li>
+<li>建立允許 RDS port 的 security group<ul>
+<li>inbound rule 允許 vpc 的 CIDR block</li>
+</ul>
+</li>
+<li>DB engine 選擇 Mariadb<ul>
+<li><a href="https://aws.amazon.com/tw/about-aws/whats-new/2022/07/amazon-rds-proxy-mariadb-version-10-support/">Proxy 只支援 Mariadb 版本 10.3, 10.4, 10.5</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>步驟三、建立 EC2</strong></p>
+<ul>
+<li>建立 key-pair</li>
+<li>允許 SSH port 的 security group</li>
+</ul>
+<p><strong>步驟四、測試無 Proxy RDS</strong></p>
+<ul>
+<li>連線到 EC2</li>
+<li>安裝 mysql-client<ul>
+<li><code>sudo yum install mysql</code></li>
+</ul>
+</li>
+<li>連線 mysql<ul>
+<li><code>mysql -h rds-test-2.xxx.us-west-2.rds.amazonaws.com -u admin -p</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>步驟五、建立 Secret Manager</strong></p>
+<ul>
+<li>secret type 選擇 Credentials for Amazon RDS database</li>
+<li>輸入 DB 的 username, password</li>
+<li>選擇前面建立的 Database</li>
+</ul>
+<p><strong>步驟六、建立 RDS Proxy (Read&#x2F;Write)</strong></p>
+<ul>
+<li>Engine Family 選擇 MySQL</li>
+<li>Idle client connection timeout 改成 30 分鐘<ul>
+<li>用戶端如果在時間內沒有丟新任務，DB 會判定為閒置將連線斷掉，給其它 client 使用</li>
+</ul>
+</li>
+<li>Target group 選擇前面建立的 Database</li>
+<li>Connection 選擇前面建立的 secret manager、自動建立 IAM Role</li>
+<li>選擇 private subnet</li>
+<li>選擇前面建立允許 RDS port 的 security group<ul>
+<li><strong>rds proxy 的 port 必須為 3306</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="/../images/aws/use-mariadb-with-rds-proxy2.png" alt="use-mariadb-with-rds-proxy2"></p>
+<p><strong>步驟七、建立 RDS Proxy Endpoint For Read-only</strong></p>
+<ul>
+<li>同一個 Proxy 建立 Read-only 的 endpoint</li>
+<li>target role 選擇 read-only</li>
+</ul>
+<p><img src="/../images/aws/use-mariadb-with-rds-proxy3.png" alt="use-mariadb-with-rds-proxy3"></p>
+<p><strong>步驟八、測試有 Proxy RDS</strong></p>
+<ul>
+<li>連線 Proxy<ul>
+<li><code>mysql -h &lt;proxy endpoint&gt; -u admin -p</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="Sysbench-簡介"><a href="#Sysbench-簡介" class="headerlink" title="Sysbench 簡介"></a>Sysbench 簡介</h2><ul>
+<li><p>用來做 MySQL &#x2F; Mariadb &#x2F; PostgreSQL 資料庫的壓力測試</p>
+</li>
+<li><p>安裝方式 ⇒ <a href="https://github.com/akopytov/sysbench">link</a></p>
+  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">curl</span> <span class="string">-s</span> <span class="string">https://packagecloud.io/install/repositories/akopytov/sysbench/script.rpm.sh</span> <span class="string">|</span> <span class="string">sudo</span> <span class="string">bash</span></span><br><span class="line"><span class="string">sudo</span> <span class="string">yum</span> <span class="string">-y</span> <span class="string">install</span> <span class="string">sysbench</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>預設提供的壓力測試腳本</p>
+<ul>
+<li>bulk_insert</li>
+<li>oltp_delete</li>
+<li>oltp_insert  ⇒ 下方壓測例子用此腳本</li>
+<li>oltp_point_select</li>
+<li>oltp_read_only</li>
+<li>oltp_read_write</li>
+<li>oltp_update_index</li>
+<li>oltp_update_non_index</li>
+<li>oltp_write_only</li>
+<li>select_random_points</li>
+<li>select_random_ranges</li>
+</ul>
+</li>
+<li><p>測試前可以先建立資料庫 <code>create database test</code></p>
+</li>
+<li><p>指令介紹</p>
+<ul>
+<li>第一次執行跑 <code>prepare</code> 建立測試 Table 及 RowData</li>
+<li>做壓力測試跑 <code>run</code></li>
+<li>測試完跑 <code>cleanup</code> 清除測試 Table 及 RowData</li>
+</ul>
+  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">sysbench</span> <span class="string">--threads=&lt;並行執行緒數量&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--time=&lt;持續執行時間&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--report-interval=&lt;間隔執行時間&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--db-driver=mysql</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--mysql-user=&lt;資料庫使用者&gt;</span> <span class="string">\l</span></span><br><span class="line">    <span class="string">--mysql-password=&lt;資料庫密碼&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--mysql-port=&lt;資料庫</span> <span class="string">port&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--mysql-host=&lt;資料庫</span> <span class="string">endpoint&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--mysql-db=&lt;資料庫名稱&gt;</span> <span class="string">&lt;測試腳本名稱&gt;</span> <span class="string">&lt;執行腳本的指令名稱&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看現有資料庫的 max_connection</p>
+<p>  <img src="/../images/aws/use-mariadb-with-rds-proxy4.png" alt="use-mariadb-with-rds-proxy4"></p>
+</li>
+</ul>
+<h2 id="無-Proxy-做壓測"><a href="#無-Proxy-做壓測" class="headerlink" title="無 Proxy 做壓測"></a>無 Proxy 做壓測</h2><ul>
+<li><p>執行指令</p>
+<ul>
+<li>要注意使用 DB endpoint 及 port</li>
+</ul>
+  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=&lt;YOUR_DB_PORT&gt;</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">prepare</span></span><br><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=&lt;YOUR_DB_PORT&gt;</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">run</span></span><br><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=&lt;YOUR_DB_PORT&gt;</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">cleanup</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>執行成果</p>
+<p>  <img src="/../images/aws/use-mariadb-with-rds-proxy5.png" alt="use-mariadb-with-rds-proxy5"></p>
+</li>
+</ul>
+<h2 id="有-Proxy-做壓測"><a href="#有-Proxy-做壓測" class="headerlink" title="有 Proxy 做壓測"></a>有 Proxy 做壓測</h2><ul>
+<li><p>執行指令</p>
+<ul>
+<li>要注意使用 DB Proxy endpoint 及 port</li>
+</ul>
+  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=3306</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">prepare</span></span><br><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=3306</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">run</span></span><br><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=3306</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">cleanup</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>執行成果</p>
+<p>  <img src="/../images/aws/use-mariadb-with-rds-proxy6.png" alt="use-mariadb-with-rds-proxy6"></p>
+</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><strong><a href="https://isdaniel.github.io/aws-rds-proxy/">AWS Postgres RDS Proxy</a></strong></li>
+<li><a href="https://hktw-resources.awscloud.com/aws-hands-on-tutorial-hk/amazon-rds-proxy-%E7%B0%A1%E4%BB%8B%E5%8F%8A%E7%A4%BA%E7%AF%84"><strong>AWS實戰工作坊：Amazon RDS Proxy 簡介及示範</strong></a></li>
+<li><strong><strong><a href="https://www.programmersought.com/article/86587579173/">sysbench stress test–mysql</a></strong></strong></li>
+<li><strong><a href="https://stackoverflow.com/questions/39199173/difference-between-session-and-connection-in-sql-server">Difference between Session and Connection in SQL Server</a></strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>AWS</category>
+      </categories>
+      <tags>
+        <tag>RDS</tag>
       </tags>
   </entry>
   <entry>
@@ -2841,176 +3012,6 @@
       </categories>
       <tags>
         <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何使用 AWS RDS Proxy</title>
-    <url>/use-mariadb-with-rds-proxy/</url>
-    <content><![CDATA[<h2 id="發生問題"><a href="#發生問題" class="headerlink" title="發生問題"></a>發生問題</h2><ul>
-<li>資料庫有 max_connection 參數來限制最大連線數</li>
-<li>當 Worker 數量變多與資料庫的連線達到上限值，新 worker 機器就會出現 connection fail</li>
-</ul>
-<h2 id="RDS-Proxy"><a href="#RDS-Proxy" class="headerlink" title="RDS Proxy"></a>RDS Proxy</h2><ul>
-<li><p>用來處理資料庫流量無法預測的突增情況，避免 Connection Fail 情況發生</p>
-</li>
-<li><p>應用程式更具可擴展性、提高對數據庫遇故障時的恢復能力</p>
-</li>
-<li><p>實作原理</p>
-<p>  <img src="/../images/aws/use-mariadb-with-rds-proxy1.png" alt="use-mariadb-with-rds-proxy1"></p>
-</li>
-</ul>
-<h2 id="Connection-Pool"><a href="#Connection-Pool" class="headerlink" title="Connection Pool"></a>Connection Pool</h2><p>主要功能是<strong>降低對資料庫連線&#x2F;關閉的次數</strong>，讓每次的 connection 都可以從 pool 中取得，為了達到該主要功能需要了解以下三個元素：</p>
-<ul>
-<li><strong>multiplexing:</strong> 為 transaction-level reuse，就是 session 中的每個 transaction 做完後可以在被重複使用，連線不會因此而中斷</li>
-<li><strong>borrowing connection:</strong> 移除現有的 connection，重新將連線在加入到 pool 中，根據 Connection borrow timeout 參數來做動</li>
-<li><strong>pinning:</strong> 當 Proxy 判斷該目前的 session 不安全無法共用連線就會進行鎖定，直到該 session 結束就會恢復可共用</li>
-</ul>
-<blockquote>
-<p>注意：RDS Proxy 不會主動去關閉 connection，所以才會一直處於一樣的連線數，透過 Connection Pool 去達到 connection reuse ，讓每次請求進來不用重新建立連線加快執行效率</p>
-</blockquote>
-<p><strong>參考連結</strong></p>
-<ul>
-<li><strong><strong><a href="https://vocus.cc/article/5f800406fd89780001365d17">Connection Pool (連線池)</a></strong></strong></li>
-<li><strong><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.howitworks.html">RDS Proxy concepts and terminology</a></strong></li>
-</ul>
-<h2 id="操作步驟"><a href="#操作步驟" class="headerlink" title="操作步驟"></a>操作步驟</h2><p>詳細步驟可參考此 <a href="https://aws.amazon.com/tw/getting-started/hands-on/set-up-shared-database-connection-amazon-rds-proxy/">link</a></p>
-<p><strong>步驟一、建立 VPC</strong></p>
-<ul>
-<li>兩個 public 及 private subnet</li>
-</ul>
-<p><strong>步驟二、建立 DB</strong></p>
-<ul>
-<li>建立 subnet group 只包含 private subnet</li>
-<li>建立允許 RDS port 的 security group<ul>
-<li>inbound rule 允許 vpc 的 CIDR block</li>
-</ul>
-</li>
-<li>DB engine 選擇 Mariadb<ul>
-<li><a href="https://aws.amazon.com/tw/about-aws/whats-new/2022/07/amazon-rds-proxy-mariadb-version-10-support/">Proxy 只支援 Mariadb 版本 10.3, 10.4, 10.5</a></li>
-</ul>
-</li>
-</ul>
-<p><strong>步驟三、建立 EC2</strong></p>
-<ul>
-<li>建立 key-pair</li>
-<li>允許 SSH port 的 security group</li>
-</ul>
-<p><strong>步驟四、測試無 Proxy RDS</strong></p>
-<ul>
-<li>連線到 EC2</li>
-<li>安裝 mysql-client<ul>
-<li><code>sudo yum install mysql</code></li>
-</ul>
-</li>
-<li>連線 mysql<ul>
-<li><code>mysql -h rds-test-2.xxx.us-west-2.rds.amazonaws.com -u admin -p</code></li>
-</ul>
-</li>
-</ul>
-<p><strong>步驟五、建立 Secret Manager</strong></p>
-<ul>
-<li>secret type 選擇 Credentials for Amazon RDS database</li>
-<li>輸入 DB 的 username, password</li>
-<li>選擇前面建立的 Database</li>
-</ul>
-<p><strong>步驟六、建立 RDS Proxy (Read&#x2F;Write)</strong></p>
-<ul>
-<li>Engine Family 選擇 MySQL</li>
-<li>Idle client connection timeout 改成 30 分鐘<ul>
-<li>用戶端如果在時間內沒有丟新任務，DB 會判定為閒置將連線斷掉，給其它 client 使用</li>
-</ul>
-</li>
-<li>Target group 選擇前面建立的 Database</li>
-<li>Connection 選擇前面建立的 secret manager、自動建立 IAM Role</li>
-<li>選擇 private subnet</li>
-<li>選擇前面建立允許 RDS port 的 security group<ul>
-<li><strong>rds proxy 的 port 必須為 3306</strong></li>
-</ul>
-</li>
-</ul>
-<p><img src="/../images/aws/use-mariadb-with-rds-proxy2.png" alt="use-mariadb-with-rds-proxy2"></p>
-<p><strong>步驟七、建立 RDS Proxy Endpoint For Read-only</strong></p>
-<ul>
-<li>同一個 Proxy 建立 Read-only 的 endpoint</li>
-<li>target role 選擇 read-only</li>
-</ul>
-<p><img src="/../images/aws/use-mariadb-with-rds-proxy3.png" alt="use-mariadb-with-rds-proxy3"></p>
-<p><strong>步驟八、測試有 Proxy RDS</strong></p>
-<ul>
-<li>連線 Proxy<ul>
-<li><code>mysql -h &lt;proxy endpoint&gt; -u admin -p</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="Sysbench-簡介"><a href="#Sysbench-簡介" class="headerlink" title="Sysbench 簡介"></a>Sysbench 簡介</h2><ul>
-<li><p>用來做 MySQL &#x2F; Mariadb &#x2F; PostgreSQL 資料庫的壓力測試</p>
-</li>
-<li><p>安裝方式 ⇒ <a href="https://github.com/akopytov/sysbench">link</a></p>
-  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">curl</span> <span class="string">-s</span> <span class="string">https://packagecloud.io/install/repositories/akopytov/sysbench/script.rpm.sh</span> <span class="string">|</span> <span class="string">sudo</span> <span class="string">bash</span></span><br><span class="line"><span class="string">sudo</span> <span class="string">yum</span> <span class="string">-y</span> <span class="string">install</span> <span class="string">sysbench</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>預設提供的壓力測試腳本</p>
-<ul>
-<li>bulk_insert</li>
-<li>oltp_delete</li>
-<li>oltp_insert  ⇒ 下方壓測例子用此腳本</li>
-<li>oltp_point_select</li>
-<li>oltp_read_only</li>
-<li>oltp_read_write</li>
-<li>oltp_update_index</li>
-<li>oltp_update_non_index</li>
-<li>oltp_write_only</li>
-<li>select_random_points</li>
-<li>select_random_ranges</li>
-</ul>
-</li>
-<li><p>測試前可以先建立資料庫 <code>create database test</code></p>
-</li>
-<li><p>指令介紹</p>
-<ul>
-<li>第一次執行跑 <code>prepare</code> 建立測試 Table 及 RowData</li>
-<li>做壓力測試跑 <code>run</code></li>
-<li>測試完跑 <code>cleanup</code> 清除測試 Table 及 RowData</li>
-</ul>
-  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">sysbench</span> <span class="string">--threads=&lt;並行執行緒數量&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--time=&lt;持續執行時間&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--report-interval=&lt;間隔執行時間&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--db-driver=mysql</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--mysql-user=&lt;資料庫使用者&gt;</span> <span class="string">\l</span></span><br><span class="line">    <span class="string">--mysql-password=&lt;資料庫密碼&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--mysql-port=&lt;資料庫</span> <span class="string">port&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--mysql-host=&lt;資料庫</span> <span class="string">endpoint&gt;</span> <span class="string">\</span></span><br><span class="line">    <span class="string">--mysql-db=&lt;資料庫名稱&gt;</span> <span class="string">&lt;測試腳本名稱&gt;</span> <span class="string">&lt;執行腳本的指令名稱&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看現有資料庫的 max_connection</p>
-<p>  <img src="/../images/aws/use-mariadb-with-rds-proxy4.png" alt="use-mariadb-with-rds-proxy4"></p>
-</li>
-</ul>
-<h2 id="無-Proxy-做壓測"><a href="#無-Proxy-做壓測" class="headerlink" title="無 Proxy 做壓測"></a>無 Proxy 做壓測</h2><ul>
-<li><p>執行指令</p>
-<ul>
-<li>要注意使用 DB endpoint 及 port</li>
-</ul>
-  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=&lt;YOUR_DB_PORT&gt;</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">prepare</span></span><br><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=&lt;YOUR_DB_PORT&gt;</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">run</span></span><br><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=&lt;YOUR_DB_PORT&gt;</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">cleanup</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>執行成果</p>
-<p>  <img src="/../images/aws/use-mariadb-with-rds-proxy5.png" alt="use-mariadb-with-rds-proxy5"></p>
-</li>
-</ul>
-<h2 id="有-Proxy-做壓測"><a href="#有-Proxy-做壓測" class="headerlink" title="有 Proxy 做壓測"></a>有 Proxy 做壓測</h2><ul>
-<li><p>執行指令</p>
-<ul>
-<li>要注意使用 DB Proxy endpoint 及 port</li>
-</ul>
-  <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=3306</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">prepare</span></span><br><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=3306</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">run</span></span><br><span class="line"><span class="string">sysbench</span> <span class="string">--threads=1000</span> <span class="string">--db-driver=mysql</span> <span class="string">--mysql-user=&lt;YOUR_DB_USER&gt;</span> <span class="string">--mysql-password=&lt;YOUR_DB_PASSWORD&gt;</span> <span class="string">--mysql-port=3306</span> <span class="string">--mysql-host=&lt;YOUR_DB_HOST&gt;</span> <span class="string">--mysql-db=&lt;YOUR_DB&gt;</span> <span class="string">oltp_insert</span> <span class="string">cleanup</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>執行成果</p>
-<p>  <img src="/../images/aws/use-mariadb-with-rds-proxy6.png" alt="use-mariadb-with-rds-proxy6"></p>
-</li>
-</ul>
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
-<li><strong><a href="https://isdaniel.github.io/aws-rds-proxy/">AWS Postgres RDS Proxy</a></strong></li>
-<li><a href="https://hktw-resources.awscloud.com/aws-hands-on-tutorial-hk/amazon-rds-proxy-%E7%B0%A1%E4%BB%8B%E5%8F%8A%E7%A4%BA%E7%AF%84"><strong>AWS實戰工作坊：Amazon RDS Proxy 簡介及示範</strong></a></li>
-<li><strong><strong><a href="https://www.programmersought.com/article/86587579173/">sysbench stress test–mysql</a></strong></strong></li>
-<li><strong><a href="https://stackoverflow.com/questions/39199173/difference-between-session-and-connection-in-sql-server">Difference between Session and Connection in SQL Server</a></strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>AWS</category>
-      </categories>
-      <tags>
-        <tag>RDS</tag>
       </tags>
   </entry>
   <entry>
